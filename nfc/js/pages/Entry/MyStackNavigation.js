@@ -53,21 +53,19 @@ const TransitionConfiguration = () => ({
 };
 
 const MyStackNavigation  = StackNavigator({
-    Main: {
-        screen: TabbarPage,
-        navigationOptions:({ navigation }) => ({
-            headerTitleStyle:{
-                alignSelf:'center',
-            },
 
-            header : null,
-        }),
-    },
 
-    login:{
-        screen: login
-    },
 
+        Main: {
+            screen: TabbarPage,
+            navigationOptions:({ navigation }) => ({
+                headerTitleStyle:{
+                    alignSelf:'center',
+                },
+
+                header : null,
+            }),
+        },
 
 
     },

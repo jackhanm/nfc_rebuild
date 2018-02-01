@@ -7,7 +7,7 @@ import GetSetStorge from '../publicState/GetSetStorg';
 // import NetUtils from '../Network/NetUtils'
 import guideView from './guideView'
 import ThemeDao from '../publicState/ThemeDao'
-
+import login from '../Login/login'
 import MyStackNavigation from "./MyStackNavigation";
 import { NavigationActions  } from 'react-navigation';
 
@@ -16,7 +16,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 let reastAction = NavigationActions.reset({
     index: 0,
     actions: [
-        NavigationActions.navigate({ routeName: 'TabBar'})
+        NavigationActions.navigate({ routeName: 'login'})
     ]
 });
 

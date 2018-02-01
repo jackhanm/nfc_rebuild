@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import MyStackNavigation from "./MyStackNavigation";
 import Welcome from "./Welcome"
 import guideView from "./guideView";
-
+import login from '../Login/login'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator'
 
 
@@ -24,6 +24,7 @@ const  SimpleApp = StackNavigator(
     {
         Welcome: { screen: Welcome },
         guideView:{screen:guideView},
+        login:{screen:login},
         TabBar: { screen: MyStackNavigation },
 
 

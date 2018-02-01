@@ -3,7 +3,8 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableOpacity
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -17,6 +18,7 @@ export default class App extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
+
                 <Text style={styles.welcome}>
                     Welcome to 首页!
                 </Text>
