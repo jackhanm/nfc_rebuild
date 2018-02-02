@@ -1,51 +1,106 @@
 import React, { Component } from 'react';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import { View, Text, StyleSheet, ListView } from 'react-native';
+import StepIndicator from 'react-native-step-indicator';
+import dummyData from './data';
 
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const stepIndicatorStyles = {
+    stepIndicatorSize: 25,
+    currentStepIndicatorSize:30,
+    separatorStrokeWidth: 2,
+    currentStepStrokeWidth: 3,
+    stepStrokeCurrentColor: '#fe7013',
+    stepStrokeWidth: 3,
+    stepStrokeFinishedColor: '#fe7013',
+    stepStrokeUnFinishedColor: '#aaaaaa',
+    separatorFinishedColor: '#fe7013',
+    separatorUnFinishedColor: '#aaaaaa',
+    stepIndicatorFinishedColor: '#fe7013',
+    stepIndicatorUnFinishedColor: '#ffffff',
+    stepIndicatorCurrentColor: '#ffffff',
+    stepIndicatorLabelFontSize: 13,
+    currentStepIndicatorLabelFontSize: 13,
+    stepIndicatorLabelCurrentColor: '#fe7013',
+    stepIndicatorLabelFinishedColor: '#ffffff',
+    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+    labelColor: '#999999',
+    labelSize: 13,
+    currentStepLabelColor: '#fe7013'
+}
 
-export default class App extends Component<{}> {
+export default class VerticalStepIndicator extends Component {
+
+    constructor() {
+        super();
+
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            dataSource: ds.cloneWithRows(dummyData.data),
+            currentPage:0
+        };
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to 第二页!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit App.js
-                </Text>
-                <Text style={styles.instructions}>
-                    {instructions}
-                </Text>
+                <View style={styles.stepIndicator}>
+                    <StepIndicator
+                        customStyles={stepIndicatorStyles}
+                        stepCount={6}
+                        direction='vertical'
+                        currentPosition={this.state.currentPage}
+                        labels={dummyData.data.map(item => item.title)}
+                    />
+                </View>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderPage}
+                    onChangeVisibleRows={this.getVisibleRows}
+                />
             </View>
         );
+    }
+
+    renderPage = (rowData) => {
+        return (
+            <View style={styles.rowItem}>
+                <Text style={styles.title}>{rowData.title}</Text>
+                <Text style={styles.body}>{rowData.body}</Text>
+            </View>
+        )
+    }
+
+    getVisibleRows = (visibleRows) => {
+        const visibleRowNumbers = Object.keys(visibleRows.s1).map((row) => parseInt(row));
+        this.setState({currentPage:visibleRowNumbers[0]})
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        flexDirection:'row',
+        backgroundColor:'#ffffff'
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
+    stepIndicator: {
+        marginVertical:50,
+        paddingHorizontal:20
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
+    rowItem: {
+        flex:3,
+        paddingVertical:20
     },
+    title: {
+        flex: 1,
+        fontSize:20,
+        color:'#333333',
+        paddingVertical:16,
+        fontWeight:'600'
+    },
+    body: {
+        flex: 1,
+        fontSize:15,
+        color:'#606060',
+        lineHeight:24,
+        marginRight:8
+    }
 });
