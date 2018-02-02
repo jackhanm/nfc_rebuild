@@ -41,14 +41,6 @@ export default class App extends Component<{}> {
 
 
     render() {
-        const changeWidth = this.buttonAnimated.interpolate({
-            inputRange: [0, 1],
-            outputRange: [DEVICE_WIDTH - MARGIN, MARGIN]
-        });
-        const changeScale = this.growAnimated.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, MARGIN]
-        });
         return (
             <View style={styles.container}>
 
@@ -56,9 +48,9 @@ export default class App extends Component<{}> {
                     style={[styles.inputStyle]}
                     label={'身份证'}
                     // this is used as active and passive border color
-                    borderColor={'#aee2c9'}
+                    borderColor={'#F035E0'}
                     onChangeText={(text) => this.setState({idCard:text})}
-                    labelStyle={{ color: '#008445' }}
+                    labelStyle={{ color: '#F035E0' }}
                     inputStyle={{ color: '#f4a197' }}
                 />
 
@@ -66,9 +58,9 @@ export default class App extends Component<{}> {
                     style={[styles.inputStyle]}
                     label={'车牌号'}
                     // this is used as active and passive border color
-                    borderColor={'#aee2c9'}
+                    borderColor={'#F035E0'}
                     onChangeText={(text) => this.setState({carCard:text})}
-                    labelStyle={{ color: '#008445' }}
+                    labelStyle={{ color: '#F035E0' }}
                     inputStyle={{ color: '#f4a197' }}
                 />
 
