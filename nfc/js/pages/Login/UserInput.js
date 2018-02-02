@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import  PropTypes from 'prop-types'
 export default class UserInput extends Component {
+
 	render() {
 		return (
 			<View style={styles.inputWrapper}>
@@ -20,7 +21,8 @@ export default class UserInput extends Component {
 					autoCapitalize={this.props.autoCapitalize}
 					returnKeyType={this.props.returnKeyType}
 					placeholderTextColor='white'
-					underlineColorAndroid='transparent' />
+					underlineColorAndroid='transparent'
+						   onChangeText={this.props.onTextChange}/>
 			</View>
 		);
 	}
@@ -33,6 +35,7 @@ UserInput.propTypes = {
 	autoCorrect: PropTypes.bool,
 	autoCapitalize: PropTypes.string,
 	returnKeyType: PropTypes.string,
+	onTextChange:PropTypes.func,
 };
 
 const DEVICE_WIDTH = Dimensions.get('window').width;

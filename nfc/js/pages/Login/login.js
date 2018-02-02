@@ -16,6 +16,7 @@ import UserInput from './UserInput';
 import Dimensions from 'Dimensions';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import { TabNavigator, NavigationActions} from "react-navigation";
+import GetSetStorg from "../publicState/GetSetStorg";
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
@@ -33,6 +34,8 @@ export default class App extends Component<{}> {
             showPass: true,
             press: false,
             isLoading: false,
+            userName:'',
+            passWrod:'',
         };
         this.showPass = this.showPass.bind(this);
         this.buttonAnimated = new Animated.Value(0);
@@ -107,12 +110,14 @@ export default class App extends Component<{}> {
                                placeholder='Username'
                                autoCapitalize={'none'}
                                returnKeyType={'done'}
+                               onTextChange={(text)=>this.setState({userName:text})}
                                autoCorrect={false} />
                     <UserInput source={require('../../images/password.png')}
                                secureTextEntry={this.state.showPass}
                                placeholder='Password'
                                returnKeyType={'done'}
                                autoCapitalize={'none'}
+                               onTextChange={(text)=>this.setState({passWrod:text})}
                                autoCorrect={false} />
                     <TouchableOpacity
                         activeOpacity={0.7}
