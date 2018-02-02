@@ -35,46 +35,10 @@ export default class App extends Component<{}> {
             carCard:'',
             search:0,
         }
-        this.buttonAnimated = new Animated.Value(0);
-        this.growAnimated = new Animated.Value(0);
-        this._onPress = this._onPress.bind(this);
     }
 
 
-    _onPress() {
-        this.setState({search:1})
-        this.setState({ isLoading: true });
-        Animated.timing(
-            this.buttonAnimated,
-            {
-                toValue: 1,
-                duration: 200,
-                easing: Easing.linear
-            }
-        ).start();
 
-        setTimeout(() => {
-            this._onGrow();
-        }, 2000);
-
-        setTimeout(() => {
-            // Actions.secondScreen();
-            this.setState({ isLoading: false });
-            this.buttonAnimated.setValue(0);
-            this.growAnimated.setValue(0);
-        }, 2300);
-    }
-
-    _onGrow() {
-        Animated.timing(
-            this.growAnimated,
-            {
-                toValue: 1,
-                duration: 200,
-                easing: Easing.linear
-            }
-        ).start();
-    }
 
     render() {
         const changeWidth = this.buttonAnimated.interpolate({
@@ -88,10 +52,8 @@ export default class App extends Component<{}> {
         return (
             <View style={styles.container}>
 
-                <Image style={styles.picture} source={require('../../images/wallpaper.png')}></Image>
-
                 <Madoka
-                    style={[styles.inputStyle, {position:'absolute', top:150}]}
+                    style={[styles.inputStyle]}
                     label={'身份证'}
                     // this is used as active and passive border color
                     borderColor={'#aee2c9'}
@@ -101,7 +63,7 @@ export default class App extends Component<{}> {
                 />
 
                 <Madoka
-                    style={[styles.inputStyle, {position:'absolute', top:300}]}
+                    style={[styles.inputStyle]}
                     label={'车牌号'}
                     // this is used as active and passive border color
                     borderColor={'#aee2c9'}
@@ -110,19 +72,12 @@ export default class App extends Component<{}> {
                     inputStyle={{ color: '#f4a197' }}
                 />
 
-                <View style={styles.container4}>
-                    <Animated.View style={{width: changeWidth}}>
-                        <TouchableOpacity style={styles.button4}
-                                          onPress={this._onPress}
-                                          activeOpacity={1} >
-                            {this.state.search === 0? <Text style={styles.text4}>查询</Text>
-                                : <Image source={require('../../images/loading.gif')} style={styles.image4} />}
-                        </TouchableOpacity>
-                        <Animated.View style={[ styles.circle4, {transform: [{scale: changeScale}]} ]} />
+                <TouchableOpacity style={styles.button4}>
+                    <Text>
+                        查询
+                    </Text>
 
-                    </Animated.View>
-
-                </View>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -150,12 +105,12 @@ const styles = StyleSheet.create({
     },
 
     button4: {
+        width:windowWidth - 40,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F035E0',
         height: MARGIN,
         borderRadius: 20,
-        zIndex: 100,
     },
 
     container4: {
@@ -170,4 +125,5 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
     },
+
 });
