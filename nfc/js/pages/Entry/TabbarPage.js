@@ -11,7 +11,7 @@ import { NavigationActions} from "react-navigation";
 import THemefactory from '../../../res/styles/ThemeFactory'
 import GlobalStyle from '../../../res/styles/GlobalStyles'
 import SecondScreen from "../secondTab/SecondScreen";
-import FourthScreen from '../Mine/MinePage'
+import FourthScreen from '../Mine/MInePage'
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
 let width = Dimensions.get('window').width

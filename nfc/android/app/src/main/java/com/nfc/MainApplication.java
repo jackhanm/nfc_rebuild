@@ -33,6 +33,8 @@ import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
 
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -60,7 +62,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new SplashScreenReactPackage()
       );
     }
 
