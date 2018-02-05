@@ -1,0 +1,283 @@
+//
+//  changtianConfig.pch
+//  ChangTianDemo
+//
+//  Created by yuhao on 2017/9/21.
+//  Copyright © 2017年 uhqsh. All rights reserved.
+//
+
+#ifndef changtianConfig_pch
+#define changtianConfig_pch
+
+
+
+#import "changtian.h"
+
+
+#define  FisrtUploadPhoneInfo  0
+#define  LoginUploadPhoneInfo  1
+#define  ExitUploadPhoneInfo  2
+#define  SafeAreaTopHeight (ScreenHeight == 812.0 ? 88 : 64)
+#define  ASConfigAPPSecret   @"5IHqGdRB"
+#define  ASConfigAPPID @"a2"
+#define  ASConfigAPPVersion @"1.0"
+#define  NoNeedtoken @"NOnedd"
+#define  LAST_RUN_VERSION_KEY @"last_run_version_of_application"
+#define  LAST_RUN_RN_KEY @"0" 
+#define  AppCFversion @"1.8.0.0"
+#define  BuglyID @"625d8f9228"
+#define  APIVersion @"1.0"
+
+
+
+//友盟
+#define MobClickKey  @"59c5f5f7f29d985662000077"
+#define UMWechatAppID @""
+#define UMWechatAppSecret @""
+#define UMQQAppID @""
+#define UMQQAppkey @""
+#define UMSinaAppKey @""
+#define UMSinaAppSecret @""
+
+
+
+
+
+
+
+
+#define kDefaultFontLightName    @"HelveticaNeue-Light"
+#define kDefaultFontName         @"HelveticaNeue"
+#define WIDTH_SCALE(X)       (ScreenWidth*X/320)
+#define HEIGHT_SCALE(Y)      (iPhone4 ? Y : (ScreenHeight*Y/568))
+
+#define NEWWIDTH_SCALE(X)       (ScreenWidth/375*X)
+#define NEWHEIGHT_SCALE(Y)      (ScreenHeight/667*Y)
+#define HexRGBAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
+#define AutoFont(X)          (iPhone6Plus ? (1.35*X) : (iPhone6 ? (X*1.15) : (iPhone6PlusBigMode ? (X*1.15) : X)))
+
+#define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+#define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+#define iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+#define iPhone6PlusBigMode ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) : NO)
+#define RGBAlpha(r, g, b, a) [UIColor colorWithRed:((r) / 255.0) green:((g) / 255.0) blue:((b) / 255.0) alpha:(a)]
+
+
+//1.获取屏幕宽度与高度
+#define WIDGHT [[UIScreen mainScreen] bounds].size.width
+#define WIDTHSIXP 375.000000
+#define HEIGHTSIXP 667.000000
+#define HEIGHT  [[UIScreen mainScreen] bounds].size.height
+#define WIDGHTSCALE [UIScreen mainScreen].scale * WIDGHT
+#define HEIGHTSCALE [UIScreen mainScreen].scale * HEIGHT
+#define DLOG NSLog
+
+
+//字符串 数组 字典 对象空判断
+#define KlStringisEmpty(str) ([str isKindOfClass:[NSNull class]]||str == nil||[str length] <1 ?YES:NO)
+#define klArrayisEmpty(array) (array == nil||[array isKindOfClass:[NSNull class]] ||array.count==0)
+#define klDicisEmpty(dic) (dic ==nil||[dic isKindOfClass:[NSNull class]]||dic.allKeys ==0)
+#define klObjectisEmpty(_object) (_object ==nil|| [_object isKindOfClass:[NSNull class]]||([_object respondsToSelector:@selector(length)]&&[(NSData *)_object length]==0)||([_object respondsToSelector:@selector(count)]&&[(NSArray *)_object count]==0))
+#define IS_IPAD     [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
+#define IS_IPHONE   [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
+#define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )480) < DBL_EPSILON )
+#define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )568) < DBL_EPSILON )
+#define IS_IPHONE_6 (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )667) < DBL_EPSILON )
+#define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen] bounds].size.height - (double )960) < DBL_EPSILON )
+
+//2.获取通知中心
+#define KLNotificationCenter [NSNotificationCenter defaultCenter]
+
+//3.设置随机颜色
+#define KLRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+
+//4.设置RGB颜色/设置RGBA颜色
+#define KLRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define KLRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]
+
+//4.1 设置RGB颜色
+#define KLsRCBColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]
+
+#define UIColorFromRGBA(rgbValue, alphaValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0x0000FF))/255.0 \
+alpha:alphaValue]
+#define UIColorFromRGB(rgbValue) UIColorFromRGBA(rgbValue, 1.0)
+
+// clear背景颜色
+#define KLClearColor [UIColor clearColor]
+
+//5.自定义高效率的 NSLog
+#ifdef DEBUG
+#define KLLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define KLLog(...)
+
+#endif
+
+//6.弱引用/强引用
+#define KLWeakSelf(type)  __weak typeof(type) weak##type = type;
+
+#define KLStrongSelf(type)  __strong typeof(type) type = weak##type;
+
+//7.设置 view 圆角和边框
+#define KLViewBorderRadius(View, Radius, Width, Color)\
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES];\
+[View.layer setBorderWidth:(Width)];\
+[View.layer setBorderColor:[Color CGColor]]
+
+//8.由角度转换弧度 由弧度转换角度
+#define KLDegreesToRadian(x) (M_PI * (x) / 180.0)
+#define KLRadianToDegrees(radian) (radian*180.0)/(M_PI)
+
+//9.设置加载提示框（第三方框架：Toast）
+#define KLToast(str)   \
+[kWindow  makeToast:str duration:1.0 position:CSToastPositionCenter];\
+kWindow.userInteractionEnabled = NO; \
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{\
+kWindow.userInteractionEnabled = YES;\
+});\
+
+//10.设置加载提示框（第三方框架：MBProgressHUD）
+// 加载
+#define kShowNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
+// 收起加载
+#define HideNetworkActivityIndicator()      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO
+// 设置加载
+#define NetworkActivityIndicatorVisible(x)  [UIApplication sharedApplication].networkActivityIndicatorVisible = x
+
+#define kWindow [UIApplication sharedApplication].keyWindow
+
+#define kBackView         for (UIView *item in kWindow.subviews) { \
+if(item.tag == 10000) \
+{ \
+[item removeFromSuperview]; \
+UIView * aView = [[UIView alloc] init]; \
+aView.frame = [UIScreen mainScreen].bounds; \
+aView.tag = 10000; \
+aView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3]; \
+[kWindow addSubview:aView]; \
+} \
+} \
+
+#define kShowHUDAndActivity kBackView;[MBProgressHUD showHUDAddedTo:kWindow animated:YES];kShowNetworkActivityIndicator()
+
+
+#define kHiddenHUD [MBProgressHUD hideAllHUDsForView:kWindow animated:YES]
+
+#define kRemoveBackView         for (UIView *item in kWindow.subviews) { \
+if(item.tag == 10000) \
+{ \
+[UIView animateWithDuration:0.4 animations:^{ \
+item.alpha = 0.0; \
+} completion:^(BOOL finished) { \
+[item removeFromSuperview]; \
+}]; \
+} \
+} \
+
+#define kHiddenHUDAndAvtivity kRemoveBackView;kHiddenHUD;HideNetworkActivityIndicator()
+
+//获取图片资源
+#define kGetImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
+
+
+//12.获取当前语言
+#define KLCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+//13.使用 ARC 和 MRC
+#if __has_feature(objc_arc)
+// ARC
+#else
+// MRC
+#endif
+
+//判断是否为ipod
+#define IS_IPOD ([[[UIDevice currentDevice] model] isEqualToString:@"iPod touch"])
+
+// 判断是否为 iPhone 5SE
+#define iPhone5SE [[UIScreen mainScreen] bounds].size.width == 320.0f && [[UIScreen mainScreen] bounds].size.height == 568.0f
+
+// 判断是否为iPhone 6/6s
+#define iPhone6_6s [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 667.0f
+
+// 判断是否为iPhone 6Plus/6sPlus
+#define iPhone6Plus_6sPlus [[UIScreen mainScreen] bounds].size.width == 414.0f && [[UIScreen mainScreen] bounds].size.height == 736.0f
+
+//获取系统版本
+#define IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+
+//判断 iOS 8 或更高的系统版本
+#define IOS_VERSION_8_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0)? (YES):(NO))
+
+
+//判断 iOS 10 或更高的系统版本
+#define IOS_VERSION_10_OR_LATER (([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0)? (YES):(NO))
+
+//15.判断是真机还是模拟器
+#if TARGET_OS_IPHONE
+//iPhone Device
+#endif
+
+#if TARGET_IPHONE_SIMULATOR
+//iPhone Simulator
+#endif
+
+//16.沙盒目录文件
+//获取temp
+#define kPathTemp NSTemporaryDirectory()
+
+//获取沙盒 Document
+#define kPathDocument [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+
+//获取沙盒 Cache
+#define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+//17.GCD 的宏定义
+//GCD - 一次性执行
+#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
+
+//GCD - 在Main线程上运行
+#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
+
+//GCD - 开启异步线程
+#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);
+
+
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
+#define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define BasicColor HexRGBAlpha(0xf7f7f7, 1)
+
+#define WIDGHT [[UIScreen mainScreen] bounds].size.width
+#define WIDTHSIXP 375.000000
+#define HEIGHTSIXP 667.000000
+#define HEIGHT  [[UIScreen mainScreen] bounds].size.height
+#define WIDGHTSCALE [UIScreen mainScreen].scale * WIDGHT
+#define HEIGHTSCALE [UIScreen mainScreen].scale * HEIGHT
+#define DLOG NSLog
+
+#ifdef DEBUG
+
+#define JKLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+
+#else
+
+#define JKLog(...)
+
+#endif
+
+
+
+
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* changtianConfig_pch */

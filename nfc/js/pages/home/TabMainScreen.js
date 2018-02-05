@@ -18,20 +18,16 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 
 import ModalDropdown from 'react-native-modal-dropdown';
 
-import { Kaede } from 'react-native-textinput-effects';
+import { Kaede } from '../../compoent/exportInput';
+import { Kohana } from '../../compoent/exportInput';
+import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const MARGIN = 40;
 
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-import { Madoka } from 'react-native-textinput-effects';
+import { Madoka } from '../../compoent/exportInput';
 
 export default class App extends Component<{}> {
 
@@ -52,23 +48,21 @@ export default class App extends Component<{}> {
 
     }
 
-
-
-
     render() {
         return (
-            <KeyboardAwareScrollView>
+
             <View style={styles.container}>
 
-                <Madoka
-                    style={[styles.inputStyle]}
-                    label={'身份证'}
-                    // this is used as active and passive border color
-                    borderColor={'black'}
-                    onChangeText={(text) => this.setState({idCard:text})}
-                    labelStyle={{ color: 'black' }}
-                    inputStyle={{ color: '#f4a197' }}
-                />
+                {/*<Kohana*/}
+                    {/*style={{ backgroundColor: '#f9f5ed' }}*/}
+                    {/*label={'身份证'}*/}
+                    {/*iconClass={MaterialsIcon}*/}
+                    {/*iconName={'directions-bus'}*/}
+                    {/*iconColor={'#f4d29a'}*/}
+                    {/*labelStyle={{ color: '#91627b' }}*/}
+                    {/*inputStyle={{ color: '#91627b' }}*/}
+                    {/*useNativeDriver*/}
+                {/*/>*/}
 
                 <Madoka
                     style={[styles.inputStyle]}
@@ -99,7 +93,7 @@ export default class App extends Component<{}> {
 
                 </TouchableOpacity>
             </View>
-            </KeyboardAwareScrollView>
+
         );
     }
 }
@@ -109,7 +103,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4474BB',
+        backgroundColor: '#FEFFFE',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },

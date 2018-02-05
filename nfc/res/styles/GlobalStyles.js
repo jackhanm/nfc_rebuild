@@ -34,7 +34,7 @@ module.exports ={
     window_width:width,
     nav_bar_height_ios:44,
     nav_bar_height_android:50,
-    themeColor:'#4474BB',
+    themeColor:'#FF9800',
     TabselectColor:'#FF9800'
 
 
