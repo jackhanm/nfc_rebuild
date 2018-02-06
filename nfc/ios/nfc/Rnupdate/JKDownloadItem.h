@@ -35,6 +35,9 @@ static NSString * const kDownloadNeedSaveDataNoti = @"kDownloadNeedSaveDataNoti"
 @property (nonatomic, weak) id <JKDownloadItemDelegate> delegate;
 @property (nonatomic, copy) NSString *fileName;
 @property (nonatomic, copy) NSString *thumbImageUrl;
+@property (nonatomic, copy) NSString *md5;
+@property (nonatomic, copy) NSString *destinPath;
+@property (nonatomic, copy) NSString *type;
 /**下载完成后保存在本地的路径*/
 @property (nonatomic, readonly) NSString *savePath;
 @property (nonatomic, assign) NSUInteger fileSize;

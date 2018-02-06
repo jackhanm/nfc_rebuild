@@ -42,6 +42,9 @@
  */
 + (void)startDownloadWithUrl:(NSString *)downloadURLString fileName:(NSString *)fileName imageUrl:(NSString *)imagUrl fileId:(NSString *)fileId;
 
++ (void)startDownloadWithUrl:(NSString *)downloadURLString fileName:(NSString *)fileName imageUrl:(NSString *)imagUrl fileId:(NSString *)fileId md5:(NSString *)md5 destinPath:(NSString *)destinPath type:(NSString *)type;
+
+
 /**
  暂停一个后台下载任务
  
