@@ -7,7 +7,7 @@
 //
 
 #import "JKDownloadManager.h"
-
+#import <DiffMatchPatch.h>
 #define kCommonUtilsGigabyte (1024 * 1024 * 1024)
 #define kCommonUtilsMegabyte (1024 * 1024)
 #define kCommonUtilsKilobyte 1024
@@ -106,6 +106,11 @@ static id _instance;
 + (void)startDownloadWithUrl:(NSString *)downloadURLString fileName:(NSString *)fileName imageUrl:(NSString *)imagUrl fileId:(NSString *)fileId{
   [[JKDownloadManager manager] startDownloadWithUrl:downloadURLString fileName:fileName imageUrl:imagUrl fileId:fileId];
 }
+
++ (void)startDownloadWithUrl:(NSString *)downloadURLString fileName:(NSString *)fileName imageUrl:(NSString *)imagUrl fileId:(NSString *)fileId md5:(NSString *)md5 destinPath:(NSString *)destinPath type:(NSString *)type{
+  [[JKDownloadManager manager] startDownloadWithUrl:downloadURLString fileName:fileName imageUrl:imagUrl fileId:fileId md5:md5 destinPath:destinPath type:type];
+}
+
 
 + (void)pauseDownloadWithItem:(JKDownloadItem *)item {
   [[JKDownloadManager manager] pauseDownloadWithItem:item];
@@ -256,6 +261,25 @@ static id _instance;
   }
   [JKDownloadSession.downloadSession startDownloadWithUrl:downloadURLString fileId:fileId delegate:item];
 }
+- (void)startDownloadWithUrl:(NSString *)downloadURLString fileName:(NSString *)fileName imageUrl:(NSString *)imagUrl fileId:(NSString *)fileId md5:(NSString *)md5 destinPath:(NSString *)destinPath type:(NSString *)type{
+  
+  if (downloadURLString.length == 0 && fileId.length == 0) return;
+  NSString *taskId = [JKDownloadTask taskIdForUrl:downloadURLString fileId:fileId];
+  JKDownloadItem *item = [self.itemsDictM valueForKey:taskId];
+  if (item == nil) {
+    
+    item = [[JKDownloadItem alloc] initWithUrl:downloadURLString fileId:fileId];
+    item.downloadStatus = JKDownloadStatusDownloading;
+    item.fileName = fileName;
+    item.thumbImageUrl = imagUrl;
+    item.md5=md5;
+    item.destinPath = destinPath;
+    item.type = type;
+    [self.itemsDictM setValue:item forKey:taskId];
+  }
+  [JKDownloadSession.downloadSession startDownloadWithUrl:downloadURLString fileId:fileId delegate:item];
+}
+
 
 - (void)resumeDownloadWithItem:(JKDownloadItem *)item{
   item.downloadStatus = JKDownloadStatusDownloading;
@@ -400,12 +424,253 @@ static id _instance;
    JKLog(@"所有的下载任务已完成222");
   JKDownloadItem *item = noti.object;
   if (item) {
-    NSString *detail = [NSString stringWithFormat:@"%@ 视频，已经下载完成！", item.fileName];
-    [self localPushWithTitle:@"JKDownloadSession" detail:detail];
+    NSString *detail = [NSString stringWithFormat:@"%@ item.fileName，已经下载完成！", item.fileName];
+     NSString *detail1 = [NSString stringWithFormat:@"%@  item.thumbImageUrl，已经下载完成！", item.thumbImageUrl];
+     NSString *detail2 = [NSString stringWithFormat:@"%@ item.md5，已经下载完成！", item.md5];
+     NSString *detail3 = [NSString stringWithFormat:@"%@ destinPath，已经下载完成！", item.destinPath];
+     NSString *detail4 = [NSString stringWithFormat:@"%@ savePath，已经下载完成！", item.savePath];
+     NSString *detail5 = [NSString stringWithFormat:@"%@ saveName，已经下载完成！", item.saveName];
+     NSString *detail6 = [NSString stringWithFormat:@"%@ 全量还是增量 ",item.type];
+    JKLog(@"%@ %@ %@ %@ %@",detail,detail1,detail2,detail3,detail4,detail5);
+    
+    
+  
+    if ([item.type isEqualToString:@"1"] ) {
+        [self checkZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName];
+    }else{
+      [self  checkPatchZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName baseVersion:item.thumbImageUrl];
+    }
+    
   }
 }
+#pragma mark checkmd5 And openzip Full zip
+-(void)checkZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename
+{
+ 
+#pragma mark 校验下载文件完整性
+      NSString *zipPath =savepath;
+      JKLog(@"%@",zipPath);
+      JKLog(@"%@", [zipPath getFileMD5WithPath:zipPath]);
+      JKLog(@"下载完整");
+      if ([md5 isEqualToString:[zipPath getFileMD5WithPath:zipPath]]) {
+        
+        NSError *error;
+        // 解压
+  
+        
+        [SSZipArchive unzipFileAtPath:zipPath toDestination:destinpath overwrite:YES password:nil error:&error];
+        if(!error){
+          NSLog(@"解压成功");
 
+          
+        }else{
+          NSLog(@"解压失败");
+          [[NSFileManager defaultManager] removeItemAtPath:destinpath error:nil];
+          JKLog(@"%@",error);
+          
+        }
+      }else{
+#pragma mark 校验失败处理？？？？？
+        JKLog(@"校验不成功");
+      }
+      [[NSFileManager defaultManager] removeItemAtPath:zipPath error:nil];
+    }
+#pragma mark checkpatchZip And openzip
+-(void)checkPatchZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename baseVersion:(NSString *)baseVersion
+{
+ 
+      NSLog(@"下载完成");
+      
+      NSString *zipPath =savepath;
+      
+      NSError *error;
+      // 解压
+      if ([md5 isEqualToString:[zipPath getFileMD5WithPath:zipPath]]) {
+        //校验zip包成功
+        
+        [SSZipArchive unzipFileAtPath:zipPath toDestination:destinpath overwrite:YES password:nil error:&error];
+        if(!error){
+          NSLog(@"解压成功");
+          
+          [self combinepatchpackage:destinpath baseVersion:baseVersion shouldUpdatedVersion:savename];
+          
+          
+        }else{
+          NSLog(@"解压失败");
+          JKLog(@"%@",error);
+        }
+      }else{
+        
+        
+      }
+      
+      
+      
+      [[NSFileManager defaultManager] removeItemAtPath:zipPath error:nil];
+      JKLog(@"%@",NSHomeDirectory());
+  
+}
 
+#pragma mark后台合并patch包
+-(void)combinepatchpackage:(NSString *)directryPath baseVersion:(NSString *)baseVersion shouldUpdatedVersion:(NSString *)shouldUpdatedVersion{
+  
+  
+  NSString *patchCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"patch"];
+  NSString *filePath = [NSString stringWithFormat:@"%@/\%@",patchCachePath,[NSString stringWithFormat:@"%@",shouldUpdatedVersion]];
+  NSString *jsversionCachePath1 = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],baseVersion];
+  
+  NSString *txtPath = [jsversionCachePath1 stringByAppendingPathComponent:@"main.jsbundle"];
+  NSString *assetPath = [jsversionCachePath1 stringByAppendingPathComponent:@"assets"];
+  NSString *imagePath = [filePath stringByAppendingPathComponent:@"images"];
+  // 此时仅存在路径，文件并没有真实存在
+  
+  //json文件
+  NSString *jsonpath = [filePath stringByAppendingPathComponent:@"Detailed.json"];
+  if ([[NSFileManager defaultManager] fileExistsAtPath:jsonpath]) {
+    NSData *data = [NSData dataWithContentsOfFile:jsonpath];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    
+    NSString *text1 = [NSString stringWithContentsOfFile:txtPath encoding:NSUTF8StringEncoding error:nil];
+    
+    
+    DiffMatchPatch *dmp = [DiffMatchPatch new];
+    //输出差异文件地址
+    NSString *patchPath = [filePath stringByAppendingPathComponent:@"patch.txt"];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:patchPath]) {
+      // 读取差异文件
+      NSString *resultStr = [NSString stringWithContentsOfFile:patchPath encoding:NSUTF8StringEncoding error:nil];
+      // 读取差异文件
+      NSMutableArray *patchDataArr =[dmp patch_fromText:resultStr error:nil];
+      // 差异文件和原始文件合并生成新的文件
+      NSArray *ResultData= [dmp patch_apply:patchDataArr toString:text1];
+      NSString *txtPath3 = [filePath stringByAppendingPathComponent:@"main.jsbundle"]; // 此时仅存在路径，文件并没有真实存在
+      for (int i =0; i < ResultData.count; i ++) {
+        if (i ==0) {
+          //bundle文件已经合成 ，下一步
+          [ResultData[i] writeToFile:txtPath3 atomically:YES encoding:NSUTF8StringEncoding error:nil];
+#pragma mark  读取json文件校验md5
+          if ([self readjsonWithDocPath:filePath zipPath:txtPath3]) {
+            JKLog(@"patch bundle md5 校验成功");
+            [self createJSlistIndoc:txtPath3 baseVersion:baseVersion shouldUpdatedVersion:shouldUpdatedVersion assets:assetPath];
+            
+          }else{
+#pragma mark 合并过后的bundle校验失败
+            JKLog(@"patch bundle md5 校验失败");
+          }
+        }
+        
+        
+        
+        //图片资源  将解压后的图片资源插入到doc的文件
+        [self movePicwithDic:dic withPath:assetPath OriPath:imagePath];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      }
+      
+    }
+    
+  }
+  
+  
+}
+#pragma mark 读取配置文件json 校验md5 返回结果 true为成功 有问题！！！！！
+-(BOOL)readjsonWithDocPath:(NSString *)Docpath zipPath:(NSString *)zipPath
+{
+  
+  NSString *jsonpath = [Docpath stringByAppendingPathComponent:@"Detailed.json"];
+  
+  NSData *data = [NSData dataWithContentsOfFile:jsonpath];
+  if (!klObjectisEmpty(data)) {
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    JKLog(@"%@ == %@",[zipPath getFileMD5WithPath:zipPath],[dic valueForKey:@"bundleMd5"]);
+    if ( [[zipPath getFileMD5WithPath:zipPath] isEqualToString:[dic valueForKey:@"bundleMd5"]]) {
+      return YES;
+    }else{
+      return NO;
+    }
+    
+  }else{
+    
+    return NO;
+  }
+  
+  
+  
+}
+#pragma mark 在沙盒生成将要移动的全部文件
+-(void)createJSlistIndoc:(NSString*)bundlepath baseVersion:(NSString *)baseVersion shouldUpdatedVersion:(NSString *)shouldUpdatedVersion assets:(NSString *)assetpath
+{
+  NSString *patchCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],shouldUpdatedVersion];
+  NSString *txtPath3 = [patchCachePath stringByAppendingPathComponent:@"main.jsbundle"];
+  NSString *txtPath2 = [patchCachePath stringByAppendingPathComponent:@"assets"];
+  
+  NSString *jslist = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"jsversion"];
+  NSString *jsversion = [NSString stringWithFormat:@"%@/\%@",jslist,[NSString stringWithFormat:@"%@",shouldUpdatedVersion]];;
+  
+  //判断assets是否存在
+  BOOL jsversionExist = [[NSFileManager defaultManager] fileExistsAtPath:patchCachePath];
+  //如果已存在,删除
+  if(jsversionExist){
+    NSLog(@"jsversion已存在: %@",patchCachePath);
+    [[NSFileManager defaultManager] removeItemAtPath:patchCachePath error:nil];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:patchCachePath withIntermediateDirectories:YES attributes:nil error:nil];
+    NSLog(@"jsversion已生成Document: %@",patchCachePath);
+    //将合并后的js文件和图片移动到该目录下
+    
+    [[NSFileManager defaultManager] copyItemAtPath:bundlepath toPath:txtPath3 error:nil];
+    [[NSFileManager defaultManager] copyItemAtPath:assetpath toPath:txtPath2 error:nil];
+    
+    
+  }else{
+    [[NSFileManager defaultManager] createDirectoryAtPath:patchCachePath withIntermediateDirectories:YES attributes:nil error:nil];
+    NSLog(@"jsversion已生成Document: %@",patchCachePath);
+    //将合并后的js文件和图片移动到该目录下
+    
+    [[NSFileManager defaultManager] copyItemAtPath:bundlepath toPath:txtPath3 error:nil];
+    [[NSFileManager defaultManager] copyItemAtPath:assetpath toPath:txtPath2 error:nil];
+    
+  }
+  //移动文件夹到jslist
+  NSString *patch = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"patch"];
+  [[NSFileManager defaultManager] moveItemAtPath:patchCachePath toPath:jsversion error:nil];
+  [[NSFileManager defaultManager] removeItemAtPath:patch error:nil];
+
+}
+#pragma mark 移动图片资源
+-(void)movePicwithDic:(NSDictionary *)dic withPath:(NSString *)path OriPath:(NSString *)OriPath
+{
+  JKLog(@"%@ == %@",path,OriPath);
+  NSString *txtPath3 = [path stringByAppendingPathComponent:@"res"];
+  NSString *txtPath2 = [txtPath3 stringByAppendingPathComponent:@"images"];
+  [[NSFileManager defaultManager] contentsOfDirectoryAtPath:OriPath error:nil];
+  NSMutableArray *imagearr = [NSMutableArray arrayWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:OriPath error:nil]];
+  
+  for (int i = 0; i < imagearr.count; i++) {
+    NSString *oriImage=@"";
+    NSString *destinImage = @"";
+    if (![[imagearr objectAtIndex:i] isEqualToString:@".DS_Store"]) {
+      oriImage = [OriPath stringByAppendingPathComponent:[imagearr objectAtIndex:i]];
+      destinImage = [txtPath2 stringByAppendingPathComponent:[imagearr objectAtIndex:i]];
+      [[NSFileManager defaultManager] moveItemAtPath:oriImage toPath:destinImage error:nil];
+    }
+  }
+  
+  
+  
+  JKLog(@"%ld 是否成功",[[NSFileManager defaultManager] moveItemAtPath:OriPath toPath:txtPath2 error:nil]);
+  
+  
+}
 #pragma mark local push
 
 - (void)localPushWithTitle:(NSString *)title detail:(NSString *)body  {
