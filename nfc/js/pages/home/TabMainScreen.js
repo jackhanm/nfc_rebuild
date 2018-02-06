@@ -21,7 +21,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import { Kaede } from '../../compoent/exportInput';
 import { Kohana } from '../../compoent/exportInput';
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
-
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const MARGIN = 40;
@@ -51,48 +51,118 @@ export default class App extends Component<{}> {
     render() {
         return (
 
-            <View style={styles.container}>
+            <KeyboardAwareScrollView style={styles.container} >
 
-                {/*<Kohana*/}
-                    {/*style={{ backgroundColor: '#f9f5ed' }}*/}
-                    {/*label={'身份证'}*/}
-                    {/*iconClass={MaterialsIcon}*/}
-                    {/*iconName={'directions-bus'}*/}
-                    {/*iconColor={'#f4d29a'}*/}
-                    {/*labelStyle={{ color: '#91627b' }}*/}
-                    {/*inputStyle={{ color: '#91627b' }}*/}
-                    {/*useNativeDriver*/}
+
+                {/*<Madoka*/}
+                    {/*style={[styles.inputStyle]}*/}
+                    {/*label={'车牌号'}*/}
+                    {/*// this is used as active and passive border color*/}
+                    {/*borderColor={'black'}*/}
+                    {/*onChangeText={(text) => this.setState({carCard:text})}*/}
+                    {/*labelStyle={{ color: 'black' }}*/}
+                    {/*inputStyle={{ color: '#f4a197' }}*/}
                 {/*/>*/}
 
-                <Madoka
-                    style={[styles.inputStyle]}
-                    label={'车牌号'}
-                    // this is used as active and passive border color
-                    borderColor={'black'}
-                    onChangeText={(text) => this.setState({carCard:text})}
-                    labelStyle={{ color: 'black' }}
-                    inputStyle={{ color: '#f4a197' }}
-                />
 
-                <Kaede
-                    style={[styles.inputStyle]}
-                    label={'身份证'}
-                    labelStyle={{backgroundColor:'black'}}
-                />
 
                 <Kaede
                     style={[styles.inputStyle]}
                     label={'车牌号'}
                 />
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' }}
+                    label={'手机号'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{ color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+                <Kohana
+                    style={{ backgroundColor: '#f9f5ed' ,marginTop:10}}
+                    label={'密码'}
+                    iconClass={FontAwesomeIcon}
+                    iconName={'bus'}
+                    iconColor={'#f4d29a'}
+                    iconSize={15}
+                    labelStyle={{  color: '#91627b' ,fontSize:13}}
+                    inputStyle={{ color: '#91627b' }}
+                    useNativeDriver
+                />
+
+
 
 
                 <TouchableOpacity style={styles.button4} onPress={this._onPress()}>
-                    <Text style={{fontSize:16}}>
+                    <Text style={{fontSize:16, width:windowWidth - 100, alignSelf: 'center',textAlign:'center'}}>
                         查    询
                     </Text>
 
                 </TouchableOpacity>
-            </View>
+            </KeyboardAwareScrollView>
 
         );
     }
@@ -100,12 +170,8 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FEFFFE',
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+
+     margin:10,
     },
     welcome: {
         fontSize: 20,
@@ -114,7 +180,7 @@ const styles = StyleSheet.create({
     },
     instructions: {
         textAlign: 'center',
-        color: '#333333',
+        color: '#DC9D93',
         marginBottom: 5,
     },
     inputStyle:{
@@ -123,12 +189,13 @@ const styles = StyleSheet.create({
     },
 
     button4: {
+        marginTop:20,
         width:windowWidth - 40,
-        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'center',
         backgroundColor: '#F035E0',
         height: 50,
-        borderRadius: 20,
+        borderRadius: 25,
     },
 
     container4: {

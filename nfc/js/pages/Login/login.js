@@ -15,6 +15,7 @@ import {
 import UserInput from './UserInput';
 import Dimensions from 'Dimensions';
 import Toast, {DURATION} from 'react-native-easy-toast'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { TabNavigator, NavigationActions} from "react-navigation";
 import GetSetStorg from "../publicState/GetSetStorg";
 import CheckModle from "../modle/CheckModle"
@@ -162,6 +163,9 @@ export default class App extends Component<{}> {
                 <Toast ref="toast"/>
             </ScrollView>
 
+
+
+
         );
     }
 }
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position:'absolute',
         top:250,
-        marginTop:10,
+        margin:10,
     },
     btnEye: {
         position: 'absolute',
@@ -217,14 +221,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         position:'absolute',
-        top:480,
+        top:450,
     },
     text3: {
         color: 'white',
         backgroundColor: 'transparent',
     },
     container4: {
-        top:430,
+        top:400,
         position:'absolute',
         alignSelf: 'center',
         justifyContent: 'flex-start',
