@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { View, Text, StyleSheet, ListView, FlatList, TouchableOpacity } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import dummyData from './data';
 
@@ -34,16 +34,20 @@ export default class VerticalStepIndicator extends Component {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(dummyData.data),
+            dataSource: dummyData.data,
             currentPage:0
         };
+        this.handleViewableItemsChanged = this.getVisibleRows.bind(this)
+        this.viewabilityConfig = {viewAreaCoveragePercentThreshold: 50}
     }
 
     render() {
+        {console.log("data:" + JSON.stringify(this.state.dataSource))}
         return (
             <View style={styles.container}>
                 <View style={styles.stepIndicator}>
                     <StepIndicator
+                        ref="StepIndicator"
                         customStyles={stepIndicatorStyles}
                         stepCount={6}
                         direction='vertical'
@@ -51,27 +55,32 @@ export default class VerticalStepIndicator extends Component {
                         labels={dummyData.data.map(item => item.title)}
                     />
                 </View>
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderPage}
-                    onChangeVisibleRows={this.getVisibleRows}
+                <FlatList
+                    data={this.state.dataSource}
+                    renderItem={(item)=>this.renderPage(item)}
+                    onViewableItemsChanged={this.handleViewableItemsChanged}
+                    viewabilityConfig={this.viewabilityConfig}
                 />
             </View>
         );
     }
 
-    renderPage = (rowData) => {
+    renderPage({item}){
+        console.log("item:" + JSON.stringify(item))
         return (
             <View style={styles.rowItem}>
-                <Text style={styles.title}>{rowData.title}</Text>
-                <Text style={styles.body}>{rowData.body}</Text>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.body}>{item.body}</Text>
             </View>
         )
     }
 
-    getVisibleRows = (visibleRows) => {
-        const visibleRowNumbers = Object.keys(visibleRows.s1).map((row) => parseInt(row));
-        this.setState({currentPage:visibleRowNumbers[0]})
+    getVisibleRows(info){
+        console.log("info:" + JSON.stringify(info));
+        visibleRows = info.viewableItems;
+        const visibleRowNumbers = visibleRows[0].index;
+        console.log("visibleRowNumbers:" + visibleRowNumbers);
+        this.setState({currentPage: visibleRowNumbers});
     }
 }
 
