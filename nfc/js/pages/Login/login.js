@@ -17,6 +17,7 @@ import Dimensions from 'Dimensions';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import { TabNavigator, NavigationActions} from "react-navigation";
 import GetSetStorg from "../publicState/GetSetStorg";
+import CheckModle from "../modle/CheckModle"
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
@@ -36,6 +37,7 @@ export default class App extends Component<{}> {
             isLoading: false,
             userName:'',
             passWrod:'',
+            checkCode:'',
         };
         this.showPass = this.showPass.bind(this);
         this.buttonAnimated = new Animated.Value(0);
@@ -119,6 +121,15 @@ export default class App extends Component<{}> {
                                autoCapitalize={'none'}
                                onTextChange={(text)=>this.setState({passWrod:text})}
                                autoCorrect={false} />
+                        <CheckModle
+                            placeholder='CheckCode'
+                            returnKeyType={'done'}
+                            autoCapitalize={'none'}
+                            onTextChange={(text)=>this.setState({checkCode:text})}
+                            autoCorrect={false}
+
+                            timeOver={60}
+                            onClick={null}/>
                     <TouchableOpacity
                         activeOpacity={0.7}
                         style={styles.btnEye}
@@ -131,6 +142,7 @@ export default class App extends Component<{}> {
                     <Text style={styles.text3}>Create Account</Text>
                     <Text style={styles.text3}>Forgot Password?</Text>
                 </View>
+
                 <View style={styles.container4}>
                     <Animated.View style={{width: changeWidth}}>
                         <TouchableOpacity style={styles.button4}
@@ -149,9 +161,6 @@ export default class App extends Component<{}> {
                 </View>
                 <Toast ref="toast"/>
             </ScrollView>
-
-
-
 
         );
     }
@@ -187,7 +196,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position:'absolute',
         top:250,
-        margin:10,
+        marginTop:10,
     },
     btnEye: {
         position: 'absolute',
@@ -208,14 +217,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         position:'absolute',
-        top:450,
+        top:480,
     },
     text3: {
         color: 'white',
         backgroundColor: 'transparent',
     },
     container4: {
-        top:400,
+        top:430,
         position:'absolute',
         alignSelf: 'center',
         justifyContent: 'flex-start',
