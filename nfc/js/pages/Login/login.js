@@ -122,7 +122,7 @@ export default class App extends Component<{}> {
                                autoCapitalize={'none'}
                                onTextChange={(text)=>this.setState({passWrod:text})}
                                autoCorrect={false} />
-                        <CheckModle
+                     <CheckModle
                             placeholder='CheckCode'
                             returnKeyType={'done'}
                             autoCapitalize={'none'}
@@ -221,14 +221,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         position:'absolute',
-        top:450,
+        top:510,
     },
     text3: {
         color: 'white',
         backgroundColor: 'transparent',
     },
     container4: {
-        top:400,
+        top:450,
         position:'absolute',
         alignSelf: 'center',
         justifyContent: 'flex-start',
