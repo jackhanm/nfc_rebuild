@@ -14,6 +14,9 @@ import SecondScreen from "../secondTab/SecondScreen";
 import FourthScreen from '../Mine/MinePage'
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
+import CheckBox from '../ThirdTab/CheckBox'
+import DatetimePick from '../ThirdTab/DatetimePick'
+
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
 //在JavaScript中调用Object-C定义的方法，需要先导入NativeModules,再使用RNCalliOSFuncation
@@ -85,6 +88,28 @@ export default class TabbarPage extends Component{
                     onPress={() => this.setState({ selectedTab: '理财' })}>
                     <SecondScreen  {...this.props}/>
                 </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'checkbox'}
+                    title={'checkbox'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'checkbox' })}>
+                    <CheckBox  {...this.props}/>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'timePick'}
+                    title={'timePick'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'timePick' })}>
+                    <DatetimePick  {...this.props}/>
+                </TabNavigator.Item>
+
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '我的'}
                     title={'我的'}
