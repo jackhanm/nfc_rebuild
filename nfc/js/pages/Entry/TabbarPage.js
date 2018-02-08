@@ -11,11 +11,12 @@ import { NavigationActions} from "react-navigation";
 import THemefactory from '../../../res/styles/ThemeFactory'
 import GlobalStyle from '../../../res/styles/GlobalStyles'
 import SecondScreen from "../secondTab/SecondScreen";
-import FourthScreen from '../Mine/MinePage'
+import FourthScreen from '../Mine/MInePage'
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
+import FillInInfo from '../Mine/FillInInfo'
 //在JavaScript中调用Object-C定义的方法，需要先导入NativeModules,再使用RNCalliOSFuncation
 
 
@@ -93,7 +94,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <FourthScreen {...this.props}/>
+                    <FillInInfo {...this.props}/>
                 </TabNavigator.Item>
 
             </TabNavigator>

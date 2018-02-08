@@ -79,9 +79,7 @@ export default class CheckModle extends Component{
                         </Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
-
         );
     };
 
