@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.neenbedankt.android-apt'
+
 import com.android.build.OutputFile
 
 /**
@@ -166,6 +167,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.0'
     //Rxjava专门针对anroid封装的RxAndroid
     //compile 'io.reactivex:rxjava:1.1.5'
+
+    compile project(':react-native-vector-icons')
 
     /*====================================================第三方依赖=================*/
 }

@@ -13,7 +13,6 @@ import android.util.Log;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactNativeHost;
@@ -33,6 +32,8 @@ import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.rnfs.RNFSPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -65,7 +66,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNFSPackage(),
-            new SplashScreenReactPackage()
+            new SplashScreenReactPackage(),
+              new VectorIconsPackage()
       );
     }
 
