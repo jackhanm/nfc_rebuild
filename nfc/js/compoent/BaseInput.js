@@ -121,7 +121,7 @@ export default class BaseInput extends Component {
         }
     }
 
-    blur() {
+    blur() {Input.js
         this.inputRef().blur();
     }
 

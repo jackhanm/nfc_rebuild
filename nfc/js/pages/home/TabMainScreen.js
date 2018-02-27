@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 let windowWidth = Dimensions.get('window').width;
-
+import TabNavigator from 'react-native-tab-navigator';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -28,7 +28,7 @@ const MARGIN = 40;
 
 
 import { Madoka } from '../../compoent/exportInput';
-
+let tabBarHeight = 0;
 export default class App extends Component<{}> {
 
     constructor(){
@@ -51,6 +51,7 @@ export default class App extends Component<{}> {
     render() {
         return (
 
+
             <KeyboardAwareScrollView style={styles.container} >
 
 
@@ -64,7 +65,10 @@ export default class App extends Component<{}> {
                     {/*inputStyle={{ color: '#f4a197' }}*/}
                 {/*/>*/}
 
-
+                <TabNavigator
+                    tabBarStyle={{ height: tabBarHeight, overflow: 'hidden' }}
+                    sceneStyle={{ paddingBottom: tabBarHeight }}
+                />
 
                 <Kaede
                     style={[styles.inputStyle]}

@@ -102,6 +102,13 @@
 		66158B832028065300C5F58A /* NSString+Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B672028065300C5F58A /* NSString+Number.m */; };
 		66158B842028065300C5F58A /* NSMutableArray+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B692028065300C5F58A /* NSMutableArray+Category.m */; };
 		66158B852028065300C5F58A /* ASLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B6C2028065300C5F58A /* ASLabel.m */; };
+		66B3950B202C454D005C1C42 /* Ubuntu-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */; };
+		66B3950C202C454D005C1C42 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39505202C454C005C1C42 /* Montserrat-Regular.ttf */; };
+		66B3950D202C454D005C1C42 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */; };
+		66B3950E202C454D005C1C42 /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39507202C454C005C1C42 /* Georgia.ttf */; };
+		66B3950F202C454D005C1C42 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39508202C454C005C1C42 /* Ubuntu-Light.ttf */; };
+		66B39510202C454D005C1C42 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39509202C454D005C1C42 /* Ubuntu-Bold.ttf */; };
+		66B39511202C454D005C1C42 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */; };
 		66DBB1DF20282E1000FAE141 /* JKDownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1DE20282E1000FAE141 /* JKDownloadSession.m */; };
 		66DBB1E220282E4500FAE141 /* JKDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1E120282E4500FAE141 /* JKDownloadTask.m */; };
 		66DBB1E520282E5F00FAE141 /* JKDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1E420282E5F00FAE141 /* JKDownloadManager.m */; };
@@ -521,6 +528,13 @@
 		66158B6A2028065300C5F58A /* NSObject+PerformBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PerformBlock.h"; sourceTree = "<group>"; };
 		66158B6B2028065300C5F58A /* UILabel+setLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+setLabel.h"; sourceTree = "<group>"; };
 		66158B6C2028065300C5F58A /* ASLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabel.m; sourceTree = "<group>"; };
+		66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light-Italic.ttf"; sourceTree = "<group>"; };
+		66B39505202C454C005C1C42 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		66B39507202C454C005C1C42 /* Georgia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Georgia.ttf; sourceTree = "<group>"; };
+		66B39508202C454C005C1C42 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		66B39509202C454D005C1C42 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		66DBB1DD20282E1000FAE141 /* JKDownloadSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKDownloadSession.h; sourceTree = "<group>"; };
 		66DBB1DE20282E1000FAE141 /* JKDownloadSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKDownloadSession.m; sourceTree = "<group>"; };
 		66DBB1E020282E4500FAE141 /* JKDownloadTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKDownloadTask.h; sourceTree = "<group>"; };
@@ -753,6 +767,13 @@
 		66158ACE2028050000C5F58A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				66B39507202C454C005C1C42 /* Georgia.ttf */,
+				66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */,
+				66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */,
+				66B39505202C454C005C1C42 /* Montserrat-Regular.ttf */,
+				66B39509202C454D005C1C42 /* Ubuntu-Bold.ttf */,
+				66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */,
+				66B39508202C454C005C1C42 /* Ubuntu-Light.ttf */,
 				66158ACF2028050000C5F58A /* Octicons.ttf */,
 				66158AD02028050000C5F58A /* Feather.ttf */,
 				66158AD12028050000C5F58A /* Entypo.ttf */,
@@ -1462,18 +1483,25 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				66158B192028050000C5F58A /* EvilIcons.ttf in Resources */,
+				66B3950C202C454D005C1C42 /* Montserrat-Regular.ttf in Resources */,
 				66158B392028053700C5F58A /* Introduce.text in Resources */,
+				66B3950E202C454D005C1C42 /* Georgia.ttf in Resources */,
 				66158B152028050000C5F58A /* Foundation.ttf in Resources */,
+				66B39511202C454D005C1C42 /* Montserrat-Light.ttf in Resources */,
 				66158B182028050000C5F58A /* Zocial.ttf in Resources */,
 				66158B1B2028050000C5F58A /* MaterialIcons.ttf in Resources */,
 				66158B162028050000C5F58A /* Ionicons.ttf in Resources */,
 				66158B1A2028050000C5F58A /* SimpleLineIcons.ttf in Resources */,
 				66158B112028050000C5F58A /* Octicons.ttf in Resources */,
+				66B39510202C454D005C1C42 /* Ubuntu-Bold.ttf in Resources */,
 				66DBB1FA20283C7900FAE141 /* jsversion in Resources */,
+				66B3950F202C454D005C1C42 /* Ubuntu-Light.ttf in Resources */,
 				66158B122028050000C5F58A /* Feather.ttf in Resources */,
 				66158B172028050000C5F58A /* FontAwesome.ttf in Resources */,
 				66158B132028050000C5F58A /* Entypo.ttf in Resources */,
+				66B3950D202C454D005C1C42 /* Montserrat-Bold.ttf in Resources */,
 				66158B142028050000C5F58A /* MaterialCommunityIcons.ttf in Resources */,
+				66B3950B202C454D005C1C42 /* Ubuntu-Light-Italic.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

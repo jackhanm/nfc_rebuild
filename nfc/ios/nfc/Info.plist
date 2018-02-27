@@ -4,6 +4,16 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Ionicons.ttf</string>
+		<string>Ubuntu-Light-Italic.ttf</string>
+		<string>Ubuntu-Light.ttf</string>
+		<string>Ubuntu-Blod.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Blod.ttf</string>
+		<string>Georgia.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Feather.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>FontAwesome.ttf</string>
 		<string>Foundation.ttf</string>

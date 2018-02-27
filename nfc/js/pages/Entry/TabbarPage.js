@@ -16,6 +16,10 @@ import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
 import CheckBox from '../ThirdTab/CheckBox'
 import DatetimePick from '../ThirdTab/DatetimePick'
+import AntDatapick from '../ThirdTab/AntDatapick'
+import Elemalogin from  '../ThirdTab/Elemalogin'
+import Antmobile from  '../ThirdTab/Antmobile'
+import LearningRedux from '../ThirdTab/LearningRedux'
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
@@ -39,10 +43,6 @@ export default class TabbarPage extends Component{
     componentWillUnmount(){
 
     }
-
-
-
-
     constructor(props){
 
 
@@ -112,6 +112,18 @@ export default class TabbarPage extends Component{
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
+                    selected={this.state.selectedTab === 'elelogin'}
+                    title={'elelogin'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'elelogin' })}>
+                    <Elemalogin  {...this.props}/>
+                </TabNavigator.Item>
+
+                <TabNavigator.Item
                     selected={this.state.selectedTab === '我的'}
                     title={'我的'}
                     titleStyle={styles.tabText}
@@ -122,18 +134,47 @@ export default class TabbarPage extends Component{
                     <FillInInfo {...this.props}/>
                 </TabNavigator.Item>
 
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'AntdataPick'}
+                    title={'AntdataPick'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'AntdataPick' })}>
+                    <AntDatapick {...this.props}/>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'Antmobile'}
+                    title={'Antmobile'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'Antmobile' })}>
+                    <Antmobile {...this.props}/>
+                </TabNavigator.Item>
+
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'LearningRedux'}
+                    title={'LearningRedux'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
+                    <LearningRedux {...this.props}/>
+                </TabNavigator.Item>
+
+
+
             </TabNavigator>
 
             </View>
            );
     }
 
-
-
 }
-
-
-
 const styles = StyleSheet.create({
     container:{
         flex:1,
