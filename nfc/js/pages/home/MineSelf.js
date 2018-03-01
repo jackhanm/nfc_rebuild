@@ -111,6 +111,21 @@ export default class MineSelf extends Component{
                             </Text>
                         </View>
                     </Item>
+
+                    <Item arrow="horizontal" onClick={() => {}}>
+                        <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
+                            <Icon
+                                color='black'
+                                size={25}
+                                backgroundColor={'white'}
+                                name="ios-cloud-download"
+                            />
+                            <Text style={{marginLeft:10}}>
+                                下载管理
+                            </Text>
+                        </View>
+                    </Item>
+
                     <Item arrow="horizontal" onClick={() => {}}>
                         <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
                             <Icon

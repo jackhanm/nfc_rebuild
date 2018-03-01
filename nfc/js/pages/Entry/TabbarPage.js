@@ -17,6 +17,8 @@ import Nfchomepage from '../home/nfchomepage'
 import Searchpersonal from '../home/SearchPersonal'
 import PersonalData from '../home/PersonalData'
 import Mineself from '../home/MineSelf'
+import Accountinfo from '../home/AccountInfo'
+import Changepassword from '../home/ChangePassWord'
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
@@ -105,7 +107,7 @@ export default class TabbarPage extends Component{
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'timePick' })}>
-                    <DatetimePick  {...this.props}/>
+                    <Accountinfo  {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
@@ -128,7 +130,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <FillInInfo {...this.props}/>
+                    <Changepassword {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
