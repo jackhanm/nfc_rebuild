@@ -6,20 +6,17 @@ import {
     Image,SafeAreaView,Platform,Dimensions
 } from 'react-native';
 
-import { NavigationActions} from "react-navigation";
-
-import THemefactory from '../../../res/styles/ThemeFactory'
 import GlobalStyle from '../../../res/styles/GlobalStyles'
-import SecondScreen from "../secondTab/SecondScreen";
-import FourthScreen from '../Mine/MInePage'
-import TabMainScreen from '../home/TabMainScreen'
-import ThemeDao from '../publicState/ThemeDao'
 import CheckBox from '../ThirdTab/CheckBox'
 import DatetimePick from '../ThirdTab/DatetimePick'
 import AntDatapick from '../ThirdTab/AntDatapick'
 import Elemalogin from  '../ThirdTab/Elemalogin'
 import Antmobile from  '../ThirdTab/Antmobile'
 import LearningRedux from '../ThirdTab/LearningRedux'
+import Nfchomepage from '../home/nfchomepage'
+import Searchpersonal from '../home/SearchPersonal'
+import PersonalData from '../home/PersonalData'
+import Mineself from '../home/MineSelf'
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
@@ -77,7 +74,7 @@ export default class TabbarPage extends Component{
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '1-1' })}>
-                    <TabMainScreen  {...this.props}/>
+                    <Nfchomepage {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '理财'}
@@ -87,7 +84,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '理财' })}>
-                    <SecondScreen  {...this.props}/>
+                    <PersonalData  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'checkbox'}
@@ -97,7 +94,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'checkbox' })}>
-                    <CheckBox  {...this.props}/>
+                    <Mineself  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'timePick'}
