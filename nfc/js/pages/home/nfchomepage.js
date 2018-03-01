@@ -79,7 +79,9 @@ export default class nfchomepage extends Component{
                     onPress={()=>{}}
                 />
 
-                <TextInput style={{padding:0}} underlineColorAndroid="transparent">
+                <TextInput
+                    underlineColorAndroid="transparent"
+                    style={{height: 40, flex:1, marginRight: 10}}>
 
                 </TextInput>
 
