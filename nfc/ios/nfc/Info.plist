@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Ionicons.ttf</string>
+		<string>iconfont.ttf</string>
 		<string>Ubuntu-Light-Italic.ttf</string>
 		<string>Ubuntu-Light.ttf</string>
 		<string>Ubuntu-Blod.ttf</string>

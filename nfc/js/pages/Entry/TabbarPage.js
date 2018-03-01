@@ -7,6 +7,10 @@ import {
 } from 'react-native';
 
 import GlobalStyle from '../../../res/styles/GlobalStyles'
+import SecondScreen from "../secondTab/SecondScreen";
+import FourthScreen from '../Mine/MinePage'
+import TabMainScreen from '../home/TabMainScreen'
+import ThemeDao from '../publicState/ThemeDao'
 import CheckBox from '../ThirdTab/CheckBox'
 import DatetimePick from '../ThirdTab/DatetimePick'
 import AntDatapick from '../ThirdTab/AntDatapick'
@@ -20,6 +24,8 @@ import Mineself from '../home/MineSelf'
 import Accountinfo from '../home/AccountInfo'
 import Changepassword from '../home/ChangePassWord'
 
+import Pdfviewer from  '../ThirdTab/pfdviewer'
+import BaseComponent from  '../../base/BaseComponent'
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
 import FillInInfo from '../Mine/FillInInfo'
@@ -76,8 +82,39 @@ export default class TabbarPage extends Component{
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '1-1' })}>
-                    <Nfchomepage {...this.props}/>
+                    <TabMainScreen  {...this.props}/>
                 </TabNavigator.Item>
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === '理财'}*/}
+                    {/*title={'理财'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: '理财' })}>*/}
+                    {/*<SecondScreen  {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === 'checkbox'}*/}
+                    {/*title={'checkbox'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: 'checkbox' })}>*/}
+                    {/*<CheckBox  {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === 'timePick'}*/}
+                    {/*title={'timePick'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*//    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: 'timePick' })}>*/}
+                    {/*<DatetimePick  {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
                 <TabNavigator.Item
                     selected={this.state.selectedTab === '理财'}
                     title={'理财'}
@@ -130,7 +167,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <Changepassword {...this.props}/>
+                    <FillInInfo {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
