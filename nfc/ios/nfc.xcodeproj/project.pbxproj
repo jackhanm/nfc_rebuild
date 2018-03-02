@@ -34,6 +34,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* nfcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nfcTests.m */; };
+		3287593A05174B7580C1C3DC /* libRNReactNativeDocViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C088613B17C4428B8DFDFC0 /* libRNReactNativeDocViewer.a */; };
 		593DAEA2BF67DC7989D0A12C /* libPods-nfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BECD6BFF5AE7FA2649D32D /* libPods-nfc.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		66158AC52027FE1900C5F58A /* JKRnUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158A842027FE1900C5F58A /* JKRnUpdateModel.m */; };
@@ -102,6 +103,7 @@
 		66158B832028065300C5F58A /* NSString+Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B672028065300C5F58A /* NSString+Number.m */; };
 		66158B842028065300C5F58A /* NSMutableArray+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B692028065300C5F58A /* NSMutableArray+Category.m */; };
 		66158B852028065300C5F58A /* ASLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B6C2028065300C5F58A /* ASLabel.m */; };
+		667BFAC82047D42F00A1551B /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667BFAA32047D42E00A1551B /* iconfont.ttf */; };
 		66B3950B202C454D005C1C42 /* Ubuntu-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */; };
 		66B3950C202C454D005C1C42 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39505202C454C005C1C42 /* Montserrat-Regular.ttf */; };
 		66B3950D202C454D005C1C42 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */; };
@@ -357,6 +359,13 @@
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
+		66C5EFE820463E8100591276 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFA3DCCB982A48178B989598 /* RNReactNativeDocViewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNReactNativeDocViewer;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -528,6 +537,7 @@
 		66158B6A2028065300C5F58A /* NSObject+PerformBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PerformBlock.h"; sourceTree = "<group>"; };
 		66158B6B2028065300C5F58A /* UILabel+setLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+setLabel.h"; sourceTree = "<group>"; };
 		66158B6C2028065300C5F58A /* ASLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabel.m; sourceTree = "<group>"; };
+		667BFAA32047D42E00A1551B /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light-Italic.ttf"; sourceTree = "<group>"; };
 		66B39505202C454C005C1C42 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -545,10 +555,12 @@
 		66DBB1E720282E7200FAE141 /* JKDownloadItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKDownloadItem.m; sourceTree = "<group>"; };
 		66DBB1F920283C7900FAE141 /* jsversion */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jsversion; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7C088613B17C4428B8DFDFC0 /* libRNReactNativeDocViewer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeDocViewer.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A6BECD6BFF5AE7FA2649D32D /* libPods-nfc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nfc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		D2336D452126DC582A857C01 /* Pods-nfc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nfc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nfc/Pods-nfc.debug.xcconfig"; sourceTree = "<group>"; };
+		EFA3DCCB982A48178B989598 /* RNReactNativeDocViewer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeDocViewer.xcodeproj; path = "../node_modules/react-native-doc-viewer/ios/RNReactNativeDocViewer.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +590,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				593DAEA2BF67DC7989D0A12C /* libPods-nfc.a in Frameworks */,
+				3287593A05174B7580C1C3DC /* libRNReactNativeDocViewer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +780,7 @@
 		66158ACE2028050000C5F58A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				667BFAA32047D42E00A1551B /* iconfont.ttf */,
 				66B39507202C454C005C1C42 /* Georgia.ttf */,
 				66B39506202C454C005C1C42 /* Montserrat-Bold.ttf */,
 				66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */,
@@ -957,6 +971,22 @@
 			path = nfc/Category;
 			sourceTree = "<group>";
 		};
+		66C5EFC120463E8000591276 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				7C088613B17C4428B8DFDFC0 /* libRNReactNativeDocViewer.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		66C5EFE520463E8100591276 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66C5EFE920463E8100591276 /* libRNReactNativeDocViewer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,6 +1011,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				EFA3DCCB982A48178B989598 /* RNReactNativeDocViewer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1004,6 +1035,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				D5D5D7B4482187D9BA8D4D01 /* Pods */,
 				A7B3A6DC54881BC776EB54DF /* Frameworks */,
+				66C5EFC120463E8000591276 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1132,7 +1164,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JK;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1209,6 +1241,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 66C5EFE520463E8100591276 /* Products */;
+					ProjectRef = EFA3DCCB982A48178B989598 /* RNReactNativeDocViewer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1446,6 +1482,13 @@
 			remoteRef = 66692588202451F50030FF96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		66C5EFE920463E8100591276 /* libRNReactNativeDocViewer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNReactNativeDocViewer.a;
+			remoteRef = 66C5EFE820463E8100591276 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1497,6 +1540,7 @@
 				66DBB1FA20283C7900FAE141 /* jsversion in Resources */,
 				66B3950F202C454D005C1C42 /* Ubuntu-Light.ttf in Resources */,
 				66158B122028050000C5F58A /* Feather.ttf in Resources */,
+				667BFAC82047D42F00A1551B /* iconfont.ttf in Resources */,
 				66158B172028050000C5F58A /* FontAwesome.ttf in Resources */,
 				66158B132028050000C5F58A /* Entypo.ttf in Resources */,
 				66B3950D202C454D005C1C42 /* Montserrat-Bold.ttf in Resources */,
@@ -1734,9 +1778,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = nfcTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1751,9 +1803,17 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = nfcTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1771,6 +1831,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_PREFIX_HEADER = "/Users/yuhao/Desktop/yuhao/yuhaosvn/NFC-APP/nfc/ios/nfc/Macro/changtianConfig.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = nfc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1790,6 +1854,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_PREFIX_HEADER = "/Users/yuhao/Desktop/yuhao/yuhaosvn/NFC-APP/nfc/ios/nfc/Macro/changtianConfig.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = nfc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1814,8 +1882,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = "nfc-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1840,8 +1916,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-doc-viewer/ios/**",
+				);
 				INFOPLIST_FILE = "nfc-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1867,6 +1951,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "nfc-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.nfc-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1888,6 +1976,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "nfc-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.nfc-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

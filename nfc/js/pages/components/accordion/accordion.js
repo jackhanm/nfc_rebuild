@@ -1,15 +1,34 @@
-/* tslint:disable:no-console */
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React, {Component} from 'react'
+import {View, StyleSheet, Text} from 'react-native'
 import { Accordion, List } from 'antd-mobile';
-import { StackNavigator } from 'react-navigation';
-export default class accordion extends Component {
+import {BaseComponent} from  '../../../base/BaseComponent'
+import {commonStyle} from '../../../util/commonStyle'
+class accordion extends BaseComponent {
 
+    navigationBarProps() {
+        return {
+            title: 'according',
+            titleStyle: {
+                color: commonStyle.white
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: commonStyle.white
+            },
+            navBarStyle: {
+                backgroundColor: '#151C28',
+            }
+        }
+    }
+    constructor(props) {
+        super(props)
 
+    }
     onChange = (key) => {
         console.log(key);
     }
-    render() {
+    _render()  {
         return (
 
             <View style={{ marginTop: 80, marginBottom: 10 }}>
@@ -30,3 +49,4 @@ export default class accordion extends Component {
         );
     }
 }
+export default accordion

@@ -9,7 +9,8 @@ import {
     Animated,
     Image,
     Easing,
-    ScrollView
+    ScrollView,
+
 } from 'react-native';
 
 let windowWidth = Dimensions.get('window').width;
@@ -17,19 +18,30 @@ import TabNavigator from 'react-native-tab-navigator';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 import ModalDropdown from 'react-native-modal-dropdown';
-
+import {BaseComponent} from  '../../base/BaseComponent'
 import { Kaede } from '../../compoent/exportInput';
 import { Kohana } from '../../compoent/exportInput';
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import {SegmentedControl} from 'antd-mobile'
+import {commonStyle} from '../../util/commonStyle'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
 const MARGIN = 40;
 
 
 import { Madoka } from '../../compoent/exportInput';
 let tabBarHeight = 0;
-export default class App extends Component<{}> {
+export default class App extends BaseComponent {
+    navigationBarProps() {
+
+        return {
+            title: 'home',
+            hiddenLeftItem: true
+        }
+    }
+
+
 
     constructor(){
         super();
@@ -48,12 +60,15 @@ export default class App extends Component<{}> {
 
     }
 
-    render() {
+    _render() {
         return (
 
 
             <KeyboardAwareScrollView style={styles.container} >
+                <View style={styles.navBarStyle}>
 
+
+                    </View>
 
                 {/*<Madoka*/}
                     {/*style={[styles.inputStyle]}*/}
@@ -220,11 +235,20 @@ const styles = StyleSheet.create({
         height:40,
         backgroundColor:'black'
     },
-
+    segContainer: {
+        marginTop: GlobalStyles.navStatusBarHeight,
+        height: GlobalStyles.navContentHeight,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     imgStyle:{
       width:80,
       height:80,
         marginBottom:10
+    },
+        navBarStyle: {
+        height: GlobalStyles.navHeight,
+        backgroundColor: '#151C28',
     },
 
 });

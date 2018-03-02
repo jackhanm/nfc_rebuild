@@ -111,7 +111,7 @@ const SimpleApp = StackNavigator(
         guideView:{screen:guideView},
         login:{screen:login},
         TabBar: { screen: MyStackNavigation },
-        Accordion:{ screen: accordion, navigationOptions:({navigation}) => StackOptions({navigation})},
+        Accordion:{ screen: accordion},
         ActionSheet:{ screen:actionsheet},
         Card:{ screen:card},
         Drawer:{ screen:drawer},
