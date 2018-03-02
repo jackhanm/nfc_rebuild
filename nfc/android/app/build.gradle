@@ -98,6 +98,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     defaultConfig {
         applicationId "com.nfc"
         minSdkVersion 16
@@ -107,6 +111,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
@@ -138,6 +144,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-doc-viewer')
+    compile project(':react-native-image-crop-picker')
     compile project(':react-native-fs')
     compile project(':react-native-splash-screen')
     compile fileTree(dir: "libs", include: ["*.jar"])

@@ -8,7 +8,6 @@ import {
 
 import GlobalStyle from '../../../res/styles/GlobalStyles'
 import SecondScreen from "../secondTab/SecondScreen";
-import FourthScreen from '../Mine/MinePage'
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
 import CheckBox from '../ThirdTab/CheckBox'

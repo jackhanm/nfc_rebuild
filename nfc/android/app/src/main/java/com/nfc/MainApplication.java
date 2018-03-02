@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNReactNativeDocViewerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
@@ -64,6 +66,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNReactNativeDocViewerPackage(),
+            new PickerPackage(),
             new RNFSPackage(),
             new SplashScreenReactPackage()
       );
