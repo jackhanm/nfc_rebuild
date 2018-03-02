@@ -81,6 +81,8 @@ export default class nfchomepage extends Component{
 
                 <TextInput
                     underlineColorAndroid="transparent"
+                    returnKeyLabel='search'
+                    placeholder='请输入人名,身份证，企业名等关键字'
                     style={{height: 40, flex:1, marginRight: 10}}>
 
                 </TextInput>
@@ -142,7 +144,7 @@ export default class nfchomepage extends Component{
                             </Text>
                         </View>
                     </View>
-                    <View style={{backgroundColor:'black', height:0.5, width:windowWidth}}/>
+                    <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
                 </View>
             </TouchableOpacity>
         );
