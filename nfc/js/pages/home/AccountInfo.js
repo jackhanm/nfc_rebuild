@@ -11,13 +11,21 @@ import {
     FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import {BaseComponent} from  '../../base/BaseComponent'
 import { List } from 'antd-mobile';
 const Item = List.Item;
 
 let winWidth = Dimensions.get('window').width;
 
-export default class AccountInfo extends Component{
+export default class AccountInfo extends BaseComponent{
+    navigationBarProps() {
+
+        return {
+            title: '账户信息',
+            hiddenLeftItem: true
+        }
+    }
+
     constructor(){
         super();
         this.state={
@@ -29,7 +37,7 @@ export default class AccountInfo extends Component{
         }
     }
 
-    render(){
+    _render(){
         return(<View style={{flex:1, backgroundColor:'#F0F0F2', flexDirection:'column'}}>
 
             <TouchableOpacity onPress={()=>{}}>

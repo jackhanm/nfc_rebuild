@@ -21,8 +21,15 @@ const Brief = Item.Brief;
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
+import {BaseComponent} from  '../../base/BaseComponent'
+export default class MineSelf extends BaseComponent{
+    navigationBarProps() {
 
-export default class MineSelf extends Component{
+        return {
+            title: '账号',
+            hiddenLeftItem: true
+        }
+    }
 
     constructor(){
         super();
@@ -36,7 +43,7 @@ export default class MineSelf extends Component{
         }
     }
 
-    render(){
+    _render(){
         return(<ScrollView
             style={{ flex: 1, backgroundColor: '#F0F0F2' }}
             automaticallyAdjustContentInsets={false}

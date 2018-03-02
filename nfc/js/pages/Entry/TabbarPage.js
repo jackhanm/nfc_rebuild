@@ -82,7 +82,7 @@ export default class TabbarPage extends Component{
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '1-1' })}>
-                    <TabMainScreen  {...this.props}/>
+                    <Nfchomepage  {...this.props}/>
                 </TabNavigator.Item>
                 {/*<TabNavigator.Item*/}
                     {/*selected={this.state.selectedTab === '理财'}*/}
@@ -146,7 +146,6 @@ export default class TabbarPage extends Component{
                     onPress={() => this.setState({ selectedTab: 'timePick' })}>
                     <Accountinfo  {...this.props}/>
                 </TabNavigator.Item>
-
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'elelogin'}
                     title={'elelogin'}
@@ -202,6 +201,16 @@ export default class TabbarPage extends Component{
                     <LearningRedux {...this.props}/>
                 </TabNavigator.Item>
 
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'LearningRedux'}
+                    title={'LearningRedux'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
+                    <Pdfviewer {...this.props}/>
+                </TabNavigator.Item>
 
 
             </TabNavigator>

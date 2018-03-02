@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {BaseComponent} from  '../../base/BaseComponent'
 import {
     StyleSheet,
     Text,
@@ -13,12 +13,19 @@ import {
 
 let winWidth = Dimensions.get('window').width;
 
-export default class ChangePassWord extends Component{
+export default class ChangePassWord extends BaseComponent{
+    navigationBarProps() {
+
+        return {
+            title: '修改密码',
+            hiddenLeftItem: true
+        }
+    }
     constructor(){
         super();
     }
 
-    render(){
+    _render(){
         return(<View style={{flex:1, backgroundColor:'#F0F0F2', flexDirection:'column', alignItems:'center'}}>
 
             <View style={{height:80, width:winWidth, flexDirection:'row', justifyContent:'center'}}>

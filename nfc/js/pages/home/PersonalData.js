@@ -15,7 +15,7 @@ import {
 import ModalDropdown from 'react-native-modal-dropdown';
 
 import { Popover,  Modal, DatePicker, List, Picker, Button } from 'antd-mobile';
-
+import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
 const Item = Popover.Item;
@@ -47,7 +47,15 @@ const homeType = [{id:1, info:"写字楼"}, {id:2, info:'商铺'}, {id:3, info:"
 
 
 
-export default class PersonalData extends Component{
+export default class PersonalData extends BaseComponent{
+    navigationBarProps() {
+
+        return {
+            title: '查询',
+            hiddenLeftItem: true
+        }
+    }
+
 
     constructor() {
         super();
@@ -77,7 +85,7 @@ export default class PersonalData extends Component{
     }
 
 
-    render(){
+    _render(){
         return(<ScrollView style={styles.container}>
             {this._renderCompanyInfo()}
             {this._renderPersionInfo()}
