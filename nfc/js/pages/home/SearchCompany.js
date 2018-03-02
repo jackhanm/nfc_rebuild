@@ -16,26 +16,20 @@ let winHeight = Dimensions.get('window').height;
 
 const TAG_TYPE = {
     ALL:'all',
-    CREDITREPORT:'creditReport',
-    ANTIFRAUD:'antiFraud',
     RISKMANAGE:'riskManage',
     HOMERENT:'homeRent',
     CARPRICE:'carPrice',
     HOMEPRICE:'homePrice',
 };
 
+export default class SearchCompany extends Component{
 
-export default class SearchPersonal extends Component {
     constructor() {
         super();
         this.state={
             all:true,
-            //个人信用报告
-            creditReport:false,
-            //反欺诈分析
-            antiFraud:false,
             //个人风险概要
-            riskManage:false,
+            companyRiskManage:false,
             //房屋租金评估
             homeRent:false,
             //车辆售价评估
@@ -75,26 +69,25 @@ export default class SearchPersonal extends Component {
                 </View>
 
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.CREDITREPORT, '个人信用报告', this.state.creditReport)}
-                    </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.ANTIFRAUD, '个人反欺诈分析', this.state.antiFraud)}
-                    </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.RISKMANAGE, '个人风险概要', this.state.riskManage)}
-                    </View>
-                </View>
 
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                        {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.riskManage)}
+                    </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent)}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice)}
                     </View>
+                </View>
+
+                <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice)}
+                    </View>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                    </View>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                     </View>
                 </View>
 
@@ -127,24 +120,13 @@ export default class SearchPersonal extends Component {
         switch (item){
             case TAG_TYPE.ALL:
                 this.setState({all:true,
-                    creditReport:false,
-                    antiFraud:false,
                     riskManage:false,
                     homeRent:false,
                     carPrice:false,
                     homePrice:false,});
                 break;
-            case TAG_TYPE.ANTIFRAUD:
-                this.setState({
-                    all:false,
-                    antiFraud:!this.state.antiFraud,
-                })
-                break;
             case TAG_TYPE.CARPRICE:
                 this.setState({carPrice:!this.state.carPrice,all:false});
-                break;
-            case TAG_TYPE.CREDITREPORT:
-                this.setState({creditReport:!this.state.creditReport,all:false});
                 break;
             case TAG_TYPE.HOMEPRICE:
                 this.setState({homePrice:!this.state.homePrice,all:false});

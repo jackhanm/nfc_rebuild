@@ -22,6 +22,8 @@ import PersonalData from '../home/PersonalData'
 import Mineself from '../home/MineSelf'
 import Accountinfo from '../home/AccountInfo'
 import Changepassword from '../home/ChangePassWord'
+import SearchPersonal from '../home/SearchPersonal'
+import SearchCompany from '../home/SearchCompany'
 
 import Pdfviewer from  '../ThirdTab/pfdviewer'
 import BaseComponent from  '../../base/BaseComponent'
@@ -165,7 +167,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <FillInInfo {...this.props}/>
+                    <SearchPersonal {...this.props}/>
                 </TabNavigator.Item>
 
                 <TabNavigator.Item
@@ -176,7 +178,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'AntdataPick' })}>
-                    <AntDatapick {...this.props}/>
+                    <SearchCompany {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'Antmobile'}
