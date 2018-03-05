@@ -58,6 +58,7 @@ import PersonalData from '../home/PersonalData'
 import Pdfviewer from  '../ThirdTab/pfdviewer'
 import ChangePassWord from '../home/ChangePassWord'
 import AccountInfo from '../home/AccountInfo'
+import NfcLogin from '../home/NfcLogin'
 
 const getOptions = title => ({
     title,
@@ -113,7 +114,7 @@ const SimpleApp = StackNavigator(
     {
         Welcome: { screen: Welcome },
         guideView:{screen:guideView},
-        login:{screen:login},
+        login:{screen:NfcLogin},
         TabBar: { screen: MyStackNavigation },
         Accordion:{ screen: accordion},
         ActionSheet:{ screen:actionsheet},
@@ -161,7 +162,8 @@ const SimpleApp = StackNavigator(
         Pdfviewer :{screen:Pdfviewer},
         PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
-        AccountInfo:{screen:AccountInfo}
+        AccountInfo:{screen:AccountInfo},
+        NfcLogin:{screen:NfcLogin}
     },
     {
         mode: 'card',

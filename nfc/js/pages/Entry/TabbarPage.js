@@ -28,6 +28,9 @@ import SearchCompany from '../home/SearchCompany'
 import Pdfviewer from  '../ThirdTab/pfdviewer'
 
 import BaseComponent from  '../../base/BaseComponent'
+
+import NfcLogin from '../home/NfcLogin'
+
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
 import FillInInfo from '../Mine/FillInInfo'
@@ -157,7 +160,7 @@ export default class TabbarPage extends Component{
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'elelogin' })}>
-                    <Elemalogin  {...this.props}/>
+                    <NfcLogin  {...this.props}/>
                 </TabNavigator.Item>
 
                 {/*<TabNavigator.Item*/}

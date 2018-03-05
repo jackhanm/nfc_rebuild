@@ -14,6 +14,8 @@ import {
 
 import ModalDropdown from 'react-native-modal-dropdown';
 
+import Picker1 from 'react-native-picker';
+
 import { Popover,  Modal, DatePicker, List, Picker, Button } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
@@ -105,6 +107,8 @@ export default class PersonalData extends BaseComponent{
 
             selectedAdd:[],
 
+            selectedCarAddress:[],
+
             type:0,
 
             /*--------------------查个人-------------------------*/
@@ -142,6 +146,7 @@ export default class PersonalData extends BaseComponent{
                 {this._renderHomeInfo()}
                 {this._renderModle()}
                 <Button type="primary"
+                        onClick={()=>{this.props.navigation.navigate('Pdfviewer')}}
                         style={{margin:40}}>
                     立即查询
                 </Button>
@@ -393,7 +398,7 @@ export default class PersonalData extends BaseComponent{
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
                         <View  style={{flex:1, marginRight:10}}>
-                            <Picker data={district} cols={2} value={this.state.selectedAdd} onChange={(value)=>this._addressonChange(value)}>
+                            <Picker data={district} cols={2} value={this.state.selectedCarAddress} onChange={(value)=>{console.log(value);this.setState({ selectedCarAddress: value })}}>
                                 <List.Item style={{marginRight:0}}last onClick={this.onClick}>
                                     <Text style={{fontSize:13}}>
                                         省市
