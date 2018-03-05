@@ -54,7 +54,7 @@ export default class MineSelf extends BaseComponent{
             <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:10}}>
 
                 <View style={{width:winWidth-20, backgroundColor:'white'}}>
-                    <TouchableOpacity onPress={()=>{}}>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('AccountInfo')}}>
                         <View style={{flexDirection:'row', alignItems:'center'}}>
                             <View style={{flex:1}}>
                                 <Image source={this.state.imageUrl == ''
@@ -133,7 +133,7 @@ export default class MineSelf extends BaseComponent{
                         </View>
                     </Item>
 
-                    <Item arrow="horizontal" onClick={() => {}}>
+                    <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('ChangePassWord')}}>
                         <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
                             <Icon
                                 color='black'

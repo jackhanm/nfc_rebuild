@@ -71,7 +71,7 @@ export default class SearchCompany extends Component{
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
 
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.riskManage)}
+                        {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.companyRiskManage)}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent)}
@@ -120,7 +120,7 @@ export default class SearchCompany extends Component{
         switch (item){
             case TAG_TYPE.ALL:
                 this.setState({all:true,
-                    riskManage:false,
+                    companyRiskManage:false,
                     homeRent:false,
                     carPrice:false,
                     homePrice:false,});
@@ -135,7 +135,7 @@ export default class SearchCompany extends Component{
                 this.setState({homeRent:!this.state.homeRent,all:false});
                 break;
             case TAG_TYPE.RISKMANAGE:
-                this.setState({riskManage:!this.state.riskManage,all:false});
+                this.setState({companyRiskManage:!this.state.companyRiskManage,all:false});
                 break;
         }
     }
@@ -145,16 +145,15 @@ export default class SearchCompany extends Component{
         this.props.navigation.navigate('PersonalData'
             ,{
                 type:1,
-
-                all:true,
+                all:this.state.all,
                 //个人风险概要
-                companyRiskManage:false,
+                companyRiskManage:this.state.companyRiskManage,
                 //房屋租金评估
-                homeRent:false,
+                homeRent:this.state.homeRent,
                 //车辆售价评估
-                carPrice:false,
+                carPrice:this.state.carPrice,
                 //房屋售价评估
-                homePrice:false,});
+                homePrice:this.state.homePrice,});
     }
 }
 

@@ -55,6 +55,8 @@ import nfcApp from '../nfcApp'
 import TodoApp from '../TodoApp'
 import Elemalogin from  '../ThirdTab/Elemalogin'
 import PersonalData from '../home/PersonalData'
+import ChangePassWord from '../home/ChangePassWord'
+import AccountInfo from '../home/AccountInfo'
 
 const getOptions = title => ({
     title,
@@ -154,7 +156,9 @@ const SimpleApp = StackNavigator(
         TodoApp:{screen :TodoApp},
         nfcApp:{screen :nfcApp},
         Elemalogin:{screen:Elemalogin},
-        PersonalData:{screen:PersonalData}
+        PersonalData:{screen:PersonalData},
+        ChangePassWord:{screen:ChangePassWord},
+        AccountInfo:{screen:AccountInfo}
     },
     {
         mode: 'card',
