@@ -97,7 +97,7 @@ export default class SearchCompany extends Component{
 
     _renderFoot() {
         return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:50}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>this._onPress()}>
                 <View style={{width:winWidth - 100, height:50, justifyContent:'center', alignItems:'center', backgroundColor:'#7861FC', marginLeft:50, marginRight:50}}>
                     <Text style={{color:'white'}}>
                         下一步
@@ -138,6 +138,23 @@ export default class SearchCompany extends Component{
                 this.setState({riskManage:!this.state.riskManage,all:false});
                 break;
         }
+    }
+
+
+    _onPress(){
+        this.props.navigation.navigate('PersonalData'
+            ,{
+                type:1,
+
+                all:true,
+                //个人风险概要
+                companyRiskManage:false,
+                //房屋租金评估
+                homeRent:false,
+                //车辆售价评估
+                carPrice:false,
+                //房屋售价评估
+                homePrice:false,});
     }
 }
 

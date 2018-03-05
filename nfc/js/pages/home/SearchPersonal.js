@@ -102,9 +102,29 @@ export default class SearchPersonal extends Component {
         );
     }
 
+    _onPress(){
+        this.props.navigation.navigate('PersonalData'
+            ,{
+            type:0,
+
+            all:this.state.all,
+            //个人信用报告
+            creditReport:this.state.creditReport,
+            //反欺诈分析
+            antiFraud:this.state.antiFraud,
+            //个人风险概要
+            riskManage:this.state.riskManage,
+            //房屋租金评估
+            homeRent:this.state.homeRent,
+            //车辆售价评估
+            carPrice:this.state.carPrice,
+            //房屋售价评估
+            homePrice:this.state.homePrice});
+    }
+
     _renderFoot() {
         return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:50}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{this._onPress()}}>
                 <View style={{width:winWidth - 100, height:50, justifyContent:'center', alignItems:'center', backgroundColor:'#7861FC', marginLeft:50, marginRight:50}}>
                     <Text style={{color:'white'}}>
                         下一步

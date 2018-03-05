@@ -56,6 +56,31 @@ export default class PersonalData extends BaseComponent{
         }
     }
 
+    componentDidMount() {
+        //这里获取从FirstPageComponent传递过来的参数: id
+
+        console.log('===================componentDidMount====================');
+
+        this.props.type == 0 ?
+            this.setState({
+                type:0
+                , creditReport:this.props.creditReport
+                , antiFraud:this.props.antiFraud
+                , riskManage:this.props.riskManage
+                , all:this.props.all
+                , homeRent:this.props.homeRent
+                , carPrice:this.props.carPrice
+                , homePrice:this.props.homePrice})
+            :this.setState({
+                type:0
+                , companyRiskManage:this.props.companyRiskManage
+                , all:this.props.all
+                , homeRent:this.props.homeRent
+                , carPrice:this.props.carPrice
+                , homePrice:this.props.homePrice
+            });
+    }
+
 
     constructor() {
         super();
@@ -81,17 +106,36 @@ export default class PersonalData extends BaseComponent{
 
             selectedAdd:[],
 
+            type:0,
+
+            /*--------------------查个人-------------------------*/
+            //个人信用报告
+            creditReport:false,
+            //反欺诈分析
+            antiFraud:false,
+            //个人风险概要
+            riskManage:false,
+            /*--------------------查个人-------------------------*/
+            /*---------------------查企业----------------------------*/
+            //个人风险概要
+            companyRiskManage:false,
+            /*---------------------查企业----------------------------*/
+
+            /*----------------------共同参数---------------------------*/
+            all:true,
+            //房屋租金评估
+            homeRent:false,
+            //车辆售价评估
+            carPrice:false,
+            //房屋售价评估
+            homePrice:false,
+            /*----------------------共同参数---------------------------*/
         }
     }
 
 
     _render(){
         return(<ScrollView style={styles.container}>
-            {this._renderCompanyInfo()}
-            {this._renderPersionInfo()}
-            {this._renderCarInfo()}
-            {this._renderHomeInfo()}
-            {this._renderModle()}
             <View style={{width:winWidth, flexDirection:'column'}}>
                 <Button type="primary"
                         style={{margin:40}}>
@@ -100,6 +144,33 @@ export default class PersonalData extends BaseComponent{
             </View>
         </ScrollView>);
     }
+
+    _all(){
+        this._renderPersionInfo(), this._renderCarInfo(),this._renderHomeInfo();
+    }
+
+    _createView(){
+
+        if(this.state.type == 0){
+            if(this.state.all){
+                return this._renderPersionInfo(), this._renderCarInfo(),this._renderHomeInfo();
+            }else{
+                {(this.state.creditReport || this.state.antiFraud || this.state.companyRiskManage) ? this._renderPersionInfo() : <View/>}
+                {(this.state.homeRent || this.state.homePrice) ? this._renderHomeInfo() : <View/>}
+                {(this.state.carPrice ? this._renderCarInfo:<View/>)}
+            }
+        }else{
+            if(this.state.all){
+                return this._renderCompanyInfo(), this._renderCarInfo(),this._renderHomeInfo();
+            }else{
+                {this.state.companyRiskManage ? this._renderCompanyInfo() : <View/>}
+                {(this.state.homeRent || this.state.homePrice) ? this._renderHomeInfo() : <View/>}
+                {(this.state.carPrice ? this._renderCarInfo:<View/>)}
+            }
+        }
+    }
+
+
 
     _renderCompanyInfo(){
         return(<View style={{width:winWidth, flexDirection:'column'}}>

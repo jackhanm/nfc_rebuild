@@ -54,6 +54,7 @@ import  WingBlank from  '../components/wing-blank/wingblank'
 import nfcApp from '../nfcApp'
 import TodoApp from '../TodoApp'
 import Elemalogin from  '../ThirdTab/Elemalogin'
+import PersonalData from '../home/PersonalData'
 
 const getOptions = title => ({
     title,
@@ -152,7 +153,8 @@ const SimpleApp = StackNavigator(
         WingBlank:{screen :WingBlank},
         TodoApp:{screen :TodoApp},
         nfcApp:{screen :nfcApp},
-        Elemalogin:{screen:Elemalogin}
+        Elemalogin:{screen:Elemalogin},
+        PersonalData:{screen:PersonalData}
     },
     {
         mode: 'card',
