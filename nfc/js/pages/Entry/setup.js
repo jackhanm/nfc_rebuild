@@ -158,7 +158,7 @@ const SimpleApp = StackNavigator(
         nfcApp:{screen :nfcApp},
         Elemalogin:{screen:Elemalogin},
         PersonalData:{screen:PersonalData},
-        Pdfviewer :{screen:Pdfviewer}
+        Pdfviewer :{screen:Pdfviewer},
         PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
         AccountInfo:{screen:AccountInfo}
