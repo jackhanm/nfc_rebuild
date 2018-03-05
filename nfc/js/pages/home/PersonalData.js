@@ -335,23 +335,26 @@ export default class PersonalData extends BaseComponent{
                             请选择车型：
                         </Text>
                     </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
+                    <View style={{flex:2.5, flexDirection:'column'}}>
                         <TouchableOpacity
                             onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}, dataSelect:carBrand})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
+                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
+                                , justifyContent:'center', alignItems:'center', backgroundColor:'white'}}>
                             <Text style={{padding:5}}>{this.state.selectedBradn.title}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车系", "type":SelectType.VEHICLES}, dataSelect:vehicles})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text>{this.state.selectedVehicles.title}</Text>
+                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
+                                , justifyContent:'center', alignItems:'center', backgroundColor:'white', marginTop:10}}>
+                            <Text style={{padding:5}}>{this.state.selectedVehicles.title}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车型号", "type":SelectType.CARMODLE}, dataSelect:carModle})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text>{this.state.selectedCarModle.title}</Text>
+                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
+                                , justifyContent:'center', alignItems:'center', backgroundColor:'white', marginTop:10}}>
+                            <Text style={{padding:5}}>{this.state.selectedCarModle.title}</Text>
                         </TouchableOpacity>
 
                     </View>
