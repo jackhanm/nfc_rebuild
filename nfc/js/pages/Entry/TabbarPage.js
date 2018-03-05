@@ -59,7 +59,7 @@ export default class TabbarPage extends Component{
         global.G_IsiPhoneX = isiphoneX;
         global.G_marginTop=isiphoneX?88:64;
         this.state = {
-            selectedTab:'1-1',
+            selectedTab:'首页',
             logingState: 0,
 
         }
@@ -76,14 +76,14 @@ export default class TabbarPage extends Component{
                 ]}
             >
                 <TabNavigator.Item
-                    selected={this.state.selectedTab === '1-1'}
-                    title={'1-1'}
+                    selected={this.state.selectedTab === '首页'}
+                    title={'首页'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: '1-1' })}>
+                    onPress={() => this.setState({ selectedTab: '首页' })}>
                     <Nfchomepage  {...this.props}/>
                 </TabNavigator.Item>
                 {/*<TabNavigator.Item*/}
@@ -118,34 +118,34 @@ export default class TabbarPage extends Component{
                     {/*<DatetimePick  {...this.props}/>*/}
                 {/*</TabNavigator.Item>*/}
                 <TabNavigator.Item
-                    selected={this.state.selectedTab === '理财'}
-                    title={'理财'}
+                    selected={this.state.selectedTab === '查个人'}
+                    title={'查个人'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: '理财' })}>
-                    <PersonalData  {...this.props}/>
+                    onPress={() => this.setState({ selectedTab: '查个人' })}>
+                    <SearchPersonal  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
-                    selected={this.state.selectedTab === 'checkbox'}
-                    title={'checkbox'}
+                    selected={this.state.selectedTab === '查企业'}
+                    title={'查企业'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: 'checkbox' })}>
-                    <Mineself  {...this.props}/>
+                    onPress={() => this.setState({ selectedTab: '查企业' })}>
+                    <SearchCompany  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
-                    selected={this.state.selectedTab === 'timePick'}
-                    title={'timePick'}
+                    selected={this.state.selectedTab === '账户'}
+                    title={'账户'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: 'timePick' })}>
+                    onPress={() => this.setState({ selectedTab: '账户' })}>
                     <Accountinfo  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
@@ -160,27 +160,27 @@ export default class TabbarPage extends Component{
                     <Elemalogin  {...this.props}/>
                 </TabNavigator.Item>
 
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === '我的'}
-                    title={'我的'}
-                    titleStyle={styles.tabText}
-                    selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: '我的' })}>
-                    <SearchPersonal {...this.props}/>
-                </TabNavigator.Item>
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === '我的'}*/}
+                    {/*title={'我的'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: '我的' })}>*/}
+                    {/*<SearchPersonal {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
 
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'AntdataPick'}
-                    title={'AntdataPick'}
-                    titleStyle={styles.tabText}
-                    selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: 'AntdataPick' })}>
-                    <SearchCompany {...this.props}/>
-                </TabNavigator.Item>
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === 'AntdataPick'}*/}
+                    {/*title={'AntdataPick'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: 'AntdataPick' })}>*/}
+                    {/*<SearchCompany {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'Antmobile'}
                     title={'Antmobile'}
@@ -192,27 +192,27 @@ export default class TabbarPage extends Component{
                     <Antmobile {...this.props}/>
                 </TabNavigator.Item>
 
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'LearningRedux'}
-                    title={'LearningRedux'}
-                    titleStyle={styles.tabText}
-                    selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
-                    <LearningRedux {...this.props}/>
-                </TabNavigator.Item>
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === 'LearningRedux'}*/}
+                    {/*title={'LearningRedux'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>*/}
+                    {/*<LearningRedux {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
 
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'LearningRedux'}
-                    title={'LearningRedux'}
-                    titleStyle={styles.tabText}
-                    selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
-                    onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
-                    <Pdfviewer {...this.props}/>
-                </TabNavigator.Item>
+                {/*<TabNavigator.Item*/}
+                    {/*selected={this.state.selectedTab === 'LearningRedux'}*/}
+                    {/*title={'LearningRedux'}*/}
+                    {/*titleStyle={styles.tabText}*/}
+                    {/*selectedTitleStyle={styles.selectedTabText}*/}
+                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
+                    {/*onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>*/}
+                    {/*<Pdfviewer {...this.props}/>*/}
+                {/*</TabNavigator.Item>*/}
 
 
             </TabNavigator>

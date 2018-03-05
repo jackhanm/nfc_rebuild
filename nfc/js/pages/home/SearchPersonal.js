@@ -13,6 +13,7 @@ import {
 import { Tag, WhiteSpace } from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
+import {BaseComponent} from  '../../base/BaseComponent'
 
 const TAG_TYPE = {
     ALL:'all',
@@ -25,7 +26,14 @@ const TAG_TYPE = {
 };
 
 
-export default class SearchPersonal extends Component {
+export default class SearchPersonal extends BaseComponent {
+    navigationBarProps() {
+
+        return {
+            title: '查个人',
+            hiddenLeftItem: true
+        }
+    }
     constructor() {
         super();
         this.state={
@@ -45,7 +53,7 @@ export default class SearchPersonal extends Component {
         }
     }
 
-    render() {
+    _render() {
         return (
             <View style={styles.container}>
                 {this._renderHead()}
@@ -106,7 +114,6 @@ export default class SearchPersonal extends Component {
         this.props.navigation.navigate('PersonalData'
             ,{
             type:0,
-
             all:this.state.all,
             //个人信用报告
             creditReport:this.state.creditReport,

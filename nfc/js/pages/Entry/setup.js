@@ -55,6 +55,7 @@ import nfcApp from '../nfcApp'
 import TodoApp from '../TodoApp'
 import Elemalogin from  '../ThirdTab/Elemalogin'
 import PersonalData from '../home/PersonalData'
+import Pdfviewer from  '../ThirdTab/pfdviewer'
 import ChangePassWord from '../home/ChangePassWord'
 import AccountInfo from '../home/AccountInfo'
 
@@ -156,6 +157,8 @@ const SimpleApp = StackNavigator(
         TodoApp:{screen :TodoApp},
         nfcApp:{screen :nfcApp},
         Elemalogin:{screen:Elemalogin},
+        PersonalData:{screen:PersonalData},
+        Pdfviewer :{screen:Pdfviewer}
         PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
         AccountInfo:{screen:AccountInfo}

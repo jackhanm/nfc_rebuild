@@ -48,15 +48,33 @@ const homeType = [{id:1, info:"写字楼"}, {id:2, info:'商铺'}, {id:3, info:"
 
 
 export default class PersonalData extends BaseComponent{
+
+
+
     navigationBarProps() {
 
         return {
+
             title: '查询',
-            hiddenLeftItem: true
+            titleStyle: {
+                color: '#2B2D2E',
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: '#4675FF',
+            },
+            navBarStyle: {
+                backgroundColor: '#FFF',
+            }
+
         }
     }
 
+
+
     componentDidMount() {
+        //这里获取从FirstPageComponent传递过来的参数: id
 
         console.log('===================componentDidMount====================');
         this.props.navigation.state.params.type == 0 ?
@@ -121,7 +139,7 @@ export default class PersonalData extends BaseComponent{
             /*---------------------查企业----------------------------*/
 
             /*----------------------共同参数---------------------------*/
-            all:false,
+            all:true,
             //房屋租金评估
             homeRent:false,
             //车辆售价评估
@@ -136,11 +154,6 @@ export default class PersonalData extends BaseComponent{
     _render(){
         return(<ScrollView style={styles.container}>
             <View style={{width:winWidth, flexDirection:'column'}}>
-                {this._renderCompanyInfo()}
-                {this._renderPersionInfo()}
-                {this._renderCarInfo()}
-                {this._renderHomeInfo()}
-                {this._renderModle()}
                 <Button type="primary"
                         style={{margin:40}}>
                     立即查询
@@ -149,297 +162,304 @@ export default class PersonalData extends BaseComponent{
         </ScrollView>);
     }
 
+    _all(){
+        this._renderPersionInfo(), this._renderCarInfo(),this._renderHomeInfo();
+    }
+
+    _createView(){
+
+        if(this.state.type == 0){
+            if(this.state.all){
+                return this._renderPersionInfo(), this._renderCarInfo(),this._renderHomeInfo();
+            }else{
+                {(this.state.creditReport || this.state.antiFraud || this.state.companyRiskManage) ? this._renderPersionInfo() : <View/>}
+                {(this.state.homeRent || this.state.homePrice) ? this._renderHomeInfo() : <View/>}
+                {(this.state.carPrice ? this._renderCarInfo:<View/>)}
+            }
+        }else{
+            if(this.state.all){
+                return this._renderCompanyInfo(), this._renderCarInfo(),this._renderHomeInfo();
+            }else{
+                {this.state.companyRiskManage ? this._renderCompanyInfo() : <View/>}
+                {(this.state.homeRent || this.state.homePrice) ? this._renderHomeInfo() : <View/>}
+                {(this.state.carPrice ? this._renderCarInfo:<View/>)}
+            }
+        }
+    }
 
 
 
     _renderCompanyInfo(){
-        if(this.state.type == 1){
-            if(this.state.all || this.state.companyRiskManage){
-                return(<View style={{width:winWidth, flexDirection:'column'}}>
+        return(<View style={{width:winWidth, flexDirection:'column'}}>
 
-                    <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
-                        , justifyContent:'center'}}>
-                        <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                            , alignItems:'center'}}>
-                            <Text style={{fontWeight:'800'}}>
-                                社会信用代码：
-                            </Text>
-                        </View>
-                        <View style={{flex:2.5}}>
-                            <TextInput
-                                style={styles.edit}
-                                underlineColorAndroid='transparent'/>
-                        </View>
-                    </View>
+            <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                       社会信用代码：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
 
-                    <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                        , justifyContent:'center'}}>
-                        <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                            , alignItems:'center'}}>
-                            <Text style={{fontWeight:'800'}}>
-                                请输入企业名称：
-                            </Text>
-                        </View>
-                        <View style={{flex:2.5}}>
-                            <TextInput
-                                style={styles.edit}
-                                underlineColorAndroid='transparent'/>
-                        </View>
-                    </View>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入企业名称：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
 
-                    <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
+            <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
 
-                </View>);
-            }
-        }
-
+        </View>);
     }
 
     _renderPersionInfo(){
-        if(this.state.type == 0){
-            if(this.state.all || (this.state.creditReport || this.state.antiFraud || this.state.riskManage)){
-                return(
-                    <View style={{width:winWidth, flexDirection:'column'}}>
+        return(<View style={{width:winWidth, flexDirection:'column'}}>
 
-                        <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
-                            , justifyContent:'center'}}>
-                            <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                                , alignItems:'center'}}>
-                                <Text style={{fontWeight:'800'}}>
-                                    请输入身份证号码：
-                                </Text>
-                            </View>
-                            <View style={{flex:2.5}}>
-                                <TextInput
-                                    style={styles.edit}
-                                    underlineColorAndroid='transparent'/>
-                            </View>
-                        </View>
+            <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入身份证号码：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
 
-                        <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                            , justifyContent:'center'}}>
-                            <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                                , alignItems:'center'}}>
-                                <Text style={{fontWeight:'800'}}>
-                                    请输入姓名：
-                                </Text>
-                            </View>
-                            <View style={{flex:2.5}}>
-                                <TextInput
-                                    style={styles.edit}
-                                    underlineColorAndroid='transparent'/>
-                            </View>
-                        </View>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入姓名：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
 
-                        <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
+            <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
 
-                    </View>);
-            }
-        }
+        </View>);
     }
 
     _renderHomeInfo(){
-
-        if(this.state.all || (this.state.homeRent || this.state.homePrice)){
-            return(<View style={{width:winWidth, flexDirection:'column', marginTop:20}}>
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            房屋所在区域：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <View  style={{flex:1, marginRight:10}}>
-                            <Picker data={district} cols={2} value={this.state.selectedAdd} onChange={(value)=>this._addressonChange(value)}>
-                                <List.Item style={{marginRight:0}}last onClick={this.onClick}>
-                                    <Text style={{fontSize:13}}>
-                                        省市
-                                    </Text>
-                                </List.Item>
-                            </Picker>
-                        </View>
+        return(<View style={{width:winWidth, flexDirection:'column', marginTop:20}}>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        房屋所在区域：
+                    </Text>
+                </View>
+                <View style={{flex:2.5, flexDirection:'row'}}>
+                    <View  style={{flex:1, marginRight:10}}>
+                        <Picker data={district} cols={2} value={this.state.selectedAdd} onChange={(value)=>this._addressonChange(value)}>
+                            <List.Item style={{marginRight:0}}last onClick={this.onClick}>
+                                <Text style={{fontSize:13}}>
+                                    省市
+                                </Text>
+                            </List.Item>
+                        </Picker>
                     </View>
                 </View>
+            </View>
 
 
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请输入房屋名称：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'/>
-                    </View>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入房屋名称：
+                    </Text>
                 </View>
-
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请选择房屋类型：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity
-                            onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, dataSelect:homeType})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text style={{padding:5}}>{this.state.slelctedHomeType.title}</Text>
-                        </TouchableOpacity>
-
-
-                    </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
                 </View>
+            </View>
 
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请输入房屋面积：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'/>
-                    </View>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请选择房屋类型：
+                    </Text>
                 </View>
+                <View style={{flex:2.5, flexDirection:'row'}}>
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, dataSelect:homeType})}}
+                        style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
+                        <Text style={{padding:5}}>{this.state.slelctedHomeType.title}</Text>
+                    </TouchableOpacity>
 
 
-            </View>);
-        }
+                </View>
+            </View>
 
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入房屋面积：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
+
+
+        </View>);
     }
 
     _renderCarInfo(){
-        if(this.state.all || this.state.carPrice){
-            return(<View style={{width:winWidth, flexDirection:'column'}}>
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请选择车型：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity
-                            onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}, dataSelect:carBrand})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text style={{padding:5}}>{this.state.selectedBradn.title}</Text>
-                        </TouchableOpacity>
+        return(<View style={{width:winWidth, flexDirection:'column'}}>
+            <View style={{width:winWidth, flexDirection:'row', marginTop:20, marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请选择车型：
+                    </Text>
+                </View>
+                <View style={{flex:2.5, flexDirection:'row'}}>
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}, dataSelect:carBrand})}}
+                        style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
+                        <Text style={{padding:5}}>{this.state.selectedBradn.title}</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车系", "type":SelectType.VEHICLES}, dataSelect:vehicles})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text>{this.state.selectedVehicles.title}</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车系", "type":SelectType.VEHICLES}, dataSelect:vehicles})}}
+                        style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
+                        <Text>{this.state.selectedVehicles.title}</Text>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车型号", "type":SelectType.CARMODLE}, dataSelect:carModle})}}
-                            style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
-                            <Text>{this.state.selectedCarModle.title}</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车型号", "type":SelectType.CARMODLE}, dataSelect:carModle})}}
+                        style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", justifyContent:'center', alignItems:'center'}}>
+                        <Text>{this.state.selectedCarModle.title}</Text>
+                    </TouchableOpacity>
 
+                </View>
+            </View>
+
+            <View style={{width:winWidth, flexDirection:'row',marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请选择上牌时间：
+                    </Text>
+                </View>
+                <View style={{flex:2.5, flexDirection:'row'}}>
+                    <View style={{flex:1, marginRight:10}}>
+                        <DatePicker
+                            style={{marginLeft:0}}
+                            defaultDate={new Date()}
+                            value={this.state.SelectData}
+                            mode="date"
+                            minDate={this.date1MinDate || (this.date1MinDate = new Date(1990, 1, 1))}
+                            maxDate={this.date1MaxDate || (this.date1MaxDate = new Date())}
+                            onChange={(value)=>this._dataOnChange(value)}
+                            format="YYYY-MM-DD"
+                        >
+                            <List.Item>
+                                <Text style={{fontSize:13}}>
+                                    上牌时间
+                                </Text>
+                            </List.Item>
+                        </DatePicker>
                     </View>
                 </View>
+            </View>
 
-                <View style={{width:winWidth, flexDirection:'row',marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请选择上牌时间：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <View style={{flex:1, marginRight:10}}>
-                            <DatePicker
-                                style={{marginLeft:0}}
-                                defaultDate={new Date()}
-                                value={this.state.SelectData}
-                                mode="date"
-                                minDate={this.date1MinDate || (this.date1MinDate = new Date(1990, 1, 1))}
-                                maxDate={this.date1MaxDate || (this.date1MaxDate = new Date())}
-                                onChange={(value)=>this._dataOnChange(value)}
-                                format="YYYY-MM-DD"
-                            >
-                                <List.Item>
-                                    <Text style={{fontSize:13}}>
-                                        上牌时间
-                                    </Text>
-                                </List.Item>
-                            </DatePicker>
-                        </View>
-                    </View>
+
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请选择车辆属地：
+                    </Text>
                 </View>
-
-
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请选择车辆属地：
-                        </Text>
+                <View style={{flex:2.5, flexDirection:'row'}}>
+                    <View  style={{flex:1, marginRight:10}}>
+                        <Picker data={district} cols={2} value={this.state.selectedAdd} onChange={(value)=>this._addressonChange(value)}>
+                            <List.Item style={{marginRight:0}}last onClick={this.onClick}>
+                                <Text style={{fontSize:13}}>
+                                    省市
+                                </Text>
+                            </List.Item>
+                        </Picker>
                     </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <View  style={{flex:1, marginRight:10}}>
-                            <Picker data={district} cols={2} value={this.state.selectedAdd} onChange={(value)=>this._addressonChange(value)}>
-                                <List.Item style={{marginRight:0}}last onClick={this.onClick}>
-                                    <Text style={{fontSize:13}}>
-                                        省市
-                                    </Text>
-                                </List.Item>
-                            </Picker>
-                        </View>
 
-                    </View>
                 </View>
+            </View>
 
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请输入行车里程：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'/>
-                    </View>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入行车里程：
+                    </Text>
                 </View>
-
-                <View style={{width:winWidth, flexDirection:'row', marginBottom:20
-                    , justifyContent:'center'}}>
-                    <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
-                        , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
-                            请输入车牌号码：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'/>
-                    </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
                 </View>
+            </View>
 
-                <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
+            <View style={{width:winWidth, flexDirection:'row', marginBottom:20
+                , justifyContent:'center'}}>
+                <View style={{flex:1.5, flexDirection:'row', justifyContent:'flex-end'
+                    , alignItems:'center'}}>
+                    <Text style={{fontWeight:'800'}}>
+                        请输入车牌号码：
+                    </Text>
+                </View>
+                <View style={{flex:2.5}}>
+                    <TextInput
+                        style={styles.edit}
+                        underlineColorAndroid='transparent'/>
+                </View>
+            </View>
 
-            </View>);
-        }
+            <View style={{width:winWidth, height:0.5, backgroundColor:'black'}}/>
 
+        </View>);
     }
 
     _addressonChange(value){

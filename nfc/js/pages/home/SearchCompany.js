@@ -13,7 +13,7 @@ import {
 import { Tag, WhiteSpace } from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-
+import {BaseComponent} from  '../../base/BaseComponent'
 const TAG_TYPE = {
     ALL:'all',
     RISKMANAGE:'riskManage',
@@ -22,8 +22,14 @@ const TAG_TYPE = {
     HOMEPRICE:'homePrice',
 };
 
-export default class SearchCompany extends Component{
+export default class SearchCompany extends BaseComponent{
+    navigationBarProps() {
 
+        return {
+            title: '查企业',
+            hiddenLeftItem: true
+        }
+    }
     constructor() {
         super();
         this.state={
@@ -39,7 +45,7 @@ export default class SearchCompany extends Component{
         }
     }
 
-    render() {
+    _render() {
         return (
             <View style={styles.container}>
                 {this._renderHead()}

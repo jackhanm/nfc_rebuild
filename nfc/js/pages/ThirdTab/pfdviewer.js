@@ -32,9 +32,32 @@ import {
 
 } from 'react-native';
 import OpenFile from 'react-native-doc-viewer';
+import {BaseComponent} from  '../../base/BaseComponent'
 // var RNFS = require('react-native-fs');
 // var SavePath = Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath;
-export default class App extends Component {
+export default class App extends BaseComponent {
+    navigationBarProps() {
+
+        return {
+
+            title: '报告',
+            titleStyle: {
+                color: '#2B2D2E',
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: '#4675FF',
+            },
+            navBarStyle: {
+                backgroundColor: '#FFF',
+            }
+
+        }
+    }
+
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -259,7 +282,7 @@ export default class App extends Component {
         }, 2000);
     }
 
-    render() {
+    _render() {
         return (
 
             <View style={styles.container}>
