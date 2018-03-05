@@ -87,7 +87,7 @@ export default class NfcLogin extends Component{
 
                 <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:30}}>
                     <TouchableOpacity onPress={()=>{this._onPress()}}>
-                        <View style={{width:winWidth - 120, height:44, backgroundColor:'#295396', alignItems:'center', justifyContent:'center', borderRadius: 4,}}>
+                        <View style={{width:winWidth - 120, height:44, backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: 4,}}>
                             <Text style={{fontSize:16, color:'#ffffff'}}>
                                 登录
                             </Text>

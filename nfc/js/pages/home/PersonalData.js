@@ -10,6 +10,7 @@ import {
     TextInput,
     FlatList,
     ScrollView,
+    KeyboardAvoidingView,
 } from 'react-native';
 
 import ModalDropdown from 'react-native-modal-dropdown';
