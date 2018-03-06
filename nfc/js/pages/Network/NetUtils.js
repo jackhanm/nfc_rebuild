@@ -206,11 +206,11 @@ export default class NetUtils extends Component{
 
         //
         // newParams = oldParams+"&timestamp="+currentDate+"&digest="+this.MD5(digestStr);
-        if(Platform.OS === 'android'){
-            if(IMEI === ''){
-                NetUtils.getimei();
-            }
-        }
+        //if(Platform.OS === 'android'){
+            //if(IMEI === ''){
+                //NetUtils.getimei();
+            //}
+        //}
 
         // var IPAdress ="172.16.255.100";
         // var IDFA = DeviceInfo.getUniqueID();
