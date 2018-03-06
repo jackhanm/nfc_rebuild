@@ -64,9 +64,9 @@ export default class MineSelf extends BaseComponent{
                 if (result.code === 0) {
                     this.setState({
                         //复制数据源
-                        allReportLogCount: result.data.allReportLogCount,
-                        myReportLogCount: result.data.myReportLogCount,
-                        selectUserCount: result.data.selectUserCount,
+                        allReportLogCount: result.data.queryCount,
+                        myReportLogCount: result.data.userCount,
+                        selectUserCount: result.data.userQueryCount,
 
                     });
 
@@ -120,7 +120,7 @@ export default class MineSelf extends BaseComponent{
             showsVerticalScrollIndicator={false}>
 
             <StatusBar barStyle={'light-content'} />
-            <StatusBar backgroundColor={'white'} />
+
             <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:10}}>
 
                 <View style={{width:winWidth, backgroundColor:'white'}}>

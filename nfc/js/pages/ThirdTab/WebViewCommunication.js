@@ -8,14 +8,31 @@ import {
     Alert,
     WebView,
 } from 'react-native';
-
-export default class WebViewCommunication extends Component {
+import {commonStyle} from '../../../js/util/commonStyle'
+import {BaseComponent} from  '../../base/BaseComponent'
+export default class WebViewCommunication extends BaseComponent {
 
     constructor(props) {
         super(props);
     }
+    navigationBarProps() {
 
-    render() {
+        return {
+            title: '报告详情页',
+            titleStyle: {
+                color: commonStyle.navTitleColor,
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: commonStyle.navTitleColor,
+            },
+            navBarStyle: {
+                backgroundColor: commonStyle.navThemeColor,
+            }
+        }
+    }
+    _render() {
         return (
             <View style={styles.container}>
                 <WebView

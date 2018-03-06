@@ -20,10 +20,11 @@ module.exports ={
     QUICK_CHECK: '/index/quick',
     // 分页查询记录
     REPORT_LIST: '/index/reportLog',
+
     // 查询记录详细
     REPORT_LIST_DETAIL: '/index/report',
     // 平台数据总览
-    PLATFORM_DATA :'/index/statistics',
+    PLATFORM_DATA :'/report/statistics',
     // 登录
     USER_LOGIN : '/user/login',
     // 登出
@@ -43,8 +44,9 @@ module.exports ={
     // 下载管理
     MINE_DOWNLOAD : '/user/download',
     // 刷新token
-    REFRESH_TOKEN : ' /user/token/{refreshToken}'
-
+    REFRESH_TOKEN : ' /user/token/{refreshToken}',
+    // 上传头像
+    UESR_UPLOADAVATAR : '/user/uploadAvatar'
 
 
 

@@ -17,7 +17,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import Picker1 from 'react-native-picker';
-
+import {commonStyle} from '../../../js/util/commonStyle'
 import { Popover,  Modal, DatePicker, List, Picker, Button } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
@@ -57,15 +57,15 @@ export default class PersonalData extends BaseComponent{
         return {
             title: '查询',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }

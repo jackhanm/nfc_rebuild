@@ -23,7 +23,7 @@ module.exports ={
     // 查询记录详细
     REPORT_LIST_DETAIL: '/index/report',
     // 平台数据总览
-    PLATFORM_DATA :' /index/statistics',
+    PLATFORM_DATA :'/report/statistics',
     // 登录
     USER_LOGIN : '/user/login',
     // 个人征信报告查询

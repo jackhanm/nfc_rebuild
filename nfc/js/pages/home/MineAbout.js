@@ -12,9 +12,7 @@ import {
     View
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-import {BaseComponent} from  '../../base/BaseComponent'
-import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -23,6 +21,9 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 import {commonStyle} from '../../../js/util/commonStyle'
+import {BaseComponent} from  '../../base/BaseComponent'
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 export default class MineAbout extends BaseComponent<{}> {
     //网络请求
     fetchData(data) {

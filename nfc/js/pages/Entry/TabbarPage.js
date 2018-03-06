@@ -85,9 +85,9 @@ export default class TabbarPage extends Component{
                     title={'首页'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/1.png')} />}
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/1.png')} />}
                     onPress={() => this.setState({ selectedTab: '首页' })}>
                     <Nfchomepage  {...this.props}/>
                 </TabNavigator.Item>
@@ -127,8 +127,8 @@ export default class TabbarPage extends Component{
                     title={'查个人'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/2.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/2.png')} />}
                     onPress={() => this.setState({ selectedTab: '查个人' })}>
                     <SearchPersonal  {...this.props}/>
                 </TabNavigator.Item>
@@ -137,8 +137,8 @@ export default class TabbarPage extends Component{
                     title={'查企业'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/3.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/3.png')} />}
                     onPress={() => this.setState({ selectedTab: '查企业' })}>
                     <SearchCompany  {...this.props}/>
                 </TabNavigator.Item>
@@ -147,9 +147,9 @@ export default class TabbarPage extends Component{
                     title={'账户'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/4.png')} />}
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/4.png')} />}
                     onPress={() => this.setState({ selectedTab: '账户' })}>
                     <Mineself  {...this.props}/>
                 </TabNavigator.Item>
@@ -241,8 +241,8 @@ const styles = StyleSheet.create({
         color:GlobalStyle.TabselectColor
     },
     icon:{
-        width:24,
-        height:24,
+        width:20,
+        height:20,
         tintColor:GlobalStyle.themeColor
     },
     iconselect:{
