@@ -14,13 +14,46 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { List } from 'antd-mobile';
-
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
 const Item = List.Item;
 
 export default class nfchomepage extends Component{
+
+    //网络请求
+    fetchData(data) {
+        //这个是js的访问网络的方法
+
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT, "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({
+                        //复制数据源
+
+
+                    });
+
+
+
+                }
+
+
+            }
+        );
+
+    }
+
+    componentDidMount() {
+        //请求数据
+
+        this.fetchData();
+
+    }
+
     constructor(props){
         super(props);
         this.state={
@@ -56,7 +89,7 @@ export default class nfchomepage extends Component{
                 </View>
 
                 <View style={{alignSelf:'flex-end', marginRight:10}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
                         <Text>
                             我的记录
                         </Text>

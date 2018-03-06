@@ -79,7 +79,8 @@ export default class NetUtils extends Component{
 
             headers:{
                 'accessToken': accessToken,
-                'version': version,
+                'agent': Platform.OS === 'ios'? 'ios':'android',
+                'loginName':'13637062487',
             }
         })
             .then((response) => {
@@ -155,6 +156,7 @@ export default class NetUtils extends Component{
             headers:{
                 'Content-Type': 'application/json;charset=UTF-8',
                 'accessToken': accessToken,
+                'agent': Platform.OS === 'ios'? 'ios':'android',
                 // 'version': version,
             },
              body:JSON.stringify(jsonObj),//json对象转换为string

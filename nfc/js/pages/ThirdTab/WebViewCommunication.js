@@ -42,7 +42,7 @@ export default class WebViewCommunication extends Component {
 
     //向HTML发送数据
     _postMessage = () => {
-        this.webview.postMessage('我是React Native发送过来的数据');
+        this.webview.postMessage('刘鹏辉');
     }
 
 }

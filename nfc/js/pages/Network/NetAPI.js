@@ -4,7 +4,7 @@ import {
 module.exports ={
     serverUrl3 :"http://172.16.255.220:8080",
     //方西岗
-    serverUrl2 : "http://192.168.1.234:8088/",
+    serverUrl2 : "http://192.168.1.202:8903",
     //RAP
     serverUrl : "http://192.168.1.32:8888/mockjsdata/7",
 //export const serverUrl @"172.16.253.15:8080/kccf/"
@@ -26,6 +26,8 @@ module.exports ={
     PLATFORM_DATA :'/index/statistics',
     // 登录
     USER_LOGIN : '/user/login',
+    // 登出
+    USER_LOGINOUT :'/user/logout',
     // 个人征信报告查询
     PERSIONAL_SEARCH : '/credit/person',
     // 个人征信报告查询
@@ -40,7 +42,8 @@ module.exports ={
     MINE_INFO : '/user/my',
     // 下载管理
     MINE_DOWNLOAD : '/user/download',
-
+    // 刷新token
+    REFRESH_TOKEN : ' /user/token/{refreshToken}'
 
 
 

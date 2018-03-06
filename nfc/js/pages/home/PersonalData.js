@@ -14,7 +14,8 @@ import {
 } from 'react-native';
 
 import ModalDropdown from 'react-native-modal-dropdown';
-
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 import Picker1 from 'react-native-picker';
 
 import { Popover,  Modal, DatePicker, List, Picker, Button } from 'antd-mobile';
@@ -68,8 +69,72 @@ export default class PersonalData extends BaseComponent{
             }
         }
     }
+//网络请求
+    fetchData(data) {
+        //这个是js的访问网络的方法
 
+        // 查询省
+        var newParams= NetAPI.PUBLIC_DIC_INFO+'?type=AREA_CODE'
+        NetUtils.get(NetAPI.serverUrl2, newParams , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+
+
+
+                }
+
+
+            }
+        );
+        // 查询车品牌
+        var CarParams= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_BRAND'
+        NetUtils.get(NetAPI.serverUrl2, CarParams , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+
+
+
+                }
+
+
+            }
+        );
+        // 查询车系
+        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_SERIES&parentCode=RUF'
+        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+
+
+
+                }
+
+
+            }
+        );
+
+        // 查询车型
+        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_MODEL&parentCode=RUF,CAR_MODEL'
+        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+
+
+
+                }
+
+
+            }
+        );
+
+
+    }
     componentDidMount() {
+
 
         console.log('===================componentDidMount====================');
         this.props.navigation.state.params.type == 0 ?
@@ -81,7 +146,10 @@ export default class PersonalData extends BaseComponent{
                 , all:this.props.navigation.state.params.all
                 , homeRent:this.props.navigation.state.params.homeRent
                 , carPrice:this.props.navigation.state.params.carPrice
-                , homePrice:this.props.navigation.state.params.homePrice})
+                , homePrice:this.props.navigation.state.params.homePrice
+
+            })
+
             :this.setState({
                 type:1
                 , companyRiskManage:this.props.navigation.state.params.companyRiskManage
@@ -90,7 +158,7 @@ export default class PersonalData extends BaseComponent{
                 , carPrice:this.props.navigation.state.params.carPrice
                 , homePrice:this.props.navigation.state.params.homePrice
             });
-
+        this.fetchData()
     }
 
 

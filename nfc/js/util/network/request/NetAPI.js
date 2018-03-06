@@ -4,7 +4,7 @@ import {
 module.exports ={
     serverUrl :"http://172.16.255.220:8080",
     //方西岗
-    serverUrl2 : "http://192.168.1.234:8088/",
+    serverUrl2 : " http://192.168.1.202:8903",
     //RAP
     serverUrl3 : "http://192.168.1.32:8888/mockjsdata/7",
 //export const serverUrl @"172.16.253.15:8080/kccf/"
