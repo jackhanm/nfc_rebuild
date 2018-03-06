@@ -132,8 +132,8 @@ export default class SearchPersonal extends BaseComponent {
     _renderFoot() {
         return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:50}}>
             <TouchableOpacity onPress={()=>{this._onPress()}}>
-                <View style={{width:winWidth - 100, height:50, justifyContent:'center', alignItems:'center', backgroundColor:'#7861FC', marginLeft:50, marginRight:50}}>
-                    <Text style={{color:'white'}}>
+                <View style={{width:250, height:44, justifyContent:'center', alignItems:'center', backgroundColor:'#1b54a5', borderRadius:4}}>
+                    <Text style={{fontSize:16, color:'white'}}>
                         下一步
                     </Text>
                 </View>

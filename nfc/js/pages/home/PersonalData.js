@@ -315,7 +315,7 @@ export default class PersonalData extends BaseComponent{
                             <TouchableOpacity
                                 onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, dataSelect:homeType})}}
                                 style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                                    <Text style={{fontSize:15, color:'#999999'}}>请选择</Text>
+                                    <Text style={{fontSize:15, color:'#999999'}}>{this.state.slelctedHomeType.title}</Text>
                                     <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
