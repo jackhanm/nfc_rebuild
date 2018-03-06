@@ -163,12 +163,7 @@ export default class AccountInfo extends BaseComponent{
                                source={this.state.imageUrl == '' ?
                                    require('../../img/Mine/avatar.png') : {uri:this.state.imageUrl}}/>
 
-                        <Icon
-                            color='black'
-                            size={25}
-                            backgroundColor={'white'}
-                            name="ios-arrow-dropright"
-                        />
+                        <Image style={{width:10, height:10, marginLeft:10}} source={require('../../nfcimg/backicon.png')}/>
                     </View>
                 </View>
             </TouchableOpacity>

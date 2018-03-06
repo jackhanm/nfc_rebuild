@@ -58,8 +58,8 @@ export default class NfcLogin extends Component{
                         <Image
                             style={{width:25, height:25}}
                             source={require('../../nfcimg/user.png')}/>
-                        <View style={{flexDirection:'column', marginLeft:20}}>
-                            <TextInput style={{width:210, color:'#194697'}}
+                        <View style={{flexDirection:'column', marginLeft:20,}}>
+                            <TextInput style={{width:210, color:'#194697', padding:0,marginBottom:5}}
                                        underlineColorAndroid='transparent'
                                        onChangeText={(text)=>this.setState({user_name:text})}
                                        placeholder='账户'
@@ -75,7 +75,7 @@ export default class NfcLogin extends Component{
                             style={{width:25, height:25}}
                             source={require('../../nfcimg/pass.png')}/>
                         <View style={{flexDirection:'column', marginLeft:20}}>
-                            <TextInput style={{width:210, color:'#194697'}}
+                            <TextInput style={{width:210, color:'#194697', padding:0, marginBottom:5}}
                                        underlineColorAndroid='transparent'
                                        onChangeText={(text) => this.setState({pass_word:text})}
                                        placeholder='密码'
