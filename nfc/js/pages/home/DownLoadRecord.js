@@ -38,6 +38,41 @@ export default class DownLoadRecord extends Component{
 
     }
 
+    _renderItemView({item}) {
+        return (
+            <View>
+                <Text style={styles.title}>name: {item.value.name}</Text>
+                <Text style={styles.content}>stars: {item.value.stargazers_count}</Text>
+                <Text style={styles.content}>description: {item.value.description}</Text>
+            </View>
+        );
+    }
+
+    _renderFooter(){
+        if (this.state.showFoot === 1) {
+            return (
+                <View style={{height:30,alignItems:'center',justifyContent:'flex-start',}}>
+                    <Text style={{color:'#999999',fontSize:14,marginTop:5,marginBottom:5,}}>
+                        没有更多数据了
+                    </Text>
+                </View>
+            );
+        } else if(this.state.showFoot === 2) {
+            return (
+                <View style={styles.footer}>
+                    <ActivityIndicator />
+                    <Text>正在加载更多数据...</Text>
+                </View>
+            );
+        } else if(this.state.showFoot === 0){
+            return (
+                <View style={styles.footer}>
+                    <Text></Text>
+                </View>
+            );
+        }
+    }
+
     _separator(){
         return <View style={{height:1,backgroundColor:'#999999'}}/>;
     }

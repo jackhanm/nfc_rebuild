@@ -9,7 +9,8 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    FlatList,
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import {BaseComponent} from  '../../base/BaseComponent'
@@ -35,12 +36,10 @@ export default class MineDownload extends BaseComponent<{}> {
                 if (result.code === 0) {
                     this.setState({
                         //复制数据源
-                        avatar: result.data.avatar,
-                        name: result.data.name,
-                        organizationName: result.data.organizationName,
-                        phone: result.data.phone,
-                        username: result.data.username,
-
+                        count:result.data.count,
+                        list:result.data.list,
+                        pageIndex:result.data.pageIndex,
+                        pageSize:result.data.pageSize,
                     });
 
 
@@ -77,23 +76,90 @@ export default class MineDownload extends BaseComponent<{}> {
             }
         }
     }
-    _render() {
+
+
+    constructor(){
+        super();
+        this.state={
+            count:0,
+            list:[],
+            pageIndex:0,
+            pageSize:0,
+            showFoot:0 //0表示隐藏， 1表示加载完成， 2显示正在加载
+        }
+    }
+
+    _render(){
+
+        return(<View style={styles.container}>
+            <FlatList style={{flex:1}}>
+                data={this.state.list}
+                renderItem={this._renderItemView}
+                ListFooterComponent={this._renderFooter()}
+                onEndReached={this._onEndReached()}
+                onEndReachedThreshold={1}
+                ItemSeparatorComponent={this._separator}
+            </FlatList>
+        </View>);
+
+    }
+
+    _renderItemView({item}) {
         return (
-
-
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit App.js
-                </Text>
-                <Text style={styles.instructions}>
-                    {instructions}
-                </Text>
+            <View>
+                <Text >{item.reportType}</Text>
+                <Text >{item.queryKey}</Text>
+                <Text >description: {item.queryKey}</Text>
             </View>
         );
     }
+
+    _renderFooter(){
+        if (this.state.showFoot === 1) {
+            return (
+                <View style={{height:30,alignItems:'center',justifyContent:'flex-start',}}>
+                    <Text style={{color:'#999999',fontSize:14,marginTop:5,marginBottom:5,}}>
+                        没有更多数据了
+                    </Text>
+                </View>
+            );
+        } else if(this.state.showFoot === 2) {
+            return (
+                <View style={styles.footer}>
+                    <Text>正在加载更多数据...</Text>
+                </View>
+            );
+        } else if(this.state.showFoot === 0){
+            return (
+                <View style={styles.footer}>
+                    <Text></Text>
+                </View>
+            );
+        }
+    }
+
+    _separator(){
+        return <View style={{height:1,backgroundColor:'#999999'}}/>;
+    }
+
+    _onEndReached(){
+        //如果是正在加载中或没有更多数据了，则返回
+        if(this.state.showFoot != 0 ){
+            return ;
+        }
+        //如果当前页大于或等于总页数，那就是到最后一页了，返回
+        if((this.state.pageIndex!=1) && (this.state.pageIndex>=this.state.pageSize)){
+            return;
+        } else {
+            this.state.pageIndex++;
+        }
+        //底部显示正在加载更多数据
+        this.setState({showFoot:2});
+        //获取数据
+        this.fetchData( );
+    }
+
+
 }
 
 const styles = StyleSheet.create({
