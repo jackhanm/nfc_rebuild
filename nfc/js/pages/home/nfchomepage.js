@@ -116,7 +116,9 @@ export default class nfchomepage extends Component{
 
                 </TextInput>
 
-                <Image style={{width:58, height:45}} source={require('../../nfcimg/search.png')}/>
+                <TouchableOpacity>
+                    <Image style={{width:58, height:45}} source={require('../../nfcimg/search.png')}/>
+                </TouchableOpacity>
 
             </View>
 
@@ -160,11 +162,11 @@ export default class nfchomepage extends Component{
                     <View style={styles.item}>
                         <View style={{flex:3, flexDirection:'row',
                             alignItems:'center',}}>
-                            <Text style={{color:'#4352B2', fontWeight:'bold', marginRight:5}}>
+                            <Text style={{color:'#4352B2', marginRight:5}}>
                                 {item.type}
                             </Text>
 
-                            <Text style={{color:'black', fontWeight:'bold', marginRight:5}}>
+                            <Text style={{color:'black', marginRight:5}}>
                                 {item.title}
                             </Text>
                         </View>
@@ -172,6 +174,7 @@ export default class nfchomepage extends Component{
                             <Text>
                                 {item.time}
                             </Text>
+                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                         </View>
                     </View>
                     <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
@@ -210,6 +213,8 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         flexDirection:'row',
         alignItems:'center',
+        paddingRight:10,
+        paddingLeft:10,
         height:50
     }
 });
