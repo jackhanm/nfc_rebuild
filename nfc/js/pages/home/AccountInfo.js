@@ -15,7 +15,7 @@ import {BaseComponent} from  '../../base/BaseComponent'
 import { List, Modal } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-
+import {commonStyle} from '../../../js/util/commonStyle'
 const Item = List.Item;
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -64,15 +64,15 @@ export default class AccountInfo extends BaseComponent{
         return {
             title: '账户信息',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }
@@ -104,6 +104,7 @@ export default class AccountInfo extends BaseComponent{
             cropping: true
         }).then(image => {
             console.log(image);
+            this._onCloseModle();
             this.setState({imageUrl:image.path})
         });
     }
@@ -115,6 +116,7 @@ export default class AccountInfo extends BaseComponent{
             cropping: true
         }).then(image => {
             console.log(image);
+            this._onCloseModle();
             this.setState({imageUrl:image.path})
         });
     }
@@ -131,11 +133,12 @@ export default class AccountInfo extends BaseComponent{
                       onClose={()=>this._onCloseModle()}
                       maskClosable
                       visible={this.state.visible}>
-            <View style={{ paddingVertical: 20, flexDirection:'column', alignItems:'center' }}>
+            <View style={{ paddingVertical: 5, flexDirection:'column', alignItems:'center' }}>
                 <TouchableOpacity onPress={()=>{this._openPhoto()}}>
                     <Text>
                         从相册选择
                     </Text>
+                    <View style={{ height:0.5, backgroundColor:'#F0F0F2'}}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{this._openCamera()}}>
                     <Text>
@@ -159,7 +162,7 @@ export default class AccountInfo extends BaseComponent{
                         <Text style={styles.textStyle}>头像</Text>
                     </View>
                     <View style={{flex:1, alignItems:'center' , flexDirection:'row',justifyContent:'flex-end', marginTop:10, marginBottom:10, marginRight:10}}>
-                        <Image style={{width:80, height:60}}
+                        <Image style={{width:40, height:40}}
                                source={this.state.imageUrl == '' ?
                                    require('../../img/Mine/avatar.png') : {uri:this.state.imageUrl}}/>
 
@@ -170,7 +173,7 @@ export default class AccountInfo extends BaseComponent{
 
             <View style={{width:winWidth, height:0.5, backgroundColor:'#F0F0F2'}}/>
 
-            <View style={{width:winWidth, height:40, backgroundColor:'white', flexDirection:'row'}}>
+            <View style={{width:winWidth, height:50, backgroundColor:'white', flexDirection:'row'}}>
                 <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
                     <Text style={styles.textStyle}>姓名</Text>
                 </View>
@@ -181,7 +184,7 @@ export default class AccountInfo extends BaseComponent{
 
             <View style={{width:winWidth, height:0.5, backgroundColor:'#F0F0F2'}}/>
 
-            <View style={{width:winWidth, height:40, backgroundColor:'white', flexDirection:'row'}}>
+            <View style={{width:winWidth, height:50, backgroundColor:'white', flexDirection:'row'}}>
                 <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
                     <Text style={styles.textStyle}>手机号</Text>
                 </View>
@@ -192,7 +195,7 @@ export default class AccountInfo extends BaseComponent{
 
             <View style={{width:winWidth, height:0.5, backgroundColor:'#F0F0F2'}}/>
 
-            <View style={{width:winWidth, height:40, backgroundColor:'white', flexDirection:'row'}}>
+            <View style={{width:winWidth, height:50, backgroundColor:'white', flexDirection:'row'}}>
                 <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
                     <Text style={styles.textStyle}>登录名</Text>
                 </View>
@@ -203,7 +206,7 @@ export default class AccountInfo extends BaseComponent{
 
             <View style={{width:winWidth, height:0.5, backgroundColor:'#F0F0F2'}}/>
 
-            <View style={{width:winWidth, height:40, backgroundColor:'white', flexDirection:'row'}}>
+            <View style={{width:winWidth, height:50, backgroundColor:'white', flexDirection:'row'}}>
                 <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
                     <Text style={styles.textStyle}>所属机构</Text>
                 </View>
@@ -220,7 +223,6 @@ export default class AccountInfo extends BaseComponent{
 const styles = StyleSheet.create({
     textStyle:{
         marginLeft:20,
-        fontWeight:'900',
         marginRight:20,
     }
 });

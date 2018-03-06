@@ -25,7 +25,7 @@ export const commonStyle = {
     // 默认灰色字体颜色
     textGrayColor: '#989898',
     // 默认黑色字体颜色
-    textBlockColor: '#262626',
+    textBlockColor: '#fff',
     // 默认背景颜色
     bgColor: '#E6E6E6',
     // 默认分割线颜色
@@ -35,12 +35,12 @@ export const commonStyle = {
     // borderColor
     borderColor: '#808080',
     // 导航title 颜色
-    navTitleColor: '#262626',
+    navTitleColor: '#fff',
     // 导航左item title color
-    navLeftTitleColor: '#333',
+    navLeftTitleColor: '#fff',
     // 导航右item title color
-    navRightTitleColor: '#333',
-    navThemeColor: '#FEFEFE',
+    navRightTitleColor: '#fff',
+    navThemeColor: '#1B52A2',
     iconGray: '#989898',
     iconBlack: '#262626',
 

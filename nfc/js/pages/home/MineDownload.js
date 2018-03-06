@@ -15,6 +15,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
+import {commonStyle} from '../../../js/util/commonStyle'
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -64,15 +65,15 @@ export default class MineDownload extends BaseComponent<{}> {
         return {
             title: '下载管理',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }

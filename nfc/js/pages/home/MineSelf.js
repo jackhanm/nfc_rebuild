@@ -9,7 +9,8 @@ import {
     Image,
     TextInput,
     FlatList,
-    ScrollView
+    ScrollView,
+    StatusBar
 } from 'react-native';
 
 import { List } from 'antd-mobile';
@@ -118,10 +119,11 @@ export default class MineSelf extends BaseComponent{
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}>
 
-
+            <StatusBar barStyle={'light-content'} />
+            <StatusBar backgroundColor={'white'} />
             <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:10}}>
 
-                <View style={{width:winWidth-20, backgroundColor:'white'}}>
+                <View style={{width:winWidth, backgroundColor:'white'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('AccountInfo')}}>
                         <View style={{flexDirection:'row', alignItems:'center'}}>
                             <View style={{flex:1}}>
@@ -130,7 +132,7 @@ export default class MineSelf extends BaseComponent{
                                        style={{width:80, height:80, borderRadius:40, margin:10}}/>
                             </View>
                             <View style={{flex:2, flexDirection:'column'}}>
-                                <Text style={{fontWeight:'900', marginBottom:10}}>
+                                <Text style={{ marginBottom:10}}>
                                     {this.state.user_name}
                                 </Text>
                                 <Text style={{ marginTop:10}}>
@@ -138,25 +140,25 @@ export default class MineSelf extends BaseComponent{
                                 </Text>
                             </View>
                             <View style={{flex:0.5, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                <Image style={{width:15, height:15}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:10, height:16}} source={require('../../nfcimg/backicon.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>
                 </View>
 
-                <View style={{backgroundColor:"#F0F0F2", width:winWidth, height:25}}/>
+                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:10}}/>
 
-                <View style={{flexDirection:'row', alignItems:'center', width:winWidth-20, backgroundColor:'white'}}>
+                <View style={{flexDirection:'row', alignItems:'center', width:winWidth, backgroundColor:'white'}}>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{fontWeight:'900', marginTop:20, marginBottom:10}}>
-                            机构用户
+                        <Text style={{ marginTop:28, marginBottom:10}}>
+                            机构用户数
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
                             {this.state.allReportLogCount + "次"}
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{fontWeight:'900', marginTop:20, marginBottom:10}}>
+                        <Text style={{ marginTop:28, marginBottom:10}}>
                             累计查询次数
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
@@ -164,7 +166,7 @@ export default class MineSelf extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{fontWeight:'900', marginTop:20, marginBottom:10}}>
+                        <Text style={{ marginTop:28, marginBottom:10}}>
                             我的查询次数
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
@@ -175,9 +177,9 @@ export default class MineSelf extends BaseComponent{
 
                 <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:10}}/>
 
-                <List style={{width:winWidth-20}}>
+                <List style={{width:winWidth}}>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineRecored')}}>
-                        <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
+                        <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
                             <Image style={{width:20, height:20}} source={require('../../nfcimg/iconrecord.png')}/>
                             <Text style={{marginLeft:10}}>
                                 我的记录
@@ -186,7 +188,7 @@ export default class MineSelf extends BaseComponent{
                     </Item>
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineDownload')}}>
-                        <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
+                        <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
                             <Image style={{width:20, height:20}} source={require('../../nfcimg/download.png')}/>
                             <Text style={{marginLeft:10}}>
                                 下载管理
@@ -195,7 +197,7 @@ export default class MineSelf extends BaseComponent{
                     </Item>
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('ChangePassWord')}}>
-                        <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
+                        <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
                             <Image style={{width:20, height:20}} source={require('../../nfcimg/changepass.png')}/>
                             <Text style={{marginLeft:10}}>
                                 修改密码
@@ -203,7 +205,7 @@ export default class MineSelf extends BaseComponent{
                         </View>
                     </Item>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineAbout')}}>
-                        <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
+                        <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
                             <Image style={{width:20, height:20}} source={require('../../nfcimg/aboutus.png')}/>
                             <Text style={{marginLeft:10}}>
                                 关于我们
@@ -215,8 +217,8 @@ export default class MineSelf extends BaseComponent{
                 <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:25}}/>
 
                 <View style={{backgroundColor:'white'
-                    , width:winWidth-20, alignItems:'center', justifyContent:'center', marginBottom:30}}>
-                    <Text style={{fontWeight:'900', marginTop:15, marginBottom:15, fontSize:15}}>
+                    , width:winWidth, alignItems:'center', justifyContent:'center', marginBottom:30}}>
+                    <Text style={{ marginTop:15, marginBottom:15, fontSize:15}}>
                         退出登录
                     </Text>
                 </View>

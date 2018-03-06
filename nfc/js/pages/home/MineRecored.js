@@ -16,6 +16,7 @@ import { List, Modal } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
+import {commonStyle} from '../../../js/util/commonStyle'
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -61,15 +62,15 @@ export default class MineRecored extends BaseComponent<{}> {
         return {
             title: '我的记录',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }

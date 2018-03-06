@@ -15,13 +15,14 @@ import TabNavigator from 'react-native-tab-navigator';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
+
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
     android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
-
+import {commonStyle} from '../../../js/util/commonStyle'
 export default class MineAbout extends BaseComponent<{}> {
     //网络请求
     fetchData(data) {
@@ -63,15 +64,15 @@ export default class MineAbout extends BaseComponent<{}> {
         return {
             title: '关于我们',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }

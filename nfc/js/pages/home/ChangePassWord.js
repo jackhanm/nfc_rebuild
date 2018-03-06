@@ -15,6 +15,8 @@ let winWidth = Dimensions.get('window').width;
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
+import {commonStyle} from '../../../js/util/commonStyle'
+
 export default class ChangePassWord extends BaseComponent{
 
     navigationBarProps() {
@@ -22,15 +24,15 @@ export default class ChangePassWord extends BaseComponent{
         return {
             title: '修改密码',
             titleStyle: {
-                color: '#2B2D2E',
+                color: commonStyle.navTitleColor,
             },
             leftIcon: {
                 name: 'nav_back_o',
                 size: 20,
-                color: '#4675FF',
+                color: commonStyle.navTitleColor,
             },
             navBarStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: commonStyle.navThemeColor,
             }
         }
     }
