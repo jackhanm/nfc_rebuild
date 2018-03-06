@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window');
 let reastAction = NavigationActions.reset({
     index: 0,
     actions: [
-        NavigationActions.navigate({ routeName: 'TabBar'})
+        NavigationActions.navigate({ routeName: 'login'})
     ]
 });
 

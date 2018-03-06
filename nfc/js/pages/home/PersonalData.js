@@ -55,7 +55,17 @@ export default class PersonalData extends BaseComponent{
 
         return {
             title: '查询',
-            hiddenLeftItem: true
+            titleStyle: {
+                color: '#2B2D2E',
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: '#4675FF',
+            },
+            navBarStyle: {
+                backgroundColor: '#FFF',
+            }
         }
     }
 
@@ -147,7 +157,9 @@ export default class PersonalData extends BaseComponent{
                 {this._renderHomeInfo()}
                 {this._renderModle()}
                 <Button type="primary"
-                        onClick={()=>{this.props.navigation.navigate('Pdfviewer')}}
+                        onClick={()=>{
+                            this.props.navigation.navigate('WebViewCommunication')
+                        }}
                         style={{margin:40}}>
                     立即查询
                 </Button>

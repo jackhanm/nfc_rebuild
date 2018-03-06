@@ -19,6 +19,12 @@ let reastAction = NavigationActions.reset({
         NavigationActions.navigate({ routeName: 'login'})
     ]
 });
+let reastAction1 = NavigationActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'TabBar'})
+    ]
+});
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -60,8 +66,14 @@ export default class Welcome extends Component {
                     console.log('22');
                     console.log('rheme'+this.theme);
                     console.log(this.theme);
+                    GetSetStorge.getStorgeAsync('isLogin').then((result) =>{
+                        if (result == null || result == ''){
+                            this.props.navigation.dispatch(reastAction);
+                        }else {
+                            this.props.navigation.dispatch(reastAction1);
+                        }
+                    })
 
-                    this.props.navigation.dispatch(reastAction);
 
                 }
             }).catch((error) => {

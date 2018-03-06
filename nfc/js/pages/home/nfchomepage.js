@@ -42,6 +42,8 @@ export default class nfchomepage extends Component{
         </View>);
     }
 
+
+
     _renderHead() {
         return (<View style={styles.container_head}>
             <View style={{ height:20, width:windowWidth, flexDirection:'row', marginTop:10, justifyContent:'center'}}>

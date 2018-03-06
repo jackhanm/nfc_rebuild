@@ -1,5 +1,7 @@
+/** 网络请求工具类的拓展类，便于后期网络层修改维护 **/
 
-import {Component} from 'react'
+import HttpUtils from './HttpUtils'
+
 import {dataCache} from '../cache'
 
 /**
@@ -14,22 +16,8 @@ import {dataCache} from '../cache'
  * @returns {value \ promise}
  * 返回的值如果从缓存中取到数据就直接换行数据，或则返回promise对象
  */
-const fetchData = (isCache, requestType) => (url, params, source, callback) => {
+const fetchData = (isCache, requestType) => (url, params, callback) => {
 
-    switch (source) {
-        case ApiSource.MIAMIMUSIC:
-            url = `${MIAMI_URL}${url}`
-            break
-        case ApiSource.TIMEMOVIE:
-            url = `${TIME_MOVIE_URL}${url}`
-            break
-        case ApiSource.TIMETICKET:
-            url = `${TIME_TICKET_URL}${url}`
-            break
-        default:
-            url = `${API_URL}${url}`
-            break
-    }
 
     const fetchFunc = () => {
         let promise = requestType === 'GET' ? HttpUtils.getRequest(url, params) : HttpUtils.postRequrst(url, params)

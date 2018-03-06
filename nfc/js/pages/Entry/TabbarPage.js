@@ -149,7 +149,7 @@ export default class TabbarPage extends Component{
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: '账户' })}>
-                    <Accountinfo  {...this.props}/>
+                    <Mineself  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'elelogin'}

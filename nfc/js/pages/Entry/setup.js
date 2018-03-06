@@ -58,6 +58,7 @@ import PersonalData from '../home/PersonalData'
 import Pdfviewer from  '../ThirdTab/pfdviewer'
 import ChangePassWord from '../home/ChangePassWord'
 import AccountInfo from '../home/AccountInfo'
+import WebViewCommunication from  '../ThirdTab/WebViewCommunication'
 import NfcLogin from '../home/NfcLogin'
 
 const getOptions = title => ({
@@ -159,7 +160,7 @@ const SimpleApp = StackNavigator(
         nfcApp:{screen :nfcApp},
         Elemalogin:{screen:Elemalogin},
         PersonalData:{screen:PersonalData},
-        Pdfviewer :{screen:Pdfviewer},
+        WebViewCommunication :{screen:WebViewCommunication},
         PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
         AccountInfo:{screen:AccountInfo},

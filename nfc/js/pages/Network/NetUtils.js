@@ -1,15 +1,15 @@
 import React,{Component} from 'react'
 import MD5 from "react-native-md5"
-import moment from 'moment';
+// import moment from 'moment';
 import {
     AppRegistry,Platform
 
 
 } from 'react-native';
-import  DeviceInfo from 'react-native-device-info';
-import Base64 from 'crypto-js/enc-base64';
-
-
+// import  DeviceInfo from 'react-native-device-info';
+// import Base64 from 'crypto-js/enc-base64';
+import {Toast} from '../../util/toast'
+import {dataCache} from '../../util/network/cache'
 
 /*
 *  网络请求的工具类
@@ -26,7 +26,7 @@ const APPID = 'a2'
 const APPIDANROID = 'a1'
 const APPVER = '1.0'
 const APPVERANDROID = '1.0'
-let Buffer = require('buffer').Buffer
+// let Buffer = require('buffer').Buffer
 
 var {NativeModules}=require('react-native');
 
@@ -140,7 +140,7 @@ export default class NetUtils extends Component{
      * @param {*} callback
      */
     static postJson(url,params,jsonObj,version,accessToken,IspubParm,callback){
-        var newParams = this.getNewParams();//接口自身的规范，可以忽略
+     //   var newParams = this.getNewParams();//接口自身的规范，可以忽略
 
         var urlstr;
         if (IspubParm){
@@ -155,7 +155,7 @@ export default class NetUtils extends Component{
             headers:{
                 'Content-Type': 'application/json;charset=UTF-8',
                 'accessToken': accessToken,
-                'version': version,
+                // 'version': version,
             },
              body:JSON.stringify(jsonObj),//json对象转换为string
 
@@ -169,8 +169,19 @@ export default class NetUtils extends Component{
 
 
                 callback(json);
+                //登陆成功保存用户信息
+                if (params === '/user/login')
+                if (json.code === '0'){
+                    //登陆成功
+                    dataCache(url, postJson, isCache)
+                }
+
+
+
 
             }).catch(error => {
+            callback(error);
+
           //  ToastAndroid.show("netword error",ToastAndroid.SHORT);
         });
     };
@@ -201,18 +212,18 @@ export default class NetUtils extends Component{
             }
         }
 
-        var IPAdress ="172.16.255.100";
-        var IDFA = DeviceInfo.getUniqueID();
-        // var deToken = IPAdress+"@"+IDFA;
-        var deToken = new Buffer(IDFA).toString('base64');
-        var deTokenANDROID = new Buffer(DeviceInfo.getSystemVersion() + '|' + IMEI).toString('base64');
-        var dates = moment().toDate().getTime();
-        var key = "5IHqGdRB"+"!@##@!"+deToken+dates;
-        var keyANDROID = 'IxoYxdKw'+"!@##@!"+deTokenANDROID+dates;
-        var md5key1 = this.MD5(key);
-        var md5key1ANDROID = this.MD5(keyANDROID);
-        var md4key2 = md5key1.substr(8,16);
-        var md4key2ANDROID = md5key1ANDROID.substr(8,16);
+        // var IPAdress ="172.16.255.100";
+        // var IDFA = DeviceInfo.getUniqueID();
+        // // var deToken = IPAdress+"@"+IDFA;
+        // var deToken = new Buffer(IDFA).toString('base64');
+        // var deTokenANDROID = new Buffer(DeviceInfo.getSystemVersion() + '|' + IMEI).toString('base64');
+        // var dates = moment().toDate().getTime();
+        // var key = "5IHqGdRB"+"!@##@!"+deToken+dates;
+        // var keyANDROID = 'IxoYxdKw'+"!@##@!"+deTokenANDROID+dates;
+        // var md5key1 = this.MD5(key);
+        // var md5key1ANDROID = this.MD5(keyANDROID);
+        // var md4key2 = md5key1.substr(8,16);
+        // var md4key2ANDROID = md5key1ANDROID.substr(8,16);
 
         // console.log(key);
         // console.log(deToken);

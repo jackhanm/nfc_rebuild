@@ -17,8 +17,10 @@ import Dimensions from 'Dimensions';
 import Toast, {DURATION} from 'react-native-easy-toast'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { TabNavigator, NavigationActions} from "react-navigation";
-import GetSetStorg from "../publicState/GetSetStorg";
+import GetSetStorge from '../publicState/GetSetStorg';
 import CheckModle from "../modle/CheckModle"
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
@@ -51,7 +53,24 @@ export default class App extends Component<{}> {
         this.state.press === false ? this.setState({ showPass: false, press: true }) :this.setState({ showPass: true, press: false });
     }
     _onPress() {
-        this.props.navigation.dispatch(reastAction);
+        NetUtils.postJson(NetAPI.serverUrl, NetAPI.USER_LOGIN, {
+                'username': this.state.userName,
+                'password': this.state.passWrod
+            }, '1.0', '', false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    GetSetStorge.setStorgeAsync('isLogin', 'true');
+                    this.props.navigation.dispatch(reastAction);
+
+
+                    GetSetStorg.getStorgeAsync('isLogin')
+
+                }
+
+            }
+        );
+
         this.refs.toast.show('hello world!');
         if (this.state.isLoading) return;
 
@@ -75,6 +94,9 @@ export default class App extends Component<{}> {
             this.buttonAnimated.setValue(0);
             this.growAnimated.setValue(0);
         }, 2300);
+    }
+    _turntoTab(){
+        this.props.navigation.dispatch(reastAction);
     }
 
     _onGrow() {
