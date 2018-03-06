@@ -251,7 +251,7 @@ export default class PersonalData extends BaseComponent{
                     <View style={styles.item_view}>
                         <View style={{flex:1.5, flexDirection:'row'
                             , alignItems:'center'}}>
-                            <Text style={{fontWeight:'800'}}>
+                            <Text style={{}}>
                                 社会信用代码：
                             </Text>
                         </View>
@@ -268,7 +268,7 @@ export default class PersonalData extends BaseComponent{
                     <View style={styles.item_view}>
                         <View style={{flex:1.5, flexDirection:'row'
                             , alignItems:'center'}}>
-                            <Text style={{fontWeight:'800'}}>
+                            <Text style={{}}>
                                 请输入企业名称：
                             </Text>
                         </View>
@@ -299,7 +299,7 @@ export default class PersonalData extends BaseComponent{
                         <View style={styles.item_view}>
                             <View style={{flex:1.5, flexDirection:'row'
                                 , alignItems:'center'}}>
-                                <Text style={{fontWeight:'800'}}>
+                                <Text style={{}}>
                                     请输入身份证号码：
                                 </Text>
                             </View>
@@ -315,7 +315,7 @@ export default class PersonalData extends BaseComponent{
                         <View style={styles.item_view}>
                             <View style={{flex:1.5, flexDirection:'row'
                                 , alignItems:'center'}}>
-                                <Text style={{fontWeight:'800'}}>
+                                <Text style={{}}>
                                     请输入姓名：
                                 </Text>
                             </View>
@@ -342,7 +342,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             房屋所在区域：
                         </Text>
                     </View>
@@ -359,7 +359,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请输入房屋名称：
                         </Text>
                     </View>
@@ -375,7 +375,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请选择房屋类型：
                         </Text>
                     </View>
@@ -395,7 +395,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请输入房屋面积：
                         </Text>
                     </View>
@@ -427,7 +427,7 @@ export default class PersonalData extends BaseComponent{
 
                     <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
                         <View style={{flex:1.5, flexDirection:'row', alignItems:'center'}}>
-                            <Text style={{fontWeight:'800'}}>
+                            <Text style={{}}>
                                 请选择车型：
                             </Text>
                         </View>
@@ -476,7 +476,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请选择上牌时间：
                         </Text>
                     </View>
@@ -494,7 +494,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请选择车辆属地：
                         </Text>
                     </View>
@@ -511,7 +511,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请输入行车里程：
                         </Text>
                     </View>
@@ -526,7 +526,7 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.item_view}>
                     <View style={{flex:1.5, flexDirection:'row'
                         , alignItems:'center'}}>
-                        <Text style={{fontWeight:'800'}}>
+                        <Text style={{}}>
                             请输入车牌号码：
                         </Text>
                     </View>
