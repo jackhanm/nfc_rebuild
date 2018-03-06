@@ -60,7 +60,9 @@ import ChangePassWord from '../home/ChangePassWord'
 import AccountInfo from '../home/AccountInfo'
 import WebViewCommunication from  '../ThirdTab/WebViewCommunication'
 import NfcLogin from '../home/NfcLogin'
-
+import MineAbout from '../home/MineAbout'
+import MineDownload from '../home/MineDownload'
+import MineRecored from '../home/MineRecored'
 const getOptions = title => ({
     title,
     headerStyle: {
@@ -164,7 +166,13 @@ const SimpleApp = StackNavigator(
         PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
         AccountInfo:{screen:AccountInfo},
-        NfcLogin:{screen:NfcLogin}
+        MineAbout:{screen:MineAbout},
+        NfcLogin:{screen:NfcLogin},
+        MineDownload:{screen:MineDownload},
+        MineRecored:{screen:MineRecored},
+
+
+
     },
     {
         mode: 'card',

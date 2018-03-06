@@ -6,7 +6,7 @@ module.exports ={
     //方西岗
     serverUrl2 : "http://192.168.1.234:8088/",
     //RAP
-    serverUrl3 : "http://192.168.1.32:8888/mockjsdata/4",
+    serverUrl3 : "http://192.168.1.32:8888/mockjsdata/7",
 //export const serverUrl @"172.16.253.15:8080/kccf/"
 //李强哥
 //export const serverUrl @"http://172.16.253.15:8080/kccf/"
@@ -31,7 +31,13 @@ module.exports ={
     // 个人征信报告查询
     COMPANY_SEARCH : '/credit/enterprise',
     // 公共字典信息 （地区编码及车品牌、车系、车型信息）
-    PUBLIC_DIC_INFO : '/common/dict'
+    PUBLIC_DIC_INFO : '/common/dict',
+    // 修改密码
+    CHANGE_PASSWORD : '/user/changepassword',
+    // 我的记录
+    MINE_REPORT : '/user/report',
+    // 账户信息
+    MINE_INFO : '/user/my',
 
 
 

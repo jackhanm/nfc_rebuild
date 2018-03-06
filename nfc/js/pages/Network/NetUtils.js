@@ -140,7 +140,7 @@ export default class NetUtils extends Component{
      * @param {*} callback
      */
     static postJson(url,params,jsonObj,version,accessToken,IspubParm,callback){
-     //   var newParams = this.getNewParams();//接口自身的规范，可以忽略
+      var newParams = this.getNewParams();//接口自身的规范，可以忽略
 
         var urlstr;
         if (IspubParm){
@@ -229,14 +229,14 @@ export default class NetUtils extends Component{
         // console.log(deToken);
         // console.log(md5key1);
         // console.log(dates);
-        if (Platform.OS === 'ios'){
-            newParams= "&appId="+APPID+"&key="+md4key2+"&ts="+dates+"&deviceId="+deToken+"&appVer="+APPVER
-        }else {
-            newParams="&appId="+APPIDANROID+"&key="+md4key2ANDROID+"&ts="+dates+"&deviceId="+deTokenANDROID+"&appVer="+APPVERANDROID
-        }
+        // if (Platform.OS === 'ios'){
+        //     newParams= "&appId="+APPID+"&key="+md4key2+"&ts="+dates+"&deviceId="+deToken+"&appVer="+APPVER
+        // }else {
+        //     newParams="&appId="+APPIDANROID+"&key="+md4key2ANDROID+"&ts="+dates+"&deviceId="+deTokenANDROID+"&appVer="+APPVERANDROID
+        // }
 
 
-        return newParams;
+        return "";
     };
 
     /**

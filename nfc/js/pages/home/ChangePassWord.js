@@ -12,13 +12,26 @@ import {
 } from 'react-native';
 
 let winWidth = Dimensions.get('window').width;
-
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
+import { Toast} from 'antd-mobile';
 export default class ChangePassWord extends BaseComponent{
+
     navigationBarProps() {
 
         return {
             title: '修改密码',
-            hiddenLeftItem: true
+            titleStyle: {
+                color: '#2B2D2E',
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: '#4675FF',
+            },
+            navBarStyle: {
+                backgroundColor: '#FFF',
+            }
         }
     }
     constructor(){
@@ -66,14 +79,32 @@ export default class ChangePassWord extends BaseComponent{
                         underlineColorAndroid='transparent'/>
                 </View>
             </View>
+            <TouchableOpacity onPress={()=>{this._onPress()}}>
+                <View style={{width:winWidth-120, backgroundColor:'white', justifyContent:'center', alignItems:'center', marginTop:100}}>
 
-            <View style={{width:winWidth-120, backgroundColor:'white', justifyContent:'center', alignItems:'center', marginTop:100}}>
-                <Text style={{fontWeight:'900', fontSize:15, padding:15}}>
+                    <Text style={{fontWeight:'900', fontSize:15, padding:15}}>
                     确认修改
-                </Text>
-            </View>
+                     </Text>
 
+            </View>
+            </TouchableOpacity>
         </View>);
+    }
+    _onPress() {
+        NetUtils.postJson(NetAPI.serverUrl, NetAPI.CHANGE_PASSWORD, {
+                'newPassword': "111111",
+                'oldPassword': "123456",
+                'confirmPassword': "123456"
+            }, '1.0', '', false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                  //修改成功
+                    Toast.info('修改成功');
+                }
+
+            }
+        );
     }
 }
 

@@ -13,7 +13,9 @@ import {
 } from 'react-native';
 
 import { List } from 'antd-mobile';
-
+import GetSetStorge from '../publicState/GetSetStorg';
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Item = List.Item;
@@ -23,6 +25,8 @@ let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
 import {BaseComponent} from  '../../base/BaseComponent'
 export default class MineSelf extends BaseComponent{
+
+
     navigationBarProps() {
 
         return {
@@ -30,6 +34,58 @@ export default class MineSelf extends BaseComponent{
             hiddenLeftItem: true
         }
     }
+    //网络请求
+    fetchData(data) {
+        //这个是js的访问网络的方法
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_INFO, "1.0", "", false, (result) => {
+
+            console.log(result)
+            if (result.code === 0) {
+                this.setState({
+                    //复制数据源
+                    avatar: result.data.avatar,
+                    name: result.data.name,
+                    organizationName: result.data.organizationName,
+                    phone: result.data.phone,
+                    username: result.data.username,
+
+                });
+
+            }
+
+
+            }
+        );
+
+        NetUtils.get(NetAPI.serverUrl, NetAPI.PLATFORM_DATA, "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({
+                        //复制数据源
+                        allReportLogCount: result.data.allReportLogCount,
+                        myReportLogCount: result.data.myReportLogCount,
+                        selectUserCount: result.data.selectUserCount,
+
+                    });
+
+                }
+
+
+            }
+        );
+
+    }
+
+    componentDidMount() {
+        //请求数据
+
+        console.log('sss');
+        console.log('url =========='+this.props.url);
+        this.fetchData();
+
+    }
+
 
     constructor(){
         super();
@@ -40,9 +96,21 @@ export default class MineSelf extends BaseComponent{
             user_number:'0',
             search_number:'0',
             my_search:'0',
+           //网络请求数据
+            avatar:'',
+            name:'',
+            organizationName:'',
+            phone:'',
+            username:'',
+            allReportLogCount:'',
+            myReportLogCount:'',
+            selectUserCount:''
+
         }
     }
+    _onPress(){
 
+    }
     _render(){
         return(<ScrollView
             style={{ flex: 1, backgroundColor: '#F0F0F2' }}
@@ -81,7 +149,7 @@ export default class MineSelf extends BaseComponent{
                             机构用户
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
-                            {this.state.user_number + "次"}
+                            {this.state.allReportLogCount + "次"}
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
@@ -89,7 +157,7 @@ export default class MineSelf extends BaseComponent{
                             累计查询次数
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
-                            {this.state.search_number + "次"}
+                            {this.state.myReportLogCount + "次"}
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
@@ -97,15 +165,17 @@ export default class MineSelf extends BaseComponent{
                             我的查询次数
                         </Text>
                         <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
-                            {this.state.my_search + "次"}
+                            {this.state.selectUserCount + "次"}
                         </Text>
                     </View>
                 </View>
 
+
+
                 <View style={{backgroundColor:"#F0F0F2", width:winWidth, height:25}}/>
 
                 <List style={{width:winWidth-20}}>
-                    <Item arrow="horizontal" onClick={() => {}}>
+                    <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineRecored')}}>
                         <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
                             <Icon
                                 color='black'
@@ -119,7 +189,7 @@ export default class MineSelf extends BaseComponent{
                         </View>
                     </Item>
 
-                    <Item arrow="horizontal" onClick={() => {}}>
+                    <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineDownload')}}>
                         <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
                             <Icon
                                 color='black'
@@ -146,7 +216,7 @@ export default class MineSelf extends BaseComponent{
                             </Text>
                         </View>
                     </Item>
-                    <Item arrow="horizontal" onClick={() => {}}>
+                    <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineAbout')}}>
                         <View style={{width:winWidth-20, flexDirection:'row', alignItems:'center'}}>
                             <Icon
                                 color='black'
@@ -162,13 +232,15 @@ export default class MineSelf extends BaseComponent{
                 </List>
 
                 <View style={{backgroundColor:"#F0F0F2", width:winWidth, height:80}}/>
+                <TouchableOpacity onPress={()=>{this._onPress()}}>
+                    <View style={{backgroundColor:'white'
+                        , width:winWidth-20, alignItems:'center', justifyContent:'center'}}>
+                        <Text style={{fontWeight:'900', marginTop:10, marginBottom:10, fontSize:15}}>
+                            退出登录
+                        </Text>
+                    </View>
+                </TouchableOpacity>
 
-                <View style={{backgroundColor:'white'
-                    , width:winWidth-20, alignItems:'center', justifyContent:'center'}}>
-                    <Text style={{fontWeight:'900', marginTop:10, marginBottom:10, fontSize:15}}>
-                        退出登录
-                    </Text>
-                </View>
 
             </View>
 

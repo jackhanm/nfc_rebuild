@@ -23,7 +23,7 @@ module.exports ={
     // 查询记录详细
     REPORT_LIST_DETAIL: '/index/report',
     // 平台数据总览
-    PLATFORM_DATA :' /index/statistics',
+    PLATFORM_DATA :'/index/statistics',
     // 登录
     USER_LOGIN : '/user/login',
     // 个人征信报告查询
@@ -32,12 +32,14 @@ module.exports ={
     COMPANY_SEARCH : '/credit/enterprise',
     // 公共字典信息 （地区编码及车品牌、车系、车型信息）
     PUBLIC_DIC_INFO : '/common/dict',
-    // 账户信息
-    ACCOUNT_INFO : '/user/my',
-    // 我的记录
-    MY_RECORD :'/user/report',
     // 修改密码
-    CHANGE_PASSWORD : ''
+    CHANGE_PASSWORD : '/user/changepassword',
+    // 我的记录
+    MINE_REPORT : '/user/report',
+    // 账户信息
+    MINE_INFO : '/user/my',
+    // 下载管理
+    MINE_DOWNLOAD : '/user/download',
 
 
 

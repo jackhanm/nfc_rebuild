@@ -13,6 +13,9 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { List, Modal } from 'antd-mobile';
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
+
 const Item = List.Item;
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -20,11 +23,57 @@ import ImagePicker from 'react-native-image-crop-picker';
 let winWidth = Dimensions.get('window').width;
 
 export default class AccountInfo extends BaseComponent{
+
+    //网络请求
+    fetchData(data) {
+        //这个是js的访问网络的方法
+
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_INFO, "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({
+                        //复制数据源
+                        avatar: result.data.avatar,
+                        name: result.data.name,
+                        organizationName: result.data.organizationName,
+                        phone: result.data.phone,
+                        username: result.data.username,
+
+                    });
+
+
+
+                }
+
+
+            }
+        );
+
+    }
+
+    componentDidMount() {
+        //请求数据
+
+        this.fetchData();
+
+    }
+
     navigationBarProps() {
 
         return {
             title: '账户信息',
-            hiddenLeftItem: true
+            titleStyle: {
+                color: '#2B2D2E',
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: '#4675FF',
+            },
+            navBarStyle: {
+                backgroundColor: '#FFF',
+            }
         }
     }
 
@@ -37,6 +86,14 @@ export default class AccountInfo extends BaseComponent{
             loginName:'xmsky2018',
             company:'长天好车贷',
             visible:false,
+            //网络请求数据
+            avatar:'',
+            name:'',
+            organizationName:'',
+            phone:'',
+            username:''
+
+
         }
     }
 

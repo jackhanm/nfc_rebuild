@@ -13,12 +13,13 @@ import {
 } from 'react-native';
 
 import { NavigationActions} from "react-navigation";
-
+import GetSetStorge from '../publicState/GetSetStorg';
+import NetUtils from '../Network/NetUtils'
+import NetAPI from  '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-
 let reastAction = NavigationActions.reset({
     index: 0,
     actions: [
@@ -110,7 +111,27 @@ export default class NfcLogin extends Component{
     }
 
     _onPress() {
-        this.props.navigation.dispatch(reastAction);
+        NetUtils.postJson(NetAPI.serverUrl, NetAPI.USER_LOGIN, {
+                'username': this.state.userName,
+                'password': this.state.passWrod
+            }, '1.0', '', false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    GetSetStorge.setStorgeAsync('isLogin', 'true');
+                    this.props.navigation.dispatch(reastAction);
+
+
+
+                }
+
+            }
+        );
+
+
+
+
+
     }
 }
 
