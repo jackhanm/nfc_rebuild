@@ -103,9 +103,9 @@ export default class MineSelf extends BaseComponent{
             organizationName:'',
             phone:'',
             username:'',
-            allReportLogCount:'',
-            myReportLogCount:'',
-            selectUserCount:''
+            allReportLogCount:'0',
+            myReportLogCount:'0',
+            selectUserCount:'0'
 
         }
     }

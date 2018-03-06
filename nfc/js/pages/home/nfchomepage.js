@@ -9,6 +9,7 @@ import {
     Image,
     TextInput,
     FlatList,
+    ScrollView
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -78,19 +79,20 @@ export default class nfchomepage extends Component{
 
 
     _renderHead() {
-        return (<View style={styles.container_head}>
-            <View style={{ height:20, width:windowWidth, flexDirection:'row', marginTop:10, justifyContent:'center'}}>
-                <View style={{flex:1, flexDirection:'row', marginLeft:10}}>
+        return (
+            <View style={styles.container_head}>
+            <View style={{height:60, width:windowWidth, flexDirection:'row', alignItems:'center', backgroundColor:'#2554A2'}}>
+                <View style={{flex:1, flexDirection:'row', marginLeft:10, alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
-                           style={{width:26, height:26, borderRadius:13}}/>
-                    <Text>
+                           style={{width:22, height:22, borderRadius:13}}/>
+                    <Text style={{fontSize:12, color:'#ffffff'}}>
                         {this.state.user_name + ',您好'}
                     </Text>
                 </View>
 
-                <View style={{alignSelf:'flex-end', marginRight:10}}>
+                <View style={{flex:1, flexDirection:'row', marginRight:10, alignItems:'center', justifyContent:'flex-end'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
-                        <Text>
+                        <Text style={{fontSize:14, color:'#ffffff'}}>
                             我的记录
                         </Text>
                     </TouchableOpacity>
@@ -99,33 +101,27 @@ export default class nfchomepage extends Component{
             </View>
 
             <View style={{flex:1, width:windowWidth, justifyContent:'center', marginTop:30, marginBottom:25, alignItems:'center'}}>
-                <Text style={{fontSize:40, color:'#FFFFFF', fontWeight:'bold'}}>
+                <Text style={{fontSize:23}}>
                     快速查询
                 </Text>
             </View>
 
-            <View style={{height:40, width:windowWidth - 30, borderWidth:1, borderColor:"white"
-                , alignSelf:'center', backgroundColor:'white', flexDirection:'row'}}>
-                <Icon.Button
-                    color='black'
-                    size={25}
-                    backgroundColor={'white'}
-                    name="ios-search"
-                    onPress={()=>{}}
-                />
-
+            <View style={{height:45, width:345, borderWidth:1, borderColor:"#ea5404"
+                , alignSelf:'center', backgroundColor:'white', flexDirection:'row',}}>
                 <TextInput
                     underlineColorAndroid="transparent"
                     returnKeyLabel='search'
                     placeholder='请输入人名,身份证，企业名等关键字'
-                    style={{height: 40, flex:1, marginRight: 10}}>
+                    style={{height: 45, width:280, marginLeft: 10,}}>
 
                 </TextInput>
+
+                <Image style={{width:58, height:45}} source={require('../../nfcimg/search.png')}/>
 
             </View>
 
             <View style={{flex:1, width:windowWidth, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontSize:15, color:'#FFFFFF'}}>
+                <Text style={{fontSize:12, color:'#666666'}}>
                     tip:如无结果，请使用精确查询
                 </Text>
             </View>
@@ -135,15 +131,14 @@ export default class nfchomepage extends Component{
 
     _renderMid(){
         return(<View style={styles.container_mid}>
-            <View style={{flex:1}}/>
-            <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontSize:30, color:'black', fontWeight:'bold'}}>
+            <View style={{flex:2, flexDirection:'row', alignItems:'center'}}>
+                <Text style={{fontSize:18, color:'#003f98', marginLeft:10}}>
                     查询记录
                 </Text>
             </View>
-            <View style={{flex:1, flexDirection:'row', height:100, justifyContent:'flex-start', fontWeight:'bold', alignItems:'center'}}>
+            <View style={{flex:1, flexDirection:'row', height:100, justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
                 <TouchableOpacity>
-                    <Text style={{color:'black', marginLeft:20, marginTop:10}}>
+                    <Text style={{color:'#003f98', marginRight:10}}>
                         更多
                     </Text>
                 </TouchableOpacity>
@@ -198,14 +193,15 @@ const styles = StyleSheet.create({
     container_head:{
         width:windowWidth,
         height:280,
-        backgroundColor:'#707597',
+        backgroundColor:'white',
         flexDirection:'column',
     },
     container_mid:{
-        height:100,
+        height:57,
         width:windowWidth,
         flexDirection:'row',
         alignItems:'center',
+        backgroundColor:'#f7f7f7'
     },
 
     item:{
@@ -214,6 +210,6 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         flexDirection:'row',
         alignItems:'center',
-        padding:10
+        height:50
     }
 });
