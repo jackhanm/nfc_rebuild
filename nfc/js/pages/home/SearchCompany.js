@@ -58,14 +58,14 @@ export default class SearchCompany extends BaseComponent{
         return (
             <View style={{flex: 1, flexDirection:'column'}}>
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20}}>
-                    <Text style={{color:'black', fontWeight:'900', marginLeft:10}}>
+                    <Text style={{color:'black', marginLeft:10}}>
                         请选择具体查询条件
                     </Text>
                 </View>
 
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.ALL, '全部', this.state.all)}
+                        {this._renderTag(TAG_TYPE.ALL, '全部', this.state.all, require('../../nfcimg/all.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
 
@@ -77,19 +77,19 @@ export default class SearchCompany extends BaseComponent{
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
 
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.companyRiskManage)}
+                        {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.companyRiskManage, require('../../nfcimg/company.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent)}
+                        {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent, require('../../nfcimg/home.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice)}
+                        {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice, require('../../nfcimg/car.png'))}
                     </View>
                 </View>
 
                 <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice)}
+                        {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice, require('../../nfcimg/home_estimate.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                     </View>
@@ -102,7 +102,7 @@ export default class SearchCompany extends BaseComponent{
     }
 
     _renderFoot() {
-        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:50}}>
+        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:20}}>
             <TouchableOpacity onPress={()=>this._onPress()}>
                 <View style={{width:250, height:44, justifyContent:'center', alignItems:'center', backgroundColor:'#1b54a5', borderRadius:4}}>
                     <Text style={{fontSize:16, color:'white'}}>
@@ -113,12 +113,20 @@ export default class SearchCompany extends BaseComponent{
         </View>);
     }
 
-    _renderTag(tagType, text, state){
-        return(<TouchableOpacity onPress={()=>{this._chageTag(tagType)}}>
-            <View style={{width:110, height:50, backgroundColor:state? '#FD9720' : '#FFFFFF', justifyContent:'center', alignItems:'center'}}>
+    _renderTag(tagType, text, state, icon){
+        return(<TouchableOpacity style={{width:105, height:105, backgroundColor:'#FFFFFF', flexDirection:'column', alignItems:'center'}}
+                                 onPress={()=>{this._chageTag(tagType)}}>
+            <View style={{flex:1}}>
+
+            </View>
+            <View style={{flex:2, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                <Image source={icon} style={{alignSelf:'center'}}/>
                 <Text style={{color:'black'}}>
                     {text}
                 </Text>
+            </View>
+            <View style={{flex:1, width:105, flexDirection:'row', justifyContent:'flex-end', alignItems:'flex-end'}}>
+                <Image source={state?require('../../nfcimg/selected.png'):require('../../nfcimg/noselected.png')}/>
             </View>
         </TouchableOpacity>);
     }
