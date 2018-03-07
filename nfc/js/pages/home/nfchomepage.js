@@ -117,7 +117,7 @@ export default class nfchomepage extends Component{
                 </TextInput>
 
                 <TouchableOpacity>
-                    <Image style={{width:58, height:45}} source={require('../../nfcimg/search.png')}/>
+                    <Image style={{width:58, height:45, padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 
             </View>
