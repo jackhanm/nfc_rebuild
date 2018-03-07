@@ -141,6 +141,7 @@ export default class NetUtils extends Component{
      * @param {*} callback
      */
     static postJson(url,params,jsonObj,version,accessToken,IspubParm,callback){
+
       var newParams = this.getNewParams();//接口自身的规范，可以忽略
 
         var urlstr;
@@ -169,14 +170,32 @@ export default class NetUtils extends Component{
             })
             .then((json) => {
 
-
-                callback(json);
                 //登陆成功保存用户信息
-                if (params === '/user/login')
+                if (params === '/user/login'){
+
+                }else {
+
+                }
                 if (json.code === '0'){
                     //登陆成功
-                    dataCache(url, postJson, isCache)
+                    // dataCache(url, postJson, isCache)
+                    callback(json);
+                }else if(json.code === 1000){
+                   //刷新token
+                    this.post(NetAPI.serverUrl, NetAPI.REFRESH_TOKEN,{'refreshToken':''},(result)=>{
+                        if (result.code === 0) {
+                            //刷新成功
+                            callback("请重新请求");
+                        }else {
+                            callback("登陆过期");
+                        }
+                    })
+
+
+                }else {
+                    callback(json);
                 }
+                //
 
 
 

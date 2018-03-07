@@ -59,7 +59,15 @@ export default class WebViewCommunication extends BaseComponent {
 
     //向HTML发送数据
     _postMessage = () => {
-        this.webview.postMessage('刘鹏辉');
+        var person={};
+
+        person.areaCode = '1111',
+        person.houseType = '1111',
+        person.name = '1111',
+        person.queryType = '1111',
+
+
+        this.webview.postMessage( JSON.stringify(person));
     }
 
 }

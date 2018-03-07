@@ -36,9 +36,11 @@ module.exports ={
     // 公共字典信息 （地区编码及车品牌、车系、车型信息）
     PUBLIC_DIC_INFO : '/common/dict',
     // 修改密码
-    CHANGE_PASSWORD : '/user/changepassword',
-    // 我的记录
-    MINE_REPORT : '/user/report',
+    CHANGE_PASSWORD : '/user/modifyPwd',
+    // 我的记录(全部)
+    MINE_REPORT_ALL : '/report/list?type=ALL',
+    // 我的记录(全部)
+    MINE_REPORT_PERSION : '/report/list?type=MY',
     // 账户信息
     MINE_INFO : '/user/my',
     // 下载管理
