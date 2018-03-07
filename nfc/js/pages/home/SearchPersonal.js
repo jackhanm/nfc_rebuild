@@ -148,9 +148,9 @@ export default class SearchPersonal extends BaseComponent {
             <View style={{flex:1}}>
 
             </View>
-            <View style={{flex:2, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-                <Image source={icon} style={{alignSelf:'center'}}/>
-                <Text style={{color:'black'}}>
+            <View style={{flex:2.5, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                <Image source={icon}/>
+                <Text style={{color:'black', marginTop:5}}>
                     {text}
                 </Text>
             </View>

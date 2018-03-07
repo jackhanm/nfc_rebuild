@@ -11,6 +11,8 @@ import {
     FlatList,
     ScrollView,
     KeyboardAvoidingView,
+    ActionSheetIOS,
+    Modal
 } from 'react-native';
 
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -18,13 +20,14 @@ import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import Picker1 from 'react-native-picker';
 import {commonStyle} from '../../../js/util/commonStyle'
-import { Popover,  Modal, DatePicker, List, Picker, Button } from 'antd-mobile';
+import { Popover,  DatePicker, List, Picker, Button } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
 const Item = Popover.Item;
 
 let winWidth = Dimensions.get('window').width;
+let winHeight = Dimensions.get('window').width;
 
 
 const SelectType = {
@@ -69,24 +72,35 @@ export default class PersonalData extends BaseComponent{
             }
         }
     }
+
+    fetchAddressData(type){
+        // 查询省
+        var newParams= NetAPI.PUBLIC_DIC_INFO+'?type=AREA_CODE' + type;
+        NetUtils.get(NetAPI.serverUrl2, newParams , "1.0", "", false, (result) => {
+
+                console.log(result)
+
+                if (result.code === 0) {
+                    if(result.data.length == 0){
+                        if(this.state.isSelected_two){
+                            this.setState({data:[this.state.selected2]});
+                        }else{
+                            if(this.state.isSelected_one){
+                                this.setState({data:[this.state.selected1]});
+                            }
+                        }
+                    }else{
+                        this.setState({data:result.data});
+                    }
+                }
+            }
+        );
+    }
+
 //网络请求
     fetchData(data) {
         //这个是js的访问网络的方法
 
-        // 查询省
-        var newParams= NetAPI.PUBLIC_DIC_INFO+'?type=AREA_CODE'
-        NetUtils.get(NetAPI.serverUrl2, newParams , "1.0", "", false, (result) => {
-
-                console.log(result)
-                if (result.code === 0) {
-
-
-
-                }
-
-
-            }
-        );
         // 查询车品牌
         var CarParams= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_BRAND'
         NetUtils.get(NetAPI.serverUrl2, CarParams , "1.0", "", false, (result) => {
@@ -123,8 +137,6 @@ export default class PersonalData extends BaseComponent{
                 console.log(result)
                 if (result.code === 0) {
 
-
-
                 }
 
 
@@ -159,6 +171,7 @@ export default class PersonalData extends BaseComponent{
                 , homePrice:this.props.navigation.state.params.homePrice
             });
         this.fetchData()
+        this.fetchAddressData('');
     }
 
 
@@ -212,6 +225,18 @@ export default class PersonalData extends BaseComponent{
             //房屋售价评估
             homePrice:false,
             /*----------------------共同参数---------------------------*/
+
+           data:[],
+            selected1:{code:''},
+            selected2:{code:''},
+            selected3:{code:''},
+            isSelected_one:false,
+            isSelected_two:false,
+            isSelected_three:false,
+            addVisible:false,
+
+            isselect_home_add:false,
+            isselect_car_add:false,
         }
     }
 
@@ -219,21 +244,23 @@ export default class PersonalData extends BaseComponent{
     _render(){
         return(<ScrollView style={styles.container}>
             <View style={{width:winWidth, flexDirection:'column'}}>
+
                 {this._renderCompanyInfo()}
                 {this._renderPersionInfo()}
                 {this._renderCarInfo()}
                 {this._renderHomeInfo()}
                 {this._renderModle()}
+                {this._renderAddModle()}
 
                 <View style={{width:winWidth, justifyContent:'center', flexDirection:'row', marginTop:50, marginBottom:50}}>
 
-                        <TouchableOpacity style={{width:250, height:44, backgroundColor:'#1b54a5', alignItems:'center',
-                            justifyContent:'center', borderRadius:4}}
-                                            onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
-                            <Text style={{fontSize:16, color:'#ffffff'}}>
-                                立即查询
-                            </Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={{width:250, height:44, backgroundColor:'#1b54a5', alignItems:'center',
+                        justifyContent:'center', borderRadius:4}}
+                                      onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
+                        <Text style={{fontSize:16, color:'#ffffff'}}>
+                            立即查询
+                        </Text>
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -347,8 +374,14 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                            <Text style={{fontSize:15, color:'#999999'}}>请选择</Text>
+                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
+                                           onPress={()=>{this.setState({addVisible:true, isselect_home_add:true, isselect_car_add:false})}}>
+                            <Text style={{fontSize:15, color:'#999999'}}>{
+                                this.state.selectedAdd.length == 0?
+                                '请选择': this.state.selectedAdd[0].code == this.state.selectedAdd[1].code?
+                                    this.state.selectedAdd[0].caption:this.state.selectedAdd[1].code == this.state.selectedAdd[2].code?
+                                        this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption
+                                        : this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption + this.state.selectedAdd[2].caption}</Text>
                             <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                         </TouchableOpacity>
                     </View>
@@ -499,8 +532,15 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                            <Text style={{fontSize:15, color:'#999999'}}>请选择</Text>
+                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
+                                           onPress={()=>{this.setState({addVisible:true, isselect_car_add:true, isselect_home_add:false})}}>
+                            <Text style={{fontSize:15, color:'#999999'}}>
+                                {this.state.selectedCarAddress.length == 0?
+                                    '请选择': this.state.selectedCarAddress[0].code == this.state.selectedCarAddress[1].code?
+                                        this.state.selectedCarAddress[0].caption:this.state.selectedCarAddress[1].code == this.state.selectedCarAddress[2].code?
+                                        this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption
+                                            : this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption + this.state.selectedCarAddress[2].caption}
+                                </Text>
                             <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                         </TouchableOpacity>
 
@@ -562,12 +602,14 @@ export default class PersonalData extends BaseComponent{
         });
     }
 
+    _onCloseAddModle(){
+        this.setState({
+            addVisible:false
+        });
+    }
+
     _renderModle(){
-        return(<Modal title={this.state.modleTitle.title}
-                      transparent
-                      onClose={()=>this._onCloseModle()}
-                      maskClosable
-                      visible={this.state.visible}>
+        return(<Modal visible={this.state.visible}>
             <View style={{ paddingVertical: 20 }}>
                 <FlatList
                     data={this.state.dataSelect}
@@ -575,6 +617,17 @@ export default class PersonalData extends BaseComponent{
             </View>
         </Modal>);
     }
+
+
+    _renderAddModle(){
+        return(<Modal
+            transparent={true}
+            visible={this.state.addVisible}>
+            {this._renderAddress()}
+        </Modal>);
+    }
+
+
 
     _selectedInfo(item){
         switch (this.state.modleTitle.type){
@@ -604,6 +657,107 @@ export default class PersonalData extends BaseComponent{
             </TouchableOpacity>
         );
     }
+
+    /**-------------------------------------------------------------------------------------------------------**/
+    _renderAddress(){
+        return(<View style={{flex:1,flexDirection:'column', backgroundColor:'rgba(0, 0, 0, 0.4)'}}>
+            <TouchableOpacity style={{flex:3}} onPress={()=>{this.setState({addVisible:false,});}}></TouchableOpacity>
+            <View style={{flex:7, width:winWidth, flexDirection:'column', backgroundColor:'white'}}>
+                <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                    <Text>请选择地址</Text>
+                </View>
+                <View style={styles.line}/>
+                <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center',}}>
+                    <TouchableOpacity style={{flex:1}} onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
+                        {this.state.isSelected_one?<Text>{this.state.selected1.caption}</Text>:<Text>请选择</Text>}
+                    </TouchableOpacity>
+                    <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1}}
+                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected1.code), this.setState({isSelected_two:false, isSelected_three:false,})}}>
+                        {this.state.isSelected_one?this.state.isSelected_two?<Text>{this.state.selected2.caption}</Text>:<Text>请选择</Text>:<Text/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{flex:1}} disabled={!this.state.isSelected_three}
+                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected2.code);  this.setState({isSelected_three:false,})}}>
+                        {this.state.isSelected_one && this.state.isSelected_two? this.state.isSelected_three?<Text>{this.state.selected3.caption}</Text>:<Text>请选择</Text>:<Text/>}
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.line}/>
+                <View style={{flex:8}}>
+                    <FlatList
+                        data={this.state.data}
+                        renderItem={({item})=><TouchableOpacity onPress={()=>{this._choseItem(item)}}>
+                            <View style={{width:winWidth,flexDirection:'row', alignItems:'center'}}>
+                                <Text style={{paddingTop:10, paddingBottom:10}}>{item.caption}</Text>
+                            </View>
+                        </TouchableOpacity>}
+                    />
+                </View>
+
+            </View>
+        </View>);
+    }
+
+
+    _separator(){
+        return <View style={{height:1,backgroundColor:'#999999'}}/>;
+    }
+
+    _choseItem(item){
+
+        var item1, item2, item3
+
+        if(this.state.isSelected_one){
+            if(this.state.isSelected_two){
+                if(this.state.isSelected_three){
+                    item1 = this.state.selected1;
+                    item2 = this.state.selected2
+                    item3 = item;
+                    this.setState({
+                        selected3:item,
+                        isSelected_three:true,
+                        addVisible:false,
+                    });
+                    if(this.state.isselect_home_add){
+                        this.setState({selectedAdd:[item1, item2, item3]});
+                    }
+                    if(this.state.isselect_car_add){
+                        this.setState({selectedCarAddress:[item1, item2, item3]});
+                    }
+                }else{
+                    item2 = this.state.selected2
+                    item1 = this.state.selected1;
+                    item3 = item;
+                    this.setState({
+                        selected3:item,
+                        isSelected_three:true,
+                        addVisible:false,
+                    });
+                    if(this.state.isselect_home_add){
+                        this.setState({selectedAdd:[item1, item2, item3]});
+                    }
+                    if(this.state.isselect_car_add){
+                        this.setState({selectedCarAddress:[item1, item2, item3]});
+                    }
+                }
+            }else{
+                this.setState({
+                    selected2:item,
+                    isSelected_two:true,
+                    isSelected_three:false,
+                });
+                this.fetchAddressData('&parentCode=' + item.code)
+            }
+        }else{
+            this.setState({
+                selected1:item,
+                isSelected_one:true,
+                isSelected_two:false,
+                isSelected_three:false,
+            });
+            this.fetchAddressData('&parentCode=' + item.code)
+        }
+    }
+
+    /**-------------------------------------------------------------------------------------------------------**/
 }
 
 const styles = StyleSheet.create({
