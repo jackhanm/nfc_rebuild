@@ -150,6 +150,25 @@ export default class PersonalData extends BaseComponent{
 
     componentDidMount() {
         console.log('===================componentDidMount====================');
+
+        fillinfo.hometype = ''
+        fillinfo.companyId = '',
+        fillinfo.companyName = '',
+        fillinfo.id = '',
+        fillinfo.name = '',
+        fillinfo.carBrand = '',
+        fillinfo.carVs = '',
+        fillinfo.carModle = '',
+        fillinfo.markTime = '',
+        fillinfo.carAdd = '',
+        fillinfo.carID = '',
+        fillinfo.carMileage = '',
+        fillinfo.homeAdd = '',
+        fillinfo.homeName = '',
+        fillinfo.hometype = '',
+        fillinfo.homeMeasure = ''
+
+
         this.props.navigation.state.params.type == 0 ?
             this.setState({
                 type:0
@@ -185,7 +204,7 @@ export default class PersonalData extends BaseComponent{
             //Modle标题
             modleTitle:{},
 
-            slelctedHomeType:{caption:"请住宅类型",},
+            slelctedHomeType:{caption:"请住宅类型", code:'0'},
 
             SelectData:undefined,
 
@@ -669,7 +688,7 @@ export default class PersonalData extends BaseComponent{
                             </Text>
                         </View>
                         <View style={styles.line}/>
-                        <FlatList
+                        <FlatList style={{width:winWidth - ScreenUtil.scaleSize(40)}}
                             data={this.state.carData}
                             renderItem={({item}) => this._renderItem(item)}
                             ItemSeparatorComponent={this._separator}/>
@@ -834,17 +853,11 @@ export default class PersonalData extends BaseComponent{
     /**-------------------------------------------------------------------------------------------------------**/
 
     _checkInfo(){
+
         var data = new Date();
 
-        fillinfo.carBrand = this.state.selectedBradn.code;
-        fillinfo.carVs = this.state.selectedVehicles.code;
-        fillinfo.carModle = this.state.selectedCarModle.code;
-        fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
-        fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
-        fillinfo.hometype = this.state.slelctedHomeType.code;
-
         console.log(fillinfo);
-        if(this.state.type == 1){
+        if(this.state.type == 1 && (this.state.all || this.state.companyRiskManage)){
             var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
             if (!orgCode.test(fillinfo.companyId)) {
                 this._showToast("企业社会信用代码输入错误！")
@@ -855,36 +868,33 @@ export default class PersonalData extends BaseComponent{
                 return;
             }
         }
-            var licenseDate = /^\d{4}$/;
-            if(!licenseDate.test(fillinfo.markTime) && 1886 < toInteger(fillinfo.markTime) < data.getFullYear().valueOf()){
+
+        if(this.state.carPrice){
+
+            fillinfo.carBrand = this.state.selectedBradn.code;
+            fillinfo.carVs = this.state.selectedVehicles.code;
+            fillinfo.carModle = this.state.selectedCarModle.code;
+            if(this.state.selectedCarAddress.length > 1){
+                fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
+            }
+            if(fillinfo.markTime == ''){
                 this._showToast("请输入正确的年份")
-                return;
+            }else{
+                var licenseDate = /^\d{4}$/;
+                if(!licenseDate.test(fillinfo.markTime) && 1886 < toInteger(fillinfo.markTime) < data.getFullYear().valueOf()){
+                    this._showToast("请输入正确的年份")
+                    return;
+                }
             }
-            var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
-            if(!mileage.test(fillinfo.carMileage) && 100 < toInteger(fillinfo.carMileage) < 800000){
+            if(fillinfo.carMileage == ''){
                 this._showToast("请输入正确的行驶里程")
-                return;
-            }
-            var houseSize = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
-            if(!houseSize.test(fillinfo.homeMeasure)){
-                this._showToast("请输入正确的房屋面积")
-                return;
-            }
-
-            if(this.state.type == 0){
-                var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-                if(!certNo.test(fillinfo.id)){
-                    this._showToast('请输入正确的身份证');
-                    return;
-                }
-                var userName = /^[\u4e00-\u9fa5]{2,4}$/;
-                if(!userName.test(fillinfo.name)){
-                    this._showToast('请输入正确的姓名');
+            }else{
+                var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+                if(!mileage.test(fillinfo.carMileage) && 100 < toInteger(fillinfo.carMileage) < 800000){
+                    this._showToast("请输入正确的行驶里程")
                     return;
                 }
             }
-        var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-
             if(fillinfo.carBrand == ''){
                 this._showToast('请选择车品牌')
                 return;
@@ -906,6 +916,19 @@ export default class PersonalData extends BaseComponent{
                 this._showToast('请输入车牌号')
                 return;
             }
+        }
+
+        if(this.state.homeRent || this.state.homePrice){
+            if(this.state.selectedAdd > 2){
+                fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
+            }
+            fillinfo.hometype = this.state.slelctedHomeType.code;
+
+            var houseSize = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+            if(!houseSize.test(fillinfo.homeMeasure)){
+                this._showToast("请输入正确的房屋面积")
+                return;
+            }
             if(fillinfo.homeAdd == ''){
                 this._showToast('请输入房屋属地')
                 return;
@@ -914,10 +937,28 @@ export default class PersonalData extends BaseComponent{
                 this._showToast('请输入房屋名称')
                 return;
             }
-            if(fillinfo.hometype == ''){
-                this._showToast('请输入房屋面积')
+            if(fillinfo.hometype == '' || fillinfo.hometype == '0'){
+                this._showToast('请选择房屋属性')
                 return;
             }
+
+        }
+
+            if(this.state.type == 0 && (this.state.creditReport || this.state.antiFraud || this.state.riskManage || this.state.all)){
+                var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if(!certNo.test(fillinfo.id)){
+                    this._showToast('请输入正确的身份证');
+                    return;
+                }
+                var userName = /^[\u4e00-\u9fa5]{2,4}$/;
+                if(!userName.test(fillinfo.name)){
+                    this._showToast('请输入正确的姓名');
+                    return;
+                }
+            }
+
+
+        var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 
         this.props.navigation.navigate('WebViewCommunication', {
             fillinfo
