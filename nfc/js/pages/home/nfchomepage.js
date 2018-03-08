@@ -137,7 +137,7 @@ export default class nfchomepage extends Component{
                     查询记录
                 </Text>
             </View>
-            <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
+            <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', alignItems:'center'}}>
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('homeMorelist')}} >
                     <Text style={{color:'#003f98', marginRight:ScreenUtil.scaleSize(20)}}>
                         更多
