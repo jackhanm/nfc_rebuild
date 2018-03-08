@@ -13,6 +13,8 @@ import {
     Keyboard
 } from 'react-native';
 
+import ScreenUtil from '../../util/ScreenUtil'
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { List } from 'antd-mobile';
@@ -35,18 +37,10 @@ export default class nfchomepage extends Component{
                 if (result.code === 0) {
                     this.setState({
                         //复制数据源
-
-
                     });
-
-
-
                 }
-
-
             }
         );
-
     }
 
     componentDidMount() {
@@ -82,42 +76,42 @@ export default class nfchomepage extends Component{
     _renderHead() {
         return (
             <View style={styles.container_head}>
-            <View style={{height:60, width:windowWidth, flexDirection:'row', alignItems:'center', backgroundColor:'#2554A2'}}>
-                <View style={{flex:1, flexDirection:'row', marginLeft:10, alignItems:'center',}}>
+            <View style={{height:ScreenUtil.scaleSize(120), width:windowWidth, flexDirection:'row', alignItems:'center', backgroundColor:'#2554A2'}}>
+                <View style={{flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
-                           style={{width:22, height:22, borderRadius:11}}/>
-                    <Text style={{marginLeft:10,fontSize:12, color:'#ffffff'}}>
+                           style={{width:ScreenUtil.scaleSize(44), height:ScreenUtil.scaleSize(44), borderRadius:ScreenUtil.scaleSize(22)}}/>
+                    <Text style={{marginLeft:ScreenUtil.scaleSize(20),fontSize:12, color:'#ffffff'}}>
                         {this.state.user_name + ',您好'}
                     </Text>
                 </View>
 
-                <View style={{flex:1, flexDirection:'row', marginRight:10, alignItems:'center', justifyContent:'flex-end'}}>
+                <View style={{flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
-                        <Text style={{fontSize:14, color:'#ffffff'}}>
+                        <Text style={{fontSize:ScreenUtil.scaleSize(28), color:'#ffffff'}}>
                             我的记录
                         </Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{flex:1, width:windowWidth, justifyContent:'center', marginTop:30, marginBottom:25, alignItems:'center'}}>
+            <View style={{flex:1, width:windowWidth, justifyContent:'center', marginTop:ScreenUtil.scaleSize(60), marginBottom:ScreenUtil.scaleSize(50), alignItems:'center'}}>
                 <Text style={{fontSize:23}}>
                     快速查询
                 </Text>
             </View>
 
-            <View style={{height:45, width:345, borderWidth:1, borderColor:"#ea5404"
+            <View style={{height:ScreenUtil.scaleSize(90), width:ScreenUtil.scaleSize(690), borderWidth:ScreenUtil.scaleSize(2), borderColor:"#ea5404"
                 , alignSelf:'center', backgroundColor:'white', flexDirection:'row',}}>
                 <TextInput
                     underlineColorAndroid="transparent"
                     returnKeyLabel='search'
                     onSubmitEditing={Keyboard.dismiss}
                     placeholder='请输入人名,身份证，企业名等关键字'
-                    style={{height: 45, width:280, marginLeft: 10,}}>
+                    style={{height: ScreenUtil.scaleSize(90), width:ScreenUtil.scaleSize(560), marginLeft: ScreenUtil.scaleSize(20),}}>
 
                 </TextInput>
 
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList')}} >
-                    <Image style={{width:55, height:44, padding:0}} source={require('../../nfcimg/search.png')}/>
+                    <Image style={{width:ScreenUtil.scaleSize(110), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 
             </View>
@@ -134,13 +128,13 @@ export default class nfchomepage extends Component{
     _renderMid(){
         return(<View style={styles.container_mid}>
             <View style={{flex:2, flexDirection:'row', alignItems:'center'}}>
-                <Text style={{fontSize:18, color:'#003f98', marginLeft:10}}>
+                <Text style={{fontSize:18, color:'#003f98', marginLeft:ScreenUtil.scaleSize(20)}}>
                     查询记录
                 </Text>
             </View>
-            <View style={{flex:1, flexDirection:'row', height:100, justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
+            <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('homeMorelist')}} >
-                    <Text style={{color:'#003f98', marginRight:10}}>
+                    <Text style={{color:'#003f98', marginRight:ScreenUtil.scaleSize(20)}}>
                         更多
                     </Text>
                 </TouchableOpacity>
@@ -162,11 +156,11 @@ export default class nfchomepage extends Component{
                     <View style={styles.item}>
                         <View style={{flex:3, flexDirection:'row',
                             alignItems:'center',}}>
-                            <Text style={{color:'#4352B2', marginRight:5}}>
+                            <Text style={{color:'#4352B2', marginRight:ScreenUtil.scaleSize(10)}}>
                                 {item.type}
                             </Text>
 
-                            <Text style={{color:'black', marginRight:5}}>
+                            <Text style={{color:'black', marginRight:ScreenUtil.scaleSize(10)}}>
                                 {item.title}
                             </Text>
                         </View>
@@ -174,10 +168,10 @@ export default class nfchomepage extends Component{
                             <Text>
                                 {item.time}
                             </Text>
-                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                         </View>
                     </View>
-                    <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
+                    <View style={{backgroundColor:'#F0F0F2', height:ScreenUtil.scaleSize(1), width:windowWidth}}/>
                 </View>
             </TouchableOpacity>
         );
@@ -195,12 +189,12 @@ const styles = StyleSheet.create({
     },
     container_head:{
         width:windowWidth,
-        height:280,
+        height:ScreenUtil.scaleSize(560),
         backgroundColor:'white',
         flexDirection:'column',
     },
     container_mid:{
-        height:57,
+        height:ScreenUtil.scaleSize(114),
         width:windowWidth,
         flexDirection:'row',
         alignItems:'center',
@@ -213,8 +207,8 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         flexDirection:'row',
         alignItems:'center',
-        paddingRight:10,
-        paddingLeft:10,
-        height:50
+        paddingRight:ScreenUtil.scaleSize(20),
+        paddingLeft:ScreenUtil.scaleSize(20),
+        height:ScreenUtil.scaleSize(100)
     }
 });

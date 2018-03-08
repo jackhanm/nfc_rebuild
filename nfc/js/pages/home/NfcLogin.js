@@ -12,6 +12,8 @@ import {
     ScrollView,
 } from 'react-native';
 
+import ScreenUtil from '../../util/ScreenUtil'
+
 import { NavigationActions} from "react-navigation";
 import GetSetStorge from '../publicState/GetSetStorg';
 import NetUtils from '../Network/NetUtils'
@@ -46,7 +48,7 @@ export default class NfcLogin extends Component{
 
             <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
                 <Image
-                    style={{width:70, height:70, marginTop:90}}
+                    style={{width:ScreenUtil.scaleSize(140), height:ScreenUtil.scaleSize(140), marginTop:ScreenUtil.scaleSize(140)}}
                     source={require('../../nfcimg/logo.png')}/>
                 <Text style={{fontSize:18, color:'#004098'}}>
                     好车贷NFC风控系统
@@ -56,15 +58,15 @@ export default class NfcLogin extends Component{
                 <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
-                            style={{width:25, height:25}}
+                            style={{width:ScreenUtil.scaleSize(50), height:ScreenUtil.scaleSize(50)}}
                             source={require('../../nfcimg/user.png')}/>
-                        <View style={{flexDirection:'column', marginLeft:20,}}>
-                            <TextInput style={{width:210, color:'#194697', padding:0,marginBottom:5}}
+                        <View style={{flexDirection:'column', marginLeft:ScreenUtil.scaleSize(40),}}>
+                            <TextInput style={{width:ScreenUtil.scaleSize(420), color:'#194697', padding:0,marginBottom:ScreenUtil.scaleSize(10)}}
                                        underlineColorAndroid='transparent'
                                        onChangeText={(text)=>this.setState({user_name:text})}
                                        placeholder='账户'
                                        placeholderTextColor='#194697'/>
-                            <View style={{width:210, height:0.5, backgroundColor:'#dbdbdb'}}></View>
+                            <View style={{width:ScreenUtil.scaleSize(420), height:ScreenUtil.scaleSize(1), backgroundColor:'#dbdbdb'}}></View>
                         </View>
                     </View>
                 </View>
@@ -72,30 +74,30 @@ export default class NfcLogin extends Component{
                 <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
-                            style={{width:25, height:25}}
+                            style={{width:ScreenUtil.scaleSize(50), height:ScreenUtil.scaleSize(50)}}
                             source={require('../../nfcimg/pass.png')}/>
-                        <View style={{flexDirection:'column', marginLeft:20}}>
-                            <TextInput style={{width:210, color:'#194697', padding:0, marginBottom:5}}
+                        <View style={{flexDirection:'column', marginLeft:ScreenUtil.scaleSize(40)}}>
+                            <TextInput style={{width:ScreenUtil.scaleSize(420), color:'#194697', padding:0, marginBottom:ScreenUtil.scaleSize(10)}}
                                        underlineColorAndroid='transparent'
                                        onChangeText={(text) => this.setState({pass_word:text})}
                                        placeholder='密码'
                                        placeholderTextColor='#194697'
                                        secureTextEntry={true}/>
-                            <View style={{width:210, height:0.5, backgroundColor:'#dbdbdb'}}></View>
+                            <View style={{width:ScreenUtil.scaleSize(420), height:ScreenUtil.scaleSize(1), backgroundColor:'#dbdbdb'}}></View>
                         </View>
                     </View>
                 </View>
 
-                <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:30}}>
+                <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:ScreenUtil.scaleSize(60)}}>
                     <TouchableOpacity onPress={()=>{this._onPress()}}>
-                        <View style={{width:winWidth - 120, height:44, backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: 4,}}>
+                        <View style={{width:winWidth - ScreenUtil.scaleSize(240), height:ScreenUtil.scaleSize(88), backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: 4,}}>
                             <Text style={{fontSize:16, color:'#ffffff'}}>
                                 登录
                             </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{this._showToast()}}>
-                        <Text style={{marginTop:12, fontSize:12, color:'#999999'}}>
+                        <Text style={{marginTop:ScreenUtil.scaleSize(24), fontSize:ScreenUtil.scaleSize(24), color:'#999999'}}>
                             立即注册
                         </Text>
                     </TouchableOpacity>
@@ -104,7 +106,7 @@ export default class NfcLogin extends Component{
             </View>
             <View style={{flex:1, flexDirection:'column', justifyContent:'flex-end'}}>
                 <Image
-                    style={{width:winWidth, height:70}} source={require('../../nfcimg/loginbuttom.png')}/>
+                    style={{width:winWidth, height:ScreenUtil.scaleSize(140)}} source={require('../../nfcimg/loginbuttom.png')}/>
             </View>
 
         </View>);
