@@ -18,6 +18,7 @@ import GetSetStorge from '../publicState/GetSetStorg';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import Icon from 'react-native-vector-icons/Ionicons';
+import ScreenUtil from '../../util/ScreenUtil'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -121,7 +122,7 @@ export default class MineSelf extends BaseComponent{
 
             <StatusBar barStyle={'light-content'} />
 
-            <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:10}}>
+            <View style={{flex:1, flexDirection:'column', alignItems:'center', marginTop:ScreenUtil.scaleSize(20)}}>
 
                 <View style={{width:winWidth, backgroundColor:'white'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('AccountInfo')}}>
@@ -129,59 +130,59 @@ export default class MineSelf extends BaseComponent{
                             <View style={{flex:1}}>
                                 <Image source={this.state.imageUrl == ''
                                     ? require('../../img/Mine/avatar.png') : {uri:this.state.imageUrl}}
-                                       style={{width:80, height:80, borderRadius:40, margin:10}}/>
+                                       style={{width:ScreenUtil.scaleSize(160), height:ScreenUtil.scaleSize(160), borderRadius:ScreenUtil.scaleSize(80), margin:ScreenUtil.scaleSize(20)}}/>
                             </View>
                             <View style={{flex:2, flexDirection:'column'}}>
-                                <Text style={{ marginBottom:10}}>
+                                <Text style={{ marginBottom:ScreenUtil.scaleSize(20)}}>
                                     {this.state.user_name}
                                 </Text>
-                                <Text style={{ marginTop:10}}>
+                                <Text style={{ marginTop:ScreenUtil.scaleSize(20)}}>
                                     {this.state.user_company}
                                 </Text>
                             </View>
                             <View style={{flex:0.5, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                <Image style={{width:10, height:16}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(32)}} source={require('../../nfcimg/backicon.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>
                 </View>
 
-                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:10}}/>
+                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:ScreenUtil.scaleSize(20)}}/>
 
                 <View style={{flexDirection:'row', alignItems:'center', width:winWidth, backgroundColor:'white'}}>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{ marginTop:28, marginBottom:10}}>
+                        <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             机构用户数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
+                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.allReportLogCount + "次"}
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{ marginTop:28, marginBottom:10}}>
+                        <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             累计查询次数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
+                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.myReportLogCount + "次"}
                         </Text>
                     </View>
                     <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-                        <Text style={{ marginTop:28, marginBottom:10}}>
+                        <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             我的查询次数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:10, marginBottom:20}}>
+                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.selectUserCount + "次"}
                         </Text>
                     </View>
                 </View>
 
-                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:10}}/>
+                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:ScreenUtil.scaleSize(20)}}/>
 
                 <List style={{width:winWidth}}>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineRecored')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:20, height:20}} source={require('../../nfcimg/iconrecord.png')}/>
-                            <Text style={{marginLeft:10}}>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/iconrecord.png')}/>
+                            <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 我的记录
                             </Text>
                         </View>
@@ -189,8 +190,8 @@ export default class MineSelf extends BaseComponent{
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineDownload')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:20, height:20}} source={require('../../nfcimg/download.png')}/>
-                            <Text style={{marginLeft:10}}>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/download.png')}/>
+                            <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 下载管理
                             </Text>
                         </View>
@@ -198,27 +199,27 @@ export default class MineSelf extends BaseComponent{
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('ChangePassWord')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:20, height:20}} source={require('../../nfcimg/changepass.png')}/>
-                            <Text style={{marginLeft:10}}>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/changepass.png')}/>
+                            <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 修改密码
                             </Text>
                         </View>
                     </Item>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineAbout')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:20, height:20}} source={require('../../nfcimg/aboutus.png')}/>
-                            <Text style={{marginLeft:10}}>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/aboutus.png')}/>
+                            <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 关于我们
                             </Text>
                         </View>
                     </Item>
                 </List>
 
-                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:25}}/>
+                <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:ScreenUtil.scaleSize(50)}}/>
 
                 <View style={{backgroundColor:'white'
-                    , width:winWidth, alignItems:'center', justifyContent:'center', marginBottom:30}}>
-                    <Text style={{ marginTop:15, marginBottom:15, fontSize:15}}>
+                    , width:winWidth, alignItems:'center', justifyContent:'center', marginBottom:ScreenUtil.scaleSize(60)}}>
+                    <Text style={{ marginTop:ScreenUtil.scaleSize(30), marginBottom:ScreenUtil.scaleSize(30), fontSize:ScreenUtil.scaleSize(30)}}>
                         退出登录
                     </Text>
                 </View>

@@ -10,6 +10,7 @@ import {
     TextInput,
     FlatList,
 } from 'react-native';
+import ScreenUtil from '../../util/ScreenUtil'
 
 let winWidth = Dimensions.get('window').width;
 import NetUtils from '../Network/NetUtils'
@@ -50,12 +51,13 @@ export default class ChangePassWord extends BaseComponent{
         return(
 
             <View style={{flex:1, backgroundColor:'#F0F0F2', flexDirection:'column', alignItems:'center'}}>
-                <View style={{backgroundColor:'#fff',width:winWidth-80, Left:40,marginTop:40,height:50,flexDirection:'row'}}>
-                    <Text style={{marginTop:16,left:15,fontSize:15}}>
+                <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160), Left:ScreenUtil.scaleSize(80)
+                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
+                    <Text style={{marginTop:ScreenUtil.scaleSize(30),left:ScreenUtil.scaleSize(30),fontSize:15}}>
                         原密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:5,}]}
+                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10),}]}
                         placeholder="请输入原密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value:text})}
@@ -64,12 +66,13 @@ export default class ChangePassWord extends BaseComponent{
                 </View>
 
 
-                <View style={{backgroundColor:'#fff',width:winWidth-80, Left:40,marginTop:40,height:50,flexDirection:'row'}}>
-                    <Text style={{marginTop:16,left:15,fontSize:15}}>
+                <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160)
+                    , Left:ScreenUtil.scaleSize(80),marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
+                    <Text style={{marginTop:16,left:ScreenUtil.scaleSize(30),fontSize:ScreenUtil.scaleSize(30)}}>
                         新密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:5,}]}
+                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10),}]}
                         placeholder="请输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value2:text})}
@@ -77,12 +80,13 @@ export default class ChangePassWord extends BaseComponent{
                     />
                 </View>
 
-                <View style={{backgroundColor:'#fff',width:winWidth-80, Left:40,marginTop:40,height:50,flexDirection:'row'}}>
-                    <Text style={{marginTop:16,left:15,fontSize:15}}>
+                <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160), Left:ScreenUtil.scaleSize(80)
+                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
+                    <Text style={{marginTop:ScreenUtil.scaleSize(32),left:ScreenUtil.scaleSize(30),fontSize:15}}>
                         确认密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:5,}]}
+                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10)}]}
                         placeholder="再次输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value1:text})}
@@ -90,8 +94,11 @@ export default class ChangePassWord extends BaseComponent{
                     />
                 </View>
 
-                <TouchableOpacity style={{marginTop:80,width:winWidth - 80, height:44, backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: 4,}} onPress={()=>this._onPress()}>
-                    <View style={{ height:44, backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: 4,}}>
+                <TouchableOpacity style={{marginTop:ScreenUtil.scaleSize(160)
+                    ,width:winWidth - ScreenUtil.scaleSize(160), height:ScreenUtil.scaleSize(88)
+                    , backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center', borderRadius: ScreenUtil.scaleSize(8),}} onPress={()=>this._onPress()}>
+                    <View style={{ height:ScreenUtil.scaleSize(88), backgroundColor:'#1b54a5', alignItems:'center', justifyContent:'center'
+                        , borderRadius: ScreenUtil.scaleSize(8),}}>
                         <Text style={{fontSize:16, color:'#ffffff'}}>
                             确认修改
                         </Text>
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         alignItems:'center',
-        marginLeft:20,
+        marginLeft:ScreenUtil.scaleSize(40),
     },
     viewRight:{
         flex:4,
@@ -148,10 +155,11 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     edit: {
-        height: 40,
+        flex:1,
+        height: ScreenUtil.scaleSize(80),
         backgroundColor: '#fff',
-        marginRight: 10,
-        marginLeft:20
+        marginRight: ScreenUtil.scaleSize(20),
+        marginLeft:ScreenUtil.scaleSize(40)
     },
 
 });

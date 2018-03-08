@@ -28,6 +28,7 @@ const Item = Popover.Item;
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').width;
+import ScreenUtil from '../../util/ScreenUtil'
 
 
 const SelectType = {
@@ -235,9 +236,9 @@ export default class PersonalData extends BaseComponent{
                 {this._renderModle()}
                 {this._renderAddModle()}
 
-                <View style={{width:winWidth, justifyContent:'center', flexDirection:'row', marginTop:50, marginBottom:50}}>
+                <View style={{width:winWidth, justifyContent:'center', flexDirection:'row', marginTop:ScreenUtil.scaleSize(100), marginBottom:ScreenUtil.scaleSize(100)}}>
 
-                    <TouchableOpacity style={{width:250, height:44, backgroundColor:'#1b54a5', alignItems:'center',
+                    <TouchableOpacity style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), backgroundColor:'#1b54a5', alignItems:'center',
                         justifyContent:'center', borderRadius:4}}
                                       onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
                         <Text style={{fontSize:16, color:'#ffffff'}}>
@@ -256,7 +257,7 @@ export default class PersonalData extends BaseComponent{
     _renderCompanyInfo(){
         if(this.state.type == 1){
             if(this.state.all || this.state.companyRiskManage){
-                return(<View style={{width:winWidth, flexDirection:'column', marginTop:10, backgroundColor:'white'}}>
+                return(<View style={{width:winWidth, flexDirection:'column', marginTop:ScreenUtil.scaleSize(20), backgroundColor:'white'}}>
 
                     <View style={styles.item_view}>
                         <View style={{flex:1.5, flexDirection:'row'
@@ -304,7 +305,7 @@ export default class PersonalData extends BaseComponent{
         if(this.state.type == 0){
             if(this.state.all || (this.state.creditReport || this.state.antiFraud || this.state.riskManage)){
                 return(
-                    <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', marginTop:10}}>
+                    <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', marginTop:ScreenUtil.scaleSize(20)}}>
 
                         <View style={styles.item_view}>
                             <View style={{flex:1.5, flexDirection:'row'
@@ -357,7 +358,7 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
+                        <TouchableOpacity  style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
                                            onPress={()=>{this.setState({addVisible:true, isselect_home_add:true, isselect_car_add:false})}}>
                             <Text style={{fontSize:15, color:'#999999'}}>{
                                 this.state.selectedAdd.length == 0?
@@ -365,7 +366,7 @@ export default class PersonalData extends BaseComponent{
                                     this.state.selectedAdd[0].caption:this.state.selectedAdd[1].code == this.state.selectedAdd[2].code?
                                         this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption
                                         : this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption + this.state.selectedAdd[2].caption}</Text>
-                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -398,9 +399,9 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:2.5, flexDirection:'row'}}>
                             <TouchableOpacity
                                 onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}})}}
-                                style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                                    <Text style={{fontSize:15, color:'#999999'}}>{this.state.slelctedHomeType.title}</Text>
-                                    <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                                style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
+                                    <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.slelctedHomeType.title}</Text>
+                                    <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
 
@@ -446,10 +447,10 @@ export default class PersonalData extends BaseComponent{
             return(<View style={{width:winWidth, flexDirection:'column', backgroundColor:'white'}}>
                 <View style={{ width:winWidth,
                     flexDirection:'column',
-                    height:150,
+                    height:ScreenUtil.scaleSize(300),
                     justifyContent:'center',
-                    paddingLeft:15,
-                    paddingRight:15}}>
+                    paddingLeft:ScreenUtil.scaleSize(30),
+                    paddingRight:ScreenUtil.scaleSize(30)}}>
 
                     <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
                         <View style={{flex:1.5, flexDirection:'row', alignItems:'center'}}>
@@ -460,10 +461,10 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
                                 onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}})}}
-                                style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", flexDirection:'row'
+                                style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white", flexDirection:'row'
                                     , justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
-                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedBradn.caption}</Text>
-                                <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                                <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.selectedBradn.caption}</Text>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -475,10 +476,10 @@ export default class PersonalData extends BaseComponent{
                                 onPress={()=>{
                                     this.state.selectedBradn.code == '0'?
                                     this._showToast('请选择车牌'):this._choeseCarVehicles()}}
-                                style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
+                                style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
                                 <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedVehicles.caption}</Text>
-                                <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -492,10 +493,10 @@ export default class PersonalData extends BaseComponent{
                                 onPress={()=>{
                                     this.state.selectedVehicles.code == '0'?
                                         this._showToast('请选择车系'):this._choeseCarModle()}}
-                                style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
+                                style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:1, borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
-                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedCarModle.caption}</Text>
-                                <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                                <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.selectedCarModle.caption}</Text>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -511,9 +512,9 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                            <Text style={{fontSize:15, color:'#999999'}}>请选择</Text>
-                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                        <TouchableOpacity  style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
+                            <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>请选择</Text>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -529,7 +530,7 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </View>
                     <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
+                        <TouchableOpacity  style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}
                                            onPress={()=>{this.setState({addVisible:true, isselect_car_add:true, isselect_home_add:false})}}>
                             <Text style={{fontSize:15, color:'#999999'}}>
                                 {this.state.selectedCarAddress.length == 0?
@@ -538,7 +539,7 @@ export default class PersonalData extends BaseComponent{
                                         this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption
                                             : this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption + this.state.selectedCarAddress[2].caption}
                                 </Text>
-                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                         </TouchableOpacity>
 
                     </View>
@@ -604,9 +605,9 @@ export default class PersonalData extends BaseComponent{
         return(<Modal visible={this.state.visible}transparent={true}>
             <View style={{flex:1, flexDirection:'column', backgroundColor:'rgba(0, 0, 0, 0.4)'}}>
                 <TouchableOpacity style={{flex:1}} onPress={()=>{this._onCloseModle()}}></TouchableOpacity>
-                <View style={{flex:3, margin:10, backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: 8,}}>
+                <View style={{flex:3, margin:ScreenUtil.scaleSize(20), backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: ScreenUtil.scaleSize(16),}}>
                     <View style={{width:winWidth, justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{marginTop:15, marginBottom:15}}>
+                        <Text style={{marginTop:ScreenUtil.scaleSize(30), marginBottom:ScreenUtil.scaleSize(30)}}>
                             {this.state.modleTitle.title}
                         </Text>
                     </View>
@@ -671,14 +672,15 @@ export default class PersonalData extends BaseComponent{
                 </View>
                 <View style={styles.line}/>
                 <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center',}}>
-                    <TouchableOpacity style={{flex:1, paddingLeft:10}} onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
+                    <TouchableOpacity style={{flex:1, paddingLeft:ScreenUtil.scaleSize(20)}}
+                                      onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
                         {this.state.isSelected_one?<Text>{this.state.selected1.caption}</Text>:<Text>请选择</Text>}
                     </TouchableOpacity>
-                    <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1,  paddingLeft:10}}
+                    <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1,  paddingLeft:ScreenUtil.scaleSize(20)}}
                                       onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected1.code), this.setState({isSelected_two:false, isSelected_three:false,})}}>
                         {this.state.isSelected_one?this.state.isSelected_two?<Text>{this.state.selected2.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex:1 , paddingLeft:10}} disabled={!this.state.isSelected_three}
+                    <TouchableOpacity style={{flex:1 , paddingLeft:ScreenUtil.scaleSize(20)}} disabled={!this.state.isSelected_three}
                                       onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected2.code);  this.setState({isSelected_three:false,})}}>
                         {this.state.isSelected_one && this.state.isSelected_two? this.state.isSelected_three?<Text>{this.state.selected3.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
@@ -689,7 +691,7 @@ export default class PersonalData extends BaseComponent{
                         data={this.state.data}
                         renderItem={({item})=><TouchableOpacity onPress={()=>{this._choseItem(item)}}>
                             <View style={{width:winWidth,flexDirection:'row', alignItems:'center'}}>
-                                <Text style={{paddingTop:10, paddingBottom:10, paddingLeft:10}}>{item.caption}</Text>
+                                <Text style={{paddingTop:ScreenUtil.scaleSize(20), paddingBottom:ScreenUtil.scaleSize(20), paddingLeft:ScreenUtil.scaleSize(20)}}>{item.caption}</Text>
                             </View>
                         </TouchableOpacity>}
                     />
@@ -701,7 +703,7 @@ export default class PersonalData extends BaseComponent{
 
 
     _separator(){
-        return <View style={{height:0.5,backgroundColor:'#f7f7f7'}}/>;
+        return <View style={{height:ScreenUtil.scaleSize(1),backgroundColor:'#f7f7f7'}}/>;
     }
 
     _choseItem(item){
@@ -770,34 +772,34 @@ const styles = StyleSheet.create({
     },
 
     edit: {
-        height: 40,
+        height: ScreenUtil.scaleSize(80),
         flex:1,
         backgroundColor: '#fff',
-        marginRight: 10
+        marginRight: ScreenUtil.scaleSize(20)
     },
     item:{
-        marginTop:5,
-        marginBottom:5,
-        width:winWidth - 20,
+        marginTop:ScreenUtil.scaleSize(10),
+        marginBottom:ScreenUtil.scaleSize(10),
+        width:winWidth - ScreenUtil.scaleSize(40),
         justifyContent:'center',
         alignItems:'center'
     },
     line:{
         width:winWidth,
-        height:1,
+        height:ScreenUtil.scaleSize(2),
         backgroundColor:'#f7f7f7'
     },
     item_view:{
         width:winWidth,
         flexDirection:'row',
-        height:50,
+        height:ScreenUtil.scaleSize(100),
         justifyContent:'center',
-        paddingLeft:15,
-        paddingRight:15
+        paddingLeft:ScreenUtil.scaleSize(30),
+        paddingRight:ScreenUtil.scaleSize(30)
     },
     blank:{
         width:winWidth,
-        height:15,
+        height:ScreenUtil.scaleSize(30),
         backgroundColor:'#f7f7f7'
     }
 });

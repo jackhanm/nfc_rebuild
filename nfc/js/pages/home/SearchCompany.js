@@ -10,7 +10,8 @@ import {
     TextInput,
     FlatList,
 } from 'react-native';
-import { Tag, WhiteSpace } from 'antd-mobile';
+
+import ScreenUtil from '../../util/ScreenUtil'
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
 import {BaseComponent} from  '../../base/BaseComponent'
@@ -57,39 +58,40 @@ export default class SearchCompany extends BaseComponent{
     _renderHead() {
         return (
             <View style={{flex: 1, flexDirection:'column'}}>
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20}}>
-                    <Text style={{color:'black', marginLeft:10}}>
+                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40)}}>
+                    <Text style={{color:'black', marginLeft:ScreenUtil.scaleSize(20)}}>
                         请选择具体查询条件
                     </Text>
                 </View>
 
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
+                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.ALL, '全部', this.state.all, require('../../nfcimg/all.png'))}
                     </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-
-                    </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                    </View>
-                </View>
-
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
-
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.RISKMANAGE, '企业风险概要', this.state.companyRiskManage, require('../../nfcimg/company.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent, require('../../nfcimg/home.png'))}
                     </View>
+                </View>
+
+                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
+
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice, require('../../nfcimg/car.png'))}
                     </View>
-                </View>
-
-                <View style={{width:winWidth, flexDirection:'row', marginTop:20, alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                         {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice, require('../../nfcimg/home_estimate.png'))}
+                    </View>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+
+                    </View>
+                </View>
+
+                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                     </View>
@@ -102,9 +104,10 @@ export default class SearchCompany extends BaseComponent{
     }
 
     _renderFoot() {
-        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:20}}>
+        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:ScreenUtil.scaleSize(40)}}>
             <TouchableOpacity onPress={()=>this._onPress()}>
-                <View style={{width:250, height:44, justifyContent:'center', alignItems:'center', backgroundColor:'#1b54a5', borderRadius:4}}>
+                <View style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), justifyContent:'center'
+                    , alignItems:'center', backgroundColor:'#1b54a5', borderRadius:ScreenUtil.scaleSize(8)}}>
                     <Text style={{fontSize:16, color:'white'}}>
                         下一步
                     </Text>
@@ -114,18 +117,19 @@ export default class SearchCompany extends BaseComponent{
     }
 
     _renderTag(tagType, text, state, icon){
-        return(<TouchableOpacity style={{width:105, height:105, backgroundColor:'#FFFFFF', flexDirection:'column', alignItems:'center'}}
+        return(<TouchableOpacity style={{width:ScreenUtil.scaleSize(210), height:ScreenUtil.scaleSize(210)
+            , backgroundColor:'#FFFFFF', flexDirection:'column', alignItems:'center'}}
                                  onPress={()=>{this._chageTag(tagType)}}>
             <View style={{flex:1}}>
 
             </View>
             <View style={{flex:2, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-                <Image source={icon} style={{alignSelf:'center'}}/>
-                <Text style={{color:'black'}}>
+                <Image source={icon}/>
+                <Text style={{color:'black', marginTop:ScreenUtil.scaleSize(10)}}>
                     {text}
                 </Text>
             </View>
-            <View style={{flex:1, width:105, flexDirection:'row', justifyContent:'flex-end', alignItems:'flex-end'}}>
+            <View style={{flex:1, width:ScreenUtil.scaleSize(210), flexDirection:'row', justifyContent:'flex-end', alignItems:'flex-end'}}>
                 <Image source={state?require('../../nfcimg/selected.png'):require('../../nfcimg/noselected.png')}/>
             </View>
         </TouchableOpacity>);

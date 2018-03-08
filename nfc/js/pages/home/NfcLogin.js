@@ -122,9 +122,6 @@ export default class NfcLogin extends Component{
                 if (result.code === 0) {
                     GetSetStorge.setStorgeAsync('isLogin', 'true');
                     this.props.navigation.dispatch(reastAction);
-
-
-
                 }
 
             }

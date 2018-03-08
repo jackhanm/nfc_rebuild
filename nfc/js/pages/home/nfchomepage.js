@@ -76,7 +76,12 @@ export default class nfchomepage extends Component{
     _renderHead() {
         return (
             <View style={styles.container_head}>
-            <View style={{height:ScreenUtil.scaleSize(120), width:windowWidth, flexDirection:'row', alignItems:'center', backgroundColor:'#2554A2'}}>
+            <View style={{height:ScreenUtil.scaleSize(120),
+                width:windowWidth, flexDirection:'row',
+                alignItems:'center',
+                backgroundColor:'#2554A2',
+                paddingTop:ScreenUtil.scaleSize(30),
+                paddingBottom:ScreenUtil.scaleSize(30)}}>
                 <View style={{flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
                            style={{width:ScreenUtil.scaleSize(44), height:ScreenUtil.scaleSize(44), borderRadius:ScreenUtil.scaleSize(22)}}/>
