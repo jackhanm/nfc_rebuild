@@ -81,8 +81,8 @@ export default class nfchomepage extends Component{
                 width:windowWidth, flexDirection:'row',
                 alignItems:'center',
                 backgroundColor:'#2554A2',
-                paddingTop:ScreenUtil.scaleSize(30),
-                paddingBottom:ScreenUtil.scaleSize(30)}}>
+                paddingTop:ScreenUtil.scaleSize(50),
+                paddingBottom:ScreenUtil.scaleSize(50)}}>
                 <View style={{flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
                            style={{width:ScreenUtil.scaleSize(44), height:ScreenUtil.scaleSize(44), borderRadius:ScreenUtil.scaleSize(22)}}/>
@@ -117,7 +117,7 @@ export default class nfchomepage extends Component{
                 </TextInput>
 
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList')}} >
-                    <Image style={{width:ScreenUtil.scaleSize(110), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
+                    <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 
             </View>
@@ -138,7 +138,7 @@ export default class nfchomepage extends Component{
                     查询记录
                 </Text>
             </View>
-            <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
+            <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', alignItems:'center'}}>
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('homeMorelist')}} >
                     <Text style={{color:'#003f98', marginRight:ScreenUtil.scaleSize(20)}}>
                         更多

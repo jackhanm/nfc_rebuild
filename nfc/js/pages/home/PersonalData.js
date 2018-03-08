@@ -12,7 +12,8 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     ActionSheetIOS,
-    Modal
+    Modal,
+    ActivityIndicator
 } from 'react-native';
 
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -28,7 +29,7 @@ const Item = Popover.Item;
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').width;
-import ScreenUtil from '../../util/ScreenUtil'
+import ScreenUtil, {scaleSize} from '../../util/ScreenUtil'
 
 
 const SelectType = {
@@ -38,7 +39,40 @@ const SelectType = {
     HOMETYPE:'hometype',
 }
 
-const homeType = [{id:1, info:"写字楼"}, {id:2, info:'商铺'}, {id:3, info:"住宅"}];
+const homeType = [{code:'HOUSE', caption:"写字楼"}, {code:'OFFICE', caption:'商铺'}, {code:'SHOP', caption:"住宅"}];
+
+const fillinfo = {
+    //企业社会代码
+    companyId:'',
+    //企业名称
+    companyName:'',
+    //省份证号码
+    id:'',
+    //姓名
+    name:'',
+    //车牌
+    carBrand:'',
+    //车系
+    carVs:'',
+    //车型号
+    carModle:'',
+    //上市时间
+    markTime:'',
+    //汽车属地 二级地址，逗号隔开
+    carAdd:'',
+    //车牌
+    carID:'',
+    //行驶公里数
+    carMileage:'',
+    //房屋地址，三级地址，逗号隔开
+    homeAdd:'',
+    //房屋名字
+    homeName:'',
+    //房屋类型
+    hometype:'',
+    //房屋面积
+    homeMeasure:''
+}
 
 
 
@@ -75,14 +109,14 @@ export default class PersonalData extends BaseComponent{
                 if (result.code === 0) {
                     if(result.data.length == 0){
                         if(this.state.isSelected_two){
-                            this.setState({data:[this.state.selected2]});
+                            this.setState({data:[this.state.selected2], isLoading:false});
                         }else{
                             if(this.state.isSelected_one){
-                                this.setState({data:[this.state.selected1]});
+                                this.setState({data:[this.state.selected1], isLoading:false});
                             }
                         }
                     }else{
-                        this.setState({data:result.data});
+                        this.setState({data:result.data, isLoading:false});
                     }
                 }
             }
@@ -96,7 +130,7 @@ export default class PersonalData extends BaseComponent{
 
                 console.log(result)
                 if (result.code === 0) {
-                    this.setState({carData:result.data});
+                    this.setState({carData:result.data, isLoading:false});
                 }
             }
         );
@@ -109,7 +143,7 @@ export default class PersonalData extends BaseComponent{
 
                 console.log(result)
                 if (result.code === 0) {
-                    this.setState({carData:result.data});
+                    this.setState({carData:result.data, isLoading:false});
                 }
             }
         );
@@ -122,7 +156,7 @@ export default class PersonalData extends BaseComponent{
 
                 console.log(result)
                 if (result.code === 0) {
-                    this.setState({carData:result.data});
+                    this.setState({carData:result.data, isLoading:false});
                 }
             }
         );
@@ -131,6 +165,25 @@ export default class PersonalData extends BaseComponent{
 
     componentDidMount() {
         console.log('===================componentDidMount====================');
+
+        fillinfo.hometype = ''
+        fillinfo.companyId = '',
+        fillinfo.companyName = '',
+        fillinfo.id = '',
+        fillinfo.name = '',
+        fillinfo.carBrand = '',
+        fillinfo.carVs = '',
+        fillinfo.carModle = '',
+        fillinfo.markTime = '',
+        fillinfo.carAdd = '',
+        fillinfo.carID = '',
+        fillinfo.carMileage = '',
+        fillinfo.homeAdd = '',
+        fillinfo.homeName = '',
+        fillinfo.hometype = '',
+        fillinfo.homeMeasure = ''
+
+
         this.props.navigation.state.params.type == 0 ?
             this.setState({
                 type:0
@@ -152,7 +205,6 @@ export default class PersonalData extends BaseComponent{
                 , carPrice:this.props.navigation.state.params.carPrice
                 , homePrice:this.props.navigation.state.params.homePrice
             });
-        this.fetchCarBrand();
         this.fetchAddressData('');
     }
 
@@ -167,7 +219,7 @@ export default class PersonalData extends BaseComponent{
             //Modle标题
             modleTitle:{},
 
-            slelctedHomeType:{"title":"请住宅类型", "id":"3"},
+            slelctedHomeType:{caption:"请住宅类型", code:'0'},
 
             SelectData:undefined,
 
@@ -221,6 +273,11 @@ export default class PersonalData extends BaseComponent{
             selectedVehicles:{caption:'请选择车系', code:"0"},
 
             selectedCarModle:{caption:'请选择车型', code:"0"},
+
+            //加载数据等待
+            isLoading:true,
+
+            /**--------------------------------------**/
         }
     }
 
@@ -240,7 +297,7 @@ export default class PersonalData extends BaseComponent{
 
                     <TouchableOpacity style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), backgroundColor:'#1b54a5', alignItems:'center',
                         justifyContent:'center', borderRadius:4}}
-                                      onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
+                                      onPress={()=>{this._checkInfo()}}>
                         <Text style={{fontSize:16, color:'#ffffff'}}>
                             立即查询
                         </Text>
@@ -270,7 +327,8 @@ export default class PersonalData extends BaseComponent{
                             , alignItems:'center'}}>
                             <TextInput
                                 style={styles.edit}
-                                underlineColorAndroid='transparent'/>
+                                underlineColorAndroid='transparent'
+                                onChangeText={(text)=>{fillinfo.companyId = text}}/>
                         </View>
                     </View>
 
@@ -287,7 +345,8 @@ export default class PersonalData extends BaseComponent{
                             , alignItems:'center'}}>
                             <TextInput
                                 style={styles.edit}
-                                underlineColorAndroid='transparent'/>
+                                underlineColorAndroid='transparent'
+                                onChangeText={(text)=>{fillinfo.companyName = text}}/>
                         </View>
                     </View>
 
@@ -317,7 +376,8 @@ export default class PersonalData extends BaseComponent{
                             <View style={{flex:2.5}}>
                                 <TextInput
                                     style={styles.edit}
-                                    underlineColorAndroid='transparent'/>
+                                    underlineColorAndroid='transparent'
+                                    onChangeText={(text)=>{fillinfo.id = text}}/>
                             </View>
                         </View>
 
@@ -333,7 +393,8 @@ export default class PersonalData extends BaseComponent{
                             <View style={{flex:2.5}}>
                                 <TextInput
                                     style={styles.edit}
-                                    underlineColorAndroid='transparent'/>
+                                    underlineColorAndroid='transparent'
+                                    onChangeText={(text)=>{fillinfo.name = text}}/>
                             </View>
                         </View>
 
@@ -383,7 +444,8 @@ export default class PersonalData extends BaseComponent{
                     <View style={{flex:2.5}}>
                         <TextInput
                             style={styles.edit}
-                            underlineColorAndroid='transparent'/>
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text)=>{fillinfo.homeName = text}}/>
                     </View>
                 </View>
 
@@ -398,9 +460,9 @@ export default class PersonalData extends BaseComponent{
                     </View>
                         <View style={{flex:2.5, flexDirection:'row'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}})}}
+                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, carData:homeType})}}
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                                    <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.slelctedHomeType.title}</Text>
+                                    <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.slelctedHomeType.caption}</Text>
                                     <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
@@ -419,7 +481,8 @@ export default class PersonalData extends BaseComponent{
                     <View style={{flex:2.5}}>
                         <TextInput
                             style={styles.edit}
-                            underlineColorAndroid='transparent'/>
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text)=>{fillinfo.homeMeasure = text}}/>
                     </View>
                 </View>
 
@@ -460,7 +523,10 @@ export default class PersonalData extends BaseComponent{
                         </View>
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}})}}
+                                onPress={()=>{
+                                    this.setState({isLoading:true})
+                                    this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}})
+                                ; this.fetchCarBrand()}}
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white", flexDirection:'row'
                                     , justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
                                 <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.selectedBradn.caption}</Text>
@@ -474,6 +540,7 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
                                 onPress={()=>{
+                                    this.setState({isLoading:true})
                                     this.state.selectedBradn.code == '0'?
                                     this._showToast('请选择车牌'):this._choeseCarVehicles()}}
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white"
@@ -491,6 +558,7 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
                                 onPress={()=>{
+                                    this.setState({isLoading:true})
                                     this.state.selectedVehicles.code == '0'?
                                         this._showToast('请选择车系'):this._choeseCarModle()}}
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:1, borderColor:"white"
@@ -511,11 +579,12 @@ export default class PersonalData extends BaseComponent{
                             请选择上牌时间：
                         </Text>
                     </View>
-                    <View style={{flex:2.5, flexDirection:'row'}}>
-                        <TouchableOpacity  style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                            <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>请选择</Text>
-                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
-                        </TouchableOpacity>
+                    <View style={{flex:2.5}}>
+                        <TextInput
+                            style={styles.edit}
+                            underlineColorAndroid='transparent'
+                            placeholder='上市时间如：2018'
+                            onChangeText={(text)=>{fillinfo.markTime = text}}/>
                     </View>
                 </View>
 
@@ -556,7 +625,8 @@ export default class PersonalData extends BaseComponent{
                     <View style={{flex:2.5}}>
                         <TextInput
                             style={styles.edit}
-                            underlineColorAndroid='transparent'/>
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text)=>{fillinfo.carMileage = text}}/>
                     </View>
                 </View>
                 <View style={styles.line}/>
@@ -571,7 +641,8 @@ export default class PersonalData extends BaseComponent{
                     <View style={{flex:2.5}}>
                         <TextInput
                             style={styles.edit}
-                            underlineColorAndroid='transparent'/>
+                            underlineColorAndroid='transparent'
+                            onChangeText={(text)=>{fillinfo.carID = text}}/>
                     </View>
                 </View>
 
@@ -600,25 +671,47 @@ export default class PersonalData extends BaseComponent{
         });
     }
 
+    _renderLoadingView() {
+        return (
+            <View style={{height:winHeight - ScreenUtil.scaleSize(60) , width:winWidth-ScreenUtil.scaleSize(50)
+                , backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: ScreenUtil.scaleSize(16), justifyContent:'center'}}>
+                <View style={{width:winWidth, justifyContent:'center', alignItems:'center'}}>
+                    <ActivityIndicator
+                        animating={true}
+                        color='red'
+                        size="large"
+                    />
+                </View>
+            </View>
+        );
+    }
+
+
 
     _renderModle(){
-        return(<Modal visible={this.state.visible}transparent={true}>
-            <View style={{flex:1, flexDirection:'column', backgroundColor:'rgba(0, 0, 0, 0.4)'}}>
-                <TouchableOpacity style={{flex:1}} onPress={()=>{this._onCloseModle()}}></TouchableOpacity>
-                <View style={{flex:3, margin:ScreenUtil.scaleSize(20), backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: ScreenUtil.scaleSize(16),}}>
-                    <View style={{width:winWidth, justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{marginTop:ScreenUtil.scaleSize(30), marginBottom:ScreenUtil.scaleSize(30)}}>
-                            {this.state.modleTitle.title}
-                        </Text>
-                    </View>
-                    <View style={styles.line}/>
-                    <FlatList
-                        data={this.state.carData}
-                        renderItem={({item}) => this._renderItem(item)}
-                        ItemSeparatorComponent={this._separator}/>
-                </View>
-                <TouchableOpacity style={{flex:1}} onPress={()=>{this._onCloseModle()}}></TouchableOpacity>
-            </View>
+        return(
+            <Modal visible={this.state.visible}transparent={true}>
+
+                <TouchableOpacity style={{flex:1, flexDirection:'column'
+                    , justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0, 0, 0, 0.4)'}}onPress={()=>{this._onCloseModle()}}>
+
+                    {this.state.isLoading?this._renderLoadingView():<View style={{maxHeight:winHeight - ScreenUtil.scaleSize(60), width:winWidth-ScreenUtil.scaleSize(50)
+                        , backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: ScreenUtil.scaleSize(16),}}>
+                        <View style={{width:winWidth, justifyContent:'center', alignItems:'center'}}>
+                            <Text style={{marginTop:ScreenUtil.scaleSize(30), marginBottom:ScreenUtil.scaleSize(30)}}>
+                                {this.state.modleTitle.title}
+                            </Text>
+                        </View>
+                        <View style={styles.line}/>
+                        <FlatList style={{width:winWidth - ScreenUtil.scaleSize(40)}}
+                            data={this.state.carData}
+                            renderItem={({item}) => this._renderItem(item)}
+                            ItemSeparatorComponent={this._separator}/>
+
+                    </View>}
+
+                </TouchableOpacity>
+
         </Modal>);
     }
 
@@ -636,13 +729,13 @@ export default class PersonalData extends BaseComponent{
     _selectedInfo(item){
         switch (this.state.modleTitle.type){
             case SelectType.BRAND:
-                this.setState({selectedBradn:item})
+                this.setState({selectedBradn:item, selectedVehicles:{caption:'请选择车系', code:"0"}, selectedCarModle:{caption:'请选择车型',code:"0"}})
                 break;
             case SelectType.CARMODLE:
                 this.setState({selectedCarModle:item})
                 break;
             case SelectType.VEHICLES:
-                this.setState({selectedVehicles:item})
+                this.setState({selectedVehicles:item, selectedCarModle:{caption:'请选择车型',code:"0"}})
                 break;
             case SelectType.HOMETYPE:
                 this.setState({slelctedHomeType:item})
@@ -666,22 +759,32 @@ export default class PersonalData extends BaseComponent{
     _renderAddress(){
         return(<View style={{flex:1,flexDirection:'column', backgroundColor:'rgba(0, 0, 0, 0.4)'}}>
             <TouchableOpacity style={{flex:3}} onPress={()=>{this.setState({addVisible:false,});}}></TouchableOpacity>
-            <View style={{flex:7, width:winWidth, flexDirection:'column', backgroundColor:'white'}}>
+            {this.state.isLoading?<View style={{flex:7, width:winWidth, flexDirection:'column'
+                , backgroundColor:'white', alignItems:'center', justifyContent:'center'}}>
+                    <ActivityIndicator
+                        animating={true}
+                        color='red'
+                        size="large"
+                    />
+            </View>:
+                <View style={{flex:7, width:winWidth, flexDirection:'column', backgroundColor:'white'}}>
                 <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                     <Text>请选择地址</Text>
                 </View>
                 <View style={styles.line}/>
                 <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center',}}>
                     <TouchableOpacity style={{flex:1, paddingLeft:ScreenUtil.scaleSize(20)}}
-                                      onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
+                                      onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false, isLoading:true})}}>
                         {this.state.isSelected_one?<Text>{this.state.selected1.caption}</Text>:<Text>请选择</Text>}
                     </TouchableOpacity>
                     <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1,  paddingLeft:ScreenUtil.scaleSize(20)}}
-                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected1.code), this.setState({isSelected_two:false, isSelected_three:false,})}}>
+                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected1.code),
+                                          this.setState({isSelected_two:false, isSelected_three:false,isLoading:true})}}>
                         {this.state.isSelected_one?this.state.isSelected_two?<Text>{this.state.selected2.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
                     <TouchableOpacity style={{flex:1 , paddingLeft:ScreenUtil.scaleSize(20)}} disabled={!this.state.isSelected_three}
-                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected2.code);  this.setState({isSelected_three:false,})}}>
+                                      onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected2.code);
+                                      this.setState({isSelected_three:false,isLoading:true})}}>
                         {this.state.isSelected_one && this.state.isSelected_two? this.state.isSelected_three?<Text>{this.state.selected3.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
                 </View>
@@ -697,7 +800,7 @@ export default class PersonalData extends BaseComponent{
                     />
                 </View>
 
-            </View>
+            </View>}
         </View>);
     }
 
@@ -763,6 +866,122 @@ export default class PersonalData extends BaseComponent{
     }
 
     /**-------------------------------------------------------------------------------------------------------**/
+
+    _checkInfo(){
+
+        var data = new Date();
+
+        console.log(fillinfo);
+        if(this.state.type == 1 && (this.state.all || this.state.companyRiskManage)){
+            var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
+            if (!orgCode.test(fillinfo.companyId)) {
+                this._showToast("企业社会信用代码输入错误！")
+                return;
+            }
+            if(fillinfo.companyName == ''){
+                this._showToast("请输入企业姓名")
+                return;
+            }
+        }
+
+        if(this.state.carPrice){
+
+            fillinfo.carBrand = this.state.selectedBradn.code;
+            fillinfo.carVs = this.state.selectedVehicles.code;
+            fillinfo.carModle = this.state.selectedCarModle.code;
+            if(this.state.selectedCarAddress.length > 1){
+                fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
+            }
+            if(fillinfo.markTime == ''){
+                this._showToast("请输入正确的年份")
+            }else{
+                var licenseDate = /^\d{4}$/;
+                if(!licenseDate.test(fillinfo.markTime) && 1886 < toInteger(fillinfo.markTime) < data.getFullYear().valueOf()){
+                    this._showToast("请输入正确的年份")
+                    return;
+                }
+            }
+            if(fillinfo.carMileage == ''){
+                this._showToast("请输入正确的行驶里程")
+            }else{
+                var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+                if(!mileage.test(fillinfo.carMileage) && 100 < toInteger(fillinfo.carMileage) < 800000){
+                    this._showToast("请输入正确的行驶里程")
+                    return;
+                }
+            }
+            if(fillinfo.carBrand == ''){
+                this._showToast('请选择车品牌')
+                return;
+            }
+            if(fillinfo.carVs == ''){
+                this._showToast('请选择车系')
+                return;
+            }
+            if(fillinfo.carModle == ''){
+                this._showToast('请选择车型号')
+                return;
+            }
+
+            if(fillinfo.carAdd == ''){
+                this._showToast('请选择车辆属地')
+                return;
+            }
+            if(fillinfo.carID == '') {
+                this._showToast('请输入车牌号')
+                return;
+            }
+        }
+
+        if(this.state.homeRent || this.state.homePrice){
+            if(this.state.selectedAdd > 2){
+                fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
+            }
+            fillinfo.hometype = this.state.slelctedHomeType.code;
+
+            var houseSize = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+            if(!houseSize.test(fillinfo.homeMeasure)){
+                this._showToast("请输入正确的房屋面积")
+                return;
+            }
+            if(fillinfo.homeAdd == ''){
+                this._showToast('请输入房屋属地')
+                return;
+            }
+            if(fillinfo.homeName == ''){
+                this._showToast('请输入房屋名称')
+                return;
+            }
+            if(fillinfo.hometype == '' || fillinfo.hometype == '0'){
+                this._showToast('请选择房屋属性')
+                return;
+            }
+
+        }
+
+            if(this.state.type == 0 && (this.state.creditReport || this.state.antiFraud || this.state.riskManage || this.state.all)){
+                var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if(!certNo.test(fillinfo.id)){
+                    this._showToast('请输入正确的身份证');
+                    return;
+                }
+                var userName = /^[\u4e00-\u9fa5]{2,4}$/;
+                if(!userName.test(fillinfo.name)){
+                    this._showToast('请输入正确的姓名');
+                    return;
+                }
+            }
+
+
+        var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+
+        this.props.navigation.navigate('WebViewCommunication', {
+            fillinfo
+        });
+
+    }
+
+
 }
 
 const styles = StyleSheet.create({
