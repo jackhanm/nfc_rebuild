@@ -112,6 +112,13 @@ export default class MineSelf extends BaseComponent{
     }
     _onPress(){
 
+        GetSetStorge.removeStorgeAsync('isLogin')
+        GetSetStorge.removeStorgeAsync('username')
+        GetSetStorge.removeStorgeAsync('accessToken')
+        GetSetStorge.removeStorgeAsync('refreshToken')
+        this.props.navigation.navigate('login');
+
+
     }
     _render(){
         return(<ScrollView
@@ -217,12 +224,15 @@ export default class MineSelf extends BaseComponent{
 
                 <View style={{backgroundColor:"#f7f7f7", width:winWidth, height:ScreenUtil.scaleSize(50)}}/>
 
+
+                <TouchableOpacity onPress={()=>{this._onPress()}}>
                 <View style={{backgroundColor:'white'
                     , width:winWidth, alignItems:'center', justifyContent:'center', marginBottom:ScreenUtil.scaleSize(60)}}>
                     <Text style={{ marginTop:ScreenUtil.scaleSize(30), marginBottom:ScreenUtil.scaleSize(30), fontSize:ScreenUtil.scaleSize(30)}}>
                         退出登录
                     </Text>
                 </View>
+                </TouchableOpacity>
 
             </View>
 

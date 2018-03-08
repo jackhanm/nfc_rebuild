@@ -31,6 +31,7 @@ export default class nfchomepage extends Component{
     fetchData(data) {
         //这个是js的访问网络的方法
 
+
         NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_ALL, "1.0", "", false, (result) => {
 
                 console.log(result)

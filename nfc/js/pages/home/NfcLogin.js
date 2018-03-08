@@ -10,6 +10,7 @@ import {
     TextInput,
     FlatList,
     ScrollView,
+    ActivityIndicator
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
@@ -19,7 +20,6 @@ import GetSetStorge from '../publicState/GetSetStorg';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
-
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
 let reastAction = NavigationActions.reset({
@@ -42,7 +42,6 @@ export default class NfcLogin extends Component{
     _showToast() {
         Toast.info('好车贷NFC风控系统暂未开放注\n册功能，如需注册，请联系客服\n          QQ：1156068241');
     }
-
     render(){
         return(<View style={styles.container}>
 
@@ -70,7 +69,6 @@ export default class NfcLogin extends Component{
                         </View>
                     </View>
                 </View>
-
                 <View style={{flex:1, flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
@@ -108,19 +106,33 @@ export default class NfcLogin extends Component{
                 <Image
                     style={{width:winWidth, height:ScreenUtil.scaleSize(140)}} source={require('../../nfcimg/loginbuttom.png')}/>
             </View>
+            {/*<ActivityIndicator*/}
+                {/*animating={false}*/}
+                {/*style={[{  alignItems: 'center',*/}
+                    {/*justifyContent: 'center',*/}
+                    {/*padding: 8,}, {height: 80}]}*/}
+                {/*size="large"*/}
+            {/*/>*/}
+
 
         </View>);
     }
 
     _onPress() {
+
         NetUtils.postJson(NetAPI.serverUrl, NetAPI.USER_LOGIN, {
                 'username': this.state.userName,
                 'password': this.state.passWrod
             }, '1.0', '', false, (result) => {
 
                 console.log(result)
-                if (result.code === 0) {
+
+            if (result.code === 0) {
                     GetSetStorge.setStorgeAsync('isLogin', 'true');
+                    GetSetStorge.setStorgeAsync('username','yuhao');
+                    GetSetStorge.setStorgeAsync('accessToken',result.data.accessToken);
+                    GetSetStorge.setStorgeAsync('refreshToken',result.data.refreshToken);
+
                     this.props.navigation.dispatch(reastAction);
                 }
 
