@@ -20,7 +20,7 @@ import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import Picker1 from 'react-native-picker';
 import {commonStyle} from '../../../js/util/commonStyle'
-import { Popover,  DatePicker, List, Picker, Button } from 'antd-mobile';
+import { Popover,Toast} from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
@@ -36,19 +36,6 @@ const SelectType = {
     CARMODLE: 'carModle',
     HOMETYPE:'hometype',
 }
-
-//品牌数据
-const carBrand = [{id:1, info:"aodi"}, {id:2, info:"kiv"}, {id:3, info:"benchi"}
-    , {id:4, info:"dazhong"},{id:5, info:"xuefeilan"}];
-//车系数据
-const vehicles = [{id:8, info:"xian"},{id:1, info:"hefei"}, {id:2, info:"shanghai"}, {id:3, info:"feidong"}
-    , {id:4, info:"feixi"},{id:5, info:"bengbu"}];
-//车型数据
-const carModle = [{id:8, info:"2017kuan"},{id:1, info:"2018kuan"}, {id:2, info:"2019kuan"}, {id:3, info:"2014kuan"}
-    , {id:8, info:"2017kuan"},{id:1, info:"2018kuan"}, {id:2, info:"2019kuan"}, {id:3, info:"2014kuan"}
-    ,{id:8, info:"2017kuan"},{id:1, info:"2018kuan"}, {id:2, info:"2019kuan"}, {id:3, info:"2014kuan"}
-    , {id:8, info:"2017kuan"},{id:1, info:"2018kuan"}, {id:2, info:"2019kuan"}, {id:3, info:"2014kuan"}
-    ,{id:8, info:"2017kuan"},{id:1, info:"2018kuan"}, {id:2, info:"2019kuan"}, {id:3, info:"2014kuan"}];
 
 const homeType = [{id:1, info:"写字楼"}, {id:2, info:'商铺'}, {id:3, info:"住宅"}];
 
@@ -71,6 +58,10 @@ export default class PersonalData extends BaseComponent{
                 backgroundColor: commonStyle.navThemeColor,
             }
         }
+    }
+
+    _showToast(info) {
+        Toast.info(info, 1);
     }
 
     fetchAddressData(type){
@@ -97,57 +88,47 @@ export default class PersonalData extends BaseComponent{
         );
     }
 
-//网络请求
-    fetchData(data) {
-        //这个是js的访问网络的方法
-
-        // 查询车品牌
+    // 查询车品牌
+    fetchCarBrand(){
         var CarParams= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_BRAND'
         NetUtils.get(NetAPI.serverUrl2, CarParams , "1.0", "", false, (result) => {
 
                 console.log(result)
                 if (result.code === 0) {
-
-
-
+                    this.setState({carData:result.data});
                 }
-
-
             }
         );
-        // 查询车系
-        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_SERIES&parentCode=RUF'
-        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
-
-                console.log(result)
-                if (result.code === 0) {
-
-
-
-                }
-
-
-            }
-        );
-
-        // 查询车型
-        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_MODEL&parentCode=RUF,CAR_MODEL'
-        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
-
-                console.log(result)
-                if (result.code === 0) {
-
-                }
-
-
-            }
-        );
-
-
     }
+
+    // 查询车系
+    fetcheCarSeries(type){
+        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_SERIES' + type
+        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({carData:result.data});
+                }
+            }
+        );
+    }
+
+// 查询车型
+    fetchCarModel(type) {
+        var CarParams2= NetAPI.PUBLIC_DIC_INFO+'?type=CAR_MODEL' + type + ',CAR_MODEL'
+        NetUtils.get(NetAPI.serverUrl2, CarParams2 , "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({carData:result.data});
+                }
+            }
+        );
+    }
+
+
     componentDidMount() {
-
-
         console.log('===================componentDidMount====================');
         this.props.navigation.state.params.type == 0 ?
             this.setState({
@@ -170,7 +151,7 @@ export default class PersonalData extends BaseComponent{
                 , carPrice:this.props.navigation.state.params.carPrice
                 , homePrice:this.props.navigation.state.params.homePrice
             });
-        this.fetchData()
+        this.fetchCarBrand();
         this.fetchAddressData('');
     }
 
@@ -180,25 +161,19 @@ export default class PersonalData extends BaseComponent{
         this.state = {
             identity:'',
             name:'',
-            dataSelect:[],
             visible:false,
 
             //Modle标题
             modleTitle:{},
 
-
-            selectedBradn:{"title":"请选择品牌", "id":"0"},
-
-            selectedVehicles:{"title":"请选择车系", "id":"0"},
-
-            selectedCarModle:{"title":"请选择车型号", "id":"0"},
-
             slelctedHomeType:{"title":"请住宅类型", "id":"3"},
 
             SelectData:undefined,
 
+            //地址选择结果
             selectedAdd:[],
 
+            //车辆属地选择结果
             selectedCarAddress:[],
 
             type:0,
@@ -237,6 +212,14 @@ export default class PersonalData extends BaseComponent{
 
             isselect_home_add:false,
             isselect_car_add:false,
+
+            /**------------------车型车系--------------------**/
+            carData:[],
+            selectedBradn:{caption:'请选择车品牌', code:"0"},
+
+            selectedVehicles:{caption:'请选择车系', code:"0"},
+
+            selectedCarModle:{caption:'请选择车型', code:"0"},
         }
     }
 
@@ -414,7 +397,7 @@ export default class PersonalData extends BaseComponent{
                     </View>
                         <View style={{flex:2.5, flexDirection:'row'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, dataSelect:homeType})}}
+                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}})}}
                                 style={{flex:1, marginRight:10, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
                                     <Text style={{fontSize:15, color:'#999999'}}>{this.state.slelctedHomeType.title}</Text>
                                     <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
@@ -448,6 +431,16 @@ export default class PersonalData extends BaseComponent{
 
     }
 
+    _choeseCarVehicles(){
+        this.fetcheCarSeries('&parentCode=' + this.state.selectedBradn.code)
+        this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车系", "type":SelectType.VEHICLES},})
+    }
+
+    _choeseCarModle(){
+        this.fetchCarModel('&parentCode=' + this.state.selectedVehicles.code)
+        this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车型号", "type":SelectType.CARMODLE},})
+    }
+
     _renderCarInfo(){
         if(this.state.all || this.state.carPrice){
             return(<View style={{width:winWidth, flexDirection:'column', backgroundColor:'white'}}>
@@ -466,10 +459,10 @@ export default class PersonalData extends BaseComponent{
                         </View>
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}, dataSelect:carBrand})}}
+                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车辆品牌", "type":SelectType.BRAND}})}}
                                 style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white", flexDirection:'row'
                                     , justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
-                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedBradn.title}</Text>
+                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedBradn.caption}</Text>
                                 <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
@@ -479,10 +472,12 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:1.5, flexDirection:'row', alignItems:'center'}}></View>
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车系", "type":SelectType.VEHICLES}, dataSelect:vehicles})}}
+                                onPress={()=>{
+                                    this.state.selectedBradn.code == '0'?
+                                    this._showToast('请选择车牌'):this._choeseCarVehicles()}}
                                 style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
-                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedVehicles.title}</Text>
+                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedVehicles.caption}</Text>
                                 <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
@@ -494,10 +489,12 @@ export default class PersonalData extends BaseComponent{
                         <View style={{flex:1.5, flexDirection:'row', alignItems:'center'}}></View>
                         <View style={{flex:2.5, flexDirection:'row', alignItems:'center'}}>
                             <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择车型号", "type":SelectType.CARMODLE}, dataSelect:carModle})}}
+                                onPress={()=>{
+                                    this.state.selectedVehicles.code == '0'?
+                                        this._showToast('请选择车系'):this._choeseCarModle()}}
                                 style={{flex:1, marginRight:10, borderWidth:1, borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
-                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedCarModle.title}</Text>
+                                <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedCarModle.caption}</Text>
                                 <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
@@ -602,18 +599,24 @@ export default class PersonalData extends BaseComponent{
         });
     }
 
-    _onCloseAddModle(){
-        this.setState({
-            addVisible:false
-        });
-    }
 
     _renderModle(){
-        return(<Modal visible={this.state.visible}>
-            <View style={{ paddingVertical: 20 }}>
-                <FlatList
-                    data={this.state.dataSelect}
-                    renderItem={({item}) => this._renderItem(item)}/>
+        return(<Modal visible={this.state.visible}transparent={true}>
+            <View style={{flex:1, flexDirection:'column', backgroundColor:'rgba(0, 0, 0, 0.4)'}}>
+                <TouchableOpacity style={{flex:1}} onPress={()=>{this._onCloseModle()}}></TouchableOpacity>
+                <View style={{flex:3, margin:10, backgroundColor:'white', flexDirection:'column', alignItems:'center', borderRadius: 8,}}>
+                    <View style={{width:winWidth, justifyContent:'center', alignItems:'center'}}>
+                        <Text style={{marginTop:15, marginBottom:15}}>
+                            {this.state.modleTitle.title}
+                        </Text>
+                    </View>
+                    <View style={styles.line}/>
+                    <FlatList
+                        data={this.state.carData}
+                        renderItem={({item}) => this._renderItem(item)}
+                        ItemSeparatorComponent={this._separator}/>
+                </View>
+                <TouchableOpacity style={{flex:1}} onPress={()=>{this._onCloseModle()}}></TouchableOpacity>
             </View>
         </Modal>);
     }
@@ -632,16 +635,16 @@ export default class PersonalData extends BaseComponent{
     _selectedInfo(item){
         switch (this.state.modleTitle.type){
             case SelectType.BRAND:
-                this.setState({selectedBradn:{"title": item.info, "id": item.id}})
+                this.setState({selectedBradn:item})
                 break;
             case SelectType.CARMODLE:
-                this.setState({selectedCarModle:{"title": item.info, "id": item.id}})
+                this.setState({selectedCarModle:item})
                 break;
             case SelectType.VEHICLES:
-                this.setState({selectedVehicles:{"title": item.info, "id": item.id}})
+                this.setState({selectedVehicles:item})
                 break;
             case SelectType.HOMETYPE:
-                this.setState({slelctedHomeType:{"title":item.info, "id":item.id}})
+                this.setState({slelctedHomeType:item})
                 break;
         }
         this._onCloseModle();
@@ -652,7 +655,7 @@ export default class PersonalData extends BaseComponent{
         return(
             <TouchableOpacity onPress={()=>{this._selectedInfo(item)}}>
                 <View style={styles.item}>
-                    <Text>{item.info}</Text>
+                    <Text>{item.caption}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -668,14 +671,14 @@ export default class PersonalData extends BaseComponent{
                 </View>
                 <View style={styles.line}/>
                 <View style={{flex:1,width:winWidth, flexDirection:'row', alignItems:'center', justifyContent:'center',}}>
-                    <TouchableOpacity style={{flex:1}} onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
+                    <TouchableOpacity style={{flex:1, paddingLeft:10}} onPress={()=>{this.fetchAddressData(''), this.setState({isSelected_one:false, isSelected_two:false, isSelected_three:false,})}}>
                         {this.state.isSelected_one?<Text>{this.state.selected1.caption}</Text>:<Text>请选择</Text>}
                     </TouchableOpacity>
-                    <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1}}
+                    <TouchableOpacity disabled={!this.state.isSelected_two} style={{flex:1,  paddingLeft:10}}
                                       onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected1.code), this.setState({isSelected_two:false, isSelected_three:false,})}}>
                         {this.state.isSelected_one?this.state.isSelected_two?<Text>{this.state.selected2.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex:1}} disabled={!this.state.isSelected_three}
+                    <TouchableOpacity style={{flex:1 , paddingLeft:10}} disabled={!this.state.isSelected_three}
                                       onPress={()=>{this.fetchAddressData('&parentCode=' + this.state.selected2.code);  this.setState({isSelected_three:false,})}}>
                         {this.state.isSelected_one && this.state.isSelected_two? this.state.isSelected_three?<Text>{this.state.selected3.caption}</Text>:<Text>请选择</Text>:<Text/>}
                     </TouchableOpacity>
@@ -686,7 +689,7 @@ export default class PersonalData extends BaseComponent{
                         data={this.state.data}
                         renderItem={({item})=><TouchableOpacity onPress={()=>{this._choseItem(item)}}>
                             <View style={{width:winWidth,flexDirection:'row', alignItems:'center'}}>
-                                <Text style={{paddingTop:10, paddingBottom:10}}>{item.caption}</Text>
+                                <Text style={{paddingTop:10, paddingBottom:10, paddingLeft:10}}>{item.caption}</Text>
                             </View>
                         </TouchableOpacity>}
                     />
@@ -698,7 +701,7 @@ export default class PersonalData extends BaseComponent{
 
 
     _separator(){
-        return <View style={{height:1,backgroundColor:'#999999'}}/>;
+        return <View style={{height:0.5,backgroundColor:'#f7f7f7'}}/>;
     }
 
     _choseItem(item){
@@ -773,9 +776,11 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     item:{
-        width:70,
-        height:40,
+        marginTop:5,
+        marginBottom:5,
+        width:winWidth - 20,
         justifyContent:'center',
+        alignItems:'center'
     },
     line:{
         width:winWidth,
