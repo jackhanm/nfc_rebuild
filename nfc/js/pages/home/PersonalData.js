@@ -42,20 +42,35 @@ const SelectType = {
 const homeType = [{code:'HOUSE', caption:"写字楼"}, {code:'OFFICE', caption:'商铺'}, {code:'SHOP', caption:"住宅"}];
 
 const fillinfo = {
+    //企业社会代码
     companyId:'',
+    //企业名称
     companyName:'',
+    //省份证号码
     id:'',
+    //姓名
     name:'',
+    //车牌
     carBrand:'',
+    //车系
     carVs:'',
+    //车型号
     carModle:'',
+    //上市时间
     markTime:'',
+    //汽车属地 二级地址，逗号隔开
     carAdd:'',
+    //车牌
     carID:'',
+    //行驶公里数
     carMileage:'',
+    //房屋地址，三级地址，逗号隔开
     homeAdd:'',
+    //房屋名字
     homeName:'',
+    //房屋类型
     hometype:'',
+    //房屋面积
     homeMeasure:''
 }
 
