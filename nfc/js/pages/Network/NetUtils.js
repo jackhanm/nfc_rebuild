@@ -10,7 +10,8 @@ import {
 // import Base64 from 'crypto-js/enc-base64';
 import {Toast} from '../../util/toast'
 import {dataCache} from '../../util/network/cache'
-
+import NetAPI from  '../Network/NetAPI'
+import fetch from './fetch-polyfill';
 /*
 *  网络请求的工具类
  */
@@ -81,16 +82,36 @@ export default class NetUtils extends Component{
                 'accessToken': accessToken,
                 'agent': Platform.OS === 'ios'? 'ios':'android',
                 'loginName':'13637062487',
-            }
+            },
+            timeout: 2 * 1000
         })
             .then((response) => {
                 // if(response.ok){//如果相应码为200
+                console.log('response');
                   return response.json(); //将字符串转换为json对象
                 // }
             })
             .then((json) => {
                 //根据接口规范在此判断是否成功，成功后则回调
-                callback(json);
+                if(json.code === 10000){
+                    //刷新token
+                    console.log('1000');
+                    this.post(NetAPI.serverUrl, NetAPI.REFRESH_TOKEN+'?refreshToken=11111',{'refreshToken':'11111'},(result)=>{
+                        if (result.code === 0) {
+                            //刷新成功
+                            console.log('response3');
+                            callback("请重新请求");
+                        }else {
+                            console.log('response4');
+                            callback("登陆过期");
+                        }
+                    })
+
+
+                }else {
+                    console.log('response2');
+                    callback(json);
+                }
 
             }).catch(error => {
             console.log(error+'error');
@@ -108,13 +129,18 @@ export default class NetUtils extends Component{
     static post(url,service,params,callback){
         //添加公共参数
         var newParams = this.getNewParams(service,params);//接口自身的规范，可以忽略
-
-        fetch(url,{
+        var urlstr;
+        urlstr = url+service;
+        console.log(urlstr);
+        fetch(urlstr,{
             method:'POST',
             headers:{
-                'Content-Type':'application/json;charset=UTF-8'
+                'Content-Type': 'application/json;charset=UTF-8',
+                'accessToken': '111111',
+                'agent': Platform.OS === 'ios'? 'ios':'android',
             },
-            body:newParams
+            timeout: 2 * 1000,
+            body:JSON.stringify(params)
         })
             .then((response) => {
                 if(response.ok){
@@ -122,11 +148,9 @@ export default class NetUtils extends Component{
                 }
             })
             .then((json) => {
-                if(json.code === "0"){
-                    callback(json);
-                }else{
-                    ToastAndroid.show(json.resultDesc,ToastAndroid.SHORT);
-                }
+                callback(json);
+
+
             }).catch(error => {
           //  alert(error);
             //ToastAndroid.show("netword error",ToastAndroid.SHORT);
@@ -161,6 +185,7 @@ export default class NetUtils extends Component{
                 // 'version': version,
             },
              body:JSON.stringify(jsonObj),//json对象转换为string
+            timeout: 2 * 1000
 
         })
             .then((response) => {

@@ -46,7 +46,7 @@ module.exports ={
     // 下载管理
     MINE_DOWNLOAD : '/user/download',
     // 刷新token
-    REFRESH_TOKEN : ' /user/token/{refreshToken}',
+    REFRESH_TOKEN : '/user/token',
     // 上传头像
     UESR_UPLOADAVATAR : '/user/uploadAvatar'
 
