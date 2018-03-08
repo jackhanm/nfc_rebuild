@@ -63,6 +63,9 @@ import NfcLogin from '../home/NfcLogin'
 import MineAbout from '../home/MineAbout'
 import MineDownload from '../home/MineDownload'
 import MineRecored from '../home/MineRecored'
+import SearchList from  '../home/SearchList'
+import homeMorelist from  '../home/homeMorelist'
+
 const getOptions = title => ({
     title,
     headerStyle: {
@@ -170,8 +173,8 @@ const SimpleApp = StackNavigator(
         NfcLogin:{screen:NfcLogin},
         MineDownload:{screen:MineDownload},
         MineRecored:{screen:MineRecored},
-
-
+        SearchList:{screen:SearchList},
+        homeMorelist:{screen:homeMorelist}
 
     },
     {

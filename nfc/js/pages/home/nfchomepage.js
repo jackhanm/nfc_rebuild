@@ -9,7 +9,8 @@ import {
     Image,
     TextInput,
     FlatList,
-    ScrollView
+    ScrollView,
+    Keyboard
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -28,7 +29,7 @@ export default class nfchomepage extends Component{
     fetchData(data) {
         //这个是js的访问网络的方法
 
-        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT, "1.0", "", false, (result) => {
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_ALL, "1.0", "", false, (result) => {
 
                 console.log(result)
                 if (result.code === 0) {
@@ -59,7 +60,7 @@ export default class nfchomepage extends Component{
         super(props);
         this.state={
             user_photo:'',
-            user_name:'',
+            user_name:'余浩',
             searchText:'',
             searchRecord:[{"time":'2018/02/23', "title":'韩美美', "type":'个人'},
                 {"time":'2018/02/23', "title":'韩美美', "type":'个人'},
@@ -84,8 +85,8 @@ export default class nfchomepage extends Component{
             <View style={{height:60, width:windowWidth, flexDirection:'row', alignItems:'center', backgroundColor:'#2554A2'}}>
                 <View style={{flex:1, flexDirection:'row', marginLeft:10, alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
-                           style={{width:22, height:22, borderRadius:13}}/>
-                    <Text style={{fontSize:12, color:'#ffffff'}}>
+                           style={{width:22, height:22, borderRadius:11}}/>
+                    <Text style={{marginLeft:10,fontSize:12, color:'#ffffff'}}>
                         {this.state.user_name + ',您好'}
                     </Text>
                 </View>
@@ -97,9 +98,7 @@ export default class nfchomepage extends Component{
                         </Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
-
             <View style={{flex:1, width:windowWidth, justifyContent:'center', marginTop:30, marginBottom:25, alignItems:'center'}}>
                 <Text style={{fontSize:23}}>
                     快速查询
@@ -111,13 +110,14 @@ export default class nfchomepage extends Component{
                 <TextInput
                     underlineColorAndroid="transparent"
                     returnKeyLabel='search'
+                    onSubmitEditing={Keyboard.dismiss}
                     placeholder='请输入人名,身份证，企业名等关键字'
                     style={{height: 45, width:280, marginLeft: 10,}}>
 
                 </TextInput>
 
-                <TouchableOpacity>
-                    <Image style={{width:58, height:45, padding:0}} source={require('../../nfcimg/search.png')}/>
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList')}} >
+                    <Image style={{width:55, height:44, padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 
             </View>
@@ -139,7 +139,7 @@ export default class nfchomepage extends Component{
                 </Text>
             </View>
             <View style={{flex:1, flexDirection:'row', height:100, justifyContent:'flex-end', fontWeight:'bold', alignItems:'center'}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('homeMorelist')}} >
                     <Text style={{color:'#003f98', marginRight:10}}>
                         更多
                     </Text>
@@ -157,7 +157,7 @@ export default class nfchomepage extends Component{
 
     _renderItem(item){
         return(
-            <TouchableOpacity onPress={()=>{}}>
+            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
                 <View style={{flex:1, flexDirection:'column'}}>
                     <View style={styles.item}>
                         <View style={{flex:3, flexDirection:'row',

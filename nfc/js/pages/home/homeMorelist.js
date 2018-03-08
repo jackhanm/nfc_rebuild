@@ -8,19 +8,20 @@ import React, {Component} from 'react';
 import {
     Platform,
     StyleSheet,
-    Text,
-    View
+    View, Text, TouchableOpacity, Image, PixelRatio,Dimensions
 } from 'react-native';
+let windowHeight = Dimensions.get('window').height;
+let windowWidth = Dimensions.get('window').width;
 import TabNavigator from 'react-native-tab-navigator';
 import { List, Modal } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
-import Cell from  '../../compoent/Cell'
+
 import testData from './data'
 import {commonStyle} from '../../../js/util/commonStyle'
-export default class MineRecored extends BaseComponent<{}> {
+export default class homeMorelist extends BaseComponent<{}> {
     state: {
         dataList: Array<any>,
         refreshState: number,
@@ -86,7 +87,7 @@ export default class MineRecored extends BaseComponent<{}> {
     navigationBarProps() {
 
         return {
-            title: '我的记录',
+            title: '查询记录',
             titleStyle: {
                 color: commonStyle.navTitleColor,
             },
@@ -139,8 +140,31 @@ export default class MineRecored extends BaseComponent<{}> {
     }
 
     renderCell = (info: Object) => {
-        return <Cell info={info.item}
-                     onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}/>
+        return (
+            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
+                <View style={{flex:1, flexDirection:'column'}}>
+                    <View style={styles.item}>
+                        <View style={{flex:3, flexDirection:'row',
+                            alignItems:'center',}}>
+                            <Text style={{color:'#4352B2', marginRight:5}}>
+                                个人
+                            </Text>
+
+                            <Text style={{color:'black', marginRight:5}}>
+                                韩梅梅
+                            </Text>
+                        </View>
+                        <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
+                            <Text>
+                                2018/02/23
+                            </Text>
+                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
+                        </View>
+                    </View>
+                    <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
+                </View>
+            </TouchableOpacity>
+        )
     }
 
     _render() {
@@ -174,5 +198,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 84,
         textAlign: 'center'
+    },
+    item:{
+        flex:1,
+        width:windowWidth,
+        backgroundColor:'white',
+        flexDirection:'row',
+        alignItems:'center',
+        paddingRight:10,
+        paddingLeft:10,
+        height:50
     }
 });
