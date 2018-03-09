@@ -65,7 +65,7 @@ import MineDownload from '../home/MineDownload'
 import MineRecored from '../home/MineRecored'
 import SearchList from  '../home/SearchList'
 import homeMorelist from  '../home/homeMorelist'
-
+import ReportData from  '../home/ReportData'
 const getOptions = title => ({
     title,
     headerStyle: {
@@ -174,7 +174,8 @@ const SimpleApp = StackNavigator(
         MineDownload:{screen:MineDownload},
         MineRecored:{screen:MineRecored},
         SearchList:{screen:SearchList},
-        homeMorelist:{screen:homeMorelist}
+        homeMorelist:{screen:homeMorelist},
+        ReportData:{screen:ReportData},
 
     },
     {

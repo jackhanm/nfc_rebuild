@@ -24,7 +24,7 @@ import Accountinfo from '../home/AccountInfo'
 import Changepassword from '../home/ChangePassWord'
 import SearchPersonal from '../home/SearchPersonal'
 import SearchCompany from '../home/SearchCompany'
-
+import ReportData from  '../home/ReportData'
 import Pdfviewer from  '../ThirdTab/pfdviewer'
 import BaseComponent from  '../../base/BaseComponent'
 
@@ -162,7 +162,7 @@ export default class TabbarPage extends Component{
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'elelogin' })}>
-                    <NfcLogin  {...this.props}/>
+                    <ReportData  {...this.props}/>
                 </TabNavigator.Item>
 
                 {/*<TabNavigator.Item*/}

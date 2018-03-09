@@ -11,7 +11,7 @@
 #import "JKDownloadManager.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-
+#import "JKpdfview.h"
 
 
 @interface AppDelegate ()
@@ -36,7 +36,8 @@
   jsCodeLocation=[self getBundlePath];
   __block RCTRootView *rootView ;
  self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
-  
+#pragma mark 监听
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OpenWebview:) name:@"OpenWebview" object:nil];
 #if DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -50,7 +51,9 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
-  self.window.rootViewController = rootViewController;
+  self.nav =[[UINavigationController alloc]initWithRootViewController:rootViewController];
+  self.nav.navigationBarHidden=YES;
+  self.window.rootViewController = self.nav;
   [self.window makeKeyAndVisible];
 #else
   [self checkupdateSuccess:^(id  _Nullable responseobject) {
@@ -107,6 +110,15 @@
   
 #endif
   return YES;
+}
+- (void)OpenWebview:(NSNotification *)notification{
+  
+  NSLog(@"%@",notification);
+  NSLog(@"---接收到通知---");
+  JKpdfview *vc= [[JKpdfview alloc]init];
+  [self.nav pushViewController:vc animated:YES];
+  
+  
 }
 -(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler{
   NSLog(@"%s", __func__);

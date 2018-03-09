@@ -80,6 +80,7 @@ RCT_EXPORT_MODULE();    //此处不添加参数即默认为这个OC类的名字
 RCT_EXPORT_METHOD(calliOSActionWithOneParams:(NSString *)name)
 {
   
+   [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:@"yuhao"];
   [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
   [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
   
