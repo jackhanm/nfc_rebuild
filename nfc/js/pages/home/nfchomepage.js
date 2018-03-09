@@ -78,9 +78,10 @@ export default class nfchomepage extends Component{
         return (
             <View style={styles.container_head}>
             <View style={{height:ScreenUtil.scaleSize(120),
+                backgroundColor:'red',
                 width:windowWidth, flexDirection:'row',
                 alignItems:'center',
-                backgroundColor:'#2554A2',
+                // backgroundColor:'#2554A2',
                 paddingTop:ScreenUtil.scaleSize(50),
                 paddingBottom:ScreenUtil.scaleSize(50)}}>
                 <View style={{flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
@@ -91,7 +92,7 @@ export default class nfchomepage extends Component{
                     </Text>
                 </View>
 
-                <View style={{flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
+                <View style={{top:10,backgroundColor:'blue',flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
                         <Text style={{fontSize:ScreenUtil.scaleSize(28), color:'#ffffff'}}>
                             我的记录
