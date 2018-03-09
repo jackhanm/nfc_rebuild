@@ -37,15 +37,166 @@ const SelectType = {
     VEHICLES: 'vehicles',
     CARMODLE: 'carModle',
     HOMETYPE:'hometype',
+    PEOPLEQUALITY:'PEOPLEQUALITY',
+    DEVELOPMENT:'DEVELOPMENT',
+    FINANCE:'FINANCE',
+    PERFORMANCE:'PERFORMANCE',
+    CASEINFO:'CASEINFO',
+    COUNTRYCOMPANY:'COUNTRYCOMPANY',
+    COMPANYHAOCHE:'COMPANYHAOCHE',
+    COMPANYOVERDUE:'COMPANYOVERDUE',
+    USERAGE:'USERAGE',
+    EDUCATION:'EDUCATION',
+    HELATHSTATE:'HELATHSTATE',
+    REGISTERED:'REGISTERED',
+    INCOME:'INCOME',
+    PERCENTAGE:'PERCENTAGE',
+    HOUSEINFO:'HOUSEINFO',
+    MARRIAGE:'MARRIAGE',
+    RESIDENCE:'RESIDENCE',
+    PEOPLES:'PEOPLES',
+    EMPLOYER:'EMPLOYER',
+    WORK:'WORK',
+    POST:'POST',
+    CREDITCARD:'CREDITCARD',
+    QUOTA:'QUOTA',
+    USE_YEAR:'USE_YEAR',
+    CREDIT_LOST:'CREDIT_LOST',
+    PERSONALHAOCHE:'PERSONALHAOCHE',
+    PERSONALOVERDUE:'PERSONALOVERDUE',
+    PERSONALCARCARD:'PERSONALCARCARD',
+    CRIMEHISTORY:'CRIMEHISTORY',
+    REALESTATE:'REALESTATE',
+    FAMILYKNOW:'FAMILYKNOW'
 }
 
 const homeType = [{code:'HOUSE', caption:"写字楼"}, {code:'OFFICE', caption:'商铺'}, {code:'SHOP', caption:"住宅"}];
+const age = [{code:'', caption:'25 - 35岁'}
+, {code:'', caption:'35 - 45岁'}
+, {code:'', caption:'45 - 55岁'}
+, {code:'', caption:'25岁以下及55岁以上'}];
+const education = [{code:'', caption:'研究生或以上'}
+    , {code:'', caption:'本科含双学位'}
+    , {code:'', caption:'大专'}
+    , {code:'', caption:'中专及高中以下'}];
+const healthy = [{code:'', caption:'当前有重大疾病'}
+    , {code:'', caption:'当前较为健康'}];
+const registered = [{code:'', caption:'本市三年以上户口'}
+    , {code:'', caption:'本市1-3年户口'}
+    , {code:'', caption:'外地户口'}];
+const income = [{code:'', caption:'20000及以上'}
+    , {code:'', caption:'10000 - 20000'}
+    , {code:'', caption:'8000 - 10000'}
+    , {code:'', caption:'6000 - 8000'}
+    , {code:'', caption:'4000 - 6000'}
+    , {code:'', caption:'2000 - 4000'}
+    , {code:'', caption:'2000以下'}];
+
+const percentage = [{code:'', caption:'无月还款'}
+    , {code:'', caption:'20%及以下'}
+    , {code:'', caption:'20% - 40%'}
+    , {code:'', caption:'40% - 60%'}
+    , {code:'', caption:'60% - 80%'}
+    , {code:'', caption:'80% - 100%'}
+    , {code:'', caption:'100%以上'}];
+
+const houseInfo = [{code:'', caption:'有住房（无贷款）'}
+    , {code:'', caption:'有住房（有贷款）'}
+    , {code:'', caption:'父母同住或者宿舍'}
+    , {code:'', caption:'租房'}
+    , {code:'', caption:'其他'}];
+
+const residence = [{code:'', caption:'5年以上'}
+    , {code:'', caption:'2 - 5年'}
+    , {code:'', caption:'2年以下'}];
+
+const peoples = [{code:'', caption:'0人'}
+    , {code:'', caption:'1-2人'}
+    , {code:'', caption:'3人'}
+    , {code:'', caption:'4人'}
+    , {code:'', caption:'4人以上'}];
+
+const employer = [{code:'', caption:'机关事业单位'}
+    , {code:'', caption:'上市公司，军队，三资外企'}
+    , {code:'', caption:'国营企业'}
+    , {code:'', caption:'集体或民营企业'}
+    , {code:'', caption:'个体经营商户'}
+    , {code:'', caption:'其他'}];
+
+const work = [{code:'', caption:'5年以上'}
+    , {code:'', caption:'2 - 5年'}
+    , {code:'', caption:'2年以下'}];
+
+const post = [{code:'', caption:'总经理，厅局级以上'}
+,{code:'', caption:'部门经理级，处级科级'}
+    , {code:'', caption:'职员一般干部'}
+    , {code:'', caption:'打工或其它'}];
+
+const creditCard = [{code:'', caption:'10次以上'}
+    ,{code:'', caption:'8 - 10次'}
+    , {code:'', caption:'5 - 8次'}
+    , {code:'', caption:'2 - 5次'}
+    , {code:'', caption:'2次以下'}
+    , {code:'', caption:'无信用卡'}];
+
+const quota = [{code:'', caption:'白金卡50-100万'}
+    ,{code:'', caption:'白金卡10-50万'}
+    , {code:'', caption:'金卡5-10万'}
+    , {code:'', caption:'金卡1-5万'}
+    , {code:'', caption:'普卡1万以下'}
+    , {code:'', caption:'无信用卡'}];
+
+const use_year = [{code:'', caption:'3年以上'}
+    , {code:'', caption:'1 - 3年'}
+    , {code:'', caption:'1年以内'}
+    , {code:'', caption:'无信用卡'}];
+
+const credit_lost = [{code:'', caption:'无失信'}
+    , {code:'', caption:'无信用卡'}
+    , {code:'', caption:'2次（含）之内'}
+    , {code:'', caption:'2次以上'}];
+
+const yes_no = [{code:'', caption:'是'}
+    , {code:'', caption:'否'}];
+
+const has_no = [{code:'', caption:'无'}
+    , {code:'', caption:'有'}];
+
+const car_card = [{code:'', caption:'无车'}
+    , {code:'', caption:'本地车牌'}
+    , {code:'', caption:'异地车牌'}];
+
+const good_bad = [{code:'', caption:'良好'}
+    , {code:'', caption:'正常'}
+    , {code:'', caption:'较差'}]
+
+const better_bad = [{code:'', caption:'优秀'}
+    , {code:'', caption:'正常'}
+    , {code:'', caption:'较差'}]
+
+const number = [{code:'', caption:'0'}
+    , {code:'', caption:'1'}
+    , {code:'', caption:'2'},
+    {code:'', caption:'3'}
+    , {code:'', caption:'4'}
+    , {code:'', caption:'5'},
+    {code:'', caption:'6'}
+    , {code:'', caption:'7'}
+    , {code:'', caption:'8'},
+    {code:'', caption:'9'}
+    , {code:'', caption:'10'}]
+
+const marriage = [{code:'', caption:'已婚有子女'}
+    , {code:'', caption:'已婚无子女'}
+    , {code:'', caption:'离婚'},
+    {code:'', caption:'未婚'}];
 
 const fillinfo = {
     //企业社会代码
     companyId:'',
     //企业名称
     companyName:'',
+
     //省份证号码
     id:'',
     //姓名
@@ -71,7 +222,45 @@ const fillinfo = {
     //房屋类型
     hometype:'',
     //房屋面积
-    homeMeasure:''
+    homeMeasure:'',
+    /*-----------------------------------------*/
+    peoplequality:'',
+    development:'',
+    finance:'',
+    performance:'',
+    caseinfo:'',
+    countrycompany:'',
+    companyhaoche:'',
+    companyoverdue:'',
+    userage:'',
+    education:'',
+    helathstate:'',
+    registered:'',
+    income:'',
+    percentage:'',
+    houseinfo:'',
+    marriage:'',
+    residence:'',
+    peoples:'',
+    employer:'',
+    work:'',
+    post:'',
+    creditcard:'',
+    quota:'',
+    use_year:'',
+    credit_lost:'',
+    personalhaoche:'',
+    personaloverdue:'',
+    personalcarcard:'',
+    crimehistory:'',
+    realestate:'',
+    familyknow:'',
+
+    phoneNumber:'',
+    personTime:'',
+    companyTime:'',
+    money:'',
+    backTime:'',
 }
 
 
@@ -184,9 +373,46 @@ export default class PersonalData extends BaseComponent{
         fillinfo.homeMeasure = ''
 
 
-        this.props.navigation.state.params.type == 0 ?
+        fillinfo.peoplequality = '',
+        fillinfo.development = '',
+        fillinfo.finance = '',
+        fillinfo.performance = '',
+        fillinfo.caseinfo = '',
+        fillinfo.countrycompany = '',
+        fillinfo.companyhaoche = '',
+        fillinfo.companyoverdue = '',
+        fillinfo.userage = '',
+        fillinfo.education = '',
+        fillinfo.helathstate = '',
+        fillinfo.registered = '',
+        fillinfo.income = '',
+        fillinfo.percentage = '',
+        fillinfo.houseinfo = '',
+        fillinfo.marriage = '',
+        fillinfo.residence = '',
+        fillinfo.peoples = '',
+        fillinfo.employer = '',
+        fillinfo.work = '',
+        fillinfo.post = '',
+        fillinfo.creditcard = '',
+        fillinfo.quota = '',
+        fillinfo.use_year = '',
+        fillinfo.credit_lost = '',
+        fillinfo.personalhaoche = '',
+        fillinfo.personaloverdue = '',
+        fillinfo.personalcarcard = '',
+        fillinfo.crimehistory = '',
+        fillinfo.realestate = '',
+        fillinfo.familyknow = ''
+
+
+
+
+
+        if(this.props.navigation.state.params.type == 0){
+            console.log(this.props.navigation.state.params);
             this.setState({
-                type:0
+                render_type:0
                 , creditReport:this.props.navigation.state.params.creditReport
                 , antiFraud:this.props.navigation.state.params.antiFraud
                 , riskManage:this.props.navigation.state.params.riskManage
@@ -196,15 +422,18 @@ export default class PersonalData extends BaseComponent{
                 , homePrice:this.props.navigation.state.params.homePrice
 
             })
-
-            :this.setState({
-                type:1
+        }else{
+            this.setState({
+                render_type:1
                 , companyRiskManage:this.props.navigation.state.params.companyRiskManage
                 , all:this.props.navigation.state.params.all
                 , homeRent:this.props.navigation.state.params.homeRent
                 , carPrice:this.props.navigation.state.params.carPrice
                 , homePrice:this.props.navigation.state.params.homePrice
             });
+            console.log(this.state)
+        }
+
         this.fetchAddressData('');
     }
 
@@ -229,7 +458,7 @@ export default class PersonalData extends BaseComponent{
             //车辆属地选择结果
             selectedCarAddress:[],
 
-            type:0,
+            render_type:0,
 
             /*--------------------查个人-------------------------*/
             //个人信用报告
@@ -278,6 +507,38 @@ export default class PersonalData extends BaseComponent{
             isLoading:true,
 
             /**--------------------------------------**/
+            /*---------------新增数据-----------------*/
+            peoplequality:{caption:"请选择", code:'0'},
+            development:{caption:"请选择", code:'0'},
+            finance:{caption:"请选择", code:'0'},
+            performance:{caption:"请选择", code:'0'},
+            caseinfo:{caption:"请选择", code:'0'},
+            countrycompany:{caption:"请选择", code:'0'},
+            companyhaoche:{caption:"请选择", code:'0'},
+            companyoverdue:{caption:"请选择", code:'0'},
+            userage:{caption:"请选择", code:'0'},
+            education:{caption:"请选择", code:'0'},
+            helathstate:{caption:"请选择", code:'0'},
+            registered:{caption:"请选择", code:'0'},
+            income:{caption:"请选择", code:'0'},
+            percentage:{caption:"请选择", code:'0'},
+            houseinfo:{caption:"请选择", code:'0'},
+            marriage:{caption:"请选择", code:'0'},
+            residence:{caption:"请选择", code:'0'},
+            peoples:{caption:"请选择", code:'0'},
+            employer:{caption:"请选择", code:'0'},
+            work:{caption:"请选择", code:'0'},
+            post:{caption:"请选择", code:'0'},
+            creditcard:{caption:"请选择", code:'0'},
+            quota:{caption:"请选择", code:'0'},
+            use_year:{caption:"请选择", code:'0'},
+            credit_lost:{caption:"请选择", code:'0'},
+            personalhaoche:{caption:"请选择", code:'0'},
+            personaloverdue:{caption:"请选择", code:'0'},
+            personalcarcard:{caption:"请选择", code:'0'},
+            crimehistory:{caption:"请选择", code:'0'},
+            realestate:{caption:"请选择", code:'0'},
+            familyknow:{caption:"请选择", code:'0'}
         }
     }
 
@@ -286,12 +547,21 @@ export default class PersonalData extends BaseComponent{
         return(<ScrollView style={styles.container}>
             <View style={{width:winWidth, flexDirection:'column'}}>
 
+                {this._renderloanInfo()}
                 {this._renderCompanyInfo()}
+                {this._renderCompanyCredit()}
                 {this._renderPersionInfo()}
+                {this._familyInfo()}
+                {this._renderProfession()}
+                {this._renderSelfCride()}
+                {this._renderHaochedai()}
+                {this._renderOther()}
+
                 {this._renderCarInfo()}
                 {this._renderHomeInfo()}
                 {this._renderModle()}
                 {this._renderAddModle()}
+
 
                 <View style={{width:winWidth, justifyContent:'center', flexDirection:'row', marginTop:ScreenUtil.scaleSize(100), marginBottom:ScreenUtil.scaleSize(100)}}>
 
@@ -308,104 +578,226 @@ export default class PersonalData extends BaseComponent{
         </ScrollView>);
     }
 
-
-
-
     _renderCompanyInfo(){
-        if(this.state.type == 1){
-            if(this.state.all || this.state.companyRiskManage){
-                return(<View style={{width:winWidth, flexDirection:'column', marginTop:ScreenUtil.scaleSize(20), backgroundColor:'white'}}>
+        if(this.state.render_type == 1){
+            return(<View style={{width:winWidth, flexDirection:'column',backgroundColor:'white'}}>
 
-                    <View style={styles.item_view}>
-                        <View style={{flex:1.5, flexDirection:'row'
-                            , alignItems:'center'}}>
-                            <Text style={{}}>
-                                社会信用代码：
-                            </Text>
-                        </View>
-                        <View style={{flex:2.5,flexDirection:'row'
-                            , alignItems:'center'}}>
-                            <TextInput
-                                style={styles.edit}
-                                underlineColorAndroid='transparent'
-                                onChangeText={(text)=>{fillinfo.companyId = text}}/>
-                        </View>
-                    </View>
+                {this._renderInputer(1.5, 2.5, '社会信用代码', '', (text)=>{fillinfo.companyId = text})}
+
+                <View style={styles.line}/>
+
+                {this._renderInputer(1.5, 2.5, '或输入企业名称', '', (text)=>{fillinfo.companyName = text})}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(1.5, 2.5, '人员素质，管理水平，商誉', '',  SelectType.PEOPLEQUALITY, good_bad, this.state.peoplequality)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(1.5, 2.5, '发展能力和潜力指标', '',  SelectType.DEVELOPMENT, better_bad, this.state.development)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(1.5, 2.5, '财务指标状况', '',  SelectType.FINANCE, better_bad, this.state.finance)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(1.5, 2.5, '履约指标', '',  SelectType.PERFORMANCE, number, this.state.performance)}
+
+                <View style={styles.line}/>
+
+                <View style={styles.blank}></View>
+
+            </View>);
+        }
+
+    }
+
+    //企业信用
+    _renderCompanyCredit(){
+        if(this.state.render_type == 1){
+            return(<View style={{width:winWidth, flexDirection:'column',  backgroundColor:'white'}}>
+                {this._renderlocalSelected(1.5, 2.5, '有无作为被告或被执行人的设素案件信息', '',  SelectType.CASEINFO, has_no, this.state.caseinfo)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(1.5, 2.5, '国家企业信用信息公示系统内容', '',  SelectType.COUNTRYCOMPANY, has_no, this.state.countrycompany)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(3, 2.5, '是否使用过好车贷平台进行理财或者借款', '',  SelectType.COMPANYHAOCHE, yes_no, this.state.companyhaoche)}
+
+                <View style={styles.line}/>
+
+                {this._renderlocalSelected(3, 2.5, '在好车贷平台2年内是否曾有逾期记录', '', SelectType.COMPANYOVERDUE, yes_no, this.state.companyoverdue)}
+
+                <View style={styles.line}/>
+
+                {this._renderInputer(1.5, 2.5, '在好车贷款2年内预期次数', '', (text)=>{fillinfo.companyTime = text})}
+
+                <View style={styles.blank}></View>
+
+            </View>);
+        }
+    }
+
+
+    //借款信息
+    _renderloanInfo(){
+        return(<View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', marginTop:ScreenUtil.scaleSize(20)}}>
+
+            {this._renderInputer(1.5, 2.5, '请填写借款金额', '', (txte)=>{fillinfo.money})}
+
+            <View style={styles.line}/>
+
+            {this._renderInputer(1.5, 2.5, '请填写借款期限', '', (text)=>{fillinfo.backTime})}
+
+            <View style={styles.line}/>
+
+            <View style={styles.blank}></View>
+
+        </View>);
+    }
+
+
+
+    _renderPersionInfo(){
+        if(this.state.render_type == 0){
+            return(
+                <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white',}}>
+
+                    {this._renderInputer(1.5, 2.5, '请输入身份证号码', '', (text)=>{fillinfo.id = text})}
 
                     <View style={styles.line}/>
 
-                    <View style={styles.item_view}>
-                        <View style={{flex:1.5, flexDirection:'row'
-                            , alignItems:'center'}}>
-                            <Text style={{}}>
-                                请输入企业名称：
-                            </Text>
-                        </View>
-                        <View style={{flex:2.5, flexDirection:'row'
-                            , alignItems:'center'}}>
-                            <TextInput
-                                style={styles.edit}
-                                underlineColorAndroid='transparent'
-                                onChangeText={(text)=>{fillinfo.companyName = text}}/>
-                        </View>
-                    </View>
+                    {this._renderInputer(1.5, 2.5, '请输入姓名', '', (text)=>{fillinfo.name = text})}
+
+                    <View style={styles.line}/>
+
+                    {this.state.antiFraud || this.state.all
+                        ? this._renderInputer(1.5, 2.5, '请输入手机号', '', (text)=>{fillinfo.phoneNumber = text}) : <View/>}
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(1.5, 2.5, "用户年龄", "年龄", SelectType.USERAGE, age, this.state.userage)}
+
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(1.5, 2.5, "用户学历", "学历", SelectType.EDUCATION, education, this.state.education)}
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(1.5, 2.5, "健康状况", "健康状况", SelectType.HELATHSTATE, healthy, this.state.helathstate)}
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(1.5, 2.5, "户口状况", "户口", SelectType.REGISTERED, registered, this.state.registered)}
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(1.5, 2.5, "月收入状况", "月收入状况", SelectType.INCOME, income, this.state.income)}
+
+                    <View style={styles.line}/>
+
+                    {this._renderlocalSelected(3, 2.5, "月还款额度工资占比", "月工资占比", SelectType.PERCENTAGE, percentage, this.state.percentage)}
 
                     <View style={styles.line}/>
 
                     <View style={styles.blank}></View>
-
                 </View>);
-            }
-        }
-
-    }
-
-    _renderPersionInfo(){
-        if(this.state.type == 0){
-            if(this.state.all || (this.state.creditReport || this.state.antiFraud || this.state.riskManage)){
-                return(
-                    <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', marginTop:ScreenUtil.scaleSize(20)}}>
-
-                        <View style={styles.item_view}>
-                            <View style={{flex:1.5, flexDirection:'row'
-                                , alignItems:'center'}}>
-                                <Text style={{}}>
-                                    请输入身份证号码：
-                                </Text>
-                            </View>
-                            <View style={{flex:2.5}}>
-                                <TextInput
-                                    style={styles.edit}
-                                    underlineColorAndroid='transparent'
-                                    onChangeText={(text)=>{fillinfo.id = text}}/>
-                            </View>
-                        </View>
-
-                        <View style={styles.line}/>
-
-                        <View style={styles.item_view}>
-                            <View style={{flex:1.5, flexDirection:'row'
-                                , alignItems:'center'}}>
-                                <Text style={{}}>
-                                    请输入姓名：
-                                </Text>
-                            </View>
-                            <View style={{flex:2.5}}>
-                                <TextInput
-                                    style={styles.edit}
-                                    underlineColorAndroid='transparent'
-                                    onChangeText={(text)=>{fillinfo.name = text}}/>
-                            </View>
-                        </View>
-
-                        <View style={styles.line}/>
-
-                        <View style={styles.blank}></View>
-
-                    </View>);
-            }
         }
     }
+
+
+    //家庭情况
+    _familyInfo(){
+        if(this.state.render_type == 0){
+            return(
+                <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+
+                    {this._renderlocalSelected(1.5, 2.5, "住房情况", "住房情况", SelectType.HOUSEINFO, houseInfo, this.state.houseinfo)}
+
+                    <View style={styles.line}/>
+                    {this._renderlocalSelected(1.5, 2.5, "婚姻状况", "婚姻状况", SelectType.MARRIAGE, marriage, this.state.marriage)}
+
+                    <View style={styles.line}/>
+                    {this._renderlocalSelected(1.5, 2.5, "目前居住地址时间", "目前居住地址时间", SelectType.RESIDENCE, residence, this.state.residence)}
+
+                    <View style={styles.line}/>
+                    {this._renderlocalSelected(1.5, 2.5, "供养人口", "供养人口", SelectType.PEOPLES, peoples, this.state.peoples)}
+
+                    <View style={styles.line}/>
+                    <View style={styles.blank}></View>
+                </View>);
+        }
+    }
+
+    //职业情况
+
+    _renderProfession(){
+        if(this.state.render_type == 0){
+            return(<View View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "单位性质", "单位性质", SelectType.EMPLOYER, employer, this.state.employer)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "工作年限", "工作年限", SelectType.WORK, work, this.state.work)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "公司职位", "公司职位", SelectType.POST, post, this.state.post)}
+                <View style={styles.line}/>
+                <View style={styles.blank}></View>
+            </View>);
+        }
+    }
+
+    //个人信用
+    _renderSelfCride(){
+        if(this.state.render_type == 0){
+            return(<View View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+                <View style={styles.line}/>
+                {this._renderlocalSelected(2.5, 2.5, "月均信用卡使用频率", "月均信用卡使用频率", SelectType.CREDITCARD, creditCard, this.state.creditcard)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "信用卡额度", "信用卡额度", SelectType.QUOTA, quota, this.state.quota)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "信用卡使用年数", "信用卡使用年数", SelectType.USE_YEAR, use_year, this.state.use_year)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(2.5, 2.5, "信用卡年度逾期失信记录", "逾期失信记录", SelectType.CREDIT_LOST, credit_lost, this.state.credit_lost)}
+            </View>);
+        }
+    }
+    //个人好车贷
+    _renderHaochedai(){
+        if(this.state.render_type == 0){
+            return(<View View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+                <View style={styles.line}/>
+                {this._renderlocalSelected(4, 2.5, "是否使用过好车贷平台进行理财或者借款", "有无借款", SelectType.PERSONALHAOCHE, has_no, this.state.personalhaoche)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(4, 2.5, "好车贷平台2年内是否曾有逾期记录", "是否逾期", SelectType.PERSONALOVERDUE, yes_no, this.state.personaloverdue)}
+                <View style={styles.line}/>
+                <View style={styles.blank}></View>
+            </View>);
+        }
+    }
+    //其他
+    _renderOther(){
+        if(this.state.render_type == 0){
+            return(<View View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+                <View style={styles.line}/>
+                {this._renderlocalSelected(1.5, 2.5, "非本地牌照", "牌照", SelectType.PERSONALCARCARD, car_card, this.state.personalcarcard)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(3, 2.5, "3年内有经济犯罪历史", "经济犯罪历史", SelectType.CRIMEHISTORY, yes_no, this.state.crimehistory)}
+                <View style={styles.line}/>
+                {this._renderInputer(3, 2.5, '在好车贷2年内逾期次数', '', (text)=>{fillinfo.personTime = text})}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(5, 2.5, "个人名下可变现金融资产大于等于汽车估价的80%", "", SelectType.REALESTATE, yes_no, this.state.realestate)}
+                <View style={styles.line}/>
+                {this._renderlocalSelected(2, 2.5, "家庭成员是否知情", "", SelectType.FAMILYKNOW, yes_no, this.state.familyknow)}
+                <View style={styles.line}/>
+                <View style={styles.blank}></View>
+            </View>);
+        }
+    }
+
 
     _renderHomeInfo(){
 
@@ -434,57 +826,13 @@ export default class PersonalData extends BaseComponent{
 
                 <View style={styles.line}/>
 
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请输入房屋名称：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'
-                            onChangeText={(text)=>{fillinfo.homeName = text}}/>
-                    </View>
-                </View>
+                {this._renderInputer(1.5, 2.5, '请输入房屋名称', '', (text)=>{fillinfo.homeName = text})}
 
                 <View style={styles.line}/>
-
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请选择房屋类型：
-                        </Text>
-                    </View>
-                        <View style={{flex:2.5, flexDirection:'row'}}>
-                            <TouchableOpacity
-                                onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":"请选择房屋类型", "type":SelectType.HOMETYPE}, carData:homeType})}}
-                                style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
-                                    <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.slelctedHomeType.caption}</Text>
-                                    <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
-                            </TouchableOpacity>
-                        </View>
-
-                </View>
-
+                {this._renderlocalSelected(1.5, 2.5, "请选择房屋类型", "请选择房屋类型", SelectType.HOMETYPE, homeType, this.state.slelctedHomeType)}
                 <View style={styles.line}/>
 
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请输入房屋面积：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'
-                            onChangeText={(text)=>{fillinfo.homeMeasure = text}}/>
-                    </View>
-                </View>
+                {this._renderInputer(1.5, 2.5, '请输入房屋面积', '', (text)=>{fillinfo.homeMeasure = text})}
 
                 <View style={styles.line}/>
 
@@ -493,6 +841,66 @@ export default class PersonalData extends BaseComponent{
             </View>);
         }
 
+    }
+
+    /**
+     *
+     * @param infoflex
+     * @param inputflex
+     * @param info
+     * @param defaultvalue
+     * @param inputmsg 输入信息保存变量
+     * @returns {XML}
+     * @private
+     */
+    _renderInputer(infoflex, inputflex, info, defaultvalue, inputmsg){
+        return(<View style={styles.item_view}>
+            <View style={{flex:infoflex, flexDirection:'row'
+                , alignItems:'center'}}>
+                <Text style={{}}>
+                    {info + ':'}
+                </Text>
+            </View>
+            <View style={{flex:inputflex}}>
+                <TextInput
+                    style={styles.edit}
+                    underlineColorAndroid='transparent'
+                    placeholder={defaultvalue}
+                    onChangeText={inputmsg}/>
+            </View>
+        </View>);
+    }
+
+    /**
+     *
+     * @param infoflex 展示信息比例 ex2.5：
+     * @param selectedflex 选择框比例
+     * @param info 展示信息
+     * @param modleTitle 选择弹框标题
+     * @param selectedType 选择类型
+     * @param dataSource 选择弹框数据源
+     * @param selectedValue 展示的值
+     * @returns {XML}
+     * @private
+     */
+    _renderlocalSelected(infoflex, selectedflex,  info, modleTitle, selectedType, dataSource, selectedValue){
+        return(<View style={styles.item_view}>
+            <View style={{flex:infoflex, flexDirection:'row'
+                , alignItems:'center'}}>
+                <Text style={{}}>
+                    {info + ':'}
+                </Text>
+            </View>
+            <View style={{flex:selectedflex, flexDirection:'row'}}>
+                <TouchableOpacity
+                    onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":modleTitle, "type":selectedType}, carData:dataSource})}}
+                    style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
+                    <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{selectedValue.caption}</Text>
+                    <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                </TouchableOpacity>
+            </View>
+
+        </View>)
     }
 
     _choeseCarVehicles(){
@@ -572,21 +980,7 @@ export default class PersonalData extends BaseComponent{
 
                 </View>
 
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请选择上牌时间：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'
-                            placeholder='上市时间如：2018'
-                            onChangeText={(text)=>{fillinfo.markTime = text}}/>
-                    </View>
-                </View>
+                {this._renderInputer(1.5, 2.5, '请选择上牌时间', '上市时间如：2018', (text)=>{fillinfo.markTime = text})}
 
                 <View style={styles.line}/>
 
@@ -615,36 +1009,11 @@ export default class PersonalData extends BaseComponent{
                 </View>
                 <View style={styles.line}/>
 
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请输入行车里程：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'
-                            onChangeText={(text)=>{fillinfo.carMileage = text}}/>
-                    </View>
-                </View>
+                {this._renderInputer(1.5, 2.5, '请输入行车里程', '', (text)=>{fillinfo.carMileage = text})}
+
                 <View style={styles.line}/>
 
-                <View style={styles.item_view}>
-                    <View style={{flex:1.5, flexDirection:'row'
-                        , alignItems:'center'}}>
-                        <Text style={{}}>
-                            请输入车牌号码：
-                        </Text>
-                    </View>
-                    <View style={{flex:2.5}}>
-                        <TextInput
-                            style={styles.edit}
-                            underlineColorAndroid='transparent'
-                            onChangeText={(text)=>{fillinfo.carID = text}}/>
-                    </View>
-                </View>
+                {this._renderInputer(1.5, 2.5, '请输入车牌号码', '', (text)=>{fillinfo.carID = text})}
 
                 <View style={styles.line}/>
 
@@ -740,6 +1109,118 @@ export default class PersonalData extends BaseComponent{
             case SelectType.HOMETYPE:
                 this.setState({slelctedHomeType:item})
                 break;
+
+            case SelectType.PEOPLEQUALITY:
+                this.setState({peoplequality:item})
+                break;
+
+            case SelectType.DEVELOPMENT:
+                this.setState({development:item})
+                break;
+
+            case SelectType.FINANCE:
+                this.setState({finance:item})
+                break;
+
+            case SelectType.PERFORMANCE:
+                this.setState({performance:item})
+                break;
+
+            case SelectType.CASEINFO:
+                this.setState({caseinfo:item})
+                break;
+
+            case SelectType.COUNTRYCOMPANY:
+                this.setState({countrycompany:item})
+                break;
+
+            case SelectType.COMPANYHAOCHE:
+                this.setState({companyhaoche:item})
+                break;
+
+            case SelectType.COMPANYOVERDUE:
+                this.setState({companyoverdue:item})
+                break;
+
+            case SelectType.USERAGE:
+                this.setState({userage:item})
+                break;
+
+            case SelectType.EDUCATION:
+                this.setState({education:item})
+                break;
+
+            case SelectType.HELATHSTATE:
+                this.setState({helathstate:item})
+                break;
+
+            case SelectType.REGISTERED:
+                this.setState({registered:item})
+                break;
+
+            case SelectType.INCOME:
+                this.setState({income:item})
+                break;
+            case SelectType.PERCENTAGE:
+                this.setState({percentage:item})
+                break;
+            case SelectType.HOUSEINFO:
+                this.setState({houseinfo:item})
+                break;
+            case SelectType.MARRIAGE:
+                this.setState({marriage:item})
+                break;
+            case SelectType.RESIDENCE:
+                this.setState({residence:item})
+                break;
+            case SelectType.PEOPLES:
+                this.setState({peoples:item})
+                break;
+            case SelectType.EMPLOYER:
+                this.setState({employer:item})
+                break;
+
+            case SelectType.WORK:
+                this.setState({work:item})
+                break;
+            case SelectType.POST:
+                this.setState({post:item})
+                break;
+
+            case SelectType.CREDITCARD:
+                this.setState({creditcard:item})
+                break;
+            case SelectType.QUOTA:
+                this.setState({quota:item})
+                break;
+            case SelectType.USE_YEAR:
+                this.setState({use_year:item})
+                break;
+            case SelectType.CREDIT_LOST:
+                this.setState({credit_lost:item})
+                break;
+            case SelectType.PERSONALHAOCHE:
+                this.setState({personalhaoche:item})
+                break;
+            case SelectType.PERSONALOVERDUE:
+                this.setState({personaloverdue:item})
+                break;
+            case SelectType.PERSONALCARCARD:
+                this.setState({personalcarcard:item})
+                break;
+
+            case SelectType.CRIMEHISTORY:
+                this.setState({crimehistory:item})
+                break;
+            case SelectType.REALESTATE:
+                this.setState({realestate:item})
+                break;
+            case SelectType.FAMILYKNOW:
+                this.setState({familyknow:item})
+                break;
+
+
+
         }
         this._onCloseModle();
     }
@@ -872,7 +1353,7 @@ export default class PersonalData extends BaseComponent{
         var data = new Date();
 
         console.log(fillinfo);
-        if(this.state.type == 1 && (this.state.all || this.state.companyRiskManage)){
+        if(this.state.render_type == 1 && (this.state.all || this.state.companyRiskManage)){
             var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
             if (!orgCode.test(fillinfo.companyId)) {
                 this._showToast("企业社会信用代码输入错误！")
@@ -889,6 +1370,39 @@ export default class PersonalData extends BaseComponent{
             fillinfo.carBrand = this.state.selectedBradn.code;
             fillinfo.carVs = this.state.selectedVehicles.code;
             fillinfo.carModle = this.state.selectedCarModle.code;
+
+            fillinfo.peoplequality = this.state.peoplequality.code;
+            fillinfo.development = this.state.development.code;
+            fillinfo.finance = this.state.finance.code;
+            fillinfo.performance = this.state.performance.code;
+            fillinfo.caseinfo = this.state.caseinfo.code;
+            fillinfo.countrycompany = this.state.countrycompany.code;
+            fillinfo.companyhaoche = this.state.companyhaoche.code;
+            fillinfo.companyoverdue = this.state.companyoverdue.code;
+            fillinfo.userage = this.state.userage.code;
+            fillinfo.education = this.state.education.code;
+            fillinfo.helathstate = this.state.helathstate.code;
+            fillinfo.registered = this.state.registered.code;
+            fillinfo.income = this.state.income.code;
+            fillinfo.percentage = this.state.percentage.code;
+            fillinfo.houseinfo = this.state.houseinfo.code;
+            fillinfo.marriage = this.state.marriage.code;
+            fillinfo.residence = this.state.residence.code;
+            fillinfo.peoples = this.state.peoples.code;
+            fillinfo.employer = this.state.employer.code;
+            fillinfo.work = this.state.work.code;
+            fillinfo.post = this.state.post.code;
+            fillinfo.creditcard = this.state.creditcard.code;
+            fillinfo.quota = this.state.quota.code;
+            fillinfo.use_year = this.state.use_year.code;
+            fillinfo.credit_lost = this.state.credit_lost.code;
+            fillinfo.personalhaoche = this.state.personalhaoche.code;
+            fillinfo.personaloverdue = this.state.personaloverdue.code;
+            fillinfo.personalcarcard = this.state.personalcarcard.code;
+            fillinfo.crimehistory = this.state.crimehistory.code;
+            fillinfo.realestate = this.state.realestate.code;
+            fillinfo.familyknow = this.state.familyknow.code;
+
             if(this.state.selectedCarAddress.length > 1){
                 fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
             }
@@ -959,7 +1473,7 @@ export default class PersonalData extends BaseComponent{
 
         }
 
-            if(this.state.type == 0 && (this.state.creditReport || this.state.antiFraud || this.state.riskManage || this.state.all)){
+            if(this.state.render_type == 0 && (this.state.creditReport || this.state.antiFraud || this.state.riskManage || this.state.all)){
                 var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                 if(!certNo.test(fillinfo.id)){
                     this._showToast('请输入正确的身份证');
