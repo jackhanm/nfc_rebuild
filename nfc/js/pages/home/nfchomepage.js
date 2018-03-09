@@ -11,7 +11,8 @@ import {
     FlatList,
     ScrollView,
     Keyboard,
-    StatusBar
+    StatusBar,
+    Platform
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
@@ -77,6 +78,15 @@ export default class nfchomepage extends Component{
 
 
     _renderHead() {
+        let height;
+        if(Platform.OS === 'ios'){
+            //ios相关操作
+            height=10
+        }else{
+            console.log('Andorid')
+            //android相关操作
+            height=0
+        }
         return (
             <View style={styles.container_head}>
             <View style={{height:ScreenUtil.scaleSize(128),
@@ -94,7 +104,7 @@ export default class nfchomepage extends Component{
                     </Text>
                 </View>
 
-                <View style={{top:10,backgroundColor:'blue',flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
+                <View style={{top:height,backgroundColor:'blue',flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
                         <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#ffffff'}}>
                             我的记录
