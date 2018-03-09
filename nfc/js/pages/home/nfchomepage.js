@@ -90,13 +90,12 @@ export default class nfchomepage extends Component{
         return (
             <View style={styles.container_head}>
             <View style={{height:ScreenUtil.scaleSize(128),
-                backgroundColor:'red',
                 width:windowWidth, flexDirection:'row',
                 alignItems:'center',
-                // backgroundColor:'#2554A2',
+                backgroundColor:'#2554A2',
                 paddingTop:ScreenUtil.scaleSize(50),
                 paddingBottom:ScreenUtil.scaleSize(50)}}>
-                <View style={{top:10,flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
+                <View style={{top:height,flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
                     <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
                            style={{width:ScreenUtil.scaleSize(44), height:ScreenUtil.scaleSize(44), borderRadius:ScreenUtil.scaleSize(22)}}/>
                     <Text style={{marginLeft:ScreenUtil.scaleSize(20),fontSize:12, color:'#ffffff'}}>
@@ -104,7 +103,7 @@ export default class nfchomepage extends Component{
                     </Text>
                 </View>
 
-                <View style={{top:height,backgroundColor:'blue',flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
+                <View style={{top:height,flex:1, flexDirection:'row', marginRight:ScreenUtil.scaleSize(20), alignItems:'center', justifyContent:'flex-end'}}>
                     <TouchableOpacity onPress={()=>{this.props.navigation.navigate('MineRecored')}}>
                         <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#ffffff'}}>
                             我的记录
