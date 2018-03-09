@@ -10,7 +10,8 @@ import {
     TextInput,
     FlatList,
     ScrollView,
-    Keyboard
+    Keyboard,
+    StatusBar
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
@@ -66,6 +67,7 @@ export default class nfchomepage extends Component{
 
     render(){
         return(<View style={styles.searchepage}>
+            <StatusBar backgroundColor={'#1B52A2'} />
             {this._renderHead()}
             {this._renderMid()}
             {this._renderFoot()}
