@@ -21,13 +21,11 @@ var RNCalliOSAction = NativeModules.RNCalliOSAction;
 import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import Picker1 from 'react-native-picker';
 import {commonStyle} from '../../../js/util/commonStyle'
-import { Popover,Toast} from 'antd-mobile';
+import {Toast} from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
-const Item = Popover.Item;
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').width;
@@ -895,7 +893,7 @@ export default class PersonalData extends BaseComponent{
             </View>
             <View style={{flex:selectedflex, flexDirection:'row'}}>
                 <TouchableOpacity
-                    onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":modleTitle, "type":selectedType}, carData:dataSource})}}
+                    onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":modleTitle, "type":selectedType}, carData:dataSource, isLoading:false})}}
                     style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
                     <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{selectedValue.caption}</Text>
                     <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
