@@ -113,6 +113,7 @@ android {
         }
 
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -140,6 +141,10 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
         }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
@@ -178,6 +183,8 @@ dependencies {
     //compile 'io.reactivex:rxjava:1.1.5'
 
     compile project(':react-native-vector-icons')
+
+    compile 'com.linkedin.dexmaker:dexmaker-mockito:2.12.1'
 
     /*====================================================第三方依赖=================*/
 }

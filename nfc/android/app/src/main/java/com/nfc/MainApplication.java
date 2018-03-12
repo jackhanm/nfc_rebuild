@@ -8,15 +8,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.multidex.MultiDex;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.reactlibrary.RNReactNativeDocViewerPackage;
-import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactNativeHost;
@@ -32,10 +30,14 @@ import com.nfc.network.NetService;
 import com.nfc.network.NetWorkFactory;
 import com.nfc.network.req.ReportJSversion;
 import com.nfc.network.resp.ResponseJSEntity;
+import com.nfc.reactmodle.RNtoNativeModle;
 import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
+import com.reactlibrary.RNReactNativeDocViewerPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.rnfs.RNFSPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -71,7 +73,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNReactNativeDocViewerPackage(),
             new PickerPackage(),
             new RNFSPackage(),
-            new SplashScreenReactPackage()
+            new SplashScreenReactPackage(),
+              new RNtoNativeModle()
       );
     }
 
@@ -311,9 +314,9 @@ public class MainApplication extends Application implements ReactApplication {
     return forceLoading;
   }
 
-
-
-
-
-
+  @Override
+  protected void attachBaseContext(Context base) {
+    super.attachBaseContext(base);
+    MultiDex.install(this);
+  }
 }
