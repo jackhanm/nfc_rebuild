@@ -43,15 +43,20 @@
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+        android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+          android:screenOrientation="portrait">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
             <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
         </intent-filter>
       </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-        <activity android:name=".ReportActivity" />
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"
+          android:screenOrientation="portrait"/>
+        <activity android:name=".ReportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ReportShowActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -150,7 +150,6 @@ android {
 
 dependencies {
     compile project(':react-native-fetch-blob')
-    compile project(':react-native-doc-viewer')
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-fs')
     compile project(':react-native-splash-screen')
@@ -185,6 +184,8 @@ dependencies {
     compile project(':react-native-vector-icons')
 
     compile 'com.linkedin.dexmaker:dexmaker-mockito:2.12.1'
+
+    compile 'com.github.barteksc:android-pdf-viewer:1.4.0'
 
     /*====================================================第三方依赖=================*/
 }

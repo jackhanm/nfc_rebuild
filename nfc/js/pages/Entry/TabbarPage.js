@@ -25,7 +25,6 @@ import Changepassword from '../home/ChangePassWord'
 import SearchPersonal from '../home/SearchPersonal'
 import SearchCompany from '../home/SearchCompany'
 import ReportData from  '../home/ReportData'
-import Pdfviewer from  '../ThirdTab/pfdviewer'
 import BaseComponent from  '../../base/BaseComponent'
 
 

@@ -12,6 +12,8 @@ import java.io.File;
 
 public class NativeConstant {
 
+    public static final String APP_NAME_FILE = "NFC";
+
     public static final boolean ISDEBUG = false;
 
     //增量文件i名称
@@ -35,10 +37,10 @@ public class NativeConstant {
     public static final  String JS_ENTY = "index.android.bundle";
 
     //下载基文件路径
-    public static final String BASE_DOWN_PATH = Environment.getExternalStorageDirectory() + File.separator + "KuaiCheCaiFu" + File.separator;
+    public static final String BASE_DOWN_PATH = Environment.getExternalStorageDirectory() + File.separator + APP_NAME_FILE + File.separator;
 
     //JS版本基路径
-    public static final String BASE_PATH = MainApplication.getInstance().getFilesDir() + File.separator + "KuaiCheCaiFu" + File.separator + JS_VERSION + File.separator;
+    public static final String BASE_PATH = MainApplication.getInstance().getFilesDir() + File.separator + APP_NAME_FILE + File.separator + JS_VERSION + File.separator;
 
     //DownLoad下载的数据包
     public static final String JS_PATCH_LOCAL_ZIP = BASE_DOWN_PATH;
@@ -46,7 +48,7 @@ public class NativeConstant {
     public static final String JS_BUNDLE_REMOTE_URL = "http://192.168.1.202:28080/rn/180203.zip";
 
     //更新文件解压临时路径
-    public static final String JS_PATCH_LOCAL_FOLDER = MainApplication.getInstance().getFilesDir() + File.separator + "KuaiCheCaiFu" + File.separator + "tmp";
+    public static final String JS_PATCH_LOCAL_FOLDER = MainApplication.getInstance().getFilesDir() + File.separator + APP_NAME_FILE + File.separator + "tmp";
 
     public static final String VERSION_CODE = "version";
 
@@ -68,6 +70,8 @@ public class NativeConstant {
 
     //下载Zip包MD5
     public static final String ZIP_MD5 = "md5";
+
+    public static final String SHARED_PREFERENCES = "NFC_APP";
 
 
 }

@@ -35,7 +35,6 @@ import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
-import com.reactlibrary.RNReactNativeDocViewerPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.rnfs.RNFSPackage;
 
@@ -70,7 +69,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNFetchBlobPackage(),
-            new RNReactNativeDocViewerPackage(),
             new PickerPackage(),
             new RNFSPackage(),
             new SplashScreenReactPackage(),
@@ -158,7 +156,7 @@ public class MainApplication extends Application implements ReactApplication {
     try {
       packageInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
       int versionCode = packageInfo.versionCode;
-      sharedPreferences = getSharedPreferences("kuaiCheCaiFu", Context.MODE_PRIVATE);
+      sharedPreferences = getSharedPreferences(NativeConstant.SHARED_PREFERENCES, Context.MODE_PRIVATE);
       int oldversionCode = sharedPreferences.getInt(NativeConstant.VERSION_CODE, 0);
       editor = sharedPreferences.edit();
       if(versionCode > oldversionCode){
