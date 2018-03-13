@@ -12,7 +12,7 @@ import android.support.multidex.MultiDex;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 
-import com.RNFetchBlob.RNFetchBlobPackage;
+import com.beefe.picker.PickerViewPackage;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -35,8 +35,8 @@ import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.rnfs.RNFSPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -68,10 +68,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFetchBlobPackage(),
+            new PickerViewPackage(),
             new PickerPackage(),
-            new RNFSPackage(),
             new SplashScreenReactPackage(),
+              new RNSpinkitPackage(),
               new RNtoNativeModle()
       );
     }
