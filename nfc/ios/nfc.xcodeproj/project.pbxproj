@@ -113,6 +113,7 @@
 		66B3950F202C454D005C1C42 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39508202C454C005C1C42 /* Ubuntu-Light.ttf */; };
 		66B39510202C454D005C1C42 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B39509202C454D005C1C42 /* Ubuntu-Bold.ttf */; };
 		66B39511202C454D005C1C42 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */; };
+		66D810F42056726C00C9FBEA /* JKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D810F32056726C00C9FBEA /* JKViewController.m */; };
 		66DBB1DF20282E1000FAE141 /* JKDownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1DE20282E1000FAE141 /* JKDownloadSession.m */; };
 		66DBB1E220282E4500FAE141 /* JKDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1E120282E4500FAE141 /* JKDownloadTask.m */; };
 		66DBB1E520282E5F00FAE141 /* JKDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DBB1E420282E5F00FAE141 /* JKDownloadManager.m */; };
@@ -561,6 +562,8 @@
 		66B39508202C454C005C1C42 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		66B39509202C454D005C1C42 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		66B3950A202C454D005C1C42 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		66D810F22056726C00C9FBEA /* JKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKViewController.h; sourceTree = "<group>"; };
+		66D810F32056726C00C9FBEA /* JKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKViewController.m; sourceTree = "<group>"; };
 		66DBB1DD20282E1000FAE141 /* JKDownloadSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKDownloadSession.h; sourceTree = "<group>"; };
 		66DBB1DE20282E1000FAE141 /* JKDownloadSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKDownloadSession.m; sourceTree = "<group>"; };
 		66DBB1E020282E4500FAE141 /* JKDownloadTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKDownloadTask.h; sourceTree = "<group>"; };
@@ -1005,6 +1008,8 @@
 				6694B7F52052797000B03865 /* NDHTMLtoPDF.m */,
 				6694B7F12052794200B03865 /* JKpdfview.h */,
 				6694B7F22052794200B03865 /* JKpdfview.m */,
+				66D810F22056726C00C9FBEA /* JKViewController.h */,
+				66D810F32056726C00C9FBEA /* JKViewController.m */,
 			);
 			name = page;
 			path = nfc/page;
@@ -1722,6 +1727,7 @@
 				66158B322028050000C5F58A /* RCSubEventEmitter.m in Sources */,
 				66158B292028050000C5F58A /* BaseHttpSessionManager.m in Sources */,
 				66158B7D2028065300C5F58A /* NSMutableString+Safe.m in Sources */,
+				66D810F42056726C00C9FBEA /* JKViewController.m in Sources */,
 				66158B722028065300C5F58A /* UIImage+Category.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				66158B702028065300C5F58A /* NSString+DisplayTime.m in Sources */,
@@ -1908,6 +1914,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = nfc;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1933,6 +1940,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = nfc;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

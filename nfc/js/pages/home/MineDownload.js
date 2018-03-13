@@ -11,18 +11,16 @@ import {
     Text,
     View,
     FlatList,
+    NativeAppEventEmitter,NativeEventEmitter,NativeModules
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import {commonStyle} from '../../../js/util/commonStyle'
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+
+//在JavaScript中调用Object-C定义的方法，需要先导入NativeModules,再使用RNCalliOSFuncation
+var RNCalliOSAction = NativeModules.RNCalliOSAction;
 
 export default class MineDownload extends BaseComponent<{}> {
 
@@ -42,11 +40,7 @@ export default class MineDownload extends BaseComponent<{}> {
                         pageSize:result.data.pageSize,
                     });
 
-
-
                 }
-
-
             }
         );
 
@@ -57,8 +51,23 @@ export default class MineDownload extends BaseComponent<{}> {
 
         this.fetchData();
 
-    }
+        this.getlocallist();
 
+
+    }
+    getlocallist(){
+        RNCalliOSAction.calliOSActionWithCallBack((string,array,end)=>{
+            console.log(string);
+            console.log(array);
+            console.log(end);
+            let data=string+'  '+array[0]+'  '+array[1]+'  '+array[2]+'  '+end;
+
+            this.setState({
+                callBackData:data,
+            })
+
+        });
+    }
     navigationBarProps() {
 
         return {

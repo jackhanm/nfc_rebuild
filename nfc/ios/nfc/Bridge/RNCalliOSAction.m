@@ -14,7 +14,7 @@
 
 #import "RCSubEventEmitter.h"
 
-
+#import "JKRnUpdateModel.h"
 #import <React/RCTEventDispatcher.h>
 
 @interface RNCalliOSAction ()
@@ -51,12 +51,12 @@ static RNCalliOSAction *_instance=nil;
 }
 
 -(void)senddata{
-  dispatch_sync(dispatch_get_main_queue(), ^{
-  RCSubEventEmitter *emitter=[[RCSubEventEmitter alloc]init];
+//  dispatch_sync(dispatch_get_main_queue(), ^{
+//  RCSubEventEmitter *emitter=[[RCSubEventEmitter alloc]init];
   //
-  [emitter Callback:@"123" result:@"456"];
-//  [self.bridge.eventDispatcher sendAppEventWithName:@"getSelectDate" body:@{@"SelectDate":@"123"}];
-  });
+  //[emitter Callback:@"123" result:@"456"];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"getSelectData" body:@{@"SelectDate":@"222222"}];
+//  });
 }
 
 //导出模块
@@ -79,10 +79,16 @@ RCT_EXPORT_MODULE();    //此处不添加参数即默认为这个OC类的名字
 //一个参数
 RCT_EXPORT_METHOD(calliOSActionWithOneParams:(NSString *)name)
 {
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:@"yuhao"];
+//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
+   
+    
+  });
   
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:@"yuhao"];
-  [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-  [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
+  
   
 }
 
@@ -147,14 +153,31 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
   //    JKLog(@"%@",Str);
   //
   //
-  //    NSString *string=Str;
-  //
-  //    NSArray *array=@[@"RN",@"and",@"iOS"];
-  //
-  //    NSString *end=@"goodbay";
   
-  //更多参数放到数组中进行回调
-  //    callBack(@[string,array,end]);
+    NSString *jsversionCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"down"];
+    NSFileManager *manager =[NSFileManager defaultManager];
+    BOOL Exist = [manager fileExistsAtPath:jsversionCachePath];
+   NSMutableArray *listarr = [NSMutableArray array];
+    if (Exist) {
+      //js文件存在
+      listarr =[manager contentsOfDirectoryAtPath:jsversionCachePath error:nil];
+    }
+  JKRnUpdateModel *model = [[JKRnUpdateModel alloc]init];
+  NSMutableArray *Arr= [NSMutableArray array];
+  model.incrementVersion = @"1232";
+  model.version = @"dsdsdsd";
+  NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"123",@"path",@"456",@"name",@"789",@"type",@"10",@"title",@"",@"time", nil];
+  [Arr addObject:model];
+  
+      NSString *string=@"1234";
+  
+      NSArray *array=Arr;
+  
+      NSString *end=@"goodbay";
+  
+  
+//  更多参数放到数组中进行回调
+  callBack(@[string,@[dic,dic,dic],end]);
   
   
 }

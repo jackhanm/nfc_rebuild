@@ -34,21 +34,25 @@ export default class MineRecored extends BaseComponent<{}> {
         }
     }
     //网络请求data.js
-    fetchData(data) {
+    fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
 
-        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT, "1.0", "", false, (result) => {
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_PERSION, "1.0", "", false, (result) => {
 
                 console.log(result)
                 if (result.code === 0) {
+                    let dataList = this.getTestList(true)
                     this.setState({
                         //复制数据源
-
+                        dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
+                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
 
                     });
 
 
 
+                }else {
+                    this.setState({refreshState: RefreshState.Failure})
                 }
 
 
@@ -59,29 +63,27 @@ export default class MineRecored extends BaseComponent<{}> {
 
     componentDidMount() {
         //请求数据
-
-        this.fetchData();
         this.onHeaderRefresh()
     }
     onHeaderRefresh = () => {
         this.setState({refreshState: RefreshState.HeaderRefreshing})
-
-        // 模拟网络请求
-        setTimeout(() => {
-            // 模拟网络加载失败的情况
-            if (Math.random() < 0.2) {
-                this.setState({refreshState: RefreshState.Failure})
-                return
-            }
-
-            //获取测试数据
-            let dataList = this.getTestList(true)
-
-            this.setState({
-                dataList: dataList,
-                refreshState: RefreshState.Idle,
-            })
-        }, 2000)
+        this.fetchData(true);
+        // // 模拟网络请求
+        // setTimeout(() => {
+        //     // 模拟网络加载失败的情况
+        //     if (Math.random() < 0.2) {
+        //         this.setState({refreshState: RefreshState.Failure})
+        //         return
+        //     }
+        //
+        //     //获取测试数据
+        //     let dataList = this.getTestList(true)
+        //
+        //     this.setState({
+        //         dataList: dataList,
+        //         refreshState: RefreshState.Idle,
+        //     })
+        // }, 2000)
     }
     navigationBarProps() {
 
@@ -102,24 +104,12 @@ export default class MineRecored extends BaseComponent<{}> {
     }
     onFooterRefresh = () => {
         this.setState({refreshState: RefreshState.FooterRefreshing})
-
+        this.fetchData(false);
         // 模拟网络请求
-        setTimeout(() => {
-            // 模拟网络加载失败的情况
-            if (Math.random() < 0.2) {
-                this.setState({refreshState: RefreshState.Failure})
-                return
-            }
 
-            //获取测试数据
-            let dataList = this.getTestList(false)
 
-            this.setState({
-                dataList: dataList,
-                refreshState: dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
-            })
-        }, 2000)
-    }
+
+        }
 
     // 获取测试数据
     getTestList(isReload: boolean): Array<Object> {

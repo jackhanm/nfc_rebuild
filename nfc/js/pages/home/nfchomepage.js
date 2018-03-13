@@ -13,10 +13,8 @@ import {
     Keyboard,
     StatusBar,
     Platform,
-    NativeModules
+    NativeAppEventEmitter,NativeEventEmitter,NativeModules
 } from 'react-native';
-
-var RNCalliOSAction = NativeModules.RNCalliOSAction;
 
 import ScreenUtil from '../../util/ScreenUtil'
 
@@ -53,10 +51,6 @@ export default class nfchomepage extends Component{
         //请求数据
 
         this.fetchData();
-
-        RNCalliOSAction.callisoActionWidthCallBack((msg)=>{
-            console.log(msg);
-        })
 
     }
 

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Liu Jinyong
- * All rights reserved.
- *
- * https://github.com/huanxsd/MeiTuan  
- * @flow
- */
 
 import React, {PureComponent} from 'react'
 import { SwipeAction, List } from 'antd-mobile';
@@ -16,8 +9,54 @@ const color = {
     border: '#e0e0e0',
     background: '#f3f3f3'
 }
-
+let substrArray;
 class Cell extends PureComponent {
+
+    constructor(prop){
+        super(prop);
+
+    }
+
+    rendertag(infp){
+        let imagestr = ""+infp.reportType;
+        substrArray = imagestr.split(",");
+        console.log(substrArray)
+
+        return(
+
+            <View style={{ flexDirection:'row',
+                alignItems:'center'}}>
+                {substrArray.includes('PERSON_RISK') ?this.rendertag1():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag2():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag3():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag4():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag5():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag6():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag7():null}
+            </View>
+    )
+    }
+    rendertag1(){
+        return(<Image source={require('../nfcimg/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag2(){
+        return(<Image source={require('../nfcimg/car_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag3(){
+        return( <Image source={require('../nfcimg/company_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag4(){
+        return(<Image source={require('../nfcimg/credit_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag5(){
+        return(<Image source={require('../nfcimg/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag6(){
+        return(<Image source={require('../nfcimg/home_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag7(){
+        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
 
     render() {
         const right = [
@@ -29,10 +68,10 @@ class Cell extends PureComponent {
             },
         ];
 
-        console.log('render cell')
-        let {info} = this.props
 
-        info.imageUrl = info.imageUrl.replace('w.h', '160.0')
+        let {info} = this.props
+        console.log(info)
+
 
         return (
             <List>
@@ -44,18 +83,12 @@ class Cell extends PureComponent {
                                 <View style={{flex:4, flexDirection:'row',
                                     alignItems:'center',}}>
                                     <Text style={{color:'#4352B2', marginRight:5}}>
-                                        个人
+                                        {info.queryType ==='PERSON'? '个人': '公司'}
                                     </Text>
                                     <Text style={{color:'black', marginRight:5}}>
-                                        韩梅梅
+                                        {info.queryKey}
                                     </Text>
-                                    <Image source={require('../nfcimg/anti_fraud_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/car_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/company_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/credit_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/home_estimate_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/home_small.png')} style={{alignSelf:'center'}}/>
-                                    <Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>
+                                    {this.rendertag(info)}
                                 </View>
                                 <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
                                     <Text>
