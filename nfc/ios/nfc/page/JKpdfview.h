@@ -10,4 +10,5 @@
 
 @interface JKpdfview : UIViewController
 @property(nonatomic, retain)NSString *pdfurl;
+@property(nonatomic, retain)NSMutableDictionary *objectDic;
 @end

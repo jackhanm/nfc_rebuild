@@ -136,7 +136,7 @@
 +(NSString *)getPhoneTime{
 //    return [[UIDevice currentDevice] systemVersion];
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
-    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm"];
     NSString *date =  [formatter stringFromDate:[NSDate date]];
     NSString *timeLocal = [[NSString alloc] initWithFormat:@"%@", date];
     return  timeLocal;

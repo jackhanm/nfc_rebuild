@@ -66,20 +66,35 @@
 -(void)rightAct
 {
   JKLog(@"下载");
- 
+  JKLog(@"%@",self.objectDic);
   NSString *patchCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"down"];
-  [[NSFileManager defaultManager] createDirectoryAtPath:patchCachePath withIntermediateDirectories:YES attributes:nil error:nil];
-   NSString *pdfDownloadpath = [NSString stringWithFormat:@"%@/%@.pdf",patchCachePath,[CTUUID getPhoneTime]];
+  BOOL jsversionExist = [[NSFileManager defaultManager] fileExistsAtPath:patchCachePath];
+  if (!jsversionExist) {
+     [[NSFileManager defaultManager] createDirectoryAtPath:patchCachePath withIntermediateDirectories:YES attributes:nil error:nil];
+  }else{
+    
+  }
+ 
+   NSString *pdfDownloadpath = [NSString stringWithFormat:@"%@/=%@=%@=%@=.pdf",patchCachePath,[self.objectDic objectForKey:@"name"],[self.objectDic objectForKey:@"typeTag"],[CTUUID getPhoneTime]];
+   BOOL downloadurl = [[NSFileManager defaultManager] fileExistsAtPath:pdfDownloadpath];
   
-  self.PDFCreator = [NDHTMLtoPDF createPDFWithURL:[NSURL URLWithString:@"http://www.baidu.com"] pathForPDF:pdfDownloadpath pageSize:kPaperSizeA4 margins:UIEdgeInsetsMake(10, 5, 10, 5) successBlock:^(NDHTMLtoPDF *htmlToPDF) {
-    NSString *result = [NSString stringWithFormat:@"HTMLtoPDF did succeed (%@ / %@)", htmlToPDF, htmlToPDF.PDFpath];
-    NSLog(@"%@",result);
+  if (downloadurl) {
+    KLToast(@"文件已下载");
+  }else{
+    self.PDFCreator = [NDHTMLtoPDF createPDFWithURL:[NSURL URLWithString:@"http://www.baidu.com"] pathForPDF:pdfDownloadpath pageSize:kPaperSizeA4 margins:UIEdgeInsetsMake(10, 5, 10, 5) successBlock:^(NDHTMLtoPDF *htmlToPDF) {
+      NSString *result = [NSString stringWithFormat:@"HTMLtoPDF did succeed (%@ / %@)", htmlToPDF, htmlToPDF.PDFpath];
+      NSLog(@"%@",result);
+       KLToast(@"文件下载成功");
+      
+    } errorBlock:^(NDHTMLtoPDF *htmlToPDF) {
+      NSString *result = [NSString stringWithFormat:@"HTMLtoPDF did fail (%@)", htmlToPDF];
+      NSLog(@"%@",result);
+      KLToast(@"文件下载失败");
+      
+    }];
+  }
   
-  } errorBlock:^(NDHTMLtoPDF *htmlToPDF) {
-    NSString *result = [NSString stringWithFormat:@"HTMLtoPDF did fail (%@)", htmlToPDF];
-    NSLog(@"%@",result);
-   
-  }];
+  
 
 }
 -(void)createview

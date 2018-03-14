@@ -179,7 +179,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
       //js文件存在
       listarr =[manager contentsOfDirectoryAtPath:jsversionCachePath error:nil];
     }
-  JKLog(@"%@",listarr);
+ 
   JKRnUpdateModel *model = [[JKRnUpdateModel alloc]init];
   NSMutableArray *Arr= [NSMutableArray array];
   model.incrementVersion = @"1232";
@@ -187,13 +187,18 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
   
   for (int i =0 ; i < listarr.count; i++) {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"123",@"path",@"456",@"name",@"789",@"type",@"10",@"title",@"",@"time", nil];
+    NSArray *arr= [listarr[i] componentsSeparatedByString:@"="];
+   
     [dic setValue:[NSString stringWithFormat:@"%@/%@",jsversionCachePath,listarr[i]]  forKey:@"path"];
-    [dic setValue:@"baidu" forKey:@"name"];
+    [dic setValue:arr[1] forKey:@"queryKey"];
+     [dic setValue:arr[2] forKey:@"reportType"];
+     [dic setValue:arr[3] forKey:@"createTime"];
+      [dic setValue:arr[3] forKey:@"queryType"];
    
     [Arr addObject:dic];
     
   }
-  JKLog(@"%@",Arr);
+ 
   
       NSString *string=@"1234";
   

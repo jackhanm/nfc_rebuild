@@ -28,5 +28,5 @@
 #import "JKRNupdateModel.h"
 #import <SSZipArchive.h>
 #import "JkFileHelper.h"
-
+#import <Toast/UIView+Toast.h>
 #endif /* changtian_h */

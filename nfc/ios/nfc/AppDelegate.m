@@ -117,9 +117,10 @@
 }
 - (void)OpenWebview:(NSNotification *)notification{
   
-  NSLog(@"%@",notification);
+ 
   NSLog(@"---接收到通知---");
   JKpdfview *vc= [[JKpdfview alloc]init];
+  vc.objectDic =notification.object;
   [self.nav pushViewController:vc animated:YES];
   
   
