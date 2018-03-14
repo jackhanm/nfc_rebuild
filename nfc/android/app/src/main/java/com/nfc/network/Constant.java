@@ -2,6 +2,8 @@ package com.nfc.network;
 
 import android.os.Environment;
 
+import com.nfc.util.NativeConstant;
+
 import java.io.File;
 
 /**
@@ -96,9 +98,9 @@ public class Constant {
     /*============================================================================================*/
     //文件下载地址
     public static final String BASE_FILE = Environment.getExternalStorageDirectory() + File.separator
-            + "KuaiCheCaiFu";
+            + NativeConstant.APP_NAME_FILE;
 
-    public static final String APK_FILE = "kuaichecaifu.apk";
+    public static final String APK_FILE = "NFC.apk";
 
     public static final String DOWN_APK = BASE_FILE + File.separator + Constant.APK_FILE;
 

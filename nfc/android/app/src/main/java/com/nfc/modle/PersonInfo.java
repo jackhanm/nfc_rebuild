@@ -78,6 +78,8 @@ public class PersonInfo implements Parcelable{
     public String money = "";
     public String backTime = "";
 
+    public String typeTag = "";
+
     protected PersonInfo(Parcel in) {
         companyId = in.readString();
         companyName = in.readString();
@@ -130,6 +132,7 @@ public class PersonInfo implements Parcelable{
         companyTime = in.readString();
         money = in.readString();
         backTime = in.readString();
+        typeTag = in.readString();
     }
 
     public static final Creator<PersonInfo> CREATOR = new Creator<PersonInfo>() {
@@ -202,6 +205,7 @@ public class PersonInfo implements Parcelable{
         dest.writeString(companyTime);
         dest.writeString(money);
         dest.writeString(backTime);
+        dest.writeString(typeTag);
     }
 
     public PersonInfo(){

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
@@ -58,6 +59,10 @@ public class ReportShowActivity extends AppCompatActivity {
     }
 
     private void displayFromFile() {
+        File pdf = new File(filePath);
+        if(!pdf.exists()){
+            Toast.makeText(this, "文件不存在，请重新下载", Toast.LENGTH_SHORT).show();
+        }
         pdfView.fromFile(new File(filePath))
                 .defaultPage(0)
                 .onPageChange(new OnPageChangeListener() {

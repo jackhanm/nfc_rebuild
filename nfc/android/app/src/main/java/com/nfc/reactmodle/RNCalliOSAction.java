@@ -106,22 +106,23 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
         personInfo.money = data.getString("countrycompany");
         personInfo.backTime = data.getString("countrycompany");
 
+        personInfo.typeTag = data.getString("typeTag");
+
         intent.putExtra("PERSONINFO", personInfo);
 
         application.startActivity(intent);
     }
 
     @ReactMethod
-    public void showPdf(String val){
+    public void calliOStopdfView(String val){
         Intent intent = new Intent(application, ReportShowActivity.class);
         intent.putExtra("PATH", val);
         application.startActivity(intent);
     }
 
-    @ReactMethod void callisoActionWidthCallBack(Callback callback){
+    @ReactMethod void calliOSActionWithCallBack(Callback callback){
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport");
-        //String[] filelist = file.list();
-        String[] filelist = new String[]{"唐地,1;2;3;4,2018/02/03", "唐地,1;2;3;4,2018/02/04", "唐地,1;2;3;4,2018/02/05", "唐地,1;2;3;4,2018/02/06"};
+        String[] filelist = file.list();
 
         WritableArray array = Arguments.createArray();
 
@@ -135,10 +136,10 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
             }
             WritableMap map = Arguments.createMap();
             map.putString("path", Environment.getExternalStorageDirectory() + File.separator + "NFCreport" + File.separator + files);
-            map.putString("title", jsondata[0]);
-            map.putString("name", "");
-            map.putString("type", type);
-            map.putString("time", jsondata[jsondata.length - 1]);
+            map.putString("quertType", jsondata[0]);
+            map.putString("queryKey", "");
+            map.putString("reportType", type);
+            map.putString("createTime", jsondata[jsondata.length - 1]);
             array.pushMap(map);
         }
         callback.invoke(array);

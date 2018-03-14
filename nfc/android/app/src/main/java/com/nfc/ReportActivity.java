@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -46,6 +47,17 @@ public class ReportActivity extends AppCompatActivity {
     private Button button;
 
     private ImageView back;
+
+    private PersonInfo personInfo;
+
+    private String fileName = "";
+
+    private File file;
+    private File dexCacheFile;
+    // 获取需要打印的webview适配器
+    private PrintDocumentAdapter printAdapter;
+    private PageRange[] ranges;
+    private ParcelFileDescriptor descriptor;
 
     private void checkPermission() {
         //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
@@ -83,7 +95,7 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.report_activity);
         statuBar();
         checkPermission();
-        PersonInfo personInfo = getIntent().getParcelableExtra("PERSONINFO");
+        personInfo = getIntent().getParcelableExtra("PERSONINFO");
         webView = (WebView) findViewById(R.id.web);
         button = (Button) findViewById(R.id.download);
         back = (ImageView) findViewById(R.id.back);
@@ -139,17 +151,26 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
     }
-
-    File file = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport" + File.separator + new Date().getTime() + ".pdf");
-    File dexCacheFile;
-    // 获取需要打印的webview适配器
-    PrintDocumentAdapter printAdapter;
-    PageRange[] ranges;
-    ParcelFileDescriptor descriptor;
     /**
         a* @param webView
         */
     private void printPDFFile(WebView webView) {
+
+        if(!personInfo.companyName.equals("")){
+            fileName += personInfo.companyName;
+        }else{
+            fileName += personInfo.name;
+        }
+        String tmp = personInfo.typeTag.replace(",", ";");
+        String typeTag = tmp.substring(0, tmp.length() - 1);
+        fileName = fileName + "," + typeTag;
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String pdfDate = format.format(new Date());
+        fileName = fileName + "," + pdfDate;
+
+        file = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport" + File.separator + fileName + ".pdf");
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
 /* android 5.0之后，出于对动态注入字节码安全性德考虑，已经不允许随意指定字节码的保存路径了，需要放在应用自己的包名文件夹下。*/
 //新的创建DexMaker缓存目录的方式，直接通过context获取路径
