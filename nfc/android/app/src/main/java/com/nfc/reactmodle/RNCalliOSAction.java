@@ -40,6 +40,7 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
 
         //企业社会代码
         PersonInfo personInfo = new PersonInfo();
+        personInfo.companyName = data.getString("companyName");
         personInfo.companyId = data.getString("companyId");
                 //省份证号码
         personInfo.id = data.getString("id");
