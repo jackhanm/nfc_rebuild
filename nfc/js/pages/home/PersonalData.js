@@ -197,6 +197,9 @@ const fillinfo = {
     //企业名称
     companyName:'',
 
+    //查询标签
+    typeTag:'',
+
     //省份证号码
     id:'',
     //姓名
@@ -403,14 +406,26 @@ export default class PersonalData extends BaseComponent{
         fillinfo.personalcarcard = '',
         fillinfo.crimehistory = '',
         fillinfo.realestate = '',
-        fillinfo.familyknow = ''
+        fillinfo.familyknow = '',
+        fillinfo.typeTag = '',
 
 
 
+        this.setState({
+            companyRiskManage:false
+            , creditReport:false
+            , antiFraud:false
+            , riskManage:false
+            , all:false
+            , homeRent:false
+            , carPrice:false
+            , homePrice:false
+        });
 
 
         if(this.props.navigation.state.params.type == 0){
             console.log(this.props.navigation.state.params);
+
             this.setState({
                 render_type:0
                 , creditReport:this.props.navigation.state.params.creditReport
@@ -1350,6 +1365,43 @@ export default class PersonalData extends BaseComponent{
 
     _checkInfo(){
 
+
+        var tag;
+
+        if(this.state.render_type == 0){
+            if(this.state.all){
+                fillinfo.typeTag = '1,2,3,4,5,6'
+            }else {
+                tag = [];
+                if (this.state.creditReport) tag.push('1');
+                if (this.state.antiFraud) tag.push('2');
+                if (this.state.riskManage) tag.push('3');
+                if(this.state.homeRent)tag.push('4');
+                if(this.state.carPrice)tag.push('5');
+                if(this.state.homePrice)tag.push('6');
+                for(i = 0; i < tag.length; i++){
+                    fillinfo.typeTag += tag[i];
+                    fillinfo.typeTag += ',';
+                }
+            }
+
+        }else {
+            if (this.state.all) {
+                fillinfo.typeTag = '7,8,9,10'
+            } else {
+                tag = [];
+                if (this.state.companyRiskManage) tag.push('7');
+                if (this.state.homeRent) tag.push('8');
+                if (this.state.carPrice) tag.push('9');
+                if (this.state.homePrice) tag.push('10');
+                for (i = 0; i < tag.length; i++) {
+                    fillinfo.typeTag += tag[i];
+                    fillinfo.typeTag += ',';
+                }
+            }
+        }
+
+
         var data = new Date();
 
         console.log(fillinfo);
@@ -1366,6 +1418,7 @@ export default class PersonalData extends BaseComponent{
         }
 
         if(this.state.carPrice){
+
 
             fillinfo.carBrand = this.state.selectedBradn.code;
             fillinfo.carVs = this.state.selectedVehicles.code;
@@ -1494,7 +1547,7 @@ export default class PersonalData extends BaseComponent{
         // this.props.navigation.navigate('WebViewCommunication', {
         //     fillinfo
         // });
-        RNCalliOSAction.calliOSActionWithOneParams(JSON.stringify(fillinfo));
+        RNCalliOSAction.calliOSActionWithOneParams(fillinfo);
 
     }
 
