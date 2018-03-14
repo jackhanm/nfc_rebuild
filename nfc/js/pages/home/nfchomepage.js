@@ -13,16 +13,16 @@ import {
     Keyboard,
     StatusBar,
     Platform,
-    NativeAppEventEmitter,NativeEventEmitter,NativeModules
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { List } from 'antd-mobile';
+import { List, Toast } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
 
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
@@ -69,7 +69,7 @@ export default class nfchomepage extends Component{
 
     render(){
         return(<View style={styles.searchepage}>
-            <StatusBar backgroundColor={'#1B52A2'} />
+            <StatusBar backgroundColor={GlobalStyles.themeColor} />
             {this._renderHead()}
             {this._renderMid()}
             {this._renderFoot()}
@@ -130,7 +130,7 @@ export default class nfchomepage extends Component{
 
                 </TextInput>
 
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList', this.state.searchText)}} >
+                <TouchableOpacity onPress={()=>{this.state.searchText == ''?Toast.info('请输入查询条件', 0.5):this.props.navigation.navigate('SearchList', this.state.searchText)}} >
                     <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 
@@ -195,6 +195,11 @@ export default class nfchomepage extends Component{
                 </View>
             </TouchableOpacity>
         );
+    }
+
+    componentWillUnmount(){
+        console.log('----componentWillUnmount--------')
+        Keyboard.dismiss();
     }
 
 }

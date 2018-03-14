@@ -50,7 +50,6 @@ public class ReportActivity extends AppCompatActivity {
 
     private PersonInfo personInfo;
 
-    private String fileName = "";
 
     private File file;
     private File dexCacheFile;
@@ -156,18 +155,28 @@ public class ReportActivity extends AppCompatActivity {
         */
     private void printPDFFile(WebView webView) {
 
-        if(!personInfo.companyName.equals("")){
-            fileName += personInfo.companyName;
+        String fileName = "";
+
+        if(!personInfo.companyName.equals("") || !personInfo.companyId.equals("")){
+            fileName += "COMPANY";
+            fileName = fileName + "," + personInfo.companyName + personInfo.companyId;
         }else{
-            fileName += personInfo.name;
+            fileName += "PERSON";
+            fileName = fileName + "," + personInfo.name;
         }
-        String tmp = personInfo.typeTag.replace(",", ";");
-        String typeTag = tmp.substring(0, tmp.length() - 1);
+
+        String typeTag = personInfo.typeTag.replace(",", ";");
         fileName = fileName + "," + typeTag;
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String pdfDate = format.format(new Date());
         fileName = fileName + "," + pdfDate;
+
+        File filedir = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport");
+
+        if(!filedir.exists()){
+            filedir.mkdirs();
+        }
 
         file = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport" + File.separator + fileName + ".pdf");
 
@@ -225,7 +234,6 @@ public class ReportActivity extends AppCompatActivity {
                 public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                     if (method.getName().equals("onWriteFinished")) {
                         Toast.makeText(ReportActivity.this,"Success",Toast.LENGTH_SHORT).show();
-                        // PDF文件写入本地完成，导出成功
                         Log.e("onLayoutSuccess","onLayoutSuccess");
                     } else {
                         Toast.makeText(ReportActivity.this,"导出失败",Toast.LENGTH_SHORT).show();

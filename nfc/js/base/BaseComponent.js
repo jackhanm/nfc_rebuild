@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Platform,Dimensions,StyleSheet,View
+    Platform,Dimensions,StyleSheet,View,Keyboard
 } from 'react-native';
 
 let width = Dimensions.get('window').width
@@ -42,6 +42,7 @@ import NavigationBar from '../compoent/NavigationBar'
         return null
     }
 
+
     renderNavigationBar() {
         let navigationBarProps = this.navigationBarProps()
         Object.assign(navigationBarProps, this.props)
@@ -67,6 +68,11 @@ import NavigationBar from '../compoent/NavigationBar'
             </View>
         )
     }
+
+     componentDidMount() {
+         Keyboard.dismiss();
+     }
+
 
     // //新建通知的监听
     // componentDidMount() {

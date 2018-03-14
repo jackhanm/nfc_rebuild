@@ -61,7 +61,9 @@ export default class MineRecored extends BaseComponent<{}> {
 
     }
 
+
     componentDidMount() {
+        super.componentDidMount();
         //请求数据
         this.onHeaderRefresh()
     }

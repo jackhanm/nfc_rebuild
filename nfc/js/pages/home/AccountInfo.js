@@ -9,6 +9,7 @@ import {
     Image,
     TextInput,
     FlatList,
+    Keyboard
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {BaseComponent} from  '../../base/BaseComponent'
@@ -55,6 +56,7 @@ export default class AccountInfo extends BaseComponent{
 
     componentDidMount() {
         //请求数据
+        super.componentDidMount();
 
         this.fetchData();
 

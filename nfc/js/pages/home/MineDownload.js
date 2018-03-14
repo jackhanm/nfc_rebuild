@@ -62,11 +62,8 @@ export default class MineDownload extends BaseComponent<{}> {
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
-        RNCalliOSAction.calliOSActionWithCallBack((string,array,end)=>{
-            console.log(string);
+        RNCalliOSAction.calliOSActionWithCallBack((array)=>{
             console.log(array);
-            console.log(end);
-            let data=string+'  '+array[0]+'  '+array[1]+'  '+array[2]+'  '+end;
 
             this.setState({
                 dataList:  isReload ?array: [...this.state.dataList, ...result.data.list ],
@@ -79,6 +76,7 @@ export default class MineDownload extends BaseComponent<{}> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         //请求数据
         this.onHeaderRefresh()
     }

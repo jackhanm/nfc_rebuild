@@ -3,7 +3,7 @@ import {
 } from 'react-navigation';
 import React, { Component } from 'react';
 import {
-    Platform,Animated,View,Button
+    Platform,Animated,View,Button,Keyboard
 } from 'react-native';
 import MyStackNavigation from "./MyStackNavigation";
 import Welcome from "./Welcome"
@@ -100,6 +100,7 @@ const StackOptions = ({navigation}) => {
         //android相关操作
         header=null
     }
+
     const headerStyle = {backgroundColor:'white'};
     const headerTitle ='ww';
     const headerTitleStyle = {fontSize:20,color:'white',fontWeight:'500'}

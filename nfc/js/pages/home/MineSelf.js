@@ -80,6 +80,7 @@ export default class MineSelf extends BaseComponent{
     }
 
     componentDidMount() {
+        super.componentDidMount();
         //请求数据
 
         console.log('sss');

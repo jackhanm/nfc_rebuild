@@ -16,6 +16,10 @@ export default class ReportData extends BaseComponent {
         }
     }
 
+    componentDidMount(){
+        super.componentDidMount();
+    }
+
     navigationBarProps() {
 
         return {

@@ -55,6 +55,7 @@ export default class SearchList extends BaseComponent<{}> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         //请求数据
         this.setState({searchkey:this.props.navigation.state.params})
         this.onHeaderRefresh()

@@ -3,7 +3,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import {
     StyleSheet,
     View,
-    Image,SafeAreaView,Platform,Dimensions
+    Image,SafeAreaView,Platform,Dimensions, Keyboard
 } from 'react-native';
 
 import GlobalStyle from '../../../res/styles/GlobalStyles'
@@ -87,7 +87,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/1.png')} />}
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/1.png')} />}
-                    onPress={() => this.setState({ selectedTab: '首页' })}>
+                    onPress={() => {Keyboard.dismiss();this.setState({ selectedTab: '首页' }); }}>
                     <Nfchomepage  {...this.props}/>
                 </TabNavigator.Item>
                 {/*<TabNavigator.Item*/}
@@ -128,7 +128,7 @@ export default class TabbarPage extends Component{
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/2.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/2.png')} />}
-                    onPress={() => this.setState({ selectedTab: '查个人' })}>
+                    onPress={() => {this.setState({ selectedTab: '查个人' });Keyboard.dismiss()}}>
                     <SearchPersonal  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
@@ -138,7 +138,7 @@ export default class TabbarPage extends Component{
                     selectedTitleStyle={styles.selectedTabText}
                     renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/3.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/3.png')} />}
-                    onPress={() => this.setState({ selectedTab: '查企业' })}>
+                    onPress={() => {this.setState({ selectedTab: '查企业' });Keyboard.dismiss()}}>
                     <SearchCompany  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
@@ -149,7 +149,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/4.png')} />}
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/4.png')} />}
-                    onPress={() => this.setState({ selectedTab: '账户' })}>
+                    onPress={() => {this.setState({ selectedTab: '账户' }); Keyboard.dismiss()}}>
                     <Mineself  {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item

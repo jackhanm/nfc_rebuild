@@ -46,6 +46,10 @@ export default class SearchCompany extends BaseComponent{
         }
     }
 
+    componentDidMount(){
+        super.componentDidMount();
+    }
+
     _render() {
         return (
             <View style={styles.container}>

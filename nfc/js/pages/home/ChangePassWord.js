@@ -9,6 +9,7 @@ import {
     Image,
     TextInput,
     FlatList,
+    Keyboard,
 } from 'react-native';
 import ScreenUtil from '../../util/ScreenUtil'
 
@@ -45,6 +46,10 @@ export default class ChangePassWord extends BaseComponent{
             value2: '',
 
         };
+    }
+
+    componentDidMount(){
+        super.componentDidMount();
     }
 
     _render(){

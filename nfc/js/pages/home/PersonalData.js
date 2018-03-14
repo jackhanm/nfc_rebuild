@@ -283,6 +283,7 @@ export default class PersonalData extends BaseComponent{
 
 
     componentDidMount() {
+        super.componentDidMount();
         console.log('===================componentDidMount====================');
 
         fillinfo={

@@ -62,6 +62,7 @@ public class ReportShowActivity extends AppCompatActivity {
         File pdf = new File(filePath);
         if(!pdf.exists()){
             Toast.makeText(this, "文件不存在，请重新下载", Toast.LENGTH_SHORT).show();
+            return;
         }
         pdfView.fromFile(new File(filePath))
                 .defaultPage(0)

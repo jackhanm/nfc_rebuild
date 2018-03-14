@@ -123,12 +123,15 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
     @ReactMethod void calliOSActionWithCallBack(Callback callback){
         File file = new File(Environment.getExternalStorageDirectory() + File.separator + "NFCreport");
         String[] filelist = file.list();
-
         WritableArray array = Arguments.createArray();
+        if(filelist == null){
+            callback.invoke(array);
+            return;
+        }
 
         for (String files : filelist){
             String[] jsondata = files.split(",");
-            String[] typelist = jsondata[1].split(";");
+            String[] typelist = jsondata[2].split(";");
             String type = "";
             for(int i = 0; i < typelist.length; i++){
                 type += typelist[i];
@@ -137,12 +140,22 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
             WritableMap map = Arguments.createMap();
             map.putString("path", Environment.getExternalStorageDirectory() + File.separator + "NFCreport" + File.separator + files);
             map.putString("quertType", jsondata[0]);
-            map.putString("queryKey", "");
+            map.putString("queryKey", jsondata[1]);
             map.putString("reportType", type);
-            map.putString("createTime", jsondata[jsondata.length - 1]);
+            String tmp = jsondata[jsondata.length - 1];
+            String time = tmp.substring(0, tmp.length() - 4);
+            map.putString("createTime", time.replace("-", "/"));
             array.pushMap(map);
         }
         callback.invoke(array);
+    }
+
+    @ReactMethod
+    public void deletepdf(String val){
+        File file = new File(val);
+        if(file.exists()){
+            file.delete();
+        }
     }
 
     @Override

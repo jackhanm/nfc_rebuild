@@ -54,6 +54,7 @@ export default class MineAbout extends BaseComponent<{}> {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         //请求数据
 
         this.fetchData();
