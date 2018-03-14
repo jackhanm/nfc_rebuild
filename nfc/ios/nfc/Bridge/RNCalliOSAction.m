@@ -77,14 +77,31 @@ RCT_EXPORT_MODULE();    //此处不添加参数即默认为这个OC类的名字
 /**************************************** RN Call iOS ***************************************************/
 
 //一个参数
-RCT_EXPORT_METHOD(calliOSActionWithOneParams:(NSString *)name)
+RCT_EXPORT_METHOD(calliOSActionWithOneParams:(id)name)
 {
   dispatch_sync(dispatch_get_main_queue(), ^{
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:@"yuhao"];
+    JKLog(@"%@",name);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
 //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
    
+    
+  });
+  
+  
+  
+}
+
+
+//一个参数
+RCT_EXPORT_METHOD(calliOStopdfView:(id)name)
+{
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    JKLog(@"%@",name);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
+    //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
+    
     
   });
   
@@ -162,12 +179,21 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
       //js文件存在
       listarr =[manager contentsOfDirectoryAtPath:jsversionCachePath error:nil];
     }
+  JKLog(@"%@",listarr);
   JKRnUpdateModel *model = [[JKRnUpdateModel alloc]init];
   NSMutableArray *Arr= [NSMutableArray array];
   model.incrementVersion = @"1232";
   model.version = @"dsdsdsd";
-  NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"123",@"path",@"456",@"name",@"789",@"type",@"10",@"title",@"",@"time", nil];
-  [Arr addObject:model];
+  
+  for (int i =0 ; i < listarr.count; i++) {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"123",@"path",@"456",@"name",@"789",@"type",@"10",@"title",@"",@"time", nil];
+    [dic setValue:[NSString stringWithFormat:@"%@/%@",jsversionCachePath,listarr[i]]  forKey:@"path"];
+    [dic setValue:@"baidu" forKey:@"name"];
+   
+    [Arr addObject:dic];
+    
+  }
+  JKLog(@"%@",Arr);
   
       NSString *string=@"1234";
   
@@ -177,7 +203,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
   
   
 //  更多参数放到数组中进行回调
-  callBack(@[string,@[dic,dic,dic],end]);
+  callBack(@[string,Arr,end]);
   
   
 }

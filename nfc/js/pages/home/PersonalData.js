@@ -1545,7 +1545,7 @@ export default class PersonalData extends BaseComponent{
 
 
         // this.props.navigation.navigate('WebViewCommunication', {
-        //     fillinfo
+        //
         // });
         RNCalliOSAction.calliOSActionWithOneParams(fillinfo);
 

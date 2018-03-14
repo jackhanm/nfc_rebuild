@@ -1,24 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
     Platform,
     StyleSheet,
-    View, Text, TouchableOpacity, Image, PixelRatio,Dimensions
+    Text,
+    View
 } from 'react-native';
-let windowHeight = Dimensions.get('window').height;
-let windowWidth = Dimensions.get('window').width;
 import TabNavigator from 'react-native-tab-navigator';
 import { List, Modal } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
-
+import Cell from  '../../compoent/Cell'
 import testData from './data'
 import {commonStyle} from '../../../js/util/commonStyle'
 export default class SearchList extends BaseComponent<{}> {
@@ -32,24 +25,27 @@ export default class SearchList extends BaseComponent<{}> {
         this.state = {
             dataList: [],
             refreshState: RefreshState.Idle,
+            searchkey:''
         }
     }
     //网络请求data.js
-    fetchData(data) {
+    fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
 
-        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT, "1.0", "", false, (result) => {
+       let searchstr =NetAPI.QUICK_CHECK +'?queryKey='+this.state.searchkey
+        NetUtils.get(NetAPI.serverUrl, searchstr, "1.0", "", false, (result) => {
 
                 console.log(result)
                 if (result.code === 0) {
+                    let dataList = this.getTestList(true)
                     this.setState({
                         //复制数据源
-
+                        dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
+                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
 
                     });
-
-
-
+                }else {
+                    this.setState({refreshState: RefreshState.Failure})
                 }
 
 
@@ -60,34 +56,33 @@ export default class SearchList extends BaseComponent<{}> {
 
     componentDidMount() {
         //请求数据
-
-        this.fetchData();
+        this.setState({searchkey:this.props.navigation.state.params})
         this.onHeaderRefresh()
     }
     onHeaderRefresh = () => {
         this.setState({refreshState: RefreshState.HeaderRefreshing})
-
-        // 模拟网络请求
-        setTimeout(() => {
-            // 模拟网络加载失败的情况
-            if (Math.random() < 0.2) {
-                this.setState({refreshState: RefreshState.Failure})
-                return
-            }
-
-            //获取测试数据
-            let dataList = this.getTestList(true)
-
-            this.setState({
-                dataList: dataList,
-                refreshState: RefreshState.Idle,
-            })
-        }, 2000)
+        this.fetchData(true);
+        // // 模拟网络请求
+        // setTimeout(() => {
+        //     // 模拟网络加载失败的情况
+        //     if (Math.random() < 0.2) {
+        //         this.setState({refreshState: RefreshState.Failure})
+        //         return
+        //     }
+        //
+        //     //获取测试数据
+        //     let dataList = this.getTestList(true)
+        //
+        //     this.setState({
+        //         dataList: dataList,
+        //         refreshState: RefreshState.Idle,
+        //     })
+        // }, 2000)
     }
     navigationBarProps() {
 
         return {
-            title: '快速查询结果',
+            title: '快速查询记录',
             titleStyle: {
                 color: commonStyle.navTitleColor,
             },
@@ -103,23 +98,11 @@ export default class SearchList extends BaseComponent<{}> {
     }
     onFooterRefresh = () => {
         this.setState({refreshState: RefreshState.FooterRefreshing})
-
+        this.fetchData(false);
         // 模拟网络请求
-        setTimeout(() => {
-            // 模拟网络加载失败的情况
-            if (Math.random() < 0.2) {
-                this.setState({refreshState: RefreshState.Failure})
-                return
-            }
 
-            //获取测试数据
-            let dataList = this.getTestList(false)
 
-            this.setState({
-                dataList: dataList,
-                refreshState: dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
-            })
-        }, 2000)
+
     }
 
     // 获取测试数据
@@ -140,31 +123,8 @@ export default class SearchList extends BaseComponent<{}> {
     }
 
     renderCell = (info: Object) => {
-        return (
-            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
-                <View style={{flex:1, flexDirection:'column'}}>
-                    <View style={styles.item}>
-                        <View style={{flex:3, flexDirection:'row',
-                            alignItems:'center',}}>
-                            <Text style={{color:'#4352B2', marginRight:5}}>
-                                个人
-                            </Text>
-
-                            <Text style={{color:'black', marginRight:5}}>
-                                韩梅梅
-                            </Text>
-                        </View>
-                        <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
-                            <Text>
-                                2018/02/23
-                            </Text>
-                            <Image style={{width:10, height:10}} source={require('../../nfcimg/backicon.png')}/>
-                        </View>
-                    </View>
-                    <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
-                </View>
-            </TouchableOpacity>
-        )
+        return <Cell info={info.item}
+                     onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}/>
     }
 
     _render() {
@@ -198,15 +158,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 84,
         textAlign: 'center'
-    },
-    item:{
-        flex:1,
-        width:windowWidth,
-        backgroundColor:'white',
-        flexDirection:'row',
-        alignItems:'center',
-        paddingRight:10,
-        paddingLeft:10,
-        height:50
     }
 });

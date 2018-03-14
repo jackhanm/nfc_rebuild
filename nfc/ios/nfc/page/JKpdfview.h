@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface JKpdfview : UIViewController
-
+@property(nonatomic, retain)NSString *pdfurl;
 @end

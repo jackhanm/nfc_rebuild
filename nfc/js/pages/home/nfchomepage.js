@@ -125,11 +125,12 @@ export default class nfchomepage extends Component{
                     returnKeyLabel='search'
                     onSubmitEditing={Keyboard.dismiss}
                     placeholder='请输入人名,身份证，企业名等关键字'
+                    onChangeText={(searchText) => this.setState({searchText})}
                     style={{height: ScreenUtil.scaleSize(90), width:ScreenUtil.scaleSize(560), marginLeft: ScreenUtil.scaleSize(20),}}>
 
                 </TextInput>
 
-                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList')}} >
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SearchList', this.state.searchText)}} >
                     <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
                 </TouchableOpacity>
 

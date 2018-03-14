@@ -57,7 +57,7 @@ export default class ChangePassWord extends BaseComponent{
                         原密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10),}]}
+                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6),}]}
                         placeholder="请输入原密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value:text})}
@@ -72,7 +72,7 @@ export default class ChangePassWord extends BaseComponent{
                         新密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10),}]}
+                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6),}]}
                         placeholder="请输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value2:text})}
@@ -86,7 +86,7 @@ export default class ChangePassWord extends BaseComponent{
                         确认密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,marginTop:ScreenUtil.scaleSize(10)}]}
+                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6)}]}
                         placeholder="再次输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value1:text})}
@@ -110,7 +110,7 @@ export default class ChangePassWord extends BaseComponent{
 
         if (this.state.value!=''&&this.state.value1!=''&&this.state.value2!=''){
             if (this.state.value1 != this.state.value2) {
-                Toast.info('两次密码输入不一致')
+                Toast.info('两次密码输入不一致',1)
                 return;
             }else {
                 NetUtils.postJson(NetAPI.serverUrl, NetAPI.CHANGE_PASSWORD, {
@@ -129,7 +129,7 @@ export default class ChangePassWord extends BaseComponent{
                 );
             }
         }else {
-            Toast.info('请输入完整信息')
+            Toast.info('请输入完整信息',1)
         }
 
 

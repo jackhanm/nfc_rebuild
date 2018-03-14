@@ -17,10 +17,9 @@ module.exports ={
 //生产
 
 //  快速查询
-    QUICK_CHECK: '/index/quick',
+    QUICK_CHECK: '/report/quick',
     // 分页查询记录
     REPORT_LIST: '/index/reportLog',
-
     // 查询记录详细
     REPORT_LIST_DETAIL: '/index/report',
     // 平台数据总览
