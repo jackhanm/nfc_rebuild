@@ -14,6 +14,7 @@
 #import "JKpdfview.h"
 #import "RNCalliOSAction.h"
 #import "JKViewController.h"
+#import "JKReadview.h"
 @interface AppDelegate ()
 @property (nonatomic,strong) RCTBridge *bridge;
 @property (nonatomic, strong) UINavigationController *nav;
@@ -41,6 +42,9 @@
   
 #pragma mark 监听
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OpenWebview:) name:@"OpenWebview" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Openpdfview:) name:@"Openpdfview" object:nil];
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletepdfview:) name:@"deletepdfview" object:nil];
+  
 #if DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -117,13 +121,40 @@
 }
 - (void)OpenWebview:(NSNotification *)notification{
   
-  NSLog(@"%@",notification);
+ 
   NSLog(@"---接收到通知---");
   JKpdfview *vc= [[JKpdfview alloc]init];
+  vc.objectDic =notification.object;
   [self.nav pushViewController:vc animated:YES];
   
   
 }
+
+- (void)Openpdfview:(NSNotification *)notification{
+  
+  
+  NSLog(@"---接收到通知---");
+  JKReadview *vc= [[JKReadview alloc]init];
+  vc.pdfurl =notification.object;
+  [self.nav pushViewController:vc animated:YES];
+  
+  
+}
+- (void)deletepdfview:(NSNotification *)notification{
+  
+  
+  NSLog(@"---接收到通知---");
+  if ([[NSFileManager defaultManager] removeItemAtPath:notification.object error:nil]) {
+    KLToast(@"删除成功")
+  }else{
+    KLToast(@"删除失败")
+  }
+ ;
+  
+  
+}
+
+
 -(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler{
   NSLog(@"%s", __func__);
   [[JKDownloadSession downloadSession] addCompletionHandler:completionHandler identifier:identifier];

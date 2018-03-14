@@ -88,7 +88,7 @@ export default class MineDownload extends BaseComponent<{}> {
     navigationBarProps() {
 
         return {
-            title: '我的记录',
+            title: '下载管理',
             titleStyle: {
                 color: commonStyle.navTitleColor,
             },
@@ -132,7 +132,11 @@ export default class MineDownload extends BaseComponent<{}> {
         return <Cell info={info.item}
                      onPress={()=>{
                          RNCalliOSAction.calliOStopdfView(info.item.path);
-                         console.log(info.item.path)}}/>
+                         console.log(info.item.path)}}
+                     delete={()=>{
+                         RNCalliOSAction.deletepdf(info.item.path);
+                     }}/>
+
     }
 
     _render() {

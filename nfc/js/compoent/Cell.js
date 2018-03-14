@@ -32,7 +32,11 @@ class Cell extends PureComponent {
                 {substrArray.includes('PERSON_CREDIT') ?this.rendertag4():null}
                 {substrArray.includes('PERSON_CREDIT') ?this.rendertag5():null}
                 {substrArray.includes('PERSON_CREDIT') ?this.rendertag6():null}
-                {substrArray.includes('PERSON_CREDIT') ?this.rendertag7():null}
+                {substrArray.includes('7') ?this.rendertag7():null}
+                {substrArray.includes('8') ?this.rendertag8():null}
+                {substrArray.includes('9') ?this.rendertag9():null}
+                {substrArray.includes('10') ?this.rendertag10():null}
+
             </View>
     )
     }
@@ -57,13 +61,22 @@ class Cell extends PureComponent {
     rendertag7(){
         return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
+    rendertag8(){
+        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag9(){
+        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag10(){
+        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
 
     render() {
         const right = [
 
             {
                 text: 'Delete',
-                onPress: () => console.log('delete'),
+                onPress: ()=>this.props.delete(),
                 style: { backgroundColor: 'red', color: 'white' },
             },
         ];
@@ -92,7 +105,7 @@ class Cell extends PureComponent {
                                 </View>
                                 <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
                                     <Text>
-                                        2018/02/23
+                                        {info.createTime.slice(0,10)}
                                     </Text>
                                     <Image style={{width:10, height:10}} source={require('../nfcimg/backicon.png')}/>
                                 </View>

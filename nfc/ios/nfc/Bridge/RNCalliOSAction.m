@@ -98,14 +98,25 @@ RCT_EXPORT_METHOD(calliOStopdfView:(id)name)
 {
   dispatch_sync(dispatch_get_main_queue(), ^{
     JKLog(@"%@",name);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Openpdfview" object:name];
     //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
     
     
   });
-  
-  
+
+}
+//一个参数
+RCT_EXPORT_METHOD(deletepdf:(id)name)
+{
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    JKLog(@"%@",name);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"deletepdfview" object:name];
+    //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
+    
+    
+  });
   
 }
 
@@ -187,13 +198,19 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
   
   for (int i =0 ; i < listarr.count; i++) {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"123",@"path",@"456",@"name",@"789",@"type",@"10",@"title",@"",@"time", nil];
+    NSArray *arr= [listarr[i] componentsSeparatedByString:@"="];
+   
     [dic setValue:[NSString stringWithFormat:@"%@/%@",jsversionCachePath,listarr[i]]  forKey:@"path"];
-    [dic setValue:@"baidu" forKey:@"name"];
+    [dic setValue:arr[1] forKey:@"queryType"];
+     [dic setValue:arr[2] forKey:@"queryKey"];
+     [dic setValue:arr[3] forKey:@"reportType"];
+     [dic setValue:arr[4] forKey:@"createTime"];
+    
    
     [Arr addObject:dic];
     
   }
-  JKLog(@"%@",Arr);
+ 
   
       NSString *string=@"1234";
   
