@@ -191,80 +191,7 @@ const marriage = [{code:'', caption:'已婚有子女'}
     , {code:'', caption:'离婚'},
     {code:'', caption:'未婚'}];
 
-const fillinfo = {
-    //企业社会代码
-    companyId:'',
-    //企业名称
-    companyName:'',
-
-    //查询标签
-    typeTag:'',
-
-    //省份证号码
-    id:'',
-    //姓名
-    name:'',
-    //车牌
-    carBrand:'',
-    //车系
-    carVs:'',
-    //车型号
-    carModle:'',
-    //上市时间
-    markTime:'',
-    //汽车属地 二级地址，逗号隔开
-    carAdd:'',
-    //车牌
-    carID:'',
-    //行驶公里数
-    carMileage:'',
-    //房屋地址，三级地址，逗号隔开
-    homeAdd:'',
-    //房屋名字
-    homeName:'',
-    //房屋类型
-    hometype:'',
-    //房屋面积
-    homeMeasure:'',
-    /*-----------------------------------------*/
-    peoplequality:'',
-    development:'',
-    finance:'',
-    performance:'',
-    caseinfo:'',
-    countrycompany:'',
-    companyhaoche:'',
-    companyoverdue:'',
-    userage:'',
-    education:'',
-    helathstate:'',
-    registered:'',
-    income:'',
-    percentage:'',
-    houseinfo:'',
-    marriage:'',
-    residence:'',
-    peoples:'',
-    employer:'',
-    work:'',
-    post:'',
-    creditcard:'',
-    quota:'',
-    use_year:'',
-    credit_lost:'',
-    personalhaoche:'',
-    personaloverdue:'',
-    personalcarcard:'',
-    crimehistory:'',
-    realestate:'',
-    familyknow:'',
-
-    phoneNumber:'',
-    personTime:'',
-    companyTime:'',
-    money:'',
-    backTime:'',
-}
+var fillinfo;
 
 
 
@@ -358,56 +285,80 @@ export default class PersonalData extends BaseComponent{
     componentDidMount() {
         console.log('===================componentDidMount====================');
 
-        fillinfo.hometype = ''
-        fillinfo.companyId = '',
-        fillinfo.companyName = '',
-        fillinfo.id = '',
-        fillinfo.name = '',
-        fillinfo.carBrand = '',
-        fillinfo.carVs = '',
-        fillinfo.carModle = '',
-        fillinfo.markTime = '',
-        fillinfo.carAdd = '',
-        fillinfo.carID = '',
-        fillinfo.carMileage = '',
-        fillinfo.homeAdd = '',
-        fillinfo.homeName = '',
-        fillinfo.hometype = '',
-        fillinfo.homeMeasure = ''
+        fillinfo={
+            //企业社会代码
+            companyId:'',
+            //企业名称
+            companyName:'',
 
+            //查询标签
+            typeTag:'',
 
-        fillinfo.peoplequality = '',
-        fillinfo.development = '',
-        fillinfo.finance = '',
-        fillinfo.performance = '',
-        fillinfo.caseinfo = '',
-        fillinfo.countrycompany = '',
-        fillinfo.companyhaoche = '',
-        fillinfo.companyoverdue = '',
-        fillinfo.userage = '',
-        fillinfo.education = '',
-        fillinfo.helathstate = '',
-        fillinfo.registered = '',
-        fillinfo.income = '',
-        fillinfo.percentage = '',
-        fillinfo.houseinfo = '',
-        fillinfo.marriage = '',
-        fillinfo.residence = '',
-        fillinfo.peoples = '',
-        fillinfo.employer = '',
-        fillinfo.work = '',
-        fillinfo.post = '',
-        fillinfo.creditcard = '',
-        fillinfo.quota = '',
-        fillinfo.use_year = '',
-        fillinfo.credit_lost = '',
-        fillinfo.personalhaoche = '',
-        fillinfo.personaloverdue = '',
-        fillinfo.personalcarcard = '',
-        fillinfo.crimehistory = '',
-        fillinfo.realestate = '',
-        fillinfo.familyknow = '',
-        fillinfo.typeTag = '',
+            //省份证号码
+            id:'',
+            //姓名
+            name:'',
+            //车牌
+            carBrand:'',
+            //车系
+            carVs:'',
+            //车型号
+            carModle:'',
+            //上市时间
+            markTime:'',
+            //汽车属地 二级地址，逗号隔开
+            carAdd:'',
+            //车牌
+            carID:'',
+            //行驶公里数
+            carMileage:'',
+            //房屋地址，三级地址，逗号隔开
+            homeAdd:'',
+            //房屋名字
+            homeName:'',
+            //房屋类型
+            hometype:'',
+            //房屋面积
+            homeMeasure:'',
+            /*-----------------------------------------*/
+            peoplequality:'',
+            development:'',
+            finance:'',
+            performance:'',
+            caseinfo:'',
+            countrycompany:'',
+            companyhaoche:'',
+            companyoverdue:'',
+            userage:'',
+            education:'',
+            helathstate:'',
+            registered:'',
+            income:'',
+            percentage:'',
+            houseinfo:'',
+            marriage:'',
+            residence:'',
+            peoples:'',
+            employer:'',
+            work:'',
+            post:'',
+            creditcard:'',
+            quota:'',
+            use_year:'',
+            credit_lost:'',
+            personalhaoche:'',
+            personaloverdue:'',
+            personalcarcard:'',
+            crimehistory:'',
+            realestate:'',
+            familyknow:'',
+
+            phoneNumber:'',
+            personTime:'',
+            companyTime:'',
+            money:'',
+            backTime:'',
+        }
 
 
 
@@ -1370,11 +1321,11 @@ export default class PersonalData extends BaseComponent{
 
         if(this.state.render_type == 0){
             if(this.state.all){
-                fillinfo.typeTag = '1,2,3,4,5,6'
+                fillinfo.typeTag = 'PERSON_RISK,PERSON_CREDIT,3,4,5,6'
             }else {
                 tag = [];
-                if (this.state.creditReport) tag.push('1');
-                if (this.state.antiFraud) tag.push('2');
+                if (this.state.creditReport) tag.push('PERSON_RISK');
+                if (this.state.antiFraud) tag.push('PERSON_CREDIT');
                 if (this.state.riskManage) tag.push('3');
                 if(this.state.homeRent)tag.push('4');
                 if(this.state.carPrice)tag.push('5');
