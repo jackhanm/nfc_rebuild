@@ -104,6 +104,7 @@
 		66158B842028065300C5F58A /* NSMutableArray+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B692028065300C5F58A /* NSMutableArray+Category.m */; };
 		66158B852028065300C5F58A /* ASLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B6C2028065300C5F58A /* ASLabel.m */; };
 		667BFAC82047D42F00A1551B /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667BFAA32047D42E00A1551B /* iconfont.ttf */; };
+		66898A742058CF5900A7FC8A /* JKReadview.m in Sources */ = {isa = PBXBuildFile; fileRef = 66898A732058CF5900A7FC8A /* JKReadview.m */; };
 		6694B7F32052794200B03865 /* JKpdfview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6694B7F22052794200B03865 /* JKpdfview.m */; };
 		6694B7F62052797000B03865 /* NDHTMLtoPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6694B7F52052797000B03865 /* NDHTMLtoPDF.m */; };
 		66B3950B202C454D005C1C42 /* Ubuntu-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */; };
@@ -551,6 +552,8 @@
 		66158B6B2028065300C5F58A /* UILabel+setLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+setLabel.h"; sourceTree = "<group>"; };
 		66158B6C2028065300C5F58A /* ASLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabel.m; sourceTree = "<group>"; };
 		667BFAA32047D42E00A1551B /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
+		66898A722058CF5900A7FC8A /* JKReadview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKReadview.h; sourceTree = "<group>"; };
+		66898A732058CF5900A7FC8A /* JKReadview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKReadview.m; sourceTree = "<group>"; };
 		6694B7F12052794200B03865 /* JKpdfview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKpdfview.h; sourceTree = "<group>"; };
 		6694B7F22052794200B03865 /* JKpdfview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKpdfview.m; sourceTree = "<group>"; };
 		6694B7F42052797000B03865 /* NDHTMLtoPDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDHTMLtoPDF.h; sourceTree = "<group>"; };
@@ -1010,6 +1013,8 @@
 				6694B7F22052794200B03865 /* JKpdfview.m */,
 				66D810F22056726C00C9FBEA /* JKViewController.h */,
 				66D810F32056726C00C9FBEA /* JKViewController.m */,
+				66898A722058CF5900A7FC8A /* JKReadview.h */,
+				66898A732058CF5900A7FC8A /* JKReadview.m */,
 			);
 			name = page;
 			path = nfc/page;
@@ -1771,6 +1776,7 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				66158B332028050000C5F58A /* EventEmitterManager.m in Sources */,
 				66158B812028065300C5F58A /* UIColor+Category.m in Sources */,
+				66898A742058CF5900A7FC8A /* JKReadview.m in Sources */,
 				66158B1D2028050000C5F58A /* OYCountDownManager.m in Sources */,
 				66158ACA2027FE1900C5F58A /* JkFileHelper.m in Sources */,
 				66158B2D2028050000C5F58A /* NSNull+NullSafe.m in Sources */,

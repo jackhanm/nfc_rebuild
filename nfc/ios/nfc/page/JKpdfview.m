@@ -74,8 +74,13 @@
   }else{
     
   }
- 
-   NSString *pdfDownloadpath = [NSString stringWithFormat:@"%@/=%@=%@=%@=.pdf",patchCachePath,[self.objectDic objectForKey:@"name"],[self.objectDic objectForKey:@"typeTag"],[CTUUID getPhoneTime]];
+  NSString *pdfDownloadpath;
+  if ([[self.objectDic objectForKey:@"companyId"] isEqualToString: @""]|| [[self.objectDic objectForKey:@"companyName"] isEqualToString:@""]) {
+     pdfDownloadpath= [NSString stringWithFormat:@"%@/=%@=%@=%@=%@=.pdf",patchCachePath,@"PERSON",[self.objectDic objectForKey:@"name"],[self.objectDic objectForKey:@"typeTag"],[CTUUID getPhoneTime]];
+  }else{
+     pdfDownloadpath = [NSString stringWithFormat:@"%@/=%@=%@=%@=%@=.pdf",patchCachePath,@"NOPERSON",@"公司",[self.objectDic objectForKey:@"typeTag"],[CTUUID getPhoneTime]];
+  }
+  
    BOOL downloadurl = [[NSFileManager defaultManager] fileExistsAtPath:pdfDownloadpath];
   
   if (downloadurl) {

@@ -98,14 +98,25 @@ RCT_EXPORT_METHOD(calliOStopdfView:(id)name)
 {
   dispatch_sync(dispatch_get_main_queue(), ^{
     JKLog(@"%@",name);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Openpdfview" object:name];
     //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
     
     
   });
-  
-  
+
+}
+//一个参数
+RCT_EXPORT_METHOD(deletepdf:(id)name)
+{
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    JKLog(@"%@",name);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"deletepdfview" object:name];
+    //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
+    
+    
+  });
   
 }
 
@@ -179,7 +190,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
       //js文件存在
       listarr =[manager contentsOfDirectoryAtPath:jsversionCachePath error:nil];
     }
- 
+  JKLog(@"%@",listarr);
   JKRnUpdateModel *model = [[JKRnUpdateModel alloc]init];
   NSMutableArray *Arr= [NSMutableArray array];
   model.incrementVersion = @"1232";
@@ -190,10 +201,11 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
     NSArray *arr= [listarr[i] componentsSeparatedByString:@"="];
    
     [dic setValue:[NSString stringWithFormat:@"%@/%@",jsversionCachePath,listarr[i]]  forKey:@"path"];
-    [dic setValue:arr[1] forKey:@"queryKey"];
-     [dic setValue:arr[2] forKey:@"reportType"];
-     [dic setValue:arr[3] forKey:@"createTime"];
-      [dic setValue:arr[3] forKey:@"queryType"];
+    [dic setValue:arr[1] forKey:@"queryType"];
+     [dic setValue:arr[2] forKey:@"queryKey"];
+     [dic setValue:arr[3] forKey:@"reportType"];
+     [dic setValue:arr[4] forKey:@"createTime"];
+    
    
     [Arr addObject:dic];
     
