@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
     Text,
@@ -14,7 +13,6 @@ import {
     StatusBar,
     Platform,
 } from 'react-native';
-
 import ScreenUtil from '../../util/ScreenUtil'
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -40,8 +38,11 @@ export default class nfchomepage extends Component{
                 console.log(result)
                 if (result.code === 0) {
                     this.setState({
-                        //复制数据源
+                        //
+                        searchRecord:result.data.list.splice(0,4),
+
                     });
+
                 }
             }
         );
@@ -60,14 +61,12 @@ export default class nfchomepage extends Component{
             user_photo:'',
             user_name:'余浩',
             searchText:'',
-            searchRecord:[{"time":'2018/02/23', "title":'韩美美', "type":'个人'},
-                {"time":'2018/02/23', "title":'韩美美', "type":'个人'},
-                {"time":'2018/02/23', "title":'韩美美', "type":'个人'},
-                {"time":'2018/02/23', "title":'韩美美', "type":'个人'}],
+            searchRecord:[],
         }
     }
 
     render(){
+
         return(<View style={styles.searchepage}>
             <StatusBar backgroundColor={GlobalStyles.themeColor} />
             {this._renderHead()}
@@ -168,25 +167,79 @@ export default class nfchomepage extends Component{
             renderItem={({item}) => this._renderItem(item)}
         />);
     }
+    rendertag(infp){
+        let imagestr = ""+infp.reportType;
+        substrArray = imagestr.split(",");
+        console.log(substrArray)
 
+        return(
+
+            <View style={{ flexDirection:'row',
+                alignItems:'center'}}>
+                {substrArray.includes('PERSON_RISK') ?this.rendertag1():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag2():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag3():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag4():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag5():null}
+                {substrArray.includes('PERSON_CREDIT') ?this.rendertag6():null}
+                {substrArray.includes('7') ?this.rendertag7():null}
+                {substrArray.includes('8') ?this.rendertag8():null}
+                {substrArray.includes('9') ?this.rendertag9():null}
+                {substrArray.includes('10') ?this.rendertag10():null}
+
+            </View>
+        )
+    }
+    rendertag1(){
+        return(<Image source={require('../../nfcimg/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag2(){
+        return(<Image source={require('../../nfcimg/car_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag3(){
+        return( <Image source={require('../../nfcimg/company_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag4(){
+        return(<Image source={require('../../nfcimg/credit_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag5(){
+        return(<Image source={require('../../nfcimg/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag6(){
+        return(<Image source={require('../../nfcimg/home_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag7(){
+        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag8(){
+        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag9(){
+        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
+    rendertag10(){
+        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+    }
     _renderItem(item){
+
         return(
             <TouchableOpacity onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}>
                 <View style={{flex:1, flexDirection:'column'}}>
                     <View style={styles.item}>
-                        <View style={{flex:3, flexDirection:'row',
+                        <View style={{flex:4, flexDirection:'row',
                             alignItems:'center',}}>
                             <Text style={{color:'#4352B2', marginRight:ScreenUtil.scaleSize(10)}}>
-                                {item.type}
+                                {item.queryType ==='PERSON'? '个人': '公司'}
                             </Text>
 
                             <Text style={{color:'black', marginRight:ScreenUtil.scaleSize(10)}}>
-                                {item.title}
+                                {item.queryKey}
                             </Text>
+                            {this.rendertag(item)}
                         </View>
                         <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
                             <Text>
-                                {item.time}
+                                {item.createTime.substr(0,10).replace("-","/").replace("-","/")}
                             </Text>
                             <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
                         </View>
