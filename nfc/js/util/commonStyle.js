@@ -40,8 +40,10 @@ export const commonStyle = {
     navLeftTitleColor: '#fff',
     // 导航右item title color
     navRightTitleColor: '#fff',
-    navThemeColor: '#1B52A2',
+    // navThemeColor: '#1B52A2',
+    navThemeColor: '#FF6347',
     iconGray: '#989898',
+
     iconBlack: '#262626',
 
     /** space **/

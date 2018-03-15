@@ -92,7 +92,7 @@ export default class nfchomepage extends Component{
             <View style={{height:ScreenUtil.scaleSize(128),
                 width:windowWidth, flexDirection:'row',
                 alignItems:'center',
-                backgroundColor:'#2554A2',
+                backgroundColor:GlobalStyles.themeColor,
                 paddingTop:ScreenUtil.scaleSize(50),
                 paddingBottom:ScreenUtil.scaleSize(50)}}>
                 <View style={{top:height,flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
@@ -147,13 +147,13 @@ export default class nfchomepage extends Component{
     _renderMid(){
         return(<View style={styles.container_mid}>
             <View style={{flex:2, flexDirection:'row', alignItems:'center'}}>
-                <Text style={{fontSize:18, color:'#003f98', marginLeft:ScreenUtil.scaleSize(20)}}>
+                <Text style={{fontSize:18, color:GlobalStyles.themeColor, marginLeft:ScreenUtil.scaleSize(20)}}>
                     查询记录
                 </Text>
             </View>
             <View style={{flex:1, flexDirection:'row', height:ScreenUtil.scaleSize(200), justifyContent:'flex-end', alignItems:'center'}}>
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('homeMorelist')}} >
-                    <Text style={{color:'#003f98', marginRight:ScreenUtil.scaleSize(20)}}>
+                    <Text style={{color:GlobalStyles.themeColor, marginRight:ScreenUtil.scaleSize(20)}}>
                         更多
                     </Text>
                 </TouchableOpacity>
@@ -228,7 +228,7 @@ export default class nfchomepage extends Component{
                     <View style={styles.item}>
                         <View style={{flex:4, flexDirection:'row',
                             alignItems:'center',}}>
-                            <Text style={{color:'#4352B2', marginRight:ScreenUtil.scaleSize(10)}}>
+                            <Text style={{color:GlobalStyles.themeColor, marginRight:ScreenUtil.scaleSize(10)}}>
                                 {item.queryType ==='PERSON'? '个人': '公司'}
                             </Text>
 
