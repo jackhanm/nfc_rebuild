@@ -1497,7 +1497,7 @@ export default class PersonalData extends BaseComponent{
         //
         // });
         RNCalliOSAction.calliOSActionWithOneParams(fillinfo);
-
+        this.props.navigation.goBack()
     }
 
 

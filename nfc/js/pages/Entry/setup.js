@@ -166,7 +166,6 @@ const SimpleApp = StackNavigator(
         Elemalogin:{screen:Elemalogin},
         PersonalData:{screen:PersonalData},
         WebViewCommunication :{screen:WebViewCommunication},
-        PersonalData:{screen:PersonalData},
         ChangePassWord:{screen:ChangePassWord},
         AccountInfo:{screen:AccountInfo},
         MineAbout:{screen:MineAbout},

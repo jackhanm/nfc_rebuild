@@ -7,12 +7,11 @@ import {
 } from 'react-native';
 
 import GlobalStyle from '../../../res/styles/GlobalStyles'
-import SecondScreen from "../secondTab/SecondScreen";
+
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
 import CheckBox from '../ThirdTab/CheckBox'
-import DatetimePick from '../ThirdTab/DatetimePick'
-import AntDatapick from '../ThirdTab/AntDatapick'
+
 import Elemalogin from  '../ThirdTab/Elemalogin'
 import Antmobile from  '../ThirdTab/Antmobile'
 import LearningRedux from '../ThirdTab/LearningRedux'
@@ -248,5 +247,12 @@ const styles = StyleSheet.create({
         width:24,
         height:24,
         tintColor:GlobalStyle.TabselectColor
+    },
+    iconSPE:{
+        position:'absolute',
+        width: Platform.OS == 'android'?45:60,
+        height:Platform.OS == 'android'?45:60,
+        bottom:Platform.OS == 'android'?-15:-15,
+        left:Platform.OS == 'android'?-22.5:-30
     }
 });
