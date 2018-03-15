@@ -1359,12 +1359,9 @@ export default class PersonalData extends BaseComponent{
         console.log(fillinfo);
         if(this.state.render_type == 1 && (this.state.all || this.state.companyRiskManage)){
             var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
-            if (!orgCode.test(fillinfo.companyId)) {
+
+            if (orgCode.test(fillinfo.companyId) || fillinfo.companyName == '') {
                 this._showToast("企业社会信用代码输入错误！")
-                return;
-            }
-            if(fillinfo.companyName == ''){
-                this._showToast("请输入企业姓名")
                 return;
             }
         }

@@ -20,6 +20,8 @@ import com.nfc.util.PhoneMessage;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
+import static com.nfc.util.NativeConstant.SHARED_PREFERENCES;
+
 @RuntimePermissions
 public class MainActivity extends ReactActivity implements UpdateDialog.CancleCallBack, UpdateDialog.EnsureCallBack{
 
@@ -98,7 +100,7 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
         ForceLoading forceLoading = MainApplication.getInstance().needUpdate();
         forceLoading.isUpdate = false;
         MainActivity.this
-                .getSharedPreferences("kuaiCheCaiFu", Context.MODE_PRIVATE)
+                .getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
                 .putString(NativeConstant.JS_VERSION_NAME, forceLoading.version)
                 .commit();

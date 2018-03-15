@@ -53,7 +53,7 @@ public class Constant {
     public static final String ARTICLE_VIDEO = "content/article/video/{videoId}";
 
     //公共平台测试baseURL
-    private static final String PLAT_BASE_URL_2 = "http://192.168.1.202:8901/kccf";
+    private static final String PLAT_BASE_URL_2 = "http://192.168.1.32:8888/mockjsdata/7";
 
     public static final String BASE_URL_2 = PLAT_BASE_URL_2;
 
@@ -62,7 +62,7 @@ public class Constant {
     public static final String COLLECTINGINFO = BASE_URL_2 + "appdevice/collectingInfo";
 
     //更新版本
-    public static final String UPDATE_VERSION = BASE_URL_2 + "/app/version";
+    public static final String UPDATE_VERSION = BASE_URL_2 + "/app/anroidVersion";
 
     //启动页面
     public static final String START_PAGE = BASE_URL + "app/startup";
