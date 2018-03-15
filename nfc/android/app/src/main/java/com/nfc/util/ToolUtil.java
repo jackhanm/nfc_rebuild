@@ -82,7 +82,7 @@ public class ToolUtil {
      */
     public static String loadJSVersion(Context context){
         SharedPreferences sharedPreferences = context
-                .getSharedPreferences("kuaiCheCaiFu", Context.MODE_PRIVATE);
+                .getSharedPreferences(NativeConstant.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         String jsVersion = sharedPreferences.getString(NativeConstant.JS_VERSION_NAME, "0");
         String loadVersion = null;
         if(jsVersion.equals(NativeConstant.VERSION_ERROR)){
