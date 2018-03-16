@@ -15,6 +15,9 @@
 #import "RNCalliOSAction.h"
 #import "JKViewController.h"
 #import "JKReadview.h"
+#import "CTUUID.h"
+#import <XHLaunchAd.h>
+
 @interface AppDelegate ()
 @property (nonatomic,strong) RCTBridge *bridge;
 @property (nonatomic, strong) UINavigationController *nav;
@@ -22,7 +25,7 @@
 @property (nonatomic, strong)NSString *jslistStr;
 @property (nonatomic, strong)NSDictionary *AppUpdateInfo;
 @property (nonatomic, strong)NSArray *RnUpdateInfo;
-
+@property (nonatomic, assign)id responseobject;
 
 
 @end
@@ -31,21 +34,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  JKLog(@"%@",NSHomeDirectory());
+  
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  self.window.backgroundColor=[UIColor whiteColor];
+  
+  
+   [self setUpAd_show];
  __block NSURL *jsCodeLocation;
- 
   jsCodeLocation=[self getBundlePath];
   __block RCTRootView *rootView ;
  self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
- 
 
-  
-#pragma mark 监听
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OpenWebview:) name:@"OpenWebview" object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Openpdfview:) name:@"Openpdfview" object:nil];
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletepdfview:) name:@"deletepdfview" object:nil];
-  
-#if DEBUG
+#if !DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -63,60 +63,83 @@
   self.window.rootViewController = self.nav;
   [self.window makeKeyAndVisible];
 #else
-  [self checkupdateSuccess:^(id  _Nullable responseobject) {
+  JKLog(@"time+BEGIN%@", [CTUUID getPhoneTimeToss]);
+  
+  dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    // 处理耗时操作的代码块...
+    [self checkupdateSuccess:^(id  _Nullable responseobject) {
+      
+      JKLog(@"%@",responseobject);
+      self.responseobject = responseobject;
+      //原则 加载逻辑在前，更新逻辑在后
+      //1 . 更新接口网络请求
+      //2 遍历本地文件夹，判断是否存在可以加载的js文件，加载js
+      //3 检查更新操作
+      //    JKLog(@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"load"]);
+   JKLog(@"time+SUCCESS%@", [CTUUID getPhoneTimeToss]);
+      // 加载
+      dispatch_async(dispatch_get_main_queue(), ^{
+        //回调或者说是通知主线程刷新，
+      
+       
+        jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:responseobject jsListArr:self.jslistArr];
+        
+        rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                               moduleName:@"nfc"
+                                        initialProperties:nil
+                                            launchOptions:launchOptions];
+        rootView.backgroundColor = [UIColor whiteColor];
+        rootView.contentView.backgroundColor = [UIColor whiteColor];
+        JKViewController *rootViewController = [[JKViewController alloc]init];
+        rootViewController.view = rootView;
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
+        nav.navigationBarHidden=YES;
+        self.window.rootViewController = nav;
+        JKLog(@"time+%@", [CTUUID getPhoneTimeToss]);
+       [self.window makeKeyAndVisible];
+      });
+     
+      
+      // 更新
+      
+      [[JKRnupdateManage shareManager]updateWithres:responseobject jsListArr:self.jslistArr];
+      
+      
+    } failure:^(NSError * _Nonnull error) {
+      JKLog(@"time+FAILUER%@", [CTUUID getPhoneTimeToss]);
+      if (!klObjectisEmpty([self getJslist])) {
+        jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:@"failuer" jsListArr:[self getJslist]];
+      }else{
+        jsCodeLocation =  [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+      }
+      
+      
+      rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                             moduleName:@"nfc"
+                                      initialProperties:nil
+                                          launchOptions:launchOptions];
+      rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+      self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+      JKViewController *rootViewController = [UIViewController new];
+      rootViewController.view = rootView;
+      UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
+      nav.navigationBarHidden=YES;
+      self.window.rootViewController = nav;
+      [self.window makeKeyAndVisible];
+    }];
+    //通知主线程刷新
+   
     
-    JKLog(@"%@",responseobject);
-    //原则 加载逻辑在前，更新逻辑在后
-    //1 . 更新接口网络请求
-    //2 遍历本地文件夹，判断是否存在可以加载的js文件，加载js
-    //3 检查更新操作
-    //    JKLog(@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"load"]);
-    JKLog(@"%@",self.jslistArr);
-    // 加载
-    // 加载
-    jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:responseobject jsListArr:self.jslistArr];
-
-    rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                           moduleName:@"nfc"
-                                    initialProperties:nil
-                                        launchOptions:launchOptions];
-    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    JKViewController *rootViewController = [UIViewController new];
-    rootViewController.view = rootView;
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
-    nav.navigationBarHidden=YES;
-    self.window.rootViewController = nav;
-    [self.window makeKeyAndVisible];
-    // 更新
-    
-    [[JKRnupdateManage shareManager]updateWithres:responseobject jsListArr:self.jslistArr];
-    
-    
-  } failure:^(NSError * _Nonnull error) {
-    if (!klObjectisEmpty([self getJslist])) {
-     jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:@"failuer" jsListArr:[self getJslist]];
-    }else{
-      jsCodeLocation =  [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-    }
-    
-    
-    rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                           moduleName:@"kuaichecaifuRn"
-                                    initialProperties:nil
-                                        launchOptions:launchOptions];
-    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    JKViewController *rootViewController = [UIViewController new];
-    rootViewController.view = rootView;
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
-    nav.navigationBarHidden=YES;
-    self.window.rootViewController = nav;
-    [self.window makeKeyAndVisible];
-  }];
+  });
+  
+  
   
 #endif
   
+#pragma mark 监听
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OpenWebview:) name:@"OpenWebview" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Openpdfview:) name:@"Openpdfview" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletepdfview:) name:@"deletepdfview" object:nil];
   return YES;
 }
 - (void)OpenWebview:(NSNotification *)notification{
@@ -153,11 +176,81 @@
   
   
 }
+#pragma mark 广告页
+- (void)setUpAd_show
+{
+  [XHLaunchAd setWaitDataDuration:3];//请求广告数据前,必须设置
+  [CommenHttpAPI klgetguidepageParemeters:nil os:@"1" prod:@"1" res:@"2" progress:^(NSProgress * _Nonnull progress) {
+    
+  } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseobject) {
+    JKLog(@"%@", responseobject);
+    
+    if ([[NSString stringWithFormat:@"%@",[responseobject valueForKey:@"code"]] isEqualToString:@"0"]) {
+      NSDictionary *urlDic = [responseobject valueForKey:@"data"];
+      _actionUrl = [urlDic valueForKey:@"actionUrl"];
+      //配置广告数据
+      XHLaunchImageAdConfiguration *imageAdconfiguration = [XHLaunchImageAdConfiguration new];
+      //广告停留时间
+      imageAdconfiguration.duration = 1;
+      //广告frame
+      imageAdconfiguration.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.window.bounds.size.height*0.82);
+      //广告图片URLString/或本地图片名(.jpg/.gif请带上后缀)
+      imageAdconfiguration.imageNameOrURLString = [urlDic valueForKey:@"imgUrl"];
+      //缓存机制(仅对网络图片有效)
+      imageAdconfiguration.imageOption = XHLaunchAdImageDefault;
+      //图片填充模式
+      imageAdconfiguration.contentMode = UIViewContentModeScaleToFill;
+      //广告点击打开链接
+      imageAdconfiguration.openURLString = _actionUrl;
+      //广告显示完成动画
+      imageAdconfiguration.showFinishAnimate =ShowFinishAnimateFlipFromLeft;
+      //跳过按钮类型
+      imageAdconfiguration.skipButtonType = SkipTypeNone;
+      //后台返回时,是否显示广告
+      imageAdconfiguration.showEnterForeground = NO;
+      //显示开屏广告
+      [XHLaunchAd imageAdWithImageAdConfiguration:imageAdconfiguration delegate:self];
+      
+      
+    }
+  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    JKLog(@"%@", error);
+    
+  }];
+}
 
 
 -(void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler{
   NSLog(@"%s", __func__);
   [[JKDownloadSession downloadSession] addCompletionHandler:completionHandler identifier:identifier];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+  [JKDownloadManager saveDownloadStatus];
+}
+
+
+#pragma mark - test code
+- (void)applicationWillResignActive:(UIApplication *)application{
+  [JKDownloadManager saveDownloadStatus];
+
+  NSLog(@"%s",__func__);
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  [JKDownloadManager saveDownloadStatus];
+  
+}
+
+
+
+#pragma mark 合并增量后jsbundle文件出现部分错误调试发现当加载jsbundle出现异常时
+- (BOOL)backToPreVersion
+{
+  // rollback
+  JKLog(@"这个js版本有问题");
+  
+  return YES;
 }
 #pragma mark 检查更新
 -(void)checkupdateSuccess:(nonnull void (^)(id _Nullable responseobject))success failure:(nonnull void (^)(NSError * _Nonnull error))failure{
@@ -168,7 +261,7 @@
     
     success(responseobject);
   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    JKLog(@"%@",error);
+   
     failure(error);
   }];
   
@@ -244,7 +337,7 @@
       //jsbundle地址
   }
 
-  NSString *txtPath = [jsversionCachePath stringByAppendingPathComponent:@"18010700"];
+  NSString *txtPath = [jsversionCachePath stringByAppendingPathComponent:@"18031500"];
   // jsCodeLocation = [NSURL URLWithString:txtPath];
   NSString *txtPath2 = [txtPath stringByAppendingPathComponent:@"main.jsbundle"];
 

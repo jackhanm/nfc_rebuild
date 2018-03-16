@@ -19,6 +19,7 @@
 +(NSString *)getPhoneVersion;
 
 +(NSString *)getPhoneTime;
++(NSString *)getPhoneTimeToss;
 //ip
 + (NSString *)getIPAddress;
 

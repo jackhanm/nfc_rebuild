@@ -31,7 +31,7 @@ export default class Welcome extends Component {
         super(props);
         this.state = {  //这是动画效果
             bounceValue: new Animated.Value(1),
-            urlstr: require('../../img/Mine/icon_userreview_defaultavatar.png'),
+            urlstr: require('../../nfcimg/image12.gif'),
         }
 
     }

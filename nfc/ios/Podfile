@@ -4,7 +4,7 @@ pod 'Google-Diff-Match-Patch'
 pod 'SVProgressHUD', '~>2.0.3 '
 pod 'Masonry', '~> 1.0.1'
 pod ’AvoidCrash‘
-pod 'AFNetworking', '~> 3.1.0'
+pod 'AFNetworking', '~> 3.2.0'
 pod 'XHLaunchAd'
 pod 'SSZipArchive'
 pod 'Toast', '~>2.4'

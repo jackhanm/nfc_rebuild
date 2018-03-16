@@ -15,7 +15,7 @@ import { Tag, WhiteSpace } from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
 import {BaseComponent} from  '../../base/BaseComponent'
-
+import GlobalStyles from '../../../res/styles/GlobalStyles'
 const TAG_TYPE = {
     ALL:'all',
     CREDITREPORT:'creditReport',
@@ -135,7 +135,7 @@ export default class SearchPersonal extends BaseComponent {
         return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:ScreenUtil.scaleSize(40)}}>
             <TouchableOpacity onPress={()=>{this._onPress()}}>
                 <View style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88),
-                    justifyContent:'center', alignItems:'center', backgroundColor:'#1b54a5', borderRadius:ScreenUtil.scaleSize(8)}}>
+                    justifyContent:'center', alignItems:'center', backgroundColor:GlobalStyles.themeColor, borderRadius:ScreenUtil.scaleSize(8)}}>
                     <Text style={{fontSize:16, color:'white'}}>
                         下一步
                     </Text>

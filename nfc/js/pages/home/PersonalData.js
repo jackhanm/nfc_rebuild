@@ -26,7 +26,7 @@ import {Toast} from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
-
+import GlobalStyles from '../../../res/styles/GlobalStyles'
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').width;
 import ScreenUtil, {scaleSize} from '../../util/ScreenUtil'
@@ -532,7 +532,7 @@ export default class PersonalData extends BaseComponent{
 
                 <View style={{width:winWidth, justifyContent:'center', flexDirection:'row', marginTop:ScreenUtil.scaleSize(100), marginBottom:ScreenUtil.scaleSize(100)}}>
 
-                    <TouchableOpacity style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), backgroundColor:'#1b54a5', alignItems:'center',
+                    <TouchableOpacity style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), backgroundColor:GlobalStyles.themeColor, alignItems:'center',
                         justifyContent:'center', borderRadius:4}}
                                       onPress={()=>{this._checkInfo()}}>
                         <Text style={{fontSize:16, color:'#ffffff'}}>

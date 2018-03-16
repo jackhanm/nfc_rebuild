@@ -26,6 +26,7 @@ const Brief = Item.Brief;
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
 import {BaseComponent} from  '../../base/BaseComponent'
+import GlobalStyles from '../../../res/styles/GlobalStyles'
 export default class MineSelf extends BaseComponent{
 
 
@@ -162,7 +163,7 @@ export default class MineSelf extends BaseComponent{
                         <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             机构用户数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
+                        <Text style={{color:GlobalStyles.themeColor, marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.allReportLogCount + "次"}
                         </Text>
                     </View>
@@ -170,7 +171,7 @@ export default class MineSelf extends BaseComponent{
                         <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             累计查询次数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
+                        <Text style={{color:GlobalStyles.themeColor, marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.myReportLogCount + "次"}
                         </Text>
                     </View>
@@ -178,7 +179,7 @@ export default class MineSelf extends BaseComponent{
                         <Text style={{ marginTop:ScreenUtil.scaleSize(56), marginBottom:ScreenUtil.scaleSize(20)}}>
                             我的查询次数
                         </Text>
-                        <Text style={{color:"#4352B2", marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
+                        <Text style={{color:GlobalStyles.themeColor, marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(40)}}>
                             {this.state.selectUserCount + "次"}
                         </Text>
                     </View>
