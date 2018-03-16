@@ -2,15 +2,10 @@ package com.nfc;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.support.multidex.MultiDex;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
 
 import com.beefe.picker.PickerViewPackage;
 import com.facebook.infer.annotation.Assertions;
@@ -22,15 +17,14 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.nfc.net.AppUpDateModle;
 import com.nfc.net.DownloadUntil;
-import com.nfc.network.Constant;
 import com.nfc.network.HttpResultSubscriber;
 import com.nfc.network.NetService;
 import com.nfc.network.NetWorkFactory;
 import com.nfc.network.req.ReportJSversion;
 import com.nfc.network.resp.ResponseJSEntity;
 import com.nfc.reactmodle.RNtoNativeModle;
+import com.nfc.util.AppUpdate;
 import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
@@ -41,7 +35,6 @@ import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,7 +49,9 @@ public class MainApplication extends Application implements ReactApplication {
 
   private SharedPreferences.Editor editor;
 
-  private ForceLoading forceLoading;
+  private ForceLoading forceLoading = null;
+
+    private AppUpdate appUpdate = null;
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -208,48 +203,15 @@ public class MainApplication extends Application implements ReactApplication {
 
                 /**====================================测试代码====================================**/
 
-                if(responseJSEntity.appVersion.upgrade != 0){
-                  //APP更新
-                  AppUpDateModle.download(responseJSEntity.appVersion.url, Constant.BASE_FILE, new AppUpDateModle.OnDownloadListener(){
+                if(responseJSEntity.appVersion.upgrade != 0 || responseJSEntity.appVersion.forceUpgrade != 0){
 
-                    @Override
-                    public void onDownloadSuccess() {
-                      Log.d(TAG, "DownSuccess");
-                      File file = new File(Constant.DOWN_APK);
-                      String[] command = {"chmod", "777", file.getPath() };
-                      ProcessBuilder builder = new ProcessBuilder(command);
-                      try {
-                        builder.start();
-                      } catch (IOException e) {
-                        e.printStackTrace();
-                      }
-                      if(Build.VERSION.SDK_INT>=24){
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        Uri apkUrl = FileProvider.getUriForFile(MainApplication.this, getApplicationContext().getPackageName() + ".provider", new File(Constant.DOWN_APK));
-                        intent.setDataAndType(apkUrl,
-                                "application/vnd.android.package-archive");
-
-                        startActivity(intent);
-                      }else{
-                        Intent install = new Intent(Intent.ACTION_VIEW);
-                        install.setDataAndType(Uri.fromFile(new File(Constant.DOWN_APK)), "application/vnd.android.package-archive");
-                        install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(install);
-                      }
-                    }
-
-                    @Override
-                    public void onDownloading(int progress) {
-                      //Log.d(TAG, "==================" + progress + "==================");
-                    }
-
-                    @Override
-                    public void onDownloadFailed() {
-
-                    }
-                  });
+                    appUpdate = new AppUpdate();
+                    appUpdate.forceUpgrade = responseJSEntity.appVersion.forceUpgrade;
+                    appUpdate.upgrade = responseJSEntity.appVersion.upgrade;
+                    appUpdate.upgradeLog = responseJSEntity.appVersion.upgradeLog;
+                    appUpdate.url = responseJSEntity.appVersion.url;
+                    appUpdate.version = responseJSEntity.appVersion.version;
+                    appUpdate.versionCode = responseJSEntity.appVersion.versionCode;
 
                 }else{
                   if(!responseJSEntity.loadRnVersion.equals("")){
@@ -312,9 +274,14 @@ public class MainApplication extends Application implements ReactApplication {
     return forceLoading;
   }
 
+  public AppUpdate needAppUpdate(){return appUpdate;}
+
   @Override
   protected void attachBaseContext(Context base) {
     super.attachBaseContext(base);
     MultiDex.install(this);
   }
+
+  //下载ID，供查询使用
+  public static long DOWNLOAD_ID = 0;
 }

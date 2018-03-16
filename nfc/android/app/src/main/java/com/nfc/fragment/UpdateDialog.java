@@ -3,20 +3,19 @@ package com.nfc.fragment;
 import android.app.DialogFragment;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nfc.R;
-import com.nfc.util.DownloadContentObserver;
-import com.nfc.util.NativeConstant;
+import com.nfc.net.DownloadUntil;
+import com.nfc.util.ForceLoading;
 
 
 /**
@@ -31,15 +30,21 @@ public class UpdateDialog extends DialogFragment {
 
     private ContentResolver contentResolver;
 
-    private Handler handler = new Handler(){
+    private ProgressBar progressBar;
 
-    };
+    private TextView textView;
 
-    private SharedPreferences sharedPreferences;
+    private ForceLoading forceLoading;
+
+
+    private DownloadUntil.DownloadUntilObserver downloadUntilObserver;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
+
+        forceLoading = getArguments().getParcelable("FORCELOADING");
+
         View view = inflater.inflate(R.layout.update_dialog, container, false);
         ((Button)view.findViewById(R.id.cancle)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +61,26 @@ public class UpdateDialog extends DialogFragment {
                 dismiss();
             }
         });
-        if(!getArguments().getString("info").equals("")){
-            ((TextView)view.findViewById(R.id.update_info))
-                    .setText(getArguments().getString("info"));
+
+        progressBar = (ProgressBar)view.findViewById(R.id.customProgressBar) ;
+        textView = (TextView)view.findViewById(R.id.update_log);
+        String updateLog = getArguments().getString("info");
+        if(updateLog != null){
+            textView.setText(updateLog);
         }
+
+        downloadUntilObserver = new DownloadUntil.DownloadUntilObserver() {
+            @Override
+            public void downloadProgress(int progress) {
+                Log.d("UpdateDialog", String.valueOf(progress));
+                progressBar.setProgress(progress);
+            }
+        };
+
+        DownloadUntil.registObserver(downloadUntilObserver);
+
+        getDialog().setCanceledOnTouchOutside(false);
+
         return view;
     }
 
@@ -76,17 +97,20 @@ public class UpdateDialog extends DialogFragment {
         super.onAttach(context);
         cancleCallBack = (CancleCallBack)context;
         ensureCallBack = (EnsureCallBack)context;
-        sharedPreferences = context.getSharedPreferences("download", Context.MODE_PRIVATE);
-        contentResolver = context.getContentResolver();
-        DownloadContentObserver observer = new DownloadContentObserver(handler, context, sharedPreferences.getLong(NativeConstant.HOT_UPDATE_ID, 0));
-        contentResolver.registerContentObserver(Uri.parse("file://" + NativeConstant.JS_PATCH_LOCAL_ZIP), true, observer);
     }
 
-    public static DialogFragment getFragment(String info){
+    public static DialogFragment getFragment(ForceLoading info){
         UpdateDialog updateDialog = new UpdateDialog();
         Bundle bundle = new Bundle();
-        bundle.putString("info", info);
+        bundle.putParcelable("FORCELOADING", info);
         updateDialog.setArguments(bundle);
+        updateDialog.setCancelable(false);
         return updateDialog;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        DownloadUntil.unRegistObserver();
     }
 }

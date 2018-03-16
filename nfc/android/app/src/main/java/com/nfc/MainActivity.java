@@ -12,7 +12,9 @@ import android.telephony.TelephonyManager;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.nfc.fragment.AppUpdateDialog;
 import com.nfc.fragment.UpdateDialog;
+import com.nfc.util.AppUpdate;
 import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
@@ -23,7 +25,7 @@ import permissions.dispatcher.RuntimePermissions;
 import static com.nfc.util.NativeConstant.SHARED_PREFERENCES;
 
 @RuntimePermissions
-public class MainActivity extends ReactActivity implements UpdateDialog.CancleCallBack, UpdateDialog.EnsureCallBack{
+public class MainActivity extends ReactActivity implements UpdateDialog.CancleCallBack, UpdateDialog.EnsureCallBack, AppUpdateDialog.AppUpdateCallBack{
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -83,8 +85,11 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
     //强制更新Dialog
     public void showDialog(){
         ForceLoading forceLoading = MainApplication.getInstance().needUpdate();
+        AppUpdate appUpdate = MainApplication.getInstance().needAppUpdate();
         if(forceLoading != null && forceLoading.isUpdate){
-            UpdateDialog.getFragment("").show(getFragmentManager(), "");
+            UpdateDialog.getFragment(forceLoading).show(getFragmentManager(), "");
+        }else if(appUpdate != null){
+            AppUpdateDialog.instance(appUpdate).show(getFragmentManager(), "");
         }
     }
 
@@ -109,5 +114,15 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
         finish();
         //清除RN，重新加载后会选择其他JS版本
         MainApplication.getInstance().getReactNativeHost().clear();
+    }
+
+    @Override
+    public void appCancleCallBack() {
+
+    }
+
+    @Override
+    public void appEnsureCallBack() {
+
     }
 }

@@ -5,11 +5,13 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.nfc.MainApplication;
 import com.nfc.util.MD5Util;
 import com.nfc.util.NativeConstant;
 
@@ -34,6 +36,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -44,6 +48,65 @@ import java.util.zip.ZipInputStream;
 public class DownloadUntil {
 
     private static final String TAG = "DownloadUntil";
+
+    private static DownloadUntilObserver downloadContentObserver;
+
+    public interface DownloadUntilObserver{
+        void downloadProgress(int progress);
+    }
+
+    public static void registObserver(DownloadUntilObserver observer){
+        downloadContentObserver = observer;
+    }
+
+    public static void unRegistObserver(){
+        downloadContentObserver = null;
+    }
+
+
+    private static void query(final DownloadManager downloadManager) {
+
+        final Timer timer = new Timer();
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                DownloadManager.Query downloadQuery = new DownloadManager.Query();
+                downloadQuery.setFilterById(MainApplication.DOWNLOAD_ID);
+                Cursor cursor = downloadManager.query(downloadQuery);
+                if (cursor != null && cursor.moveToFirst()) {
+                    int fileName = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+                    int fileUri = cursor.getColumnIndex(DownloadManager.COLUMN_URI);
+                    String fn = cursor.getString(fileName);
+                    String fu = cursor.getString(fileUri);
+
+                    int totalSizeBytesIndex = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                    int bytesDownloadSoFarIndex = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+
+                    // 下载的文件总大小
+                    int totalSizeBytes = cursor.getInt(totalSizeBytesIndex);
+
+                    // 截止目前已经下载的文件总大小
+                    int bytesDownloadSoFar = cursor.getInt(bytesDownloadSoFarIndex);
+
+                    Log.d("DownloadUntil",
+                            "from " + fu + " 下载到本地 " + fn + " 文件总大小:" + totalSizeBytes + " 已经下载:" + bytesDownloadSoFar);
+
+                    if(downloadContentObserver != null){
+                        if(fn != null){
+                            int progress = (int)((float) bytesDownloadSoFar / (float) totalSizeBytes * 100);
+                            downloadContentObserver.downloadProgress(progress);
+                        }
+                    }
+                    if(totalSizeBytes == bytesDownloadSoFar){
+                        cursor.close();
+                        timer.cancel();
+                    }
+                }
+            }
+        }, 0, 500);
+    }
+
 
     public static Long downLoadBundle(Context context, String updateVersion, String baseVersion, String url, String md5) {
         File zipfile;
@@ -66,6 +129,9 @@ public class DownloadUntil {
         editor.putString(NativeConstant.BASE_VERSION + id, baseVersion);
         editor.putString(NativeConstant.ZIP_MD5 + id, md5);
         editor.commit();
+
+        MainApplication.DOWNLOAD_ID = id;
+        query(downloadManager);
         return id;
     }
 
