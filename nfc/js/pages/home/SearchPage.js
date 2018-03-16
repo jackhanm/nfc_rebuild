@@ -26,7 +26,7 @@ export default class SearchPage extends Component{
 
             <View style={{flex:1, width:window.width, flexDirection:'row'}}>
                 <View style={{flex:1, flexDirection:'row'}}>
-                    <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
+                    <Image source={this.state.user_photo == ''? require('../../imgResouce/avatar.png'):{uri:this.state.user_photo}}
                            style={{width:16, height:16, borderRadius:8}}/>
                     <Text>
                         {this.state.user_name + ',您好'}

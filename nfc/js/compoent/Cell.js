@@ -41,34 +41,34 @@ class Cell extends PureComponent {
     )
     }
     rendertag1(){
-        return(<Image source={require('../nfcimg/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag2(){
-        return(<Image source={require('../nfcimg/car_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/car_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag3(){
-        return( <Image source={require('../nfcimg/company_small.png')} style={{alignSelf:'center'}}/>);
+        return( <Image source={require('../imgResouce/company_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag4(){
-        return(<Image source={require('../nfcimg/credit_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/credit_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag5(){
-        return(<Image source={require('../nfcimg/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag6(){
-        return(<Image source={require('../nfcimg/home_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/home_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag7(){
-        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag8(){
-        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag9(){
-        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag10(){
-        return(<Image source={require('../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
 
     render() {
@@ -107,7 +107,7 @@ class Cell extends PureComponent {
                                     <Text>
                                         {info.createTime.slice(0,10)}
                                     </Text>
-                                    <Image style={{width:10, height:10}} source={require('../nfcimg/backicon.png')}/>
+                                    <Image style={{width:10, height:10}} source={require('../imgResouce/backicon.png')}/>
                                 </View>
                             </View>
                             <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>

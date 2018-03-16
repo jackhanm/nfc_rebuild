@@ -19,7 +19,7 @@ class TodoApp extends Component {
       return (
         <View key={index} style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
           <TouchableOpacity onPress={() => checkItem(index)}>
-            <Image source={item.isSelected ? require('../../images/ic_selected.png') : require('../../images/ic_defult.png')} resizeMode={'cover'}/>
+            {/*<Image source={item.isSelected ? require('../../images/ic_selected.png') : require('../../images/ic_defult.png')} resizeMode={'cover'}/>*/}
           </TouchableOpacity>
           <Text>{item.name}</Text>
           <TouchableOpacity

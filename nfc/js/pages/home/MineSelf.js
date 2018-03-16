@@ -138,7 +138,7 @@ export default class MineSelf extends BaseComponent{
                         <View style={{flexDirection:'row', alignItems:'center'}}>
                             <View style={{flex:1}}>
                                 <Image source={this.state.imageUrl == ''
-                                    ? require('../../img/Mine/avatar.png') : {uri:this.state.imageUrl}}
+                                    ? require('../../imgResouce/avatar.png') : {uri:this.state.imageUrl}}
                                        style={{width:ScreenUtil.scaleSize(160), height:ScreenUtil.scaleSize(160), borderRadius:ScreenUtil.scaleSize(80), margin:ScreenUtil.scaleSize(20)}}/>
                             </View>
                             <View style={{flex:2, flexDirection:'column'}}>
@@ -150,7 +150,7 @@ export default class MineSelf extends BaseComponent{
                                 </Text>
                             </View>
                             <View style={{flex:0.5, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(32)}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(32)}} source={require('../../imgResouce/backicon.png')}/>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -190,7 +190,7 @@ export default class MineSelf extends BaseComponent{
                 <List style={{width:winWidth}}>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineRecored')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/iconrecord.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../imgResouce/iconrecord.png')}/>
                             <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 我的记录
                             </Text>
@@ -199,7 +199,7 @@ export default class MineSelf extends BaseComponent{
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineDownload')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/download.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../imgResouce/download.png')}/>
                             <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 下载管理
                             </Text>
@@ -208,7 +208,7 @@ export default class MineSelf extends BaseComponent{
 
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('ChangePassWord')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/changepass.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../imgResouce/changepass.png')}/>
                             <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 修改密码
                             </Text>
@@ -216,7 +216,7 @@ export default class MineSelf extends BaseComponent{
                     </Item>
                     <Item arrow="horizontal" onClick={() => {this.props.navigation.navigate('MineAbout')}}>
                         <View style={{width:winWidth, flexDirection:'row', alignItems:'center'}}>
-                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../nfcimg/aboutus.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(40), height:ScreenUtil.scaleSize(40)}} source={require('../../imgResouce/aboutus.png')}/>
                             <Text style={{marginLeft:ScreenUtil.scaleSize(20)}}>
                                 关于我们
                             </Text>

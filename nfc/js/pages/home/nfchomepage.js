@@ -96,7 +96,7 @@ export default class nfchomepage extends Component{
                 paddingTop:ScreenUtil.scaleSize(50),
                 paddingBottom:ScreenUtil.scaleSize(50)}}>
                 <View style={{top:height,flex:1, flexDirection:'row', marginLeft:ScreenUtil.scaleSize(20), alignItems:'center',}}>
-                    <Image source={this.state.user_photo == ''? require('../../img/Mine/avatar.png'):{uri:this.state.user_photo}}
+                    <Image source={this.state.user_photo == ''? require('../../imgResouce/avatar.png'):{uri:this.state.user_photo}}
                            style={{width:ScreenUtil.scaleSize(44), height:ScreenUtil.scaleSize(44), borderRadius:ScreenUtil.scaleSize(22)}}/>
                     <Text style={{marginLeft:ScreenUtil.scaleSize(20),fontSize:12, color:'#ffffff'}}>
                         {this.state.user_name + ',您好'}
@@ -130,7 +130,7 @@ export default class nfchomepage extends Component{
                 </TextInput>
 
                 <TouchableOpacity onPress={()=>{this.state.searchText == ''?Toast.info('请输入查询条件', 0.5):this.props.navigation.navigate('SearchList', this.state.searchText)}} >
-                    <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../nfcimg/search.png')}/>
+                    <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../imgResouce/search.png')}/>
                 </TouchableOpacity>
 
             </View>
@@ -191,34 +191,34 @@ export default class nfchomepage extends Component{
         )
     }
     rendertag1(){
-        return(<Image source={require('../../nfcimg/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag2(){
-        return(<Image source={require('../../nfcimg/car_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/car_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag3(){
-        return( <Image source={require('../../nfcimg/company_small.png')} style={{alignSelf:'center'}}/>);
+        return( <Image source={require('../../imgResouce/company_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag4(){
-        return(<Image source={require('../../nfcimg/credit_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/credit_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag5(){
-        return(<Image source={require('../../nfcimg/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/home_estimate_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag6(){
-        return(<Image source={require('../../nfcimg/home_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/home_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag7(){
-        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag8(){
-        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag9(){
-        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     rendertag10(){
-        return(<Image source={require('../../nfcimg/personal_small.png')} style={{alignSelf:'center'}}/>);
+        return(<Image source={require('../../imgResouce/personal_small.png')} style={{alignSelf:'center'}}/>);
     }
     _renderItem(item){
 
@@ -241,7 +241,7 @@ export default class nfchomepage extends Component{
                             <Text>
                                 {item.createTime.substr(0,10).replace("-","/").replace("-","/")}
                             </Text>
-                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                         </View>
                     </View>
                     <View style={{backgroundColor:'#F0F0F2', height:ScreenUtil.scaleSize(1), width:windowWidth}}/>

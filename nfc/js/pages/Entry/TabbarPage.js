@@ -83,9 +83,9 @@ export default class TabbarPage extends Component{
                     title={'首页'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/1.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/1.png')} />}
                 //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/1.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/1.png')} />}
                     onPress={() => {Keyboard.dismiss();this.setState({ selectedTab: '首页' }); }}>
                     <Nfchomepage  {...this.props}/>
                 </TabNavigator.Item>
@@ -125,8 +125,8 @@ export default class TabbarPage extends Component{
                     title={'查个人'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/2.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/2.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/2.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/2.png')} />}
                     onPress={() => {this.setState({ selectedTab: '查个人' });Keyboard.dismiss()}}>
                     <SearchPersonal  {...this.props}/>
                 </TabNavigator.Item>
@@ -135,8 +135,8 @@ export default class TabbarPage extends Component{
                     title={'查企业'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/3.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/3.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/3.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/3.png')} />}
                     onPress={() => {this.setState({ selectedTab: '查企业' });Keyboard.dismiss()}}>
                     <SearchCompany  {...this.props}/>
                 </TabNavigator.Item>
@@ -145,9 +145,9 @@ export default class TabbarPage extends Component{
                     title={'账户'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../nfcimg/4.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/4.png')} />}
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../nfcimg/4.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/4.png')} />}
                     onPress={() => {this.setState({ selectedTab: '账户' }); Keyboard.dismiss()}}>
                     <Mineself  {...this.props}/>
                 </TabNavigator.Item>
@@ -156,9 +156,9 @@ export default class TabbarPage extends Component{
                     title={'elelogin'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/home_boy_press.png')} />}
                     //    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../../res/images/home_normal.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'elelogin' })}>
                     <ReportData  {...this.props}/>
                 </TabNavigator.Item>
@@ -189,8 +189,8 @@ export default class TabbarPage extends Component{
                     title={'Antmobile'}
                     titleStyle={styles.tabText}
                     selectedTitleStyle={styles.selectedTabText}
-                    renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}
-                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/home_boy_press.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'Antmobile' })}>
                     <Antmobile {...this.props}/>
                 </TabNavigator.Item>

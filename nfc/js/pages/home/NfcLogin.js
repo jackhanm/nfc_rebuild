@@ -48,7 +48,7 @@ export default class NfcLogin extends Component{
             <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
                 <Image
                     style={{width:ScreenUtil.scaleSize(140), height:ScreenUtil.scaleSize(140), marginTop:ScreenUtil.scaleSize(140)}}
-                    source={require('../../nfcimg/logo.png')}/>
+                    source={require('../../imgResouce/logo.png')}/>
                 <Text style={{fontSize:18, color:'#004098'}}>
                     好车贷NFC风控系统
                 </Text>
@@ -58,7 +58,7 @@ export default class NfcLogin extends Component{
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
                             style={{width:ScreenUtil.scaleSize(50), height:ScreenUtil.scaleSize(50)}}
-                            source={require('../../nfcimg/user.png')}/>
+                            source={require('../../imgResouce/user.png')}/>
                         <View style={{flexDirection:'column', marginLeft:ScreenUtil.scaleSize(40),}}>
                             <TextInput style={{width:ScreenUtil.scaleSize(420), color:'#194697', padding:0,marginBottom:ScreenUtil.scaleSize(10)}}
                                        underlineColorAndroid='transparent'
@@ -73,7 +73,7 @@ export default class NfcLogin extends Component{
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
                             style={{width:ScreenUtil.scaleSize(50), height:ScreenUtil.scaleSize(50)}}
-                            source={require('../../nfcimg/pass.png')}/>
+                            source={require('../../imgResouce/pass.png')}/>
                         <View style={{flexDirection:'column', marginLeft:ScreenUtil.scaleSize(40)}}>
                             <TextInput style={{width:ScreenUtil.scaleSize(420), color:'#194697', padding:0, marginBottom:ScreenUtil.scaleSize(10)}}
                                        underlineColorAndroid='transparent'
@@ -104,7 +104,7 @@ export default class NfcLogin extends Component{
             </View>
             <View style={{flex:1, flexDirection:'column', justifyContent:'flex-end'}}>
                 <Image
-                    style={{width:winWidth, height:ScreenUtil.scaleSize(140)}} source={require('../../nfcimg/loginbuttom.png')}/>
+                    style={{width:winWidth, height:ScreenUtil.scaleSize(140)}} source={require('../../imgResouce/loginbuttom.png')}/>
             </View>
             {/*<ActivityIndicator*/}
                 {/*animating={false}*/}

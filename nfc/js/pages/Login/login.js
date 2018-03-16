@@ -122,22 +122,22 @@ export default class App extends Component<{}> {
         return (
 
             <ScrollView>
-                <Image style={styles.picture} source={require('../../images/wallpaper.png')}>
+                <Image style={styles.picture} source={require('../../imgResouce/wallpaper.png')}>
 
                 </Image>
                 <View style={styles.container1}>
-                    <Image source={require('../../images/logo.png')} style={styles.image1} />
+                    <Image source={require('../../imgResouce/logo.png')} style={styles.image1} />
                     <Text style={styles.text1}>nfc</Text>
                 </View>
                 <KeyboardAvoidingView behavior='padding'
                                       style={styles.container2}>
-                    <UserInput source={require('../../images/username.png')}
+                    <UserInput source={require('../../imgResouce/username.png')}
                                placeholder='Username'
                                autoCapitalize={'none'}
                                returnKeyType={'done'}
                                onTextChange={(text)=>this.setState({userName:text})}
                                autoCorrect={false} />
-                    <UserInput source={require('../../images/password.png')}
+                    <UserInput source={require('../../imgResouce/password.png')}
                                secureTextEntry={this.state.showPass}
                                placeholder='Password'
                                returnKeyType={'done'}
@@ -158,7 +158,7 @@ export default class App extends Component<{}> {
                         style={styles.btnEye}
                         onPress={this.showPass}
                     >
-                        <Image source={require('../../images/eye_black.png')} style={styles.iconEye} />
+                        <Image source={require('../../imgResouce/eye_black.png')} style={styles.iconEye} />
                     </TouchableOpacity>
                 </KeyboardAvoidingView>
                 <View style={styles.container3}>
@@ -172,7 +172,7 @@ export default class App extends Component<{}> {
                                           onPress={this._onPress}
                                           activeOpacity={1} >
                             {this.state.isLoading ?
-                                <Image source={require('../../images/loading.gif')} style={styles.image4} />
+                                <Image source={require('../../imgResouce/loading.gif')} style={styles.image4} />
                                 :
                                 <Text style={styles.text4}>LOGIN</Text>
                             }
