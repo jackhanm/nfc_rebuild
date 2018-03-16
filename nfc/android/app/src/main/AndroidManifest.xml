@@ -52,7 +52,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ReportShowActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".TestActivity" >
+        <activity android:name=".LogoActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

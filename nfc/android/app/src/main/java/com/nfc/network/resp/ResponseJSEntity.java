@@ -14,7 +14,7 @@ import java.util.List;
 public class ResponseJSEntity {
     public AppVersion appVersion;
     public List<RNVersion> rnVersionList;
-    public List<String> deleteVersionList;
+    public List<String> deleteRnVersionList;
     public String loadRnVersion;
     public class RNVersion{
         public String versionUrl;
@@ -55,7 +55,7 @@ public class ResponseJSEntity {
             //rnVersionList.add(rnVersion);
             //rnVersionList.add(rnVersion1);
             rnVersionList.add(rnVersion2);
-            deleteVersionList = new ArrayList<>();
+            deleteRnVersionList = new ArrayList<>();
             //deleteVersionList.add("18050602");
             //deleteVersionList.add("18050601");
             loadRnVersion = "18050602";

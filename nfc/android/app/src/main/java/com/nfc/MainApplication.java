@@ -237,8 +237,8 @@ public class MainApplication extends Application implements ReactApplication {
                     }
                   }
 
-                  if(responseJSEntity.deleteVersionList != null){
-                    for(String deleteRnVersion : responseJSEntity.deleteVersionList){
+                  if(responseJSEntity.deleteRnVersionList != null){
+                    for(String deleteRnVersion : responseJSEntity.deleteRnVersionList){
                       //删除版本
                       ToolUtil.deleteJS(deleteRnVersion);
                     }
