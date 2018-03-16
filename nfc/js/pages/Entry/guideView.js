@@ -3,10 +3,10 @@ import { Image, ScrollView, StyleSheet, Text, Dimensions, TouchableOpacity,Touch
 import Swiper from 'react-native-swiper'
 import GlobalStyle from '../../../res/styles/GlobalStyles'
 import { TabNavigator, NavigationActions} from "react-navigation";
-let image1 = require('../../images/1.jpg');
-let image2 = require('../../images/2.jpg');
-let image3 = require('../../images/3.jpg');
-let image4 = require('../../images/4.jpg');
+let image1 = require('../../imgResouce/1.jpg');
+let image2 = require('../../imgResouce/2.jpg');
+let image3 = require('../../imgResouce/3.jpg');
+let image4 = require('../../imgResouce/4.jpg');
 const { width, height } = Dimensions.get('window');
 
 let reastAction = NavigationActions.reset({

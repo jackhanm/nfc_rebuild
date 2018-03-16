@@ -786,7 +786,7 @@ export default class PersonalData extends BaseComponent{
                                     this.state.selectedAdd[0].caption:this.state.selectedAdd[1].code == this.state.selectedAdd[2].code?
                                         this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption
                                         : this.state.selectedAdd[0].caption + this.state.selectedAdd[1].caption + this.state.selectedAdd[2].caption}</Text>
-                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -863,7 +863,7 @@ export default class PersonalData extends BaseComponent{
                     onPress={()=>{this.setState({visible:!this.state.visible, modleTitle:{"title":modleTitle, "type":selectedType}, carData:dataSource, isLoading:false})}}
                     style={{flex:1, marginRight:ScreenUtil.scaleSize(20), flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
                     <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{selectedValue.caption}</Text>
-                    <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                    <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                 </TouchableOpacity>
             </View>
 
@@ -905,7 +905,7 @@ export default class PersonalData extends BaseComponent{
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white", flexDirection:'row'
                                     , justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
                                 <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.selectedBradn.caption}</Text>
-                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -921,7 +921,7 @@ export default class PersonalData extends BaseComponent{
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:ScreenUtil.scaleSize(2), borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
                                 <Text style={{fontSize:15, color:'#999999'}}>{this.state.selectedVehicles.caption}</Text>
-                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -939,7 +939,7 @@ export default class PersonalData extends BaseComponent{
                                 style={{flex:1, marginRight:ScreenUtil.scaleSize(20), borderWidth:1, borderColor:"white"
                                     , flexDirection:'row', justifyContent:'flex-end', alignItems:'center', backgroundColor:'white'}}>
                                 <Text style={{fontSize:ScreenUtil.scaleSize(30), color:'#999999'}}>{this.state.selectedCarModle.caption}</Text>
-                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                                <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -969,7 +969,7 @@ export default class PersonalData extends BaseComponent{
                                         this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption
                                             : this.state.selectedCarAddress[0].caption + this.state.selectedCarAddress[1].caption + this.state.selectedCarAddress[2].caption}
                                 </Text>
-                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                            <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                         </TouchableOpacity>
 
                     </View>

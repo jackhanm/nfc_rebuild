@@ -74,31 +74,31 @@ export default class SearchPersonal extends BaseComponent {
 
                 <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.ALL, '全部', this.state.all, require('../../nfcimg/all.png'))}
+                        {this._renderTag(TAG_TYPE.ALL, '全部', this.state.all, require('../../imgResouce/all.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.CREDITREPORT, '个人信用报告', this.state.creditReport, require('../../nfcimg/credit.png'))}
+                        {this._renderTag(TAG_TYPE.CREDITREPORT, '个人信用报告', this.state.creditReport, require('../../imgResouce/credit.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.ANTIFRAUD, '个人反欺诈分析', this.state.antiFraud, require('../../nfcimg/anti_fraud.png'))}
-                    </View>
-                </View>
-
-                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.RISKMANAGE, '个人风险概要', this.state.riskManage, require('../../nfcimg/personal.png'))}
-                    </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent, require('../../nfcimg/home.png'))}
-                    </View>
-                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice, require('../../nfcimg/car.png'))}
+                        {this._renderTag(TAG_TYPE.ANTIFRAUD, '个人反欺诈分析', this.state.antiFraud, require('../../imgResouce/anti_fraud.png'))}
                     </View>
                 </View>
 
                 <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-                        {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice, require('../../nfcimg/home_estimate.png'))}
+                        {this._renderTag(TAG_TYPE.RISKMANAGE, '个人风险概要', this.state.riskManage, require('../../imgResouce/personal.png'))}
+                    </View>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                        {this._renderTag(TAG_TYPE.HOMERENT, '房屋租金评估', this.state.homeRent, require('../../imgResouce/home.png'))}
+                    </View>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                        {this._renderTag(TAG_TYPE.CARPRICE, '车辆售价评估', this.state.carPrice, require('../../imgResouce/car.png'))}
+                    </View>
+                </View>
+
+                <View style={{width:winWidth, flexDirection:'row', marginTop:ScreenUtil.scaleSize(40), alignItems:'center'}}>
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                        {this._renderTag(TAG_TYPE.HOMEPRICE, '房屋售价评估', this.state.homePrice, require('../../imgResouce/home_estimate.png'))}
                     </View>
                     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
 
@@ -158,7 +158,7 @@ export default class SearchPersonal extends BaseComponent {
                 </Text>
             </View>
             <View style={{flex:1, width:ScreenUtil.scaleSize(210), flexDirection:'row', justifyContent:'flex-end', alignItems:'flex-end'}}>
-                <Image source={state?require('../../nfcimg/selected.png'):require('../../nfcimg/noselected.png')}/>
+                <Image source={state?require('../../imgResouce/selected.png'):require('../../imgResouce/noselected.png')}/>
             </View>
         </TouchableOpacity>);
     }

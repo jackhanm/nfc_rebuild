@@ -168,9 +168,9 @@ export default class AccountInfo extends BaseComponent{
                         marginTop:ScreenUtil.scaleSize(20), marginBottom:ScreenUtil.scaleSize(20), marginRight:ScreenUtil.scaleSize(20)}}>
                         <Image style={{width:ScreenUtil.scaleSize(80), height:ScreenUtil.scaleSize(80)}}
                                source={this.state.imageUrl == '' ?
-                                   require('../../img/Mine/avatar.png') : {uri:this.state.imageUrl}}/>
+                                   require('../../imgResouce/avatar.png') : {uri:this.state.imageUrl}}/>
 
-                        <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20), marginLeft:ScreenUtil.scaleSize(20)}} source={require('../../nfcimg/backicon.png')}/>
+                        <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20), marginLeft:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                     </View>
                 </View>
             </TouchableOpacity>
