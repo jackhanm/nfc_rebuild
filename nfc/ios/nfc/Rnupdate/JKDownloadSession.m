@@ -66,16 +66,16 @@ static JKDownloadSession *_instance;
       }
     }];
     
-    if (dictM.count>0) {
-      //app重启，或者闪退的任务全部暂停,Xcode连接重启app
-      [self pauseAllDownloadTask];
-      NSLog(@"app start default pause all bg runing task! task count: %zd", dictM.count);
-      //waiting async pause task callback
-      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self detectAllCacheFileSize];
-      });
-    }
-    
+//    if (dictM.count>0) {
+//      //app重启，或者闪退的任务全部暂停,Xcode连接重启app
+//      [self pauseAllDownloadTask];
+//      NSLog(@"app start default pause all bg runing task! task count: %zd", dictM.count);
+//      //waiting async pause task callback
+//      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self detectAllCacheFileSize];
+//      });
+//    }
+//    
   }
   return self;
 }

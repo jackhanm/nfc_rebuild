@@ -267,8 +267,10 @@ static id _instance;
   NSString *taskId = [JKDownloadTask taskIdForUrl:downloadURLString fileId:fileId];
   JKDownloadItem *item = [self.itemsDictM valueForKey:taskId];
   if (item == nil) {
-    
     item = [[JKDownloadItem alloc] initWithUrl:downloadURLString fileId:fileId];
+  }
+    
+  
     item.downloadStatus = JKDownloadStatusDownloading;
     item.fileName = fileName;
     item.thumbImageUrl = imagUrl;
@@ -276,7 +278,7 @@ static id _instance;
     item.destinPath = destinPath;
     item.type = type;
     [self.itemsDictM setValue:item forKey:taskId];
-  }
+  
   [JKDownloadSession.downloadSession startDownloadWithUrl:downloadURLString fileId:fileId delegate:item];
 }
 
@@ -421,15 +423,15 @@ static id _instance;
 }
 
 - (void)downloadTaskFinishedNoti:(NSNotification *)noti{
-   JKLog(@"所有的下载任务已完成222");
+   JKLog(@"下载任务已完成");
   JKDownloadItem *item = noti.object;
   if (item) {
-    NSString *detail = [NSString stringWithFormat:@"%@ item.fileName，已经下载完成！", item.fileName];
-     NSString *detail1 = [NSString stringWithFormat:@"%@  item.thumbImageUrl，已经下载完成！", item.thumbImageUrl];
-     NSString *detail2 = [NSString stringWithFormat:@"%@ item.md5，已经下载完成！", item.md5];
-     NSString *detail3 = [NSString stringWithFormat:@"%@ destinPath，已经下载完成！", item.destinPath];
-     NSString *detail4 = [NSString stringWithFormat:@"%@ savePath，已经下载完成！", item.savePath];
-     NSString *detail5 = [NSString stringWithFormat:@"%@ saveName，已经下载完成！", item.saveName];
+    NSString *detail = [NSString stringWithFormat:@"%@ item.fileName，！", item.fileName];
+     NSString *detail1 = [NSString stringWithFormat:@"%@  item.thumbImageUrl，！", item.thumbImageUrl];
+     NSString *detail2 = [NSString stringWithFormat:@"%@ item.md5，！", item.md5];
+     NSString *detail3 = [NSString stringWithFormat:@"%@ destinPath，！", item.destinPath];
+     NSString *detail4 = [NSString stringWithFormat:@"%@ savePath，！", item.savePath];
+     NSString *detail5 = [NSString stringWithFormat:@"%@ saveName！", item.saveName];
      NSString *detail6 = [NSString stringWithFormat:@"%@ 全量还是增量 ",item.type];
     JKLog(@"%@ %@ %@ %@ %@",detail,detail1,detail2,detail3,detail4,detail5);
     
@@ -437,6 +439,7 @@ static id _instance;
   
     if ([item.type isEqualToString:@"1"] ) {
         [self checkZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName];
+      
     }else{
       [self  checkPatchZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName baseVersion:item.thumbImageUrl];
     }
@@ -482,7 +485,7 @@ static id _instance;
       NSLog(@"下载完成");
       
       NSString *zipPath =savepath;
-      
+  JKLog(@"%@",[zipPath getFileMD5WithPath:zipPath]);
       NSError *error;
       // 解压
       if ([md5 isEqualToString:[zipPath getFileMD5WithPath:zipPath]]) {
@@ -492,7 +495,7 @@ static id _instance;
         if(!error){
           NSLog(@"解压成功");
           
-          [self combinepatchpackage:destinpath baseVersion:baseVersion shouldUpdatedVersion:savename];
+          [self combinepatchpackage:destinpath baseVersion:baseVersion shouldUpdatedVersion:filename];
           
           
         }else{
@@ -576,8 +579,12 @@ static id _instance;
         
       }
       
+    }else{
+      JKLog(@"no patch.tex");
     }
     
+  }else{
+    JKLog(@" no detail.json");
   }
   
   
@@ -643,15 +650,15 @@ static id _instance;
   //移动文件夹到jslist
   NSString *patch = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"patch"];
   [[NSFileManager defaultManager] moveItemAtPath:patchCachePath toPath:jsversion error:nil];
-  [[NSFileManager defaultManager] removeItemAtPath:patch error:nil];
+  
 
 }
 #pragma mark 移动图片资源
 -(void)movePicwithDic:(NSDictionary *)dic withPath:(NSString *)path OriPath:(NSString *)OriPath
 {
   JKLog(@"%@ == %@",path,OriPath);
-  NSString *txtPath3 = [path stringByAppendingPathComponent:@"res"];
-  NSString *txtPath2 = [txtPath3 stringByAppendingPathComponent:@"images"];
+  NSString *txtPath3 = [path stringByAppendingPathComponent:@"js"];
+  NSString *txtPath2 = [txtPath3 stringByAppendingPathComponent:@"nfcimg"];
   [[NSFileManager defaultManager] contentsOfDirectoryAtPath:OriPath error:nil];
   NSMutableArray *imagearr = [NSMutableArray arrayWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:OriPath error:nil]];
   
@@ -664,7 +671,7 @@ static id _instance;
       [[NSFileManager defaultManager] moveItemAtPath:oriImage toPath:destinImage error:nil];
     }
   }
-  
+ // [[NSFileManager defaultManager] removeItemAtPath:patch error:nil];
   
   
   JKLog(@"%ld 是否成功",[[NSFileManager defaultManager] moveItemAtPath:OriPath toPath:txtPath2 error:nil]);

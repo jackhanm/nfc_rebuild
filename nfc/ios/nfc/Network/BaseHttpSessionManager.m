@@ -23,7 +23,7 @@ static NSMutableArray *_allSessionFailTask;
     _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"application/x-json",@"text/html",@"text/plain", nil];
       _manager.requestSerializer=[AFJSONRequestSerializer serializer];
       [_manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-      _manager.requestSerializer.timeoutInterval = 5.f;
+      _manager.requestSerializer.timeoutInterval = 4.f;
       [_manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     _manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //_manager.requestSerializer=[AFJSONRequestSerializer serializer];

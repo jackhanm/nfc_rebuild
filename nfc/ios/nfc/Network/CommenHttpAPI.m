@@ -183,8 +183,9 @@
   NSString *timeStamps         = [CTUUID getTimeStamp];
   NSString *deToken =[NSString stringWithFormat:@"%@@%@",[CTUUID getIPAddress],[CTUUID getIDFA]];
   NSString *key =[NSString stringWithFormat:@"%@!@##@!%@%@",ASConfigAPPSecret,deToken,timeStamps];
- 
-    NSString *str = [NSString stringWithFormat:@"%@%@?version=%@&channel=%@&os=%@&jsVersionList=%@&appId=%@&key=%@&ts=%@&deviceId=%@&appVer=%@", serverUrl2,KlUpdateversion_v_1_0,[[UserOperatemanager shareManager] last_run_version_of_application],channel,os,jsVersionList,ASConfigAPPID,[key do16MD5],timeStamps,deToken,[[UserOperatemanager shareManager] last_run_version_of_application]];
+// &appId=%@&key=%@&ts=%@&deviceId=%@&appVer=%@"
+//  ,ASConfigAPPID,[key do16MD5],timeStamps,deToken,[[UserOperatemanager shareManager] last_run_version_of_application],ASConfigAPPID,[key do16MD5],timeStamps,deToken,[[UserOperatemanager shareManager] last_run_version_of_application]
+    NSString *str = [NSString stringWithFormat:@"%@%@?version=%@&channel=%@&os=%@&jsVersionList=%@", serverUrl2,KlUpdateversion_v_1_0,[[UserOperatemanager shareManager] last_run_version_of_application],channel,os,jsVersionList];
 //
   //mock 假数据
 //  NSString *str = @"https://d954c7f3-c8f7-4e00-b2de-8602f57ba5e8.mock.pstmn.io/rnupdate/3";

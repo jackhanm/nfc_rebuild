@@ -314,7 +314,8 @@ static JKRnupdateManage *_instance=nil;
       if (!klObjectisEmpty([updatemodel incrementVersion])) {
         if ([[updatemodel incrementVersion] isEqualToString:@"all"]) {
           //后台更新全量包
-          [self getBackFullPackageDownurl:[updatemodel versionUrl] packageName:[updatemodel version]zipmd5:[updatemodel versionSign]];
+        
+          [self getBackFullPackageDownurl:[updatemodel versionUrl] packageName:[updatemodel version] zipmd5:[updatemodel versionSign]];
           
         }else{
           //后台更新增量包
@@ -376,19 +377,21 @@ static JKRnupdateManage *_instance=nil;
      jslistArr =[manager contentsOfDirectoryAtPath:jsversionCachePath error:nil];
     
     for (int i = 0; i < jslistArr.count; i++) {
-      if ([baseVersion isEqualToString:[jslistArr objectAtIndex:i]]) {
+     
+      if ([baseVersion isEqualToString:[NSString stringWithFormat:@"%@",[jslistArr objectAtIndex:i]]]) {
         IsBaseversion = YES;
       }else{
         
       }
       
     }
+   
     if (IsBaseversion) {
       NSString *jsversionCachePath1 = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],baseVersion];
       BOOL jsversionExist = [[NSFileManager defaultManager] fileExistsAtPath:jsversionCachePath1];
       //如果已存在
       if(jsversionExist){
-        NSLog(@"jsversion已存在: %@",jsversionCachePath);
+        NSLog(@"jsversionCachePath1已存在: %@",jsversionCachePath);
         
         //如果不存在
       }else{

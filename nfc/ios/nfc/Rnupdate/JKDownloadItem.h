@@ -6,6 +6,8 @@
 //  Copyright © 2018年 Facebook. All rights reserved.
 //
 
+
+
 #import <Foundation/Foundation.h>
 #import "JKDownloadTask.h"
 @class JKDownloadItem;
@@ -20,7 +22,7 @@ static NSString * const kDownloadNeedSaveDataNoti = @"kDownloadNeedSaveDataNoti"
 @optional
 - (void)downloadItemStatusChanged:(JKDownloadItem *)item;
 - (void)downloadItem:(JKDownloadItem *)item downloadedSize:(int64_t)downloadedSize totalSize:(int64_t)totalSize;
-
+- (void)downloadItem:(JKDownloadItem *)item speed:(NSUInteger)speed speedDesc:(NSString *)speedDesc;
 @end
 
 @interface JKDownloadItem : NSObject<JKDownloadTaskDelegate>
@@ -45,7 +47,7 @@ static NSString * const kDownloadNeedSaveDataNoti = @"kDownloadNeedSaveDataNoti"
 @property (nonatomic, assign) JKDownloadStatus downloadStatus;
 @property (nonatomic, copy, readonly) NSString *saveName;
 @property (nonatomic, copy) NSString *compatibleKey;
-
+@property (nonatomic, assign) BOOL enableSpeed;
 
 @end
 
