@@ -234,7 +234,9 @@ public class MainApplication extends Application implements ReactApplication {
                         Long id = DownloadUntil.downLoadBundle(MainApplication.this, rnVersion.version
                                 , rnVersion.incrementVersion, rnVersion.versionUrl, rnVersion.versionSign);
                         if(responseJSEntity.loadRnVersion.equals(rnVersion.version)){
-                          forceLoading.id = id;
+                          if(forceLoading != null){
+                            forceLoading.id = id;
+                          }
                         }
                       }
                     }
