@@ -2,7 +2,6 @@ package com.nfc.fragment;
 
 import android.app.DialogFragment;
 import android.app.DownloadManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,8 +32,6 @@ public class UpdateDialog extends DialogFragment {
 
     private EnsureCallBack ensureCallBack;
 
-    private ContentResolver contentResolver;
-
     private ProgressBar progressBar;
 
     private TextView textView;
@@ -47,6 +44,8 @@ public class UpdateDialog extends DialogFragment {
 
 
     private DownloadUntil.DownloadUntilObserver downloadUntilObserver;
+
+    private String backMesg = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -62,7 +61,16 @@ public class UpdateDialog extends DialogFragment {
         progressBar = (ProgressBar)view.findViewById(R.id.customProgressBar) ;
         textView = (TextView)view.findViewById(R.id.update_log);
         String updateLog = getArguments().getString("info");
-        textView.setText("花费少许流量正在为您更新，请稍后....");
+        textView.setText("花费少许流量正在为您更新，请稍后....\n解压过程不耗费流量");
+
+        downloadUntilObserver = new DownloadUntil.DownloadUntilObserver() {
+            @Override
+            public void downloadProgress(String message) {
+                backMesg = message;
+            }
+        };
+
+        DownloadUntil.registObserver(downloadUntilObserver);
 
         getDialog().setCanceledOnTouchOutside(false);
         getTime();
@@ -85,14 +93,12 @@ public class UpdateDialog extends DialogFragment {
                     }
                     if(prosess == 100){
                         if(ensureCallBack != null) {
-                            if(ToolUtil.checkJSversion(forceLoading.version)){
+                            if(backMesg.equals("SUCCESS") && ToolUtil.checkJSversion(forceLoading.version)){
                                 ensureCallBack.ensureCallBack();
                                 timer.cancel();
                                 dismiss();
-                            }else{
-                                checkCount++;
                             }
-                            if(checkCount >= 3){
+                            if(backMesg.equals("ERROR")){
                                 timer.cancel();
                                 dismiss();
                             }

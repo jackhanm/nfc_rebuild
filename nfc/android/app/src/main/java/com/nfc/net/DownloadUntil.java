@@ -49,7 +49,7 @@ public class DownloadUntil {
     private static DownloadUntilObserver downloadContentObserver;
 
     public interface DownloadUntilObserver{
-        void downloadProgress(int progress);
+        void downloadProgress(String message);
     }
 
     public static void registObserver(DownloadUntilObserver observer){
@@ -171,8 +171,14 @@ public class DownloadUntil {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 Log.d(TAG, "===================================\n" + jsVersion + "下载完成\n" + "===================================");
+                if(downloadContentObserver != null){
+                    downloadContentObserver.downloadProgress("下载完成");
+                }
                 if(checkZip(md5, jsVersion)){
                     Log.d(TAG, "===================================\n" + jsVersion + "zip校验完成\n" + "===================================");
+                    if(downloadContentObserver != null){
+                        downloadContentObserver.downloadProgress("压缩包校验完成");
+                    }
                     unzip(jsVersion);
                     File src = new File(NativeConstant.JS_PATCH_LOCAL_FOLDER + File.separator + jsVersion);
                     File dest = new File(NativeConstant.BASE_PATH + jsVersion);
@@ -181,14 +187,24 @@ public class DownloadUntil {
                         if(!CheckDetail(jsVersion)){
                             deleteFile(new File(NativeConstant.BASE_PATH + jsVersion));
                             Log.d(TAG, "===================================\n" + jsVersion + "清单校验完成\n" + "===================================");
+                            if(downloadContentObserver != null){
+                                downloadContentObserver.downloadProgress("ERROR");
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                         Log.e(TAG, "===================================\n" + jsVersion + "出错了\n" + e.getMessage() + "\n" + "===================================");
+                        if(downloadContentObserver != null){
+                            downloadContentObserver.downloadProgress("ERROR");
+                        }
                         deleteFile(new File(NativeConstant.BASE_PATH + jsVersion));
                         deleteFile(src);
                     }
                     deleteFile(src);
+                }else{
+                    if(downloadContentObserver != null){
+                        downloadContentObserver.downloadProgress("ERROR");
+                    }
                 }
                 File file = new File(NativeConstant.JS_PATCH_LOCAL_ZIP + jsVersion + ".zip");
                 file.delete();
@@ -197,6 +213,9 @@ public class DownloadUntil {
                 editor.remove(NativeConstant.BASE_VERSION + completeId);
                 editor.remove(NativeConstant.HOT_UPDATE_ID + completeId);
                 editor.commit();
+                if(downloadContentObserver != null){
+                    downloadContentObserver.downloadProgress("SUCCESS");
+                }
             }
         }).start();
     }
@@ -215,16 +234,28 @@ public class DownloadUntil {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 Log.d(TAG, "===================================\n" + jsVersion + "增量下载完成\n" + "===================================");
+                if(downloadContentObserver != null){
+                    downloadContentObserver.downloadProgress("下载完成");
+                }
                 if(checkZip(md5, jsVersion)){
                     Log.d(TAG, "===================================\n" + jsVersion + "zip增量MD5校验完成\n" + "===================================");
+                    if(downloadContentObserver != null){
+                        downloadContentObserver.downloadProgress("压缩包校验完成");
+                    }
                     unzip(jsVersion);
                     Log.d(TAG, "===================================\n" + jsVersion + "zip增量解压完成\n" + "===================================");
+                    if(downloadContentObserver != null){
+                        downloadContentObserver.downloadProgress("解压完成");
+                    }
                     File src = new File(NativeConstant.BASE_PATH + baseVersion);
                     File dest = new File(NativeConstant.BASE_PATH + "tmp" + jsVersion);
                     try {
                         copyFolder(src, dest);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        if(downloadContentObserver != null){
+                            downloadContentObserver.downloadProgress("ERROR");
+                        }
                     }
                     mergePatAndAsset(NativeConstant.BASE_PATH + "tmp" + jsVersion, jsVersion);
                     File file = new File(NativeConstant.BASE_PATH + "tmp" + jsVersion);
@@ -233,6 +264,9 @@ public class DownloadUntil {
                         if(!CheckDetail("tmp" + jsVersion)){
                             deleteFile(new File(NativeConstant.BASE_PATH + "tmp" + jsVersion));
                             Log.d(TAG, "===================================\n" + jsVersion + "Detail文件校验失败\n" + "===================================");
+                            if(downloadContentObserver != null){
+                                downloadContentObserver.downloadProgress("ERROR");
+                            }
                         }else{
                             boolean isSucess = file.renameTo(new File(NativeConstant.BASE_PATH + jsVersion));
                             if(isSucess){
@@ -243,6 +277,13 @@ public class DownloadUntil {
                         e.printStackTrace();
                         Log.d(TAG, "===================================\n" + jsVersion + e.getMessage() + "===================================");
                         deleteFile(new File(NativeConstant.BASE_PATH + jsVersion));
+                        if(downloadContentObserver != null){
+                            downloadContentObserver.downloadProgress("ERROR");
+                        }
+                    }
+                }else{
+                    if(downloadContentObserver != null){
+                        downloadContentObserver.downloadProgress("ERROR");
                     }
                 }
                 File file = new File(NativeConstant.JS_PATCH_LOCAL_ZIP + jsVersion + ".zip");
@@ -252,6 +293,9 @@ public class DownloadUntil {
                 editor.remove(NativeConstant.HOT_UPDATE_ID + completeId);
                 editor.remove(NativeConstant.BASE_VERSION + completeId);
                 editor.commit();
+                if(downloadContentObserver != null){
+                    downloadContentObserver.downloadProgress("SUCCESS");
+                }
             }
         }).start();
     }
