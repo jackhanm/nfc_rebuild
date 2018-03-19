@@ -18,6 +18,7 @@ import com.nfc.util.AppUpdate;
 import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
+import com.nfc.util.ToolUtil;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
@@ -87,7 +88,11 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
         ForceLoading forceLoading = MainApplication.getInstance().needUpdate();
         AppUpdate appUpdate = MainApplication.getInstance().needAppUpdate();
         if(forceLoading != null && forceLoading.isUpdate){
-            UpdateDialog.getFragment(forceLoading).show(getFragmentManager(), "");
+            if(ToolUtil.checkJSversion(forceLoading.version)){
+                loadAgain();
+            }else{
+                UpdateDialog.getFragment(forceLoading).show(getFragmentManager(), "");
+            }
         }else if(appUpdate != null){
             AppUpdateDialog.instance(appUpdate).show(getFragmentManager(), "");
         }
@@ -102,6 +107,16 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
 
     @Override
     public void ensureCallBack() {
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadAgain();
+            }
+        });
+    }
+
+    //重新加载
+    private void loadAgain(){
         ForceLoading forceLoading = MainApplication.getInstance().needUpdate();
         forceLoading.isUpdate = false;
         MainActivity.this
@@ -123,6 +138,5 @@ public class MainActivity extends ReactActivity implements UpdateDialog.CancleCa
 
     @Override
     public void appEnsureCallBack() {
-
     }
 }

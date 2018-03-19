@@ -231,8 +231,11 @@ public class MainApplication extends Application implements ReactApplication {
                     for(ResponseJSEntity.RNVersion rnVersion : responseJSEntity.rnVersionList){
                       if(rnVersion.versionUrl != null && !rnVersion.versionUrl.equals("")){
                         //添加JS版本
-                        DownloadUntil.downLoadBundle(MainApplication.this, rnVersion.version
+                        Long id = DownloadUntil.downLoadBundle(MainApplication.this, rnVersion.version
                                 , rnVersion.incrementVersion, rnVersion.versionUrl, rnVersion.versionSign);
+                        if(responseJSEntity.loadRnVersion.equals(rnVersion.version)){
+                          forceLoading.id = id;
+                        }
                       }
                     }
                   }
@@ -281,7 +284,4 @@ public class MainApplication extends Application implements ReactApplication {
     super.attachBaseContext(base);
     MultiDex.install(this);
   }
-
-  //下载ID，供查询使用
-  public static long DOWNLOAD_ID = 0;
 }

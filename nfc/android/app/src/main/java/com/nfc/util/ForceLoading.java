@@ -11,6 +11,7 @@ public class ForceLoading implements Parcelable{
     public boolean isUpdate;
     public String version;
     public String updateLog;
+    public Long id;
 
     public ForceLoading(){}
 
@@ -18,6 +19,7 @@ public class ForceLoading implements Parcelable{
         isUpdate = in.readByte() != 0;
         version = in.readString();
         updateLog = in.readString();
+        id = in.readLong();
     }
 
     public static final Creator<ForceLoading> CREATOR = new Creator<ForceLoading>() {
@@ -42,5 +44,6 @@ public class ForceLoading implements Parcelable{
         dest.writeByte((byte) (isUpdate ? 1 : 0));
         dest.writeString(version);
         dest.writeString(updateLog);
+        dest.writeLong(id);
     }
 }

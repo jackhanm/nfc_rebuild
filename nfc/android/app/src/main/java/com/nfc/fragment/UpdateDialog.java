@@ -1,6 +1,7 @@
 package com.nfc.fragment;
 
 import android.app.DialogFragment;
+import android.app.DownloadManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +17,10 @@ import android.widget.TextView;
 import com.nfc.R;
 import com.nfc.net.DownloadUntil;
 import com.nfc.util.ForceLoading;
+import com.nfc.util.ToolUtil;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -36,6 +41,10 @@ public class UpdateDialog extends DialogFragment {
 
     private ForceLoading forceLoading;
 
+    private static final String TAG = "UpdateDialog";
+
+    private int checkCount = 0;
+
 
     private DownloadUntil.DownloadUntilObserver downloadUntilObserver;
 
@@ -46,42 +55,59 @@ public class UpdateDialog extends DialogFragment {
         forceLoading = getArguments().getParcelable("FORCELOADING");
 
         View view = inflater.inflate(R.layout.update_dialog, container, false);
-        ((Button)view.findViewById(R.id.cancle)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancleCallBack.cancleCallBack();
-                dismiss();
-            }
-        });
+        ((Button)view.findViewById(R.id.cancle)).setVisibility(View.GONE);
 
-        ((Button)view.findViewById(R.id.ensure)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ensureCallBack.ensureCallBack();
-                dismiss();
-            }
-        });
+        ((Button)view.findViewById(R.id.ensure)).setVisibility(View.GONE);
 
         progressBar = (ProgressBar)view.findViewById(R.id.customProgressBar) ;
         textView = (TextView)view.findViewById(R.id.update_log);
         String updateLog = getArguments().getString("info");
-        if(updateLog != null){
-            textView.setText(updateLog);
-        }
-
-        downloadUntilObserver = new DownloadUntil.DownloadUntilObserver() {
-            @Override
-            public void downloadProgress(int progress) {
-                Log.d("UpdateDialog", String.valueOf(progress));
-                progressBar.setProgress(progress);
-            }
-        };
-
-        DownloadUntil.registObserver(downloadUntilObserver);
+        textView.setText("花费少许流量正在为您更新，请稍后....");
 
         getDialog().setCanceledOnTouchOutside(false);
+        getTime();
 
         return view;
+    }
+
+    private void getTime(){
+        final DownloadManager downloadManager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                int prosess = DownloadUntil.getProsess(downloadManager, forceLoading.id);
+                Log.d(TAG, "=======================>" + prosess);
+                if(prosess != Integer.MAX_VALUE){
+                    if(progressBar != null){
+                        progressBar.setProgress(prosess);
+                    }
+                    if(prosess == 100){
+                        if(ensureCallBack != null) {
+                            if(ToolUtil.checkJSversion(forceLoading.version)){
+                                ensureCallBack.ensureCallBack();
+                                timer.cancel();
+                                dismiss();
+                            }else{
+                                checkCount++;
+                            }
+                            if(checkCount >= 3){
+                                timer.cancel();
+                                dismiss();
+                            }
+                        }else{
+                            timer.cancel();
+                            dismiss();
+                        }
+                    }
+                }else{
+                    progressBar.setVisibility(View.INVISIBLE);
+                    timer.cancel();
+                    dismiss();
+                }
+            }
+        }, 0, 500);
     }
 
     public interface CancleCallBack{
