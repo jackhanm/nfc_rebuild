@@ -8,10 +8,10 @@ import android.os.Parcelable;
  */
 
 public class ForceLoading implements Parcelable{
-    public boolean isUpdate;
+    public boolean isUpdate = false;
     public String version;
     public String updateLog;
-    public Long id;
+    public Long id = 0l;
 
     public ForceLoading(){}
 

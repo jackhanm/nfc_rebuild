@@ -218,7 +218,6 @@ public class MainApplication extends Application implements ReactApplication {
                     if(!ToolUtil.checkJSversion(responseJSEntity.loadRnVersion)){
                       //强制加载版本,将提示信息延迟到主界面
                       forceLoading = new ForceLoading();
-                      forceLoading.isUpdate = true;
                       forceLoading.version = responseJSEntity.loadRnVersion;
                     }
                     //记录加载版本号
@@ -236,6 +235,7 @@ public class MainApplication extends Application implements ReactApplication {
                         if(responseJSEntity.loadRnVersion.equals(rnVersion.version)){
                           if(forceLoading != null){
                             forceLoading.id = id;
+                              forceLoading.isUpdate = true;
                           }
                         }
                       }
