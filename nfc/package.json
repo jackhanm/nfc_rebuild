@@ -15,7 +15,7 @@
 		"react-native": "0.50.3",
 		"react-native-actionsheet": "^2.3.0",
 		"react-native-checkbox-heaven": "^0.1.4",
-		"react-native-easy-toast": "^1.0.9",
+		"react-native-easy-toast": "^1.1.0",
 		"react-native-elements": "^1.0.0-beta2",
 		"react-native-image-crop-picker": "^0.19.3",
 		"react-native-keyboard-aware-scroll-view": "^0.4.3",

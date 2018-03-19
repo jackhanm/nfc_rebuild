@@ -22,7 +22,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import {commonStyle} from '../../../js/util/commonStyle'
-import {Toast} from 'antd-mobile';
+import Toast from 'react-native-root-toast';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
@@ -221,7 +221,10 @@ export default class PersonalData extends BaseComponent{
     }
 
     _showToast(info) {
-        Toast.info(info, 0.5);
+        Toast.show(info, {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.CENTER,
+        });
     }
 
     fetchAddressData(type){
@@ -547,7 +550,6 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
         </ScrollView>);
     }
@@ -1392,12 +1394,12 @@ export default class PersonalData extends BaseComponent{
         }
 
         if(fillinfo.money == ''){
-            Toast.info('请选择借款金额');
+            this._showToast('请选择借款金额');
             return;
         }
 
         if(fillinfo.backTime == '0'){
-            Toast.info('请选择还款日期');
+            this._showToast('请选择还款日期');
             return;
         }
 
