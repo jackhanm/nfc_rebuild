@@ -67,129 +67,135 @@ const SelectType = {
     PERSONALCARCARD:'PERSONALCARCARD',
     CRIMEHISTORY:'CRIMEHISTORY',
     REALESTATE:'REALESTATE',
-    FAMILYKNOW:'FAMILYKNOW'
+    FAMILYKNOW:'FAMILYKNOW',
+    BACKTIME:'BACKTIME',
 }
 
 const homeType = [{code:'HOUSE', caption:"写字楼"}, {code:'OFFICE', caption:'商铺'}, {code:'SHOP', caption:"住宅"}];
-const age = [{code:'', caption:'25 - 35岁'}
-, {code:'', caption:'35 - 45岁'}
-, {code:'', caption:'45 - 55岁'}
-, {code:'', caption:'25岁以下及55岁以上'}];
-const education = [{code:'', caption:'研究生或以上'}
-    , {code:'', caption:'本科含双学位'}
-    , {code:'', caption:'大专'}
-    , {code:'', caption:'中专及高中以下'}];
-const healthy = [{code:'', caption:'当前有重大疾病'}
-    , {code:'', caption:'当前较为健康'}];
-const registered = [{code:'', caption:'本市三年以上户口'}
-    , {code:'', caption:'本市1-3年户口'}
-    , {code:'', caption:'外地户口'}];
-const income = [{code:'', caption:'20000及以上'}
-    , {code:'', caption:'10000 - 20000'}
-    , {code:'', caption:'8000 - 10000'}
-    , {code:'', caption:'6000 - 8000'}
-    , {code:'', caption:'4000 - 6000'}
-    , {code:'', caption:'2000 - 4000'}
-    , {code:'', caption:'2000以下'}];
+const age = [{code:'25-35岁', caption:'25 - 35岁'}
+, {code:'35-45岁', caption:'35 - 45岁'}
+, {code:'45-55岁', caption:'45 - 55岁'}
+, {code:'25岁以下及55岁以上', caption:'25岁以下及55岁以上'}];
+const education = [{code:'研究生或以上', caption:'研究生或以上'}
+    , {code:'本科含双学位', caption:'本科含双学位'}
+    , {code:'大专', caption:'大专'}
+    , {code:'中专及高中以下', caption:'中专及高中以下'}];
+const healthy = [{code:'当前有重大疾病', caption:'当前有重大疾病'}
+    , {code:'当前较为健康', caption:'当前较为健康'}];
+const registered = [{code:'本市三年以上户口', caption:'本市三年以上户口'}
+    , {code:'本市1-3年户口', caption:'本市1-3年户口'}
+    , {code:'外地户口', caption:'外地户口'}];
+const income = [{code:'20000及以上', caption:'20000及以上'}
+    , {code:'10000-20000', caption:'10000 - 20000'}
+    , {code:'8000-10000', caption:'8000 - 10000'}
+    , {code:'6000-8000', caption:'6000 - 8000'}
+    , {code:'4000-6000', caption:'4000 - 6000'}
+    , {code:'2000-4000', caption:'2000 - 4000'}
+    , {code:'2000以下', caption:'2000以下'}];
 
 const percentage = [{code:'', caption:'无月还款'}
-    , {code:'', caption:'20%及以下'}
-    , {code:'', caption:'20% - 40%'}
-    , {code:'', caption:'40% - 60%'}
-    , {code:'', caption:'60% - 80%'}
-    , {code:'', caption:'80% - 100%'}
-    , {code:'', caption:'100%以上'}];
+    , {code:'20%及以下', caption:'20%及以下'}
+    , {code:'20%-40%', caption:'20% - 40%'}
+    , {code:'40%-60%', caption:'40% - 60%'}
+    , {code:'60%-80%', caption:'60% - 80%'}
+    , {code:'80%-100%', caption:'80% - 100%'}
+    , {code:'100%以上', caption:'100%以上'}];
 
-const houseInfo = [{code:'', caption:'有住房（无贷款）'}
-    , {code:'', caption:'有住房（有贷款）'}
-    , {code:'', caption:'父母同住或者宿舍'}
-    , {code:'', caption:'租房'}
-    , {code:'', caption:'其他'}];
+const houseInfo = [{code:'有住房（无贷款）', caption:'有住房（无贷款）'}
+    , {code:'有住房（有贷款）', caption:'有住房（有贷款）'}
+    , {code:'父母同住或者宿舍', caption:'父母同住或者宿舍'}
+    , {code:'租房', caption:'租房'}
+    , {code:'其他', caption:'其他'}];
 
-const residence = [{code:'', caption:'5年以上'}
-    , {code:'', caption:'2 - 5年'}
-    , {code:'', caption:'2年以下'}];
+const residence = [{code:'5年以上', caption:'5年以上'}
+    , {code:'2-5年', caption:'2 - 5年'}
+    , {code:'2年以下', caption:'2年以下'}];
 
-const peoples = [{code:'', caption:'0人'}
-    , {code:'', caption:'1-2人'}
-    , {code:'', caption:'3人'}
-    , {code:'', caption:'4人'}
-    , {code:'', caption:'4人以上'}];
+const peoples = [{code:'0人', caption:'0人'}
+    , {code:'1-2人', caption:'1-2人'}
+    , {code:'3人', caption:'3人'}
+    , {code:'4人', caption:'4人'}
+    , {code:'4人以上', caption:'4人以上'}];
 
-const employer = [{code:'', caption:'机关事业单位'}
-    , {code:'', caption:'上市公司，军队，三资外企'}
-    , {code:'', caption:'国营企业'}
-    , {code:'', caption:'集体或民营企业'}
-    , {code:'', caption:'个体经营商户'}
-    , {code:'', caption:'其他'}];
+const employer = [{code:'机关事业单位', caption:'机关事业单位'}
+    , {code:'上市公司，军队，三资外企', caption:'上市公司，军队，三资外企'}
+    , {code:'国营企业', caption:'国营企业'}
+    , {code:'集体或民营企业', caption:'集体或民营企业'}
+    , {code:'个体经营商户', caption:'个体经营商户'}
+    , {code:'其他', caption:'其他'}];
 
-const work = [{code:'', caption:'5年以上'}
-    , {code:'', caption:'2 - 5年'}
-    , {code:'', caption:'2年以下'}];
+const work = [{code:'5年以上', caption:'5年以上'}
+    , {code:'2-5年', caption:'2 - 5年'}
+    , {code:'2年以下', caption:'2年以下'}];
 
-const post = [{code:'', caption:'总经理，厅局级以上'}
-,{code:'', caption:'部门经理级，处级科级'}
-    , {code:'', caption:'职员一般干部'}
-    , {code:'', caption:'打工或其它'}];
+const post = [{code:'总经理，厅局级以上', caption:'总经理，厅局级以上'}
+,{code:'部门经理级，处级科级', caption:'部门经理级，处级科级'}
+    , {code:'职员一般干部', caption:'职员一般干部'}
+    , {code:'打工或其它', caption:'打工或其它'}];
 
-const creditCard = [{code:'', caption:'10次以上'}
-    ,{code:'', caption:'8 - 10次'}
-    , {code:'', caption:'5 - 8次'}
-    , {code:'', caption:'2 - 5次'}
-    , {code:'', caption:'2次以下'}
-    , {code:'', caption:'无信用卡'}];
+const creditCard = [{code:'10次以上', caption:'10次以上'}
+    ,{code:'8-10次', caption:'8 - 10次'}
+    , {code:'5-8次', caption:'5 - 8次'}
+    , {code:'2-5次', caption:'2 - 5次'}
+    , {code:'2次以下', caption:'2次以下'}
+    , {code:'无信用卡', caption:'无信用卡'}];
 
-const quota = [{code:'', caption:'白金卡50-100万'}
-    ,{code:'', caption:'白金卡10-50万'}
-    , {code:'', caption:'金卡5-10万'}
-    , {code:'', caption:'金卡1-5万'}
-    , {code:'', caption:'普卡1万以下'}
-    , {code:'', caption:'无信用卡'}];
+const quota = [{code:'白金卡50-100万', caption:'白金卡50-100万'}
+    ,{code:'白金卡10-50万', caption:'白金卡10-50万'}
+    , {code:'金卡5-10万', caption:'金卡5-10万'}
+    , {code:'金卡1-5万', caption:'金卡1-5万'}
+    , {code:'普卡1万以下', caption:'普卡1万以下'}
+    , {code:'无信用卡', caption:'无信用卡'}];
 
-const use_year = [{code:'', caption:'3年以上'}
-    , {code:'', caption:'1 - 3年'}
-    , {code:'', caption:'1年以内'}
-    , {code:'', caption:'无信用卡'}];
+const use_year = [{code:'3年以上', caption:'3年以上'}
+    , {code:'1 - 3年', caption:'1 - 3年'}
+    , {code:'1年以内', caption:'1年以内'}
+    , {code:'无信用卡', caption:'无信用卡'}];
 
-const credit_lost = [{code:'', caption:'无失信'}
-    , {code:'', caption:'无信用卡'}
-    , {code:'', caption:'2次（含）之内'}
-    , {code:'', caption:'2次以上'}];
+const credit_lost = [{code:'无失信', caption:'无失信'}
+    , {code:'无信用卡', caption:'无信用卡'}
+    , {code:'2次（含）之内', caption:'2次（含）之内'}
+    , {code:'2次以上', caption:'2次以上'}];
 
-const yes_no = [{code:'', caption:'是'}
-    , {code:'', caption:'否'}];
+const yes_no = [{code:'是', caption:'是'}
+    , {code:'否', caption:'否'}];
 
-const has_no = [{code:'', caption:'无'}
-    , {code:'', caption:'有'}];
+const has_no = [{code:'无', caption:'无'}
+    , {code:'有', caption:'有'}];
 
-const car_card = [{code:'', caption:'无车'}
-    , {code:'', caption:'本地车牌'}
-    , {code:'', caption:'异地车牌'}];
+const car_card = [{code:'无车', caption:'无车'}
+    , {code:'本地车牌', caption:'本地车牌'}
+    , {code:'异地车牌', caption:'异地车牌'}];
 
-const good_bad = [{code:'', caption:'良好'}
-    , {code:'', caption:'正常'}
-    , {code:'', caption:'较差'}]
+const good_bad = [{code:'良好', caption:'良好'}
+    , {code:'正常', caption:'正常'}
+    , {code:'较差', caption:'较差'}]
 
-const better_bad = [{code:'', caption:'优秀'}
-    , {code:'', caption:'正常'}
-    , {code:'', caption:'较差'}]
+const better_bad = [{code:'优秀', caption:'优秀'}
+    , {code:'正常', caption:'正常'}
+    , {code:'较差', caption:'较差'}]
 
-const number = [{code:'', caption:'0'}
-    , {code:'', caption:'1'}
-    , {code:'', caption:'2'},
-    {code:'', caption:'3'}
-    , {code:'', caption:'4'}
-    , {code:'', caption:'5'},
-    {code:'', caption:'6'}
-    , {code:'', caption:'7'}
-    , {code:'', caption:'8'},
-    {code:'', caption:'9'}
-    , {code:'', caption:'10'}]
+const number = [{code:'0', caption:'0'}
+    , {code:'1', caption:'1'}
+    , {code:'2', caption:'2'},
+    {code:'3', caption:'3'}
+    , {code:'4', caption:'4'}
+    , {code:'5', caption:'5'},
+    {code:'6', caption:'6'}
+    , {code:'7', caption:'7'}
+    , {code:'8', caption:'8'},
+    {code:'9', caption:'9'}
+    , {code:'10', caption:'10'}]
 
-const marriage = [{code:'', caption:'已婚有子女'}
-    , {code:'', caption:'已婚无子女'}
-    , {code:'', caption:'离婚'},
-    {code:'', caption:'未婚'}];
+const marriage = [{code:'已婚有子女', caption:'已婚有子女'}
+    , {code:'已婚无子女', caption:'已婚无子女'}
+    , {code:'离婚', caption:'离婚'},
+    {code:'未婚', caption:'未婚'}];
+
+const backTime = [{code:'1个月', caption:'1个月'}
+, {code:'3个月', caption:'3个月'}
+, {code:'6个月', caption:'6个月'}
+, {code:'12个月', caption:'12个月'}];
 
 var fillinfo;
 
@@ -215,7 +221,7 @@ export default class PersonalData extends BaseComponent{
     }
 
     _showToast(info) {
-        Toast.info(info, 1);
+        Toast.info(info, 0.5);
     }
 
     fetchAddressData(type){
@@ -505,7 +511,8 @@ export default class PersonalData extends BaseComponent{
             personalcarcard:{caption:"请选择", code:'0'},
             crimehistory:{caption:"请选择", code:'0'},
             realestate:{caption:"请选择", code:'0'},
-            familyknow:{caption:"请选择", code:'0'}
+            familyknow:{caption:"请选择", code:'0'},
+            backTime:{caption:"请选择", code:'0'}
         }
     }
 
@@ -613,11 +620,11 @@ export default class PersonalData extends BaseComponent{
     _renderloanInfo(){
         return(<View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', marginTop:ScreenUtil.scaleSize(20)}}>
 
-            {this._renderInputer(1.5, 2.5, '请填写借款金额', '', (txte)=>{fillinfo.money})}
+            {this._renderInputer(1.5, 2.5, '请填写借款金额', '', (text)=>{fillinfo.money = text})}
 
             <View style={styles.line}/>
 
-            {this._renderInputer(1.5, 2.5, '请填写借款期限', '', (text)=>{fillinfo.backTime})}
+            {this._renderlocalSelected(1.5, 2.5, "请填写借款期限", "请填写借款期限", SelectType.BACKTIME, backTime, this.state.backTime)}
 
             <View style={styles.line}/>
 
@@ -681,7 +688,7 @@ export default class PersonalData extends BaseComponent{
     _familyInfo(){
         if(this.state.render_type == 0){
             return(
-                <View style={{width:winWidth, flexDirection:'column', backgroundColor:'white', }}>
+                <View style={{markTimewidth:winWidth, flexDirection:'column', backgroundColor:'white', }}>
 
                     {this._renderlocalSelected(1.5, 2.5, "住房情况", "住房情况", SelectType.HOUSEINFO, houseInfo, this.state.houseinfo)}
 
@@ -947,7 +954,7 @@ export default class PersonalData extends BaseComponent{
 
                 </View>
 
-                {this._renderInputer(1.5, 2.5, '请选择上牌时间', '上市时间如：2018', (text)=>{fillinfo.markTime = text})}
+                {this._renderInputer(1.5, 2.5, '请选择上市时间', '上市时间如：2018', (text)=>{fillinfo.markTime = text})}
 
                 <View style={styles.line}/>
 
@@ -977,10 +984,6 @@ export default class PersonalData extends BaseComponent{
                 <View style={styles.line}/>
 
                 {this._renderInputer(1.5, 2.5, '请输入行车里程', '', (text)=>{fillinfo.carMileage = text})}
-
-                <View style={styles.line}/>
-
-                {this._renderInputer(1.5, 2.5, '请输入车牌号码', '', (text)=>{fillinfo.carID = text})}
 
                 <View style={styles.line}/>
 
@@ -1185,7 +1188,8 @@ export default class PersonalData extends BaseComponent{
             case SelectType.FAMILYKNOW:
                 this.setState({familyknow:item})
                 break;
-
+            case SelectType.BACKTIME:
+                this.setState({backTime:item});
 
 
         }
@@ -1317,6 +1321,40 @@ export default class PersonalData extends BaseComponent{
 
     _checkInfo(){
 
+        fillinfo.backTime = this.state.backTime.code;
+
+        fillinfo.peoplequality = this.state.peoplequality.code;
+        fillinfo.development = this.state.development.code;
+        fillinfo.finance = this.state.finance.code;
+        fillinfo.performance = this.state.performance.code;
+        fillinfo.caseinfo = this.state.caseinfo.code;
+        fillinfo.countrycompany = this.state.countrycompany.code;
+        fillinfo.companyhaoche = this.state.companyhaoche.code;
+        fillinfo.companyoverdue = this.state.companyoverdue.code;
+        fillinfo.userage = this.state.userage.code;
+        fillinfo.education = this.state.education.code;
+        fillinfo.helathstate = this.state.helathstate.code;
+        fillinfo.registered = this.state.registered.code;
+        fillinfo.income = this.state.income.code;
+        fillinfo.percentage = this.state.percentage.code;
+        fillinfo.houseinfo = this.state.houseinfo.code;
+        fillinfo.marriage = this.state.marriage.code;
+        fillinfo.residence = this.state.residence.code;
+        fillinfo.peoples = this.state.peoples.code;
+        fillinfo.employer = this.state.employer.code;
+        fillinfo.work = this.state.work.code;
+        fillinfo.post = this.state.post.code;
+        fillinfo.creditcard = this.state.creditcard.code;
+        fillinfo.quota = this.state.quota.code;
+        fillinfo.use_year = this.state.use_year.code;
+        fillinfo.credit_lost = this.state.credit_lost.code;
+        fillinfo.personalhaoche = this.state.personalhaoche.code;
+        fillinfo.personaloverdue = this.state.personaloverdue.code;
+        fillinfo.personalcarcard = this.state.personalcarcard.code;
+        fillinfo.crimehistory = this.state.crimehistory.code;
+        fillinfo.realestate = this.state.realestate.code;
+        fillinfo.familyknow = this.state.familyknow.code;
+
 
         var tag;
 
@@ -1353,11 +1391,21 @@ export default class PersonalData extends BaseComponent{
             }
         }
 
+        if(fillinfo.money == ''){
+            Toast.info('请选择借款金额');
+            return;
+        }
+
+        if(fillinfo.backTime == '0'){
+            Toast.info('请选择还款日期');
+            return;
+        }
+
 
         var data = new Date();
 
         console.log(fillinfo);
-        if(this.state.render_type == 1 && (this.state.all || this.state.companyRiskManage)){
+        if(this.state.render_type == 1){
             var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
 
             if (orgCode.test(fillinfo.companyId) || fillinfo.companyName == '') {
@@ -1366,44 +1414,33 @@ export default class PersonalData extends BaseComponent{
             }
         }
 
-        if(this.state.carPrice){
+        if(this.state.render_type == 0 ){
+            var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if(!certNo.test(fillinfo.id)){
+                this._showToast('请输入正确的身份证');
+                return;
+            }
+            var userName = /^[\u4e00-\u9fa5]{2,4}$/;
+            if(!userName.test(fillinfo.name)){
+                this._showToast('请输入正确的姓名');
+                return;
+            }
+        }
+
+        if(this.state.antiFraud || this.state.all){
+            var re = /13[0-9]{9}/
+            if(!re.test(fillinfo.phoneNumber)){
+                Toast.info('请输入正确的电话号码')
+                return;
+            }
+        }
+
+        if(this.state.carPrice || this.state.all){
 
 
             fillinfo.carBrand = this.state.selectedBradn.code;
             fillinfo.carVs = this.state.selectedVehicles.code;
             fillinfo.carModle = this.state.selectedCarModle.code;
-
-            fillinfo.peoplequality = this.state.peoplequality.code;
-            fillinfo.development = this.state.development.code;
-            fillinfo.finance = this.state.finance.code;
-            fillinfo.performance = this.state.performance.code;
-            fillinfo.caseinfo = this.state.caseinfo.code;
-            fillinfo.countrycompany = this.state.countrycompany.code;
-            fillinfo.companyhaoche = this.state.companyhaoche.code;
-            fillinfo.companyoverdue = this.state.companyoverdue.code;
-            fillinfo.userage = this.state.userage.code;
-            fillinfo.education = this.state.education.code;
-            fillinfo.helathstate = this.state.helathstate.code;
-            fillinfo.registered = this.state.registered.code;
-            fillinfo.income = this.state.income.code;
-            fillinfo.percentage = this.state.percentage.code;
-            fillinfo.houseinfo = this.state.houseinfo.code;
-            fillinfo.marriage = this.state.marriage.code;
-            fillinfo.residence = this.state.residence.code;
-            fillinfo.peoples = this.state.peoples.code;
-            fillinfo.employer = this.state.employer.code;
-            fillinfo.work = this.state.work.code;
-            fillinfo.post = this.state.post.code;
-            fillinfo.creditcard = this.state.creditcard.code;
-            fillinfo.quota = this.state.quota.code;
-            fillinfo.use_year = this.state.use_year.code;
-            fillinfo.credit_lost = this.state.credit_lost.code;
-            fillinfo.personalhaoche = this.state.personalhaoche.code;
-            fillinfo.personaloverdue = this.state.personaloverdue.code;
-            fillinfo.personalcarcard = this.state.personalcarcard.code;
-            fillinfo.crimehistory = this.state.crimehistory.code;
-            fillinfo.realestate = this.state.realestate.code;
-            fillinfo.familyknow = this.state.familyknow.code;
 
             if(this.state.selectedCarAddress.length > 1){
                 fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
@@ -1426,30 +1463,26 @@ export default class PersonalData extends BaseComponent{
                     return;
                 }
             }
-            if(fillinfo.carBrand == ''){
+            if(fillinfo.carBrand == '0'){
                 this._showToast('请选择车品牌')
                 return;
             }
-            if(fillinfo.carVs == ''){
+            if(fillinfo.carVs == '0'){
                 this._showToast('请选择车系')
                 return;
             }
-            if(fillinfo.carModle == ''){
+            if(fillinfo.carModle == '0'){
                 this._showToast('请选择车型号')
                 return;
             }
 
-            if(fillinfo.carAdd == ''){
+            if(fillinfo.carAdd == '0'){
                 this._showToast('请选择车辆属地')
-                return;
-            }
-            if(fillinfo.carID == '') {
-                this._showToast('请输入车牌号')
                 return;
             }
         }
 
-        if(this.state.homeRent || this.state.homePrice){
+        if(this.state.homeRent || this.state.homePrice || this.state.all){
             if(this.state.selectedAdd > 2){
                 fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
             }
@@ -1460,7 +1493,7 @@ export default class PersonalData extends BaseComponent{
                 this._showToast("请输入正确的房屋面积")
                 return;
             }
-            if(fillinfo.homeAdd == ''){
+            if(fillinfo.homeAdd == '0'){
                 this._showToast('请输入房屋属地')
                 return;
             }
@@ -1474,19 +1507,6 @@ export default class PersonalData extends BaseComponent{
             }
 
         }
-
-            if(this.state.render_type == 0 && (this.state.creditReport || this.state.antiFraud || this.state.riskManage || this.state.all)){
-                var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-                if(!certNo.test(fillinfo.id)){
-                    this._showToast('请输入正确的身份证');
-                    return;
-                }
-                var userName = /^[\u4e00-\u9fa5]{2,4}$/;
-                if(!userName.test(fillinfo.name)){
-                    this._showToast('请输入正确的姓名');
-                    return;
-                }
-            }
 
 
         var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
