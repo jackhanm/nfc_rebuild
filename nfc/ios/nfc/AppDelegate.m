@@ -17,7 +17,8 @@
 #import "JKReadview.h"
 #import "CTUUID.h"
 #import <XHLaunchAd.h>
-
+#import "JKforceupdate.h"
+#import "JKforceupdateroot.h"
 @interface AppDelegate ()
 @property (nonatomic,strong) RCTBridge *bridge;
 @property (nonatomic, strong) UINavigationController *nav;
@@ -45,7 +46,7 @@
   __block RCTRootView *rootView ;
  self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
 
-#if DEBUG
+#if !DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -55,7 +56,6 @@
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
-  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   JKViewController *rootViewController = [JKViewController new];
   rootViewController.view = rootView;
   self.nav =[[UINavigationController alloc]initWithRootViewController:rootViewController];
@@ -65,7 +65,7 @@
 #else
   JKLog(@"time+BEGIN%@", [CTUUID getPhoneTimeToss]);
   
-  dispatch_async(dispatch_get_global_queue(0, 0), ^{
+ 
     // 处理耗时操作的代码块...
     [self checkupdateSuccess:^(id  _Nullable responseobject) {
       
@@ -73,38 +73,63 @@
       self.responseobject = responseobject;
       //原则 加载逻辑在前，更新逻辑在后
       //1 . 更新接口网络请求
-      //2 遍历本地文件夹，判断是否存在可以加载的js文件，加载js
-      //3 检查更新操作
+      //2 . 遍历本地文件夹，判断是否存在可以加载的js文件，加载js
+      //3 . 检查更新操作
       //    JKLog(@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"load"]);
    JKLog(@"time+SUCCESS%@", [CTUUID getPhoneTimeToss]);
       // 加载
-      dispatch_async(dispatch_get_main_queue(), ^{
+
         //回调或者说是通知主线程刷新，
-      
-       
+
         jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:responseobject jsListArr:self.jslistArr];
+        JKLog(@"%@",jsCodeLocation);
+   
+        if ([[jsCodeLocation absoluteString] isEqualToString:@"forceAll"]) {
+       
+          JKforceupdateroot *rootViewController = [JKforceupdateroot new];
+          rootViewController.responseobject =responseobject;
+          rootViewController.view = rootView;
+          self.nav =[[UINavigationController alloc]initWithRootViewController:rootViewController];
+          self.nav.navigationBarHidden=YES;
+          self.window.rootViewController = self.nav;
+          [self.window makeKeyAndVisible];
+
+          return ;
+        }
+        if ([[jsCodeLocation absoluteString] isEqualToString:@"forcePatch"]) {
+          
+          JKforceupdateroot *rootViewController = [JKforceupdateroot new];
+          rootViewController.responseobject =responseobject;
+          rootViewController.view = rootView;
+          self.nav =[[UINavigationController alloc]initWithRootViewController:rootViewController];
+          self.nav.navigationBarHidden=YES;
+          self.window.rootViewController = self.nav;
+          [self.window makeKeyAndVisible];
+          return ;
+        }
+        if ((![[jsCodeLocation absoluteString] isEqualToString:@"forceAll"])&&(![[jsCodeLocation absoluteString] isEqualToString:@"forcePatch"])) {
+          rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                 moduleName:@"nfc"
+                                          initialProperties:nil
+                                              launchOptions:launchOptions];
+          rootView.backgroundColor = [UIColor whiteColor];
+          rootView.contentView.backgroundColor = [UIColor whiteColor];
+          JKViewController *rootViewController = [[JKViewController alloc]init];
+          rootViewController.view = rootView;
+          UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
+          nav.navigationBarHidden=YES;
+          self.window.rootViewController = nav;
+          JKLog(@"time+%@", [CTUUID getPhoneTimeToss]);
+          [self.window makeKeyAndVisible];
+           [[JKRnupdateManage shareManager]updateWithres:responseobject jsListArr:self.jslistArr];
+        }
         
-        rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                               moduleName:@"nfc"
-                                        initialProperties:nil
-                                            launchOptions:launchOptions];
-        rootView.backgroundColor = [UIColor whiteColor];
-        rootView.contentView.backgroundColor = [UIColor whiteColor];
-        JKViewController *rootViewController = [[JKViewController alloc]init];
-        rootViewController.view = rootView;
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootViewController];
-        nav.navigationBarHidden=YES;
-        self.window.rootViewController = nav;
-        JKLog(@"time+%@", [CTUUID getPhoneTimeToss]);
-       [self.window makeKeyAndVisible];
-      });
+       
      
-      
       // 更新
-      
-      [[JKRnupdateManage shareManager]updateWithres:responseobject jsListArr:self.jslistArr];
-      
-      
+     
+     
+    
     } failure:^(NSError * _Nonnull error) {
       JKLog(@"time+FAILUER%@", [CTUUID getPhoneTimeToss]);
       if (!klObjectisEmpty([self getJslist])) {
@@ -130,7 +155,7 @@
     //通知主线程刷新
    
     
-  });
+
   
   
   

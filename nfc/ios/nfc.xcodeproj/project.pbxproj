@@ -105,6 +105,16 @@
 		66158B852028065300C5F58A /* ASLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66158B6C2028065300C5F58A /* ASLabel.m */; };
 		667BFAC82047D42F00A1551B /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667BFAA32047D42E00A1551B /* iconfont.ttf */; };
 		66898A742058CF5900A7FC8A /* JKReadview.m in Sources */ = {isa = PBXBuildFile; fileRef = 66898A732058CF5900A7FC8A /* JKReadview.m */; };
+		6690AEC720609F5A00B1F324 /* JKforceupdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEC620609F5A00B1F324 /* JKforceupdate.m */; };
+		6690AEEE2060A0CA00B1F324 /* JKforceupdateroot.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEED2060A0CA00B1F324 /* JKforceupdateroot.m */; };
+		6690AF012060AF7800B1F324 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEF12060AF7800B1F324 /* SCLTimerDisplay.m */; };
+		6690AF022060AF7800B1F324 /* SCLAlertViewStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEF32060AF7800B1F324 /* SCLAlertViewStyleKit.m */; };
+		6690AF032060AF7800B1F324 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEF72060AF7800B1F324 /* SCLAlertViewResponder.m */; };
+		6690AF042060AF7800B1F324 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEF82060AF7800B1F324 /* SCLTextView.m */; };
+		6690AF052060AF7800B1F324 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEF92060AF7800B1F324 /* SCLSwitchView.m */; };
+		6690AF062060AF7800B1F324 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEFB2060AF7800B1F324 /* SCLButton.m */; };
+		6690AF072060AF7800B1F324 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AEFD2060AF7800B1F324 /* UIImage+ImageEffects.m */; };
+		6690AF082060AF7800B1F324 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6690AF002060AF7800B1F324 /* SCLAlertView.m */; };
 		6694B7F32052794200B03865 /* JKpdfview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6694B7F22052794200B03865 /* JKpdfview.m */; };
 		6694B7F62052797000B03865 /* NDHTMLtoPDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6694B7F52052797000B03865 /* NDHTMLtoPDF.m */; };
 		66B3950B202C454D005C1C42 /* Ubuntu-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B394E1202C454C005C1C42 /* Ubuntu-Light-Italic.ttf */; };
@@ -554,6 +564,27 @@
 		667BFAA32047D42E00A1551B /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		66898A722058CF5900A7FC8A /* JKReadview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKReadview.h; sourceTree = "<group>"; };
 		66898A732058CF5900A7FC8A /* JKReadview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKReadview.m; sourceTree = "<group>"; };
+		6690AEC520609F5A00B1F324 /* JKforceupdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKforceupdate.h; sourceTree = "<group>"; };
+		6690AEC620609F5A00B1F324 /* JKforceupdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKforceupdate.m; sourceTree = "<group>"; };
+		6690AEEC2060A0CA00B1F324 /* JKforceupdateroot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKforceupdateroot.h; sourceTree = "<group>"; };
+		6690AEED2060A0CA00B1F324 /* JKforceupdateroot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKforceupdateroot.m; sourceTree = "<group>"; };
+		6690AEF02060AF7800B1F324 /* SCLSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLSwitchView.h; sourceTree = "<group>"; };
+		6690AEF12060AF7800B1F324 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTimerDisplay.m; sourceTree = "<group>"; };
+		6690AEF22060AF7800B1F324 /* SCLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLButton.h; sourceTree = "<group>"; };
+		6690AEF32060AF7800B1F324 /* SCLAlertViewStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewStyleKit.m; sourceTree = "<group>"; };
+		6690AEF42060AF7800B1F324 /* SCLMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLMacros.h; sourceTree = "<group>"; };
+		6690AEF52060AF7800B1F324 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		6690AEF62060AF7800B1F324 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertView.h; sourceTree = "<group>"; };
+		6690AEF72060AF7800B1F324 /* SCLAlertViewResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewResponder.m; sourceTree = "<group>"; };
+		6690AEF82060AF7800B1F324 /* SCLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTextView.m; sourceTree = "<group>"; };
+		6690AEF92060AF7800B1F324 /* SCLSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLSwitchView.m; sourceTree = "<group>"; };
+		6690AEFA2060AF7800B1F324 /* SCLAlertViewStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewStyleKit.h; sourceTree = "<group>"; };
+		6690AEFB2060AF7800B1F324 /* SCLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLButton.m; sourceTree = "<group>"; };
+		6690AEFC2060AF7800B1F324 /* SCLTimerDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLTimerDisplay.h; sourceTree = "<group>"; };
+		6690AEFD2060AF7800B1F324 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		6690AEFE2060AF7800B1F324 /* SCLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLTextView.h; sourceTree = "<group>"; };
+		6690AEFF2060AF7800B1F324 /* SCLAlertViewResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewResponder.h; sourceTree = "<group>"; };
+		6690AF002060AF7800B1F324 /* SCLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertView.m; sourceTree = "<group>"; };
 		6694B7F12052794200B03865 /* JKpdfview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKpdfview.h; sourceTree = "<group>"; };
 		6694B7F22052794200B03865 /* JKpdfview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKpdfview.m; sourceTree = "<group>"; };
 		6694B7F42052797000B03865 /* NDHTMLtoPDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDHTMLtoPDF.h; sourceTree = "<group>"; };
@@ -854,6 +885,7 @@
 		66158AE92028050000C5F58A /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				6690AEEF2060AF7800B1F324 /* SCLAlertView */,
 				66158AEA2028050000C5F58A /* MD5 */,
 				66158AF12028050000C5F58A /* SFHFKeychainUtils.m */,
 				66158AF22028050000C5F58A /* EFCommonUtils.m */,
@@ -1004,6 +1036,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6690AEEF2060AF7800B1F324 /* SCLAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				6690AEF02060AF7800B1F324 /* SCLSwitchView.h */,
+				6690AEF12060AF7800B1F324 /* SCLTimerDisplay.m */,
+				6690AEF22060AF7800B1F324 /* SCLButton.h */,
+				6690AEF32060AF7800B1F324 /* SCLAlertViewStyleKit.m */,
+				6690AEF42060AF7800B1F324 /* SCLMacros.h */,
+				6690AEF52060AF7800B1F324 /* UIImage+ImageEffects.h */,
+				6690AEF62060AF7800B1F324 /* SCLAlertView.h */,
+				6690AEF72060AF7800B1F324 /* SCLAlertViewResponder.m */,
+				6690AEF82060AF7800B1F324 /* SCLTextView.m */,
+				6690AEF92060AF7800B1F324 /* SCLSwitchView.m */,
+				6690AEFA2060AF7800B1F324 /* SCLAlertViewStyleKit.h */,
+				6690AEFB2060AF7800B1F324 /* SCLButton.m */,
+				6690AEFC2060AF7800B1F324 /* SCLTimerDisplay.h */,
+				6690AEFD2060AF7800B1F324 /* UIImage+ImageEffects.m */,
+				6690AEFE2060AF7800B1F324 /* SCLTextView.h */,
+				6690AEFF2060AF7800B1F324 /* SCLAlertViewResponder.h */,
+				6690AF002060AF7800B1F324 /* SCLAlertView.m */,
+			);
+			path = SCLAlertView;
+			sourceTree = "<group>";
+		};
 		6694B7F02052792300B03865 /* page */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,6 +1071,10 @@
 				66D810F32056726C00C9FBEA /* JKViewController.m */,
 				66898A722058CF5900A7FC8A /* JKReadview.h */,
 				66898A732058CF5900A7FC8A /* JKReadview.m */,
+				6690AEC520609F5A00B1F324 /* JKforceupdate.h */,
+				6690AEC620609F5A00B1F324 /* JKforceupdate.m */,
+				6690AEEC2060A0CA00B1F324 /* JKforceupdateroot.h */,
+				6690AEED2060A0CA00B1F324 /* JKforceupdateroot.m */,
 			);
 			name = page;
 			path = nfc/page;
@@ -1739,6 +1799,7 @@
 				66158B262028050000C5F58A /* SFHFKeychainUtils.m in Sources */,
 				66158B822028065300C5F58A /* NSAttributedString+Category.m in Sources */,
 				66158B752028065300C5F58A /* UIButton+Category.m in Sources */,
+				6690AF032060AF7800B1F324 /* SCLAlertViewResponder.m in Sources */,
 				66158B242028050000C5F58A /* NSString+MD5.m in Sources */,
 				66158B802028065300C5F58A /* NSObject+Category.m in Sources */,
 				66158B772028065300C5F58A /* NSData+CommonCryptor.m in Sources */,
@@ -1752,12 +1813,16 @@
 				66158B852028065300C5F58A /* ASLabel.m in Sources */,
 				66158B232028050000C5F58A /* MD5.m in Sources */,
 				66158B712028065300C5F58A /* NSArray+Category.m in Sources */,
+				6690AF062060AF7800B1F324 /* SCLButton.m in Sources */,
+				6690AF022060AF7800B1F324 /* SCLAlertViewStyleKit.m in Sources */,
+				6690AF082060AF7800B1F324 /* SCLAlertView.m in Sources */,
 				66158B6D2028065300C5F58A /* CTUUID.m in Sources */,
 				66158B252028050000C5F58A /* NSString+WZXSSLTool.m in Sources */,
 				6694B7F32052794200B03865 /* JKpdfview.m in Sources */,
 				66158B2C2028050000C5F58A /* BaseRequestParemsModel.m in Sources */,
 				66DBB1DF20282E1000FAE141 /* JKDownloadSession.m in Sources */,
 				66158B1C2028050000C5F58A /* CodeingOperateManager.m in Sources */,
+				6690AF012060AF7800B1F324 /* SCLTimerDisplay.m in Sources */,
 				66158B302028050000C5F58A /* CTBaseTableViewController.m in Sources */,
 				66158B7F2028065300C5F58A /* NSString+Predicate.m in Sources */,
 				66DBB1E520282E5F00FAE141 /* JKDownloadManager.m in Sources */,
@@ -1769,22 +1834,27 @@
 				6694B7F62052797000B03865 /* NDHTMLtoPDF.m in Sources */,
 				66158AC72027FE1900C5F58A /* JKupdateHelper.m in Sources */,
 				66DBB1E220282E4500FAE141 /* JKDownloadTask.m in Sources */,
+				6690AEC720609F5A00B1F324 /* JKforceupdate.m in Sources */,
 				66158AC52027FE1900C5F58A /* JKRnUpdateModel.m in Sources */,
 				66158B2F2028050000C5F58A /* CTBaseModel.m in Sources */,
 				66158AC82027FE1900C5F58A /* JKRnupdateManage.m in Sources */,
 				66158B7A2028065300C5F58A /* NSString+Category.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				6690AF072060AF7800B1F324 /* UIImage+ImageEffects.m in Sources */,
 				66158B332028050000C5F58A /* EventEmitterManager.m in Sources */,
+				6690AF042060AF7800B1F324 /* SCLTextView.m in Sources */,
 				66158B812028065300C5F58A /* UIColor+Category.m in Sources */,
 				66898A742058CF5900A7FC8A /* JKReadview.m in Sources */,
 				66158B1D2028050000C5F58A /* OYCountDownManager.m in Sources */,
 				66158ACA2027FE1900C5F58A /* JkFileHelper.m in Sources */,
 				66158B2D2028050000C5F58A /* NSNull+NullSafe.m in Sources */,
+				6690AF052060AF7800B1F324 /* SCLSwitchView.m in Sources */,
 				66158ACC2027FE1900C5F58A /* JKBundleHelper.m in Sources */,
 				66158B1F2028050000C5F58A /* NetWorkInfoManager.m in Sources */,
 				66158B792028065300C5F58A /* NSObject+PerformBlock.m in Sources */,
 				66158B782028065300C5F58A /* UILabel+setLabel.m in Sources */,
 				66DBB1E820282E7200FAE141 /* JKDownloadItem.m in Sources */,
+				6690AEEE2060A0CA00B1F324 /* JKforceupdateroot.m in Sources */,
 				66158B6E2028065300C5F58A /* UIImage+ColorChange.m in Sources */,
 				66158B732028065300C5F58A /* NSString+Safe.m in Sources */,
 				66158B1E2028050000C5F58A /* DeviceInfoManager.m in Sources */,
@@ -1906,6 +1976,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "/Users/yuhao/Desktop/yuhao/yuhaosvn/NFC-APP/nfc/ios/nfc/Macro/changtianConfig.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1933,6 +2004,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "/Users/yuhao/Desktop/yuhao/yuhaosvn/NFC-APP/nfc/ios/nfc/Macro/changtianConfig.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

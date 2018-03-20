@@ -99,11 +99,11 @@ export default class NetUtils extends Component{
                     this.post(NetAPI.serverUrl, NetAPI.REFRESH_TOKEN+'?refreshToken=11111',{'refreshToken':'11111'},(result)=>{
                         if (result.code === 0) {
                             //刷新成功
-                            console.log('response3');
-                            callback("请重新请求");
+                            console.log('token,刷新成功 请重新请求');
+                            callback("10000");
                         }else {
-                            console.log('response4');
-                            callback("登陆过期");
+                            console.log('token,刷新成功，登陆过期');
+                            callback("10000");
                         }
                     })
 

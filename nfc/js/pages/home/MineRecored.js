@@ -19,7 +19,7 @@ import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
 import testData from './data'
-import {commonStyle} from '../../../js/util/commonStyle'
+import {commonStyle} from '../../../res/styles/commonStyle'
 export default class MineRecored extends BaseComponent<{}> {
     state: {
         dataList: Array<any>,

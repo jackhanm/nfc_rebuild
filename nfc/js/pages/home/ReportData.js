@@ -5,7 +5,7 @@ import {BaseComponent} from  '../../base/BaseComponent'
 import { List, Modal } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import {commonStyle} from '../../../js/util/commonStyle'
+import {commonStyle} from '../../../res/styles/commonStyle'
 export default class ReportData extends BaseComponent {
     constructor(){
         super();

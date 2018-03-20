@@ -18,7 +18,9 @@
 #import <Foundation/Foundation.h>
 
 typedef  NS_ENUM(NSInteger, RNLOADTACTICS){
-  RnLoadbyInternet = 0,//根据网络策略加载   网络请求成功
+  RnLoadbyInternet = 0,//根据网络策略加载(非强制)   网络请求成功
+  RnLoadbyInternetWithAllForce,
+   RnLoadbyInternetWithpatchForce,
   RnLoadbyLocaltactics,//根据本地策略加载   网络请求失败，超时，服务器返回信息错误
   RnLoadbyUnknown, //未知预留字段
 } ;

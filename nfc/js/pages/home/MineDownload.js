@@ -20,7 +20,7 @@ import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
 import testData from './data'
-import {commonStyle} from '../../../js/util/commonStyle'
+import {commonStyle} from '../../../res/styles/commonStyle'
 
 //在JavaScript中调用Object-C定义的方法，需要先导入NativeModules,再使用RNCalliOSFuncation
 var RNCalliOSAction = NativeModules.RNCalliOSAction;

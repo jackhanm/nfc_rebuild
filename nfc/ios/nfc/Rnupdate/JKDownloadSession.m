@@ -704,7 +704,7 @@ didFinishDownloadingToURL:(NSURL *)location {
  didResumeAtOffset:(int64_t)fileOffset
 expectedTotalBytes:(int64_t)expectedTotalBytes {
   
-  //NSLog(@"fileOffset:%lld expectedTotalBytes:%lld",fileOffset,expectedTotalBytes);
+ NSLog(@"fileOffset:%lld expectedTotalBytes:%lld",fileOffset,expectedTotalBytes);
 }
 
 - (void)URLSession:(NSURLSession *)session
@@ -722,9 +722,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
     }
     [self saveDownloadStatus];
   }
-  
+  JKLog(@"task= %@ task.downloadedSize =%d task.fileSize=%d",task,task.downloadedSize,task.downloadedSize);
   if([task.delegate respondsToSelector:@selector(downloadProgress:downloadedSize:fileSize:)]){
-    [task.delegate downloadProgress:task downloadedSize:task.downloadedSize fileSize:task.fileSize];
+    [task.delegate downloadProgress:task  downloadedSize:task.downloadedSize fileSize:task.downloadedSize];
   }
   
 }
@@ -790,4 +790,5 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
 
 
 @end
+
 

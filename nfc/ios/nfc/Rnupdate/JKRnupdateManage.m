@@ -42,9 +42,13 @@ static JKRnupdateManage *_instance=nil;
   JKLog(@"%@ %@",responseobject, jsListArr);
   //原则 加载逻辑在前，更新逻辑在后
  
-  NSInteger tactics = 1;
+   [[NSUserDefaults standardUserDefaults] setObject:[self Loadlocalbundle:jsListArr] forKey:LAST_RUN_RN_KEY] ;
+  
+  JKLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:LAST_RUN_RN_KEY]);
+  
+  NSInteger tactics = 3;
   if ([[NSString stringWithFormat:@"%@", responseobject] isEqualToString:@"failuer"]) {
-    tactics =1;
+    tactics =3;
   }else{
   if ([[NSString stringWithFormat:@"%@",[responseobject objectForKey:@"code"]] isEqualToString:@"0"]) {
     Isbackgrounddown = false;
@@ -62,18 +66,38 @@ static JKRnupdateManage *_instance=nil;
     if (IsloadlocalPackage) {
       tactics = 0;
     }else{
-      tactics = 1;
+      NSArray *Arr =  [[responseobject objectForKey:@"data"] valueForKey:@"rnVersionList"];
+      for(int i = 0; i < Arr.count ; i++){
+        if ([[NSString stringWithFormat:@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"loadRnVersion"]] isEqualToString:Arr[i][@"version"] ]) {
+          if ([Arr[i][@"incrementVersion"] isEqualToString:@"all"]) {
+             tactics = 1;
+          }else{
+             tactics = 2;
+          }
+        }else{
+          tactics = 3;
+        }
+             
+      }
+     
+     
     }
   }else{
-    tactics = 1;
+    tactics = 3;
   }
   }
   switch (tactics) {
     case RnLoadbyInternet:
       return  [self getjsCodeLocationWithresponseobject:responseobject];
       break;
+    case RnLoadbyInternetWithAllForce:
+      return   [NSURL URLWithString:@"forceAll"] ;
+      break;
+    case RnLoadbyInternetWithpatchForce:
+      return  [NSURL URLWithString:@"forcePatch"];
+      break;
     case RnLoadbyLocaltactics:
-      return [self getjsCodeLocationWithresponseobject2:responseobject list:jsListArr];
+      return   [self getjsCodeLocationWithresponseobject2:responseobject list:jsListArr];
     default:
       return [self getjsCodeLocationWithresponseobject2:responseobject list:jsListArr];
       break;
@@ -82,7 +106,7 @@ static JKRnupdateManage *_instance=nil;
 
 -(NSURL *)getjsCodeLocationWithresponseobject:(id  _Nullable )responseobject
 {
-  //本地存在要加载的js文件
+  //本地存在的js文件
   NSString *jsversionCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"jsversion"];
   NSString *txtPath = [jsversionCachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"loadRnVersion"]]];
   NSString *txtPath2 = [txtPath stringByAppendingPathComponent:@"main.jsbundle"];
@@ -207,35 +231,36 @@ static JKRnupdateManage *_instance=nil;
     //App更新 的情况下 rn更新情况不做判断， 一种情况除外 。App非强制更新，下次枚举有几个没有用
     
     switch (updateWay) {
-        //App不更新
+        //App不更新 rn不更新
       case RnupdateStructurebyNone:
         break;
-        //App更新 无弹窗
+        //App更新 无弹窗 rn不更新
       case RnupdateStructurebyAPP:
         break;
-        //App更新 有弹窗可取消
+        //App更新 有弹窗可取消 rn不更新
       case RnupdateStructurebyAlertCanmove:
         break;
-        //App更新 有弹窗不可取消 (App强制更新)
+        //App更新 有弹窗不可取消 (App强制更新) rn不更新
       case RnupdateStructurebyAlertCannotmove:
 #pragma  待完善 传入标题信息 ，APPstore信息校验，跳转Appstore
         [self AppForeceUpdate];
         [self deleteWithdic:responseobject];
         break;
-        //App不更新 js更新 无弹窗
+       // App不更新, rn是否需要更新
       case RnupdateStructurebyJS:
-        [self AppNoneupdateWithRnupdate:RnUpdateInfo jsListArr:jsListArr];
+        [self AppNoneupdateWithRnupdate:RnUpdateInfo jsListArr:jsListArr responseobject:responseobject];
         [self deleteWithdic:responseobject];
         break;
-        //App不更新 Rn更新 (有弹窗)可取消
+        //App不更新 rn是否需要更新 (如更新会有弹窗)可取消
       case RnupdateStructurebyJSAlertCanmove:
         break;
-        //App不更新 Rn更新 (有弹窗) 不可取消
+        //App不更新 rn是否需要更新 (如更新有弹窗) 不可取消
       case RnupdateStructurebyJSAlertCannotmove:
+        
         break;
         //App不强制更新，rn检查rn是否需要更新:
       case RNupdateStructurebyNoneAppWithRN:
-        [self AppNoneForceupdateWithRnupdate:RnUpdateInfo jsListArr:jsListArr];
+        [self AppNoneForceupdateWithRnupdate:RnUpdateInfo jsListArr:jsListArr responseobject:responseobject];
         [self deleteWithdic:responseobject];
       default:
         break;
@@ -268,7 +293,7 @@ static JKRnupdateManage *_instance=nil;
   }];
 }
 // App 不强制更新 rn更新
--(void)AppNoneForceupdateWithRnupdate:(NSArray *)RnUpdateInfo jsListArr:(NSArray *)jsListArr
+-(void)AppNoneForceupdateWithRnupdate:(NSArray *)RnUpdateInfo jsListArr:(NSArray *)jsListArr responseobject:(id _Nullable)responseobject
 {
   //App不强制更新， 展示弹窗
   [self presentAlertWithtitle:@"要更新咯" message:@"" leftbutton:@"取消" rightbutton:@"确定" leftAct:^{
@@ -279,7 +304,7 @@ static JKRnupdateManage *_instance=nil;
         //需要更新
         if (!klObjectisEmpty([updatemodel incrementVersion])) {
           if ([[updatemodel incrementVersion] isEqualToString:@"all"]) {
-            //后台更新全量包
+            //更新全量包
             
             [self getBackFullPackageDownurl:[updatemodel versionUrl] packageName:[updatemodel version] zipmd5:[updatemodel versionSign]];
             
@@ -287,7 +312,7 @@ static JKRnupdateManage *_instance=nil;
             
             
           }else{
-            //后台更新增量包
+            //更新增量包
             [self getBackpatchPackageWithBaseversion:[updatemodel incrementVersion] shouldUpdatedVersion:[updatemodel version] url:[updatemodel versionUrl] zipMd5:[updatemodel versionSign] jslistArr:jsListArr];
             
           }
@@ -304,21 +329,25 @@ static JKRnupdateManage *_instance=nil;
   }];
 }
 //App 不更新 rn处理
--(void)AppNoneupdateWithRnupdate:(NSArray *)RnUpdateInfo jsListArr:(NSArray *)jsListArr
+-(void)AppNoneupdateWithRnupdate:(NSArray *)RnUpdateInfo jsListArr:(NSArray *)jsListArr responseobject:(id _Nullable)responseobject
 {
-  //App不更新, 检查rn是否需要更新
+  
+ 
+  
+  
+  
   for (int i = 0; i < RnUpdateInfo.count; i++) {
     JKRnUpdateModel *updatemodel = [RnUpdateInfo objectAtIndex:i];
     if (!klObjectisEmpty([updatemodel version]) ) {
       //需要更新
       if (!klObjectisEmpty([updatemodel incrementVersion])) {
         if ([[updatemodel incrementVersion] isEqualToString:@"all"]) {
-          //后台更新全量包
+          //更新全量包
         
           [self getBackFullPackageDownurl:[updatemodel versionUrl] packageName:[updatemodel version] zipmd5:[updatemodel versionSign]];
           
         }else{
-          //后台更新增量包
+          //更新增量包
           [self getBackpatchPackageWithBaseversion:[updatemodel incrementVersion] shouldUpdatedVersion:[updatemodel version] url:[updatemodel versionUrl] zipMd5:[updatemodel versionSign] jslistArr:jsListArr];
         }
       }
@@ -332,7 +361,7 @@ static JKRnupdateManage *_instance=nil;
 }
 
 
-#pragma mark后台下载全量包
+#pragma mark下载全量包
 -(void)getBackFullPackageDownurl:(NSString *)url packageName:(NSString *)packageName zipmd5:(NSString *)zipmd5 {
   
   NSString *docsDir = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"jsversion"];
@@ -344,7 +373,9 @@ static JKRnupdateManage *_instance=nil;
   
   
 }
-#pragma mark 后台下载补丁包
+
+
+#pragma mark 下载补丁包
 -(void)getBackpatchPackageWithBaseversion:(NSString *)baseVersion shouldUpdatedVersion:(NSString *)shouldUpdatedVersion url:(NSString *)downUrl zipMd5:(NSString *)zipmd5 jslistArr:(NSArray *)jslistArr
 {
   //先找到baseVersion版本
@@ -352,14 +383,14 @@ static JKRnupdateManage *_instance=nil;
   [self findBaseWithCopyWithbaseVersion:baseVersion jslistArr:jslistArr];
   
   
-  JKLog(@"++++++++++++++++++++++++++++++++++++++++++++++++++后台下载补丁包+++++++++++++++++++++++++++++++++++++++++++++");
+  JKLog(@"++++++++++++++++++++++++++++++++++++++++++++++++++下载补丁包+++++++++++++++++++++++++++++++++++++++++++++");
   NSString *patchCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"patch"];
   NSString *filePath = [NSString stringWithFormat:@"%@/\%@",patchCachePath,[NSString stringWithFormat:@"%@",shouldUpdatedVersion]];
   [[NSFileManager defaultManager] createDirectoryAtPath:patchCachePath withIntermediateDirectories:YES attributes:nil error:nil];
   
  [JKDownloadManager startDownloadWithUrl:downUrl fileName:shouldUpdatedVersion imageUrl:baseVersion fileId:shouldUpdatedVersion md5:zipmd5 destinPath:filePath type:@"2"];
  
-  JKLog(@"++++++++++++++++++++++++++++++++++++++++++++++++++后台下载补丁包结束+++++++++++++++++++++++++++++++++++++++++++++");
+  JKLog(@"++++++++++++++++++++++++++++++++++++++++++++++++++下载补丁包结束+++++++++++++++++++++++++++++++++++++++++++++");
   
 }
 #pragma mark 后台下载补丁包 先找到baseVersion版本 拷贝到沙盒
@@ -385,7 +416,6 @@ static JKRnupdateManage *_instance=nil;
       }
       
     }
-   
     if (IsBaseversion) {
       NSString *jsversionCachePath1 = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],baseVersion];
       BOOL jsversionExist = [[NSFileManager defaultManager] fileExistsAtPath:jsversionCachePath1];
@@ -411,10 +441,6 @@ static JKRnupdateManage *_instance=nil;
     
   }
 }
-
-
-
-
 #pragma mark 弹窗展现
 -(void)presentAlertWithtitle:(NSString *)title message:(NSString *)message leftbutton:(NSString *)leftbutton rightbutton:(NSString *)rightbutton leftAct:(void(^)())leftAction rightAct:(void(^)())rightAct{
   UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];

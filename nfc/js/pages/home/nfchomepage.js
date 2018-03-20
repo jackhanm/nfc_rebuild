@@ -44,6 +44,12 @@ export default class nfchomepage extends Component{
                     });
 
                 }
+                if (result === "10000") {
+
+                    this.fetchData();
+
+                }
+
             }
         );
     }
@@ -59,7 +65,7 @@ export default class nfchomepage extends Component{
         super(props);
         this.state={
             user_photo:'',
-            user_name:'余浩',
+            user_name:'hello',
             searchText:'',
             searchRecord:[],
         }
@@ -170,12 +176,13 @@ export default class nfchomepage extends Component{
     rendertag(infp){
         let imagestr = ""+infp.reportType;
         substrArray = imagestr.split(",");
-        console.log(substrArray)
+
 
         return(
 
             <View style={{ flexDirection:'row',
-                alignItems:'center'}}>
+                alignItems:'center',
+            }}>
                 {substrArray.includes('PERSON_RISK') ?this.rendertag1():null}
                 {substrArray.includes('PERSON_CREDIT') ?this.rendertag2():null}
                 {substrArray.includes('PERSON_CREDIT') ?this.rendertag3():null}

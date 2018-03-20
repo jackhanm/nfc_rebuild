@@ -21,6 +21,8 @@ var RNCalliOSAction = NativeModules.RNCalliOSAction;
 import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
+import {commonStyle} from '../../../res/styles/commonStyle'
+import {Toast} from 'antd-mobile';
 import {commonStyle} from '../../../js/util/commonStyle'
 import Toast from 'react-native-root-toast';
 import {BaseComponent} from  '../../base/BaseComponent'
@@ -550,6 +552,7 @@ export default class PersonalData extends BaseComponent{
                         </Text>
                     </TouchableOpacity>
                 </View>
+
             </View>
         </ScrollView>);
     }

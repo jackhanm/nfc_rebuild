@@ -25,7 +25,7 @@ import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {SegmentedControl} from 'antd-mobile'
-import {commonStyle} from '../../util/commonStyle'
+import {commonStyle} from '../../../res/styles/commonStyle'
 import GlobalStyles from '../../../res/styles/GlobalStyles'
 const MARGIN = 40;
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {View, StyleSheet, Text} from 'react-native'
 import { Accordion, List } from 'antd-mobile';
 import {BaseComponent} from  '../../../base/BaseComponent'
-import {commonStyle} from '../../../util/commonStyle'
+import {commonStyle} from '../../../../res/styles/commonStyle'
 class accordion extends BaseComponent {
 
     navigationBarProps() {

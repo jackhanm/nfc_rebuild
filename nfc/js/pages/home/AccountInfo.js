@@ -16,7 +16,7 @@ import {BaseComponent} from  '../../base/BaseComponent'
 import { List, Modal } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import {commonStyle} from '../../../js/util/commonStyle'
+import {commonStyle} from '../../../res/styles/commonStyle'
 const Item = List.Item;
 import ImagePicker from 'react-native-image-crop-picker';
 import ScreenUtil from '../../util/ScreenUtil'

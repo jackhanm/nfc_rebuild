@@ -13,4 +13,5 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property(copy,nonatomic)NSString *actionUrl;
+-(NSMutableArray *)getJslist;
 @end
