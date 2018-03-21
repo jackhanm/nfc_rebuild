@@ -200,6 +200,8 @@ const backTime = [{code:'1个月', caption:'1个月'}
 
 var fillinfo;
 
+var toastshow = false;
+
 
 
 export default class PersonalData extends BaseComponent{
@@ -222,10 +224,19 @@ export default class PersonalData extends BaseComponent{
     }
 
     _showToast(info) {
-        Toast.show(info, {
-            duration: Toast.durations.SHORT,
-            position: Toast.positions.CENTER,
-        });
+        if(!toastshow){
+            Toast.show(info, {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.CENTER,
+
+                onShow: () => {
+                    toastshow = true;
+                },
+                onHidden: () => {
+                    toastshow = false;
+                }
+            });
+        }
     }
 
     fetchAddressData(type){
