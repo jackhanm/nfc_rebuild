@@ -46,7 +46,7 @@
   __block RCTRootView *rootView ;
  self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
 
-#if !DEBUG
+#if DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 

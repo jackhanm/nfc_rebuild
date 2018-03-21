@@ -22,12 +22,12 @@ import NetAPI from  '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-let reastAction = NavigationActions.reset({
-    index: 0,
-    actions: [
-        NavigationActions.navigate({ routeName: 'TabBar'})
-    ]
-});
+// let reastAction = NavigationActions.reset({
+//     index: 0,
+//     actions: [
+//         NavigationActions.navigate({ routeName: 'TabBar'})
+//     ]
+// });
 
 export default class NfcLogin extends Component{
 
@@ -133,7 +133,7 @@ export default class NfcLogin extends Component{
                     GetSetStorge.setStorgeAsync('accessToken',result.data.accessToken);
                     GetSetStorge.setStorgeAsync('refreshToken',result.data.refreshToken);
 
-                    this.props.navigation.dispatch(reastAction);
+                    this.props.navigation.navigate('TabBar');
                 }
 
             }
