@@ -1430,12 +1430,13 @@ export default class PersonalData extends BaseComponent{
                 return;
             }
         }
-
-        if(this.state.antiFraud || this.state.all){
-            var re = /13[0-9]{9}/
-            if(!re.test(fillinfo.phoneNumber)){
-                Toast.info('请输入正确的电话号码')
-                return;
+        if(this.state.render_type == 0){
+            if((this.state.antiFraud || this.state.all)){
+                var re = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+                if(!re.test(fillinfo.phoneNumber)){
+                    this._showToast('请输入正确的电话号码')
+                    return;
+                }
             }
         }
 
@@ -1449,24 +1450,7 @@ export default class PersonalData extends BaseComponent{
             if(this.state.selectedCarAddress.length > 1){
                 fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
             }
-            if(fillinfo.markTime == ''){
-                this._showToast("请输入正确的年份")
-            }else{
-                var licenseDate = /^\d{4}$/;
-                if(!licenseDate.test(fillinfo.markTime) && 1886 < toInteger(fillinfo.markTime) < data.getFullYear().valueOf()){
-                    this._showToast("请输入正确的年份")
-                    return;
-                }
-            }
-            if(fillinfo.carMileage == ''){
-                this._showToast("请输入正确的行驶里程")
-            }else{
-                var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
-                if(!mileage.test(fillinfo.carMileage) && 100 < toInteger(fillinfo.carMileage) < 800000){
-                    this._showToast("请输入正确的行驶里程")
-                    return;
-                }
-            }
+
             if(fillinfo.carBrand == '0'){
                 this._showToast('请选择车品牌')
                 return;
@@ -1480,14 +1464,43 @@ export default class PersonalData extends BaseComponent{
                 return;
             }
 
-            if(fillinfo.carAdd == '0'){
+            if(fillinfo.markTime == ''){
+                this._showToast("请输入正确车辆上市的年份")
+                return;
+            }else{
+                var licenseDate = /^\d{4}$/;
+                if(!licenseDate.test(fillinfo.markTime)){
+                    this._showToast("请输入正确车辆上市的年份")
+                    return;
+                }else if(1886 > Number.parseInt(fillinfo.markTime) || Number.parseInt(fillinfo.markTime) > data.getFullYear().valueOf()){
+                    this._showToast("请输入正确车辆上市的年份")
+                    console.log(Number.parseInt(fillinfo.markTime));
+                    return;
+                }
+            }
+
+            if(fillinfo.carMileage == ''){
+                this._showToast("请输入正确的行驶里程")
+                return;
+            }else{
+                var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+                if(!mileage.test(fillinfo.carMileage)){
+                    this._showToast("请输入正确的行驶里程")
+                    return;
+                }else if(100 > Number.parseInt(fillinfo.carMileage) || Number.parseInt(fillinfo.carMileage) > 800000){
+                    this._showToast("请输入正确的行驶里程")
+                    return;
+                }
+            }
+
+            if(fillinfo.carAdd == ''){
                 this._showToast('请选择车辆属地')
                 return;
             }
         }
 
         if(this.state.homeRent || this.state.homePrice || this.state.all){
-            if(this.state.selectedAdd > 2){
+            if(this.state.selectedAdd.length > 2){
                 fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
             }
             fillinfo.hometype = this.state.slelctedHomeType.code;
@@ -1497,7 +1510,7 @@ export default class PersonalData extends BaseComponent{
                 this._showToast("请输入正确的房屋面积")
                 return;
             }
-            if(fillinfo.homeAdd == '0'){
+            if(fillinfo.homeAdd == ''){
                 this._showToast('请输入房屋属地')
                 return;
             }
@@ -1506,7 +1519,7 @@ export default class PersonalData extends BaseComponent{
                 return;
             }
             if(fillinfo.hometype == '' || fillinfo.hometype == '0'){
-                this._showToast('请选择房屋属性')
+                this._showToast('请选择房屋类型')
                 return;
             }
 
