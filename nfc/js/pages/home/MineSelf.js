@@ -55,8 +55,6 @@ export default class MineSelf extends BaseComponent{
                 });
 
             }
-
-
             }
         );
 

@@ -157,9 +157,6 @@ export default class AccountInfo extends BaseComponent{
     _render(){
         return(<View style={{flex:1, backgroundColor:'#F0F0F2', flexDirection:'column'}}>
 
-            {this._renderModle()}
-
-            <TouchableOpacity onPress={()=>{this.setState({visible:!this.state.visible})}}>
                 <View style={{width:winWidth, backgroundColor:'white', flexDirection:'row'}}>
                     <View style={{flex:1, alignItems:'center', flexDirection:'row'}}>
                         <Text style={styles.textStyle}>头像</Text>
@@ -173,7 +170,6 @@ export default class AccountInfo extends BaseComponent{
                         <Image style={{width:ScreenUtil.scaleSize(20), height:ScreenUtil.scaleSize(20), marginLeft:ScreenUtil.scaleSize(20)}} source={require('../../imgResouce/backicon.png')}/>
                     </View>
                 </View>
-            </TouchableOpacity>
 
             <View style={{width:winWidth, height:ScreenUtil.scaleSize(1), backgroundColor:'#F0F0F2'}}/>
 
