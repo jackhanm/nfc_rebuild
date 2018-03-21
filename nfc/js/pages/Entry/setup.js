@@ -1,5 +1,5 @@
 import {
-    StackNavigator,
+    StackNavigator,NavigationActions
 } from 'react-navigation';
 import React, { Component } from 'react';
 import {
@@ -65,6 +65,8 @@ import MineRecored from '../home/MineRecored'
 import SearchList from  '../home/SearchList'
 import homeMorelist from  '../home/homeMorelist'
 import ReportData from  '../home/ReportData'
+
+import GetSetStorge from '../publicState/GetSetStorg';
 const getOptions = title => ({
     title,
     headerStyle: {
@@ -116,12 +118,91 @@ const StackOptions = ({navigation}) => {
     return {headerStyle,headerTitle,headerTitleStyle,headerBackTitle,headerLeft,header}
 };
 
+export default function configAppNavigator(isLoggedIn) {
+    return StackNavigator(
+        {
+
+            // Welcome: { screen: Welcome },
+            // guideView:{screen:guideView},
+            login:{screen:NfcLogin,navigationOptions:{header:null}},
+            TabBar: { screen: MyStackNavigation },
+            Accordion:{ screen: accordion},
+            ActionSheet:{ screen:actionsheet},
+            Card:{ screen:card},
+            Drawer:{ screen:drawer},
+            Icon:{ screen:icon},
+            List:{ screen:list},
+            Modal:{ screen:modal},
+            Popover:{ screen:popover},
+            Result:{ screen:result},
+            Toast:{ screen:toast},
+            ActivityIndicator:{ screen:activityindicator},
+            Badge:{ screen:badge},
+            Button:{ screen:button},
+            Carousel:{ screen:carousel},
+            Checkbox:{ screen:checkbox},
+            DatePicker:{ screen:datepicker},
+            DatePickerView:{screen:datapickerview},
+            ImagePicker:{ screen:imagepicker},
+            InputItem:{ screen:inputitem},
+            Picker:{ screen:picker},
+            PickerView:{ screen:pickerview},
+            Progress:{ screen:progress},
+            Pagination:{ screen:pageination},
+            Radio:{ screen:radio},
+            Slider:{ screen:slider},
+            Stepper:{ screen:stepper},
+            Steps:{ screen:basic},
+            SegmentedControl:{ screen:segmentedcontrol},
+            Switch:{ screen:Switch},
+            SwipeAction:{ screen:swipeaction},
+            Tabs:{ screen:tabs},
+            Tag:{ screen:tag},
+            TextAreaItem:{ screen:textareaitem},
+            Flex:{ screen:flex},
+            GridList:{ screen:grid},
+            NoticeBar:{ screen:NoticeBar},
+            SearchBar:{ screen:SearchBar},
+            WhiteSpace:{ screen:WhiteSpace},
+            WingBlank:{screen :WingBlank},
+            TodoApp:{screen :TodoApp},
+            nfcApp:{screen :nfcApp},
+            Elemalogin:{screen:Elemalogin},
+            PersonalData:{screen:PersonalData},
+            WebViewCommunication :{screen:WebViewCommunication},
+            ChangePassWord:{screen:ChangePassWord},
+            AccountInfo:{screen:AccountInfo},
+            MineAbout:{screen:MineAbout},
+            NfcLogin:{screen:NfcLogin},
+            MineDownload:{screen:MineDownload},
+            MineRecored:{screen:MineRecored},
+            SearchList:{screen:SearchList},
+            homeMorelist:{screen:homeMorelist},
+            ReportData:{screen:ReportData},
+
+        },
+
+        {
+            initialRouteName: isLoggedIn ? 'TabBar' : 'login'
+        },
+        {
+            mode: 'card',
+            headerMode:'none',
+        },
+        {
+            transitionConfig: TransitionConfiguration,
+            StackOptions,
+        },
+        );
+};
 const SimpleApp = StackNavigator(
     {
-        Welcome: { screen: Welcome },
-        guideView:{screen:guideView},
-        login:{screen:NfcLogin},
+
+        // Welcome: { screen: Welcome },
+        // guideView:{screen:guideView},
+
         TabBar: { screen: MyStackNavigation },
+        login:{screen:NfcLogin},
         Accordion:{ screen: accordion},
         ActionSheet:{ screen:actionsheet},
         Card:{ screen:card},
@@ -185,4 +266,28 @@ const SimpleApp = StackNavigator(
         transitionConfig: TransitionConfiguration,
          StackOptions,
     });
-export default SimpleApp;
+
+const defaultGetStateForAction = SimpleApp.router.getStateForAction;
+//
+// SimpleApp.router.getStateForAction = (action, state) => {
+//     //页面是MeScreen并且 global.user.loginState = false || ''（未登录）
+//     GetSetStorge.getStorgeAsync('isLogin').then((result) =>{
+//         if (action.routeName ==='TabBar'&& (result == null || result == '')){
+//             this.routes = [
+//                 ...state.routes,
+//                 {key: 'id-'+Date.now(), routeName: 'login', params: { name: 'name1'}},
+//             ];
+//             return {
+//                 ...state,
+//                 routes,
+//                 index: this.routes.length - 1,
+//             };
+//         }else {
+//             return defaultGetStateForAction(action, state);
+//         }
+//     })
+//
+// };
+
+
+// export default SimpleApp;
