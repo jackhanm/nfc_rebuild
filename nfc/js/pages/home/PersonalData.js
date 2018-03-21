@@ -22,8 +22,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import {commonStyle} from '../../../res/styles/commonStyle'
-import {Toast} from 'antd-mobile';
-import {commonStyle} from '../../../js/util/commonStyle'
+
 import Toast from 'react-native-root-toast';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
