@@ -57,12 +57,13 @@ export default class ChangePassWord extends BaseComponent{
 
             <View style={{flex:1, backgroundColor:'#F0F0F2', flexDirection:'column', alignItems:'center'}}>
                 <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160), Left:ScreenUtil.scaleSize(80)
-                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
-                    <Text style={{marginTop:ScreenUtil.scaleSize(30),left:ScreenUtil.scaleSize(30),fontSize:15}}>
+                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'
+                    ,flexDirection:'row', alignItems:'center'}}>
+                    <Text style={{marginLeft:ScreenUtil.scaleSize(30),fontSize:15}}>
                         原密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6),}]}
+                        style={[styles.edit,{fontSize:15}]}
                         placeholder="请输入原密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value:text})}
@@ -72,12 +73,13 @@ export default class ChangePassWord extends BaseComponent{
 
 
                 <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160)
-                    , Left:ScreenUtil.scaleSize(80),marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
-                    <Text style={{marginTop:16,left:ScreenUtil.scaleSize(30),fontSize:ScreenUtil.scaleSize(30)}}>
+                    , Left:ScreenUtil.scaleSize(80),marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100)
+                    ,flexDirection:'row', alignItems:'center'}}>
+                    <Text style={{marginLeft:ScreenUtil.scaleSize(30),fontSize:ScreenUtil.scaleSize(30)}}>
                         新密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6),}]}
+                        style={[styles.edit,{fontSize:15}]}
                         placeholder="请输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value2:text})}
@@ -86,12 +88,13 @@ export default class ChangePassWord extends BaseComponent{
                 </View>
 
                 <View style={{backgroundColor:'#fff',width:winWidth-ScreenUtil.scaleSize(160), Left:ScreenUtil.scaleSize(80)
-                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'}}>
-                    <Text style={{marginTop:ScreenUtil.scaleSize(32),left:ScreenUtil.scaleSize(30),fontSize:15}}>
+                    ,marginTop:ScreenUtil.scaleSize(80),height:ScreenUtil.scaleSize(100),flexDirection:'row'
+                    ,flexDirection:'row', alignItems:'center'}}>
+                    <Text style={{marginLeft:ScreenUtil.scaleSize(30),fontSize:15}}>
                         确认密码：
                     </Text>
                     <TextInput
-                        style={[styles.edit,{fontSize:15,top:ScreenUtil.scaleSize(6)}]}
+                        style={[styles.edit,{fontSize:15}]}
                         placeholder="再次输入新密码"
                         underlineColorAndroid='transparent'
                         onChangeText={(text) => this.setState({value1:text})}
@@ -164,7 +167,8 @@ const styles = StyleSheet.create({
         height: ScreenUtil.scaleSize(80),
         backgroundColor: '#fff',
         marginRight: ScreenUtil.scaleSize(20),
-        marginLeft:ScreenUtil.scaleSize(40)
+        marginLeft:ScreenUtil.scaleSize(40),
+        padding: 0
     },
 
 });

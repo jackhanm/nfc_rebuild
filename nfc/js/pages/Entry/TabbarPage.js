@@ -151,7 +151,7 @@ export default class TabbarPage extends Component{
                     onPress={() => {this.setState({ selectedTab: '账户' }); Keyboard.dismiss()}}>
                     <Mineself  {...this.props}/>
                 </TabNavigator.Item>
-                <TabNavigator.Item
+                {/*<TabNavigator.Item
                     selected={this.state.selectedTab === 'elelogin'}
                     title={'elelogin'}
                     titleStyle={styles.tabText}
@@ -161,7 +161,7 @@ export default class TabbarPage extends Component{
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'elelogin' })}>
                     <ReportData  {...this.props}/>
-                </TabNavigator.Item>
+                </TabNavigator.Item>*/}
 
                 {/*<TabNavigator.Item*/}
                     {/*selected={this.state.selectedTab === '我的'}*/}
@@ -184,7 +184,7 @@ export default class TabbarPage extends Component{
                     {/*onPress={() => this.setState({ selectedTab: 'AntdataPick' })}>*/}
                     {/*<SearchCompany {...this.props}/>*/}
                 {/*</TabNavigator.Item>*/}
-                <TabNavigator.Item
+                {/*<TabNavigator.Item
                     selected={this.state.selectedTab === 'Antmobile'}
                     title={'Antmobile'}
                     titleStyle={styles.tabText}
@@ -193,7 +193,7 @@ export default class TabbarPage extends Component{
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/home_boy_press.png')} />}
                     onPress={() => this.setState({ selectedTab: 'Antmobile' })}>
                     <Antmobile {...this.props}/>
-                </TabNavigator.Item>
+                </TabNavigator.Item>*/}
 
                 {/*<TabNavigator.Item*/}
                     {/*selected={this.state.selectedTab === 'LearningRedux'}*/}
