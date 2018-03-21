@@ -29,7 +29,6 @@ import com.nfc.util.ForceLoading;
 import com.nfc.util.NativeConstant;
 import com.nfc.util.PhoneMessage;
 import com.nfc.util.ToolUtil;
-import com.react.rnspinkit.RNSpinkitPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -66,7 +65,6 @@ public class MainApplication extends Application implements ReactApplication {
             new PickerViewPackage(),
             new PickerPackage(),
             new SplashScreenReactPackage(),
-              new RNSpinkitPackage(),
               new RNtoNativeModle()
       );
     }
@@ -244,8 +242,13 @@ public class MainApplication extends Application implements ReactApplication {
 
                   if(responseJSEntity.deleteRnVersionList != null){
                     for(String deleteRnVersion : responseJSEntity.deleteRnVersionList){
-                      //删除版本
-                      ToolUtil.deleteJS(deleteRnVersion);
+                      for(ResponseJSEntity.RNVersion rnVersion : responseJSEntity.rnVersionList){
+
+                        if(!rnVersion.incrementVersion.equals(deleteRnVersion)){
+                          //删除版本
+                          ToolUtil.deleteJS(deleteRnVersion);
+                        }
+                      }
                     }
                   }
                 }
