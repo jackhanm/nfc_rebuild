@@ -440,12 +440,12 @@ static id _instance;
      NSString *detail6 = [NSString stringWithFormat:@"%@ 全量还是增量 ",item.type];
     JKLog(@"%@ %@ %@ %@ %@",detail,detail1,detail2,detail3,detail4,detail5);
     if ([item.type isEqualToString:@"1"] ) {
-        [self checkZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName];
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:noti.object];
+        [self checkZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName object:noti.object];
+    
       
     }else{
-      [self  checkPatchZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName baseVersion:item.thumbImageUrl];
-       [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:noti.object];
+      [self  checkPatchZipwithMd5:item.md5 filename:item.fileName destinpath:item.destinPath savePath:item.savePath savename:item.saveName baseVersion:item.thumbImageUrl object:noti.object];
+      
     }
     
   }
@@ -491,7 +491,7 @@ static id _instance;
 
 
 #pragma mark checkmd5 And openzip Full zip
--(void)checkZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename
+-(void)checkZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename object:(id _Nullable)object
 {
  
 #pragma mark 校验下载文件完整性
@@ -504,14 +504,13 @@ static id _instance;
         NSError *error;
         // 解压
   
-        
         [SSZipArchive unzipFileAtPath:zipPath toDestination:destinpath overwrite:YES password:nil error:&error];
         if(!error){
           NSLog(@"解压成功");
-
-          
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:object];
         }else{
           NSLog(@"解压失败");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:@"更新失败"];
           [[NSFileManager defaultManager] removeItemAtPath:destinpath error:nil];
           JKLog(@"%@",error);
           
@@ -523,7 +522,7 @@ static id _instance;
       [[NSFileManager defaultManager] removeItemAtPath:zipPath error:nil];
     }
 #pragma mark checkpatchZip And openzip
--(void)checkPatchZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename baseVersion:(NSString *)baseVersion
+-(void)checkPatchZipwithMd5:(NSString *)md5 filename:(NSString *)filename destinpath:(NSString *)destinpath savePath:(NSString *)savepath savename:(NSString *)savename baseVersion:(NSString *)baseVersion object:(id _Nullable)object
 {
  
       NSLog(@"下载完成");
@@ -539,12 +538,13 @@ static id _instance;
         if(!error){
           NSLog(@"解压成功");
           
-          [self combinepatchpackage:destinpath baseVersion:baseVersion shouldUpdatedVersion:filename];
+          [self combinepatchpackage:destinpath baseVersion:baseVersion shouldUpdatedVersion:filename object:object];
           
           
         }else{
           NSLog(@"解压失败");
           JKLog(@"%@",error);
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:@"更新失败"];
         }
       }else{
         JKLog(@"md5 failure");
@@ -555,7 +555,7 @@ static id _instance;
 }
 
 #pragma mark后台合并patch包
--(void)combinepatchpackage:(NSString *)directryPath baseVersion:(NSString *)baseVersion shouldUpdatedVersion:(NSString *)shouldUpdatedVersion{
+-(void)combinepatchpackage:(NSString *)directryPath baseVersion:(NSString *)baseVersion shouldUpdatedVersion:(NSString *)shouldUpdatedVersion object:(id _Nullable)object{
   
   
   NSString *patchCachePath = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"patch"];
@@ -607,21 +607,25 @@ static id _instance;
             NSString *jslist = [NSString stringWithFormat:@"%@/\%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0],@"jsversion"];
             NSString *jsversion = [NSString stringWithFormat:@"%@/\%@",jslist,[NSString stringWithFormat:@"%@",shouldUpdatedVersion]];;
             [[NSFileManager defaultManager] moveItemAtPath:patchCachePath toPath:jsversion error:nil];
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:object];
            
           }else{
 #pragma mark 合并过后的bundle校验失败
             JKLog(@"patch bundle md5 校验失败");
+            
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:@"更新失败"];
           }
         }
       }
       
     }else{
       JKLog(@"no patch.tex");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:@"更新失败"];
     }
     
   }else{
     JKLog(@" no detail.json");
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"changetonextpage" object:@"更新失败"];
   }
   
   
@@ -703,8 +707,6 @@ static id _instance;
       oriImage = [OriPath stringByAppendingPathComponent:[imagearr objectAtIndex:i]];
       destinImage = [txtPath2 stringByAppendingPathComponent:[imagearr objectAtIndex:i]];
       [[NSFileManager defaultManager] moveItemAtPath:oriImage toPath:destinImage error:nil];
-      
-      
     }
   }
  // [[NSFileManager defaultManager] removeItemAtPath:patch error:nil];

@@ -210,7 +210,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
     [Arr addObject:dic];
     
   }
- 
+  JKLog(@"%@",Arr);
   
       NSString *string=@"1234";
   
@@ -220,7 +220,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
   
   
 //  更多参数放到数组中进行回调
-  callBack(@[string,Arr,end]);
+  callBack(@[Arr]);
   
   
 }

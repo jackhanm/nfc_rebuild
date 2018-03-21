@@ -105,7 +105,7 @@ class Cell extends PureComponent {
                                 </View>
                                 <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
                                     <Text>
-                                        {info.createTime.slice(0,10)}
+                                        {info.createTime}
                                     </Text>
                                     <Image style={{width:10, height:10}} source={require('../imgResouce/backicon.png')}/>
                                 </View>
