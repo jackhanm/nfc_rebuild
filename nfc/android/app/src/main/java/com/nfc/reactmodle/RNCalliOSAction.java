@@ -14,7 +14,9 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.nfc.ReportActivity;
 import com.nfc.ReportShowActivity;
-import com.nfc.modle.PersonInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -38,78 +40,99 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
         //intent.putExtra("JSdata", val);
         //ReadableMap data = val.getMap("NativeMap");
 
-        //企业社会代码
-        PersonInfo personInfo = new PersonInfo();
-        personInfo.companyName = data.getString("companyName");
-        personInfo.companyId = data.getString("companyId");
-                //省份证号码
-        personInfo.id = data.getString("id");
-                //姓名
-        personInfo.name = data.getString("name");
-                //车牌
-        personInfo.carBrand = data.getString("carBrand");
-                //车系
-        personInfo.carVs = data.getString("carVs");
-                //车型号
-        personInfo.carModle = data.getString("carModle");
-                //上市时间
-        personInfo.markTime = data.getString("markTime");
-                //汽车属地 二级地址，逗号隔开
-        personInfo.carAdd = data.getString("carAdd");
-                //车牌
-        personInfo.carID = data.getString("carID");
-                //行驶公里数
-        personInfo.carMileage = data.getString("carMileage");
-                //房屋地址，三级地址，逗号隔开
-        personInfo.homeAdd = data.getString("homeAdd");
-                //房屋名字
-        personInfo.homeName = data.getString("homeName");
-                //房屋类型
-        personInfo.hometype = data.getString("hometype");
-                //房屋面积
-        personInfo.homeMeasure = data.getString("homeMeasure");
-    /*-----------------------------------------*/
-        personInfo.peoplequality = data.getString("peoplequality");
-        personInfo.development = data.getString("development");
-        personInfo.finance = data.getString("finance");
-        personInfo.performance = data.getString("performance");
-        personInfo.caseinfo = data.getString("caseinfo");
-        personInfo.countrycompany = data.getString("countrycompany");
-        personInfo.companyhaoche = data.getString("companyhaoche");
-        personInfo.companyoverdue = data.getString("companyoverdue");
-        personInfo.userage = data.getString("userage");
-        personInfo.education = data.getString("education");
-        personInfo.helathstate = data.getString("helathstate");
-        personInfo.registered = data.getString("registered");
-        personInfo.income = data.getString("income");
-        personInfo.percentage = data.getString("percentage");
-        personInfo.houseinfo = data.getString("houseinfo");
-        personInfo.marriage = data.getString("marriage");
-        personInfo.residence = data.getString("residence");
-        personInfo.peoples = data.getString("peoples");
-        personInfo.employer = data.getString("employer");
-        personInfo.work = data.getString("work");
-        personInfo.post = data.getString("post");
-        personInfo.creditcard = data.getString("creditcard");
-        personInfo.quota = data.getString("quota");
-        personInfo.use_year = data.getString("use_year");
-        personInfo.credit_lost = data.getString("credit_lost");
-        personInfo.personalhaoche = data.getString("personalhaoche");
-        personInfo.personaloverdue = data.getString("personaloverdue");
-        personInfo.personalcarcard = data.getString("personalcarcard");
-        personInfo.crimehistory = data.getString("crimehistory");
-        personInfo.realestate = data.getString("realestate");
-        personInfo.familyknow = data.getString("familyknow");
+        JSONObject house = new JSONObject();
+        try {
+            house.put("areaCode", data.getString("homeAdd"));
+            house.put("houseType", data.getString("hometype"));
+            house.put("name", data.getString("homeName"));
+            house.put("queryType", data.getString("houseQueryType"));
+            house.put("address", data.getString("houseAddStr"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        personInfo.phoneNumber = data.getString("phoneNumber");
-        personInfo.personTime = data.getString("personTime");
-        personInfo.companyTime = data.getString("companyTime");
-        personInfo.money = data.getString("money");
-        personInfo.backTime = data.getString("backTime");
+        JSONObject vehicle = new JSONObject();
+        try {
+            vehicle.put("areaCode", data.getString("carAdd"));
+            vehicle.put("address", data.getString("carAddStr"));
+            vehicle.put("brand", data.getString("carBrand"));
+            vehicle.put("carModel", data.getString("carVs"));
+            vehicle.put("carSeries", data.getString("carModle"));
+            vehicle.put("mileage", data.getString("carMileage"));
+            vehicle.put("registerYear", data.getString("markTime"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        personInfo.typeTag = data.getString("typeTag");
+        JSONObject result = new JSONObject();
 
-        intent.putExtra("PERSONINFO", personInfo);
+        if(data.getString("queryType").equals("0")){
+            try {
+                result.put("ageBracket", data.getString("userage"));
+                result.put("carValuation", data.getString("realestate"));
+                result.put("certNo", data.getString("id"));
+                result.put("companyNature", data.getString("employer"));
+                result.put("creditCardAmount", data.getString("quota"));
+                result.put("creditCardOverdue", data.getString("credit_lost"));
+                result.put("creditCardYear",data.getString("use_year"));
+                result.put("crimeRecord",data.getString("crimehistory"));
+                result.put("degree",data.getString("education"));
+                result.put("dependentsInformed",data.getString("familyknow"));
+                result.put("feedPopulation",data.getString("peoples"));
+                result.put("health",data.getString("helathstate"));
+                result.put("houseSituation", data.getString("houseinfo"));
+                result.put("investLoan",data.getString("personalhaoche"));
+                result.put("licensePlate",data.getString("personalcarcard"));
+                result.put("livingTime",data.getString("residence"));
+                result.put("loanAmount",data.getString("money"));;
+                result.put("loanDuration",data.getString("backTime"));
+                result.put("marriage",data.getString("marriage"));
+                result.put("monthCreditCardRate",data.getString("creditcard"));
+                result.put("monthIncome",data.getString("income"));
+                result.put("monthRepayPrecent",data.getString("percentage"));
+                result.put("name",data.getString("name"));
+                result.put("overdueNum",data.getString("personTime"));
+                result.put("overdueRecord",data.getString("personaloverdue"));
+                result.put("phone",data.getString("phoneNumber"));
+                result.put("position",data.getString("post"));
+                result.put("queryType",data.getString("PersonQueryType"));
+                result.put("residence", data.getString("registered"));
+                result.put("workYear",data.getString("work"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                result.put("caseInvolved", data.getString("caseinfo"));
+                result.put("companyQuality", data.getString("peoplequality"));
+                result.put("creditSystem", data.getString("countrycompany"));
+                result.put("financialIndex", data.getString("finance"));
+                result.put("investLoan", data.getString("personalhaoche"));
+                result.put("loanAmount", data.getString("money"));
+                result.put("loanDuration", data.getString("backTime"));
+                result.put("name", data.getString("companyName"));
+                result.put("orgCode", data.getString("companyId"));
+                result.put("overdueNum", data.getString("personTime"));
+                result.put("overdueRecord", data.getString("personaloverdue"));
+                result.put("performanceIndex", data.getString("performance"));
+                result.put("potentialIndex", data.getString("development"));
+                result.put("queryType", data.getString("companyQueryType"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            result.put("house", house);
+            result.put("vehicle", vehicle);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        intent.putExtra("PERSONINFO", result.toString());
+        intent.putExtra("typeTag", data.getString("typeTag"));
+        intent.putExtra("queryType", data.getString("queryType"));
 
         application.startActivity(intent);
     }

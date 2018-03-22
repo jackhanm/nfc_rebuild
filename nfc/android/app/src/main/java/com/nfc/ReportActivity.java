@@ -27,7 +27,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.dx.stock.ProxyBuilder;
-import com.nfc.modle.PersonInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +50,7 @@ public class ReportActivity extends AppCompatActivity {
 
     private ImageView back;
 
-    private PersonInfo personInfo;
+    private JSONObject result;
 
 
     private File file;
@@ -94,7 +96,11 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.report_activity);
         statuBar();
         checkPermission();
-        personInfo = getIntent().getParcelableExtra("PERSONINFO");
+        try {
+            result = new JSONObject(getIntent().getStringExtra("PERSONINFO"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         webView = (WebView) findViewById(R.id.web);
         button = (Button) findViewById(R.id.download);
         back = (ImageView) findViewById(R.id.back);
@@ -157,15 +163,19 @@ public class ReportActivity extends AppCompatActivity {
 
         String fileName = "";
 
-        if(!personInfo.companyName.equals("") || !personInfo.companyId.equals("")){
-            fileName += "COMPANY";
-            fileName = fileName + "," + personInfo.companyName + personInfo.companyId;
-        }else{
+        if(getIntent().getStringExtra("queryType").equals("0")){
             fileName += "PERSON";
-            fileName = fileName + "," + personInfo.name;
+        }else{
+            fileName += "COMPANY";
         }
 
-        String typeTag = personInfo.typeTag.replace(",", ";");
+        try {
+            fileName = fileName + "," + result.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String typeTag = getIntent().getStringExtra("typeTag").replace(",", ";");
         fileName = fileName + "," + typeTag;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

@@ -380,6 +380,20 @@ export default class PersonalData extends BaseComponent{
             companyTime:'',
             money:'',
             backTime:'',
+
+            //房屋查询条件
+            houseQueryType:'',
+            //房屋地址拼接字符串
+            houseAddStr:'',
+            //个人查询类型
+            PersonQueryType:'',
+            //车辆地址字符串拼接
+            carAddStr:'',
+            //企业查询类型
+            companyQueryType:'',
+
+            //查询企业还是个人
+            queryType: '',
         }
 
 
@@ -1056,8 +1070,8 @@ export default class PersonalData extends BaseComponent{
                                 {this.state.modleTitle.title}
                             </Text>
                         </View>
-                        <View style={styles.line}/>
-                        <FlatList style={{width:winWidth - ScreenUtil.scaleSize(40)}}
+                        <View style={[styles.line, winWidth-ScreenUtil.scaleSize(50)]}/>
+                        <FlatList style={{width:winWidth - ScreenUtil.scaleSize(50)}}
                             data={this.state.carData}
                             renderItem={({item}) => this._renderItem(item)}
                             ItemSeparatorComponent={this._separator}/>
@@ -1372,15 +1386,19 @@ export default class PersonalData extends BaseComponent{
 
 
         var tag;
+        var personTag;
 
         if(this.state.render_type == 0){
+            fillinfo.queryType = '0';
             if(this.state.all){
                 fillinfo.typeTag = 'PERSON_RISK,PERSON_CREDIT,3,4,5,6'
+                fillinfo.PersonQueryType = 'PERSON_RISK,PERSON_CREDIT,PERSON_ANTIFRAUD'
             }else {
                 tag = [];
-                if (this.state.creditReport) tag.push('PERSON_RISK');
-                if (this.state.antiFraud) tag.push('PERSON_CREDIT');
-                if (this.state.riskManage) tag.push('3');
+                personTag = [];
+                if (this.state.creditReport) {tag.push('PERSON_CREDIT'); personTag.push('PERSON_CREDIT')}
+                if (this.state.antiFraud) {tag.push('PERSON_ANTIFRAUD'); personTag.push('PERSON_ANTIFRAUD')}
+                if (this.state.riskManage) {personTag.push('PERSON_RISK');tag.push('3');}
                 if(this.state.homeRent)tag.push('4');
                 if(this.state.carPrice)tag.push('5');
                 if(this.state.homePrice)tag.push('6');
@@ -1388,9 +1406,14 @@ export default class PersonalData extends BaseComponent{
                     fillinfo.typeTag += tag[i];
                     fillinfo.typeTag += ',';
                 }
+                for(i = 0; i < personTag.length; i++){
+                    fillinfo.PersonQueryType += personTag[i];
+                    fillinfo.PersonQueryType += ',';
+                }
             }
 
         }else {
+            fillinfo.queryType = '1';
             if (this.state.all) {
                 fillinfo.typeTag = '7,8,9,10'
             } else {
@@ -1421,6 +1444,9 @@ export default class PersonalData extends BaseComponent{
 
         console.log(fillinfo);
         if(this.state.render_type == 1){
+
+            fillinfo.companyQueryType = 'COMPANY_RISK';
+
             var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
 
             if (orgCode.test(fillinfo.companyId) || fillinfo.companyName == '') {
@@ -1459,7 +1485,9 @@ export default class PersonalData extends BaseComponent{
             fillinfo.carModle = this.state.selectedCarModle.code;
 
             if(this.state.selectedCarAddress.length > 1){
-                fillinfo.carAdd = this.state.selectedCarAddress[0].code + ',' + this.state.selectedCarAddress[1].code;
+                fillinfo.carAdd = this.state.selectedCarAddress[1].code;
+                fillinfo.carAddStr = this.state.selectedCarAddress[0].caption + ','
+                    + this.state.selectedCarAddress[1].caption
             }
 
             if(fillinfo.carBrand == '0'){
@@ -1511,8 +1539,17 @@ export default class PersonalData extends BaseComponent{
         }
 
         if(this.state.homeRent || this.state.homePrice || this.state.all){
+            if(this.state.homeRent){
+                fillinfo.houseQueryType = 'RENTAL';
+            }else if(this.state.homePrice){
+                fillinfo.houseQueryType = 'SALE';
+            }else if(this.state.all || (this.state.homeRent && this.state.homePrice)){
+                fillinfo.houseQueryType = 'SALE,RENTAL';
+            }
             if(this.state.selectedAdd.length > 2){
-                fillinfo.homeAdd = this.state.selectedAdd[0].code + ',' + this.state.selectedAdd[1].code + ',' + this.state.selectedAdd[2].code;
+                fillinfo.homeAdd = this.state.selectedAdd[2].code;
+                fillinfo.houseAddStr = this.state.selectedAdd[0].caption + ','
+                    + this.state.selectedAdd[1].caption + ',' + this.state.selectedAdd[2].caption
             }
             fillinfo.hometype = this.state.slelctedHomeType.code;
 
