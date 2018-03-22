@@ -9,7 +9,7 @@ export const RefreshState = {
     Failure: 4,
 }
 
-const DEBUG = false
+const DEBUG = true
 const log = (text: string) => {DEBUG && console.log(text)}
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 
     footerContainerStyle?: ViewPropTypes.style,
     footerTextStyle?: ViewPropTypes.style,
-
+    ListEmptyViewStyle?:ViewPropTypes.style,
     listRef?: any,
 
     footerRefreshingText?: string,
@@ -102,13 +102,24 @@ class RefreshListView extends PureComponent<Props, State> {
                 onRefresh={this.onHeaderRefresh}
                 refreshing={this.props.refreshState == RefreshState.HeaderRefreshing}
                 ListFooterComponent={this.renderFooter}
-                onEndReachedThreshold={0.1}
-
+                onEndReachedThreshold={0}
+                ListEmptyComponent={this.renderEmpty}
                 renderItem={renderItem}
 
                 {...rest}
             />
         )
+    }
+    renderEmpty = ()=>{
+        let empty = null
+        let emptyStyle = [styles.empty, this.props.ListEmptyViewStyle]
+        empty = (
+            <View style={emptyStyle}>
+                <Text style={{ fontSize: 14,
+                    color: '#555555'}}>没有数据</Text>
+            </View>
+        )
+        return empty
     }
 
     renderFooter = () => {
@@ -170,6 +181,12 @@ const styles = StyleSheet.create({
     footerText: {
         fontSize: 14,
         color: '#555555'
+    },
+    empty:{
+        // marginTop:100,
+        // backgroundColor: 'red',
+        alignItems:'center',
+        justifyContent:'center'
     }
 })
 

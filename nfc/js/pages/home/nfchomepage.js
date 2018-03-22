@@ -131,7 +131,7 @@ export default class nfchomepage extends Component{
                     onSubmitEditing={Keyboard.dismiss}
                     placeholder='请输入人名,身份证，企业名等关键字'
                     onChangeText={(searchText) => this.setState({searchText})}
-                    style={{height: ScreenUtil.scaleSize(90), width:ScreenUtil.scaleSize(560), marginLeft: ScreenUtil.scaleSize(20),}}>
+                    style={{flex:1,backgroundColor: '#fff', paddingLeft: ScreenUtil.scaleSize(20),}}>
 
                 </TextInput>
 

@@ -18,7 +18,7 @@ import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
-import testData from './data'
+
 import {commonStyle} from '../../../res/styles/commonStyle'
 export default class MineRecored extends BaseComponent<{}> {
     state: {
@@ -31,21 +31,24 @@ export default class MineRecored extends BaseComponent<{}> {
         this.state = {
             dataList: [],
             refreshState: RefreshState.Idle,
+            page:1
         }
     }
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
+        let url =  NetAPI.MINE_REPORT_PERSION + '&pageIndex='+this.state.page+'&pageSize=10'
+        NetUtils.get(NetAPI.serverUrl, url, "1.0", "", false, (result) => {
 
-        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_PERSION, "1.0", "", false, (result) => {
-
-                console.log(result)
+           console.log(result)
                 if (result.code === 0) {
-                    let dataList = this.getTestList(true)
+
+
                     this.setState({
                         //复制数据源
+                        page:this.state.page++,
                         dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
-                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
+                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 1000 ? RefreshState.NoMoreData : RefreshState.Idle,
 
                     });
 
@@ -105,6 +108,7 @@ export default class MineRecored extends BaseComponent<{}> {
         }
     }
     onFooterRefresh = () => {
+
         this.setState({refreshState: RefreshState.FooterRefreshing})
         this.fetchData(false);
         // 模拟网络请求

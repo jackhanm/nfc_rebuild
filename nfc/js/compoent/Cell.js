@@ -1,4 +1,3 @@
-
 import React, {PureComponent} from 'react'
 import { SwipeAction, List } from 'antd-mobile';
 import {View, Text, StyleSheet, TouchableOpacity, Image, PixelRatio,Dimensions} from 'react-native'
@@ -12,15 +11,15 @@ const color = {
 let substrArray;
 class Cell extends PureComponent {
 
-    constructor(prop){
-        super(prop);
-
-    }
+    // constructor(prop){
+    //     super(prop);
+    //
+    // }
 
     rendertag(infp){
         let imagestr = ""+infp.reportType;
         substrArray = imagestr.split(",");
-        console.log(substrArray)
+
 
         return(
 
@@ -38,7 +37,7 @@ class Cell extends PureComponent {
                 {substrArray.includes('10') ?this.rendertag10():null}
 
             </View>
-    )
+        )
     }
     rendertag1(){
         return(<Image source={require('../imgResouce/anti_fraud_small.png')} style={{alignSelf:'center'}}/>);
@@ -81,21 +80,21 @@ class Cell extends PureComponent {
             },
         ];
 
-
+        console.log('render cell')
         let {info} = this.props
-        console.log(info)
+
 
 
         return (
-            <List>
-                <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>
+         //   <List>
+                // <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>*/}
 
-                    <TouchableOpacity onPress={() => this.props.onPress()}>
+                    <TouchableOpacity  style={styles.container} onPress={() => this.props.onPress()}>
                         <View style={{flex:1, flexDirection:'column'}}>
                             <View style={styles.item}>
                                 <View style={{flex:4, flexDirection:'row',
-                                    alignItems:'center',}}>
-                                    <Text style={{color:'#4352B2', marginRight:5}}>
+                                    alignItems:'center',height:50}}>
+                                    <Text style={{color:'#4352B2', marginRight:5, }}>
                                         {info.queryType ==='PERSON'? '个人': '公司'}
                                     </Text>
                                     <Text style={{color:'black', marginRight:5}}>
@@ -103,9 +102,9 @@ class Cell extends PureComponent {
                                     </Text>
                                     {this.rendertag(info)}
                                 </View>
-                                <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
+                                <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end',height:50}}>
                                     <Text>
-                                        {info.createTime}
+                                        {info.createTime.substring(0,10)}
                                     </Text>
                                     <Image style={{width:10, height:10}} source={require('../imgResouce/backicon.png')}/>
                                 </View>
@@ -113,8 +112,8 @@ class Cell extends PureComponent {
                             <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
                         </View>
                     </TouchableOpacity>
-                </SwipeAction>
-            </List>
+                // </SwipeAction>
+            // </List>
 
 
         )
@@ -122,6 +121,11 @@ class Cell extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        padding: 10,
+    },
     item:{
         flex:1,
         width:windowWidth,
@@ -130,8 +134,9 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingRight:10,
         paddingLeft:10,
-        height:50
+        height:30
     }
 })
 
 export default Cell
+
