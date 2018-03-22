@@ -38,15 +38,13 @@
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor=[UIColor whiteColor];
-  
-  
    [self setUpAd_show];
- __block NSURL *jsCodeLocation;
-  jsCodeLocation=[self getBundlePath];
-  __block RCTRootView *rootView ;
- self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
+   __block NSURL *jsCodeLocation;
+   jsCodeLocation=[self getBundlePath];
+   __block RCTRootView *rootView ;
+   self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
 
-#if DEBUG
+#if !DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -75,15 +73,12 @@
       //1 . 更新接口网络请求
       //2 . 遍历本地文件夹，判断是否存在可以加载的js文件，加载js
       //3 . 检查更新操作
-      //    JKLog(@"%@",[[responseobject objectForKey:@"data"] valueForKey:@"load"]);
-   JKLog(@"time+SUCCESS%@", [CTUUID getPhoneTimeToss]);
-      // 加载
-
+  
         //回调或者说是通知主线程刷新，
-
+     // 加载
         jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:responseobject jsListArr:self.jslistArr];
         JKLog(@"%@",jsCodeLocation);
-   
+    // 强制更新全量包
         if ([[jsCodeLocation absoluteString] isEqualToString:@"forceAll"]) {
        
           JKforceupdateroot *rootViewController = [JKforceupdateroot new];
@@ -96,6 +91,7 @@
 
           return ;
         }
+    // 强制更新增量包
         if ([[jsCodeLocation absoluteString] isEqualToString:@"forcePatch"]) {
           
           JKforceupdateroot *rootViewController = [JKforceupdateroot new];
@@ -107,6 +103,7 @@
           [self.window makeKeyAndVisible];
           return ;
         }
+      // 非强制处理
         if ((![[jsCodeLocation absoluteString] isEqualToString:@"forceAll"])&&(![[jsCodeLocation absoluteString] isEqualToString:@"forcePatch"])) {
           rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                  moduleName:@"nfc"
@@ -124,13 +121,12 @@
            [[JKRnupdateManage shareManager]updateWithres:responseobject jsListArr:self.jslistArr];
         }
         
-       
-     
-      // 更新
+    
      
      
     
     } failure:^(NSError * _Nonnull error) {
+      // 网络请求失败处理
       JKLog(@"time+FAILUER%@", [CTUUID getPhoneTimeToss]);
       if (!klObjectisEmpty([self getJslist])) {
         jsCodeLocation = [[JKRnupdateManage shareManager] bundlePathWithresponseobject:@"failuer" jsListArr:[self getJslist]];

@@ -63,6 +63,7 @@ static JKRnupdateManage *_instance=nil;
         
       }
     }
+    //本地存在
     if (IsloadlocalPackage) {
       tactics = 0;
     }else{
@@ -213,8 +214,7 @@ static JKRnupdateManage *_instance=nil;
     if ([[NSString stringWithFormat:@"%@",[AppUpdateInfo valueForKey:@"upgrade"]] isEqualToString:@"1"])
     {
       //App更新 的情况下 rn更新情况不做判断， 一种情况除外 。App非强制更新
-      
-      
+    
       if ([[NSString stringWithFormat:@"%@",[AppUpdateInfo valueForKey:@"forceUpgrade"]] isEqualToString:@"1"]) {
         //App是强制更新，弹窗展示更新信息，无取消按钮，升级跳转Appstore（是否需要和苹果服务器做校验）
         updateWay = 3;
@@ -226,10 +226,7 @@ static JKRnupdateManage *_instance=nil;
        //App不更新, 检查rn是否需要更新
       updateWay = 4;
     }
-    
-    
     //App更新 的情况下 rn更新情况不做判断， 一种情况除外 。App非强制更新，下次枚举有几个没有用
-    
     switch (updateWay) {
         //App不更新 rn不更新
       case RnupdateStructurebyNone:

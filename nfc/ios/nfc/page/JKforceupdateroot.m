@@ -17,6 +17,7 @@
 @property (nonatomic, strong)NSArray *jslistArr;
 @property (nonatomic, strong)NSString *jslistStr;
 @property (nonatomic, strong) NSMutableArray *cacheVideoList;
+@property (nonatomic, strong) SCLAlertView *alert;
 @end
 
 @implementation JKforceupdateroot
@@ -30,11 +31,22 @@
 }
 - (void)changetonextpage:(NSNotification *)notification{
   
+  JKLog(@"%@",notification);
   
+  
+  if ([notification.object isEqual:@"更新失败"]) {
+    [self.alert hideView];
+    KLToast(@"更新失败");
+  }else{
+    JKforceupdate *vc= [[JKforceupdate alloc]init];
+    
+    JKDownloadItem *item= notification.object;
+    
+    vc.filename =item.fileName;
+    [self.navigationController pushViewController:vc animated:YES];
+  }
   NSLog(@"---接收到通知---");
-  JKforceupdate *vc= [[JKforceupdate alloc]init];
-  vc.filename = @"18031901";
-  [self.navigationController pushViewController:vc animated:YES];
+  
   
   
 }
@@ -63,16 +75,16 @@
 }
 -(void)addBlackView
 {
-  SCLAlertView *alert = [[SCLAlertView alloc] init];
-  [alert addTimerToButtonIndex:0 reverse:YES];
-  [alert showInfo:self title:@"有更新"
+  self.alert = [[SCLAlertView alloc] init];
+  [self.alert addTimerToButtonIndex:0 reverse:YES];
+  [self.alert showInfo:self title:@"有更新"
          subTitle:@"更新内容等等等等等，相关提示，不影响使用等的"
  closeButtonTitle:@"Dismiss" duration:10.0f];
 }
 - (void)viewDidLoad {
   
     [super viewDidLoad];
-  JKLog(@"%@", self.responseobject);
+ 
     self.view.backgroundColor = [UIColor whiteColor];
   [self load_last_vision];
   [self addBlackView];
