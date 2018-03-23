@@ -18,7 +18,7 @@ import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
-import Cell from  '../../compoent/Cell'
+import downLoadcell from  './downLoadcell'
 import testData from './data'
 import {commonStyle} from '../../../res/styles/commonStyle'
 
@@ -63,7 +63,7 @@ export default class MineDownload extends BaseComponent<{}> {
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
         RNCalliOSAction.calliOSActionWithCallBack((array)=>{
-            console.log(array);
+            console.log('本地pdflist'+array);
             this.setState({
                 dataList:  isReload ?array: [...this.state.dataList, ...result.data.list ],
                 refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
@@ -128,7 +128,7 @@ export default class MineDownload extends BaseComponent<{}> {
     }
 
     renderCell = (info: Object) => {
-        return <Cell info={info.item}
+        return <downLoadcell info={info.item}
                      onPress={()=>{
                          RNCalliOSAction.calliOStopdfView(info.item.path);
                          console.log(info.item.path)}}

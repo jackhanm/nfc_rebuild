@@ -1429,152 +1429,152 @@ export default class PersonalData extends BaseComponent{
             }
         }
 
-        if(fillinfo.money == ''){
-            this._showToast('请选择借款金额');
-            return;
-        }
+        // if(fillinfo.money == ''){
+        //     this._showToast('请选择借款金额');
+        //     return;
+        // }
+        //
+        // if(fillinfo.backTime == '0'){
+        //     this._showToast('请选择还款日期');
+        //     return;
+        // }
+        //
+        //
+        // var data = new Date();
+        //
+        // console.log(fillinfo);
+        // if(this.state.render_type == 1){
+        //
+        //     fillinfo.companyQueryType = 'COMPANY_RISK';
+        //
+        //     var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
+        //
+        //     if (orgCode.test(fillinfo.companyId) || fillinfo.companyName == '') {
+        //         this._showToast("企业社会信用代码输入错误！")
+        //         return;
+        //     }
+        // }
+        //
+        // if(this.state.render_type == 0 ){
+        //     var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        //     if(!certNo.test(fillinfo.id)){
+        //         this._showToast('请输入正确的身份证');
+        //         return;
+        //     }
+        //     var userName = /^[\u4e00-\u9fa5]{2,4}$/;
+        //     if(!userName.test(fillinfo.name)){
+        //         this._showToast('请输入正确的姓名');
+        //         return;
+        //     }
+        // }
+        // if(this.state.render_type == 0){
+        //     if((this.state.antiFraud || this.state.all)){
+        //         var re = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+        //         if(!re.test(fillinfo.phoneNumber)){
+        //             this._showToast('请输入正确的电话号码')
+        //             return;
+        //         }
+        //     }
+        // }
+        //
+        // if(this.state.carPrice || this.state.all){
+        //
+        //
+        //     fillinfo.carBrand = this.state.selectedBradn.code;
+        //     fillinfo.carVs = this.state.selectedVehicles.code;
+        //     fillinfo.carModle = this.state.selectedCarModle.code;
+        //
+        //     if(this.state.selectedCarAddress.length > 1){
+        //         fillinfo.carAdd = this.state.selectedCarAddress[1].code;
+        //         fillinfo.carAddStr = this.state.selectedCarAddress[0].caption + ','
+        //             + this.state.selectedCarAddress[1].caption
+        //     }
 
-        if(fillinfo.backTime == '0'){
-            this._showToast('请选择还款日期');
-            return;
-        }
+            //if(fillinfo.carBrand == '0'){
+               // this._showToast('请选择车品牌')
+                //return;
+            //}
+            //if(fillinfo.carVs == '0'){
+                //this._showToast('请选择车系')
+                //return;
+            //}
+            //if(fillinfo.carModle == '0'){
+                //this._showToast('请选择车型号')
+                //return;
+            //}
 
-
-        var data = new Date();
-
-        console.log(fillinfo);
-        if(this.state.render_type == 1){
-
-            fillinfo.companyQueryType = 'COMPANY_RISK';
-
-            var orgCode = /[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}/;
-
-            if (orgCode.test(fillinfo.companyId) || fillinfo.companyName == '') {
-                this._showToast("企业社会信用代码输入错误！")
-                return;
-            }
-        }
-
-        if(this.state.render_type == 0 ){
-            var certNo =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-            if(!certNo.test(fillinfo.id)){
-                this._showToast('请输入正确的身份证');
-                return;
-            }
-            var userName = /^[\u4e00-\u9fa5]{2,4}$/;
-            if(!userName.test(fillinfo.name)){
-                this._showToast('请输入正确的姓名');
-                return;
-            }
-        }
-        if(this.state.render_type == 0){
-            if((this.state.antiFraud || this.state.all)){
-                var re = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
-                if(!re.test(fillinfo.phoneNumber)){
-                    this._showToast('请输入正确的电话号码')
-                    return;
-                }
-            }
-        }
-
-        if(this.state.carPrice || this.state.all){
-
-
-            fillinfo.carBrand = this.state.selectedBradn.code;
-            fillinfo.carVs = this.state.selectedVehicles.code;
-            fillinfo.carModle = this.state.selectedCarModle.code;
-
-            if(this.state.selectedCarAddress.length > 1){
-                fillinfo.carAdd = this.state.selectedCarAddress[1].code;
-                fillinfo.carAddStr = this.state.selectedCarAddress[0].caption + ','
-                    + this.state.selectedCarAddress[1].caption
-            }
-
-            if(fillinfo.carBrand == '0'){
-                this._showToast('请选择车品牌')
-                return;
-            }
-            if(fillinfo.carVs == '0'){
-                this._showToast('请选择车系')
-                return;
-            }
-            if(fillinfo.carModle == '0'){
-                this._showToast('请选择车型号')
-                return;
-            }
-
-            if(fillinfo.markTime == ''){
-                this._showToast("请输入正确车辆上市的年份")
-                return;
-            }else{
-                var licenseDate = /^\d{4}$/;
-                if(!licenseDate.test(fillinfo.markTime)){
-                    this._showToast("请输入正确车辆上市的年份")
-                    return;
-                }else if(1886 > Number.parseInt(fillinfo.markTime) || Number.parseInt(fillinfo.markTime) > data.getFullYear().valueOf()){
-                    this._showToast("请输入正确车辆上市的年份")
-                    console.log(Number.parseInt(fillinfo.markTime));
-                    return;
-                }
-            }
-
-            if(fillinfo.carMileage == ''){
-                this._showToast("请输入正确的行驶里程")
-                return;
-            }else{
-                var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
-                if(!mileage.test(fillinfo.carMileage)){
-                    this._showToast("请输入正确的行驶里程")
-                    return;
-                }else if(100 > Number.parseInt(fillinfo.carMileage) || Number.parseInt(fillinfo.carMileage) > 800000){
-                    this._showToast("请输入正确的行驶里程")
-                    return;
-                }
-            }
-
-            if(fillinfo.carAdd == ''){
-                this._showToast('请选择车辆属地')
-                return;
-            }
-        }
-
-        if(this.state.homeRent || this.state.homePrice || this.state.all){
-            if(this.state.homeRent){
-                fillinfo.houseQueryType = 'RENTAL';
-            }else if(this.state.homePrice){
-                fillinfo.houseQueryType = 'SALE';
-            }else if(this.state.all || (this.state.homeRent && this.state.homePrice)){
-                fillinfo.houseQueryType = 'SALE,RENTAL';
-            }
-            if(this.state.selectedAdd.length > 2){
-                fillinfo.homeAdd = this.state.selectedAdd[2].code;
-                fillinfo.houseAddStr = this.state.selectedAdd[0].caption + ','
-                    + this.state.selectedAdd[1].caption + ',' + this.state.selectedAdd[2].caption
-            }
-            fillinfo.hometype = this.state.slelctedHomeType.code;
-
-            var houseSize = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
-            if(!houseSize.test(fillinfo.homeMeasure)){
-                this._showToast("请输入正确的房屋面积")
-                return;
-            }
-            if(fillinfo.homeAdd == ''){
-                this._showToast('请输入房屋属地')
-                return;
-            }
-            if(fillinfo.homeName == ''){
-                this._showToast('请输入房屋名称')
-                return;
-            }
-            if(fillinfo.hometype == '' || fillinfo.hometype == '0'){
-                this._showToast('请选择房屋类型')
-                return;
-            }
-
-        }
-
-
-        var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+            // if(fillinfo.markTime == ''){
+            //     this._showToast("请输入正确车辆上市的年份")
+            //     return;
+            // }else{
+            //     var licenseDate = /^\d{4}$/;
+            //     if(!licenseDate.test(fillinfo.markTime)){
+            //         this._showToast("请输入正确车辆上市的年份")
+            //         return;
+            //     }else if(1886 > Number.parseInt(fillinfo.markTime) || Number.parseInt(fillinfo.markTime) > data.getFullYear().valueOf()){
+            //         this._showToast("请输入正确车辆上市的年份")
+            //         console.log(Number.parseInt(fillinfo.markTime));
+            //         return;
+            //     }
+            // }
+            //
+            // if(fillinfo.carMileage == ''){
+            //     this._showToast("请输入正确的行驶里程")
+            //     return;
+            // }else{
+            //     var mileage = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+            //     if(!mileage.test(fillinfo.carMileage)){
+            //         this._showToast("请输入正确的行驶里程")
+            //         return;
+            //     }else if(100 > Number.parseInt(fillinfo.carMileage) || Number.parseInt(fillinfo.carMileage) > 800000){
+            //         this._showToast("请输入正确的行驶里程")
+            //         return;
+            //     }
+            // }
+            //
+            // if(fillinfo.carAdd == ''){
+            //     this._showToast('请选择车辆属地')
+            //     return;
+            // }
+        // }
+        //
+        // if(this.state.homeRent || this.state.homePrice || this.state.all){
+        //     if(this.state.homeRent){
+        //         fillinfo.houseQueryType = 'RENTAL';
+        //     }else if(this.state.homePrice){
+        //         fillinfo.houseQueryType = 'SALE';
+        //     }else if(this.state.all || (this.state.homeRent && this.state.homePrice)){
+        //         fillinfo.houseQueryType = 'SALE,RENTAL';
+        //     }
+        //     if(this.state.selectedAdd.length > 2){
+        //         fillinfo.homeAdd = this.state.selectedAdd[2].code;
+        //         fillinfo.houseAddStr = this.state.selectedAdd[0].caption + ','
+        //             + this.state.selectedAdd[1].caption + ',' + this.state.selectedAdd[2].caption
+        //     }
+        //     fillinfo.hometype = this.state.slelctedHomeType.code;
+        //
+        //     var houseSize = /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/;
+        //     if(!houseSize.test(fillinfo.homeMeasure)){
+        //         this._showToast("请输入正确的房屋面积")
+        //         return;
+        //     }
+        //     if(fillinfo.homeAdd == ''){
+        //         this._showToast('请输入房屋属地')
+        //         return;
+        //     }
+        //     if(fillinfo.homeName == ''){
+        //         this._showToast('请输入房屋名称')
+        //         return;
+        //     }
+        //     if(fillinfo.hometype == '' || fillinfo.hometype == '0'){
+        //         this._showToast('请选择房屋类型')
+        //         return;
+        //     }
+        //
+        // }
+        //
+        //
+        // var mobile = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 
 
 
