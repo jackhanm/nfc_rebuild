@@ -20,7 +20,7 @@ import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
 
 import {commonStyle} from '../../../res/styles/commonStyle'
-export default class MineRecored extends BaseComponent<{}> {
+export default class MineRecored extends BaseComponent {
     state: {
         dataList: Array<any>,
         refreshState: number,
@@ -46,10 +46,10 @@ export default class MineRecored extends BaseComponent<{}> {
 
                     this.setState({
                         //复制数据源
-                        page:this.state.page++,
+
                         dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
                         refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 1000 ? RefreshState.NoMoreData : RefreshState.Idle,
-
+                        page:this.state.page++,
                     });
 
 
@@ -66,7 +66,7 @@ export default class MineRecored extends BaseComponent<{}> {
 
 
     componentDidMount() {
-        super.componentDidMount();
+        // super.componentDidMount();
         //请求数据
         this.onHeaderRefresh()
     }
@@ -109,7 +109,7 @@ export default class MineRecored extends BaseComponent<{}> {
     }
     onFooterRefresh = () => {
 
-        this.setState({refreshState: RefreshState.FooterRefreshing})
+        // this.setState({refreshState: RefreshState.FooterRefreshing})
         this.fetchData(false);
         // 模拟网络请求
 

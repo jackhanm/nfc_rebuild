@@ -86,6 +86,9 @@ class Cell extends PureComponent {
 
 
         return (
+
+
+
          //   <List>
                 // <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>*/}
 
@@ -135,7 +138,36 @@ const styles = StyleSheet.create({
         paddingRight:10,
         paddingLeft:10,
         height:30
-    }
+    },
+    // container: {
+    //     flexDirection: 'row',
+    //     padding: 10,
+    //     borderBottomWidth: 1 / PixelRatio.get(),
+    //     borderColor: color.border,
+    //     backgroundColor: 'white',
+    // },
+    // icon: {
+    //     width: 80,
+    //     height: 80,
+    //     borderRadius: 5,
+    // },
+    // rightContainer: {
+    //     flex: 1,
+    //     paddingLeft: 20,
+    //     paddingRight: 10,
+    // },
+    // price: {
+    //     color: color.theme
+    // },
+    // h1: {
+    //     fontSize: 15,
+    //     fontWeight: 'bold',
+    //     color: '#222222',
+    // },
+    // p: {
+    //     fontSize: 13,
+    //     color: '#777777',
+    // },
 })
 
 export default Cell
