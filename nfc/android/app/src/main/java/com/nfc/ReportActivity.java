@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -86,7 +87,8 @@ public class ReportActivity extends AppCompatActivity {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-        window.setStatusBarColor(0xff1B52A2);
+        int color = Color.parseColor(getIntent().getStringExtra("color"));
+        window.setStatusBarColor(color);
 
     }
 

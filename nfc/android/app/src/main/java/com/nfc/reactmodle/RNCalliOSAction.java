@@ -35,7 +35,7 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void calliOSActionWithOneParams(ReadableMap data){
+    public void calliOSActionWithOneParams(ReadableMap data, String val, String type){
         Intent intent = new Intent(application, ReportActivity.class);
         //intent.putExtra("JSdata", val);
         //ReadableMap data = val.getMap("NativeMap");
@@ -133,6 +133,9 @@ public class RNCalliOSAction  extends ReactContextBaseJavaModule {
         intent.putExtra("PERSONINFO", result.toString());
         intent.putExtra("typeTag", data.getString("typeTag"));
         intent.putExtra("queryType", data.getString("queryType"));
+        intent.putExtra("color", val);
+
+
 
         application.startActivity(intent);
     }
