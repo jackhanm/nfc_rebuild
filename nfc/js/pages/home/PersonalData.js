@@ -1070,7 +1070,7 @@ export default class PersonalData extends BaseComponent{
                                 {this.state.modleTitle.title}
                             </Text>
                         </View>
-                        <View style={[styles.line, winWidth-ScreenUtil.scaleSize(50)]}/>
+                        <View style={{width:winWidth-ScreenUtil.scaleSize(50),height:ScreenUtil.scaleSize(2),backgroundColor:'#f7f7f7'}}/>
                         <FlatList style={{width:winWidth - ScreenUtil.scaleSize(50)}}
                             data={this.state.carData}
                             renderItem={({item}) => this._renderItem(item)}
