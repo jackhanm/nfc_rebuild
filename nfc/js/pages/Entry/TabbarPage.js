@@ -75,7 +75,7 @@ export default class TabbarPage extends Component{
             <TabNavigator
                 tabBarStyle={[
                     {backgroundColor:'#fff',borderTopWidth:1,borderTopColor:'#e5e5e5',overflow:'visible'},
-                    G_IsiPhoneX?{paddingBottom:30,height:49+34}:{}
+                    G_IsiPhoneX?{paddingBottom:34,height:49+34}:{}
                 ]}
             >
                 <TabNavigator.Item
@@ -246,7 +246,8 @@ const styles = StyleSheet.create({
     iconselect:{
         width:24,
         height:24,
-        tintColor:GlobalStyle.TabselectColor
+        tintColor:GlobalStyle.TabselectColor,
+
     },
 
 });
