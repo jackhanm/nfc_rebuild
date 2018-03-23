@@ -108,7 +108,7 @@ export default class SearchCompany extends BaseComponent{
     }
 
     _renderFoot() {
-        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:ScreenUtil.scaleSize(40)}}>
+        return(<View style={{width:winWidth, flexDirection:'row', justifyContent:'center', alignItems:'center', marginBottom:ScreenUtil.scaleSize(80)}}>
             <TouchableOpacity onPress={()=>this._onPress()}>
                 <View style={{width:ScreenUtil.scaleSize(500), height:ScreenUtil.scaleSize(88), justifyContent:'center'
                     , alignItems:'center', backgroundColor:GlobalStyles.themeColor, borderRadius:ScreenUtil.scaleSize(8)}}>

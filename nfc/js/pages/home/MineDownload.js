@@ -64,7 +64,6 @@ export default class MineDownload extends BaseComponent<{}> {
         //这个是js的访问网络的方法
         RNCalliOSAction.calliOSActionWithCallBack((array)=>{
             console.log(array);
-
             this.setState({
                 dataList:  isReload ?array: [...this.state.dataList, ...result.data.list ],
                 refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
@@ -149,11 +148,9 @@ export default class MineDownload extends BaseComponent<{}> {
                     renderItem={this.renderCell}
                     refreshState={this.state.refreshState}
                     onHeaderRefresh={this.onHeaderRefresh}
-
-
                     // 可选
                     footerRefreshingText= '玩命加载中 >.<'
-                    footerFailureText = '我擦嘞，居然失败了 =.=!'
+                    footerFailureText = '我擦嘞，服务器小哥开小差 =.=!'
                     footerNoMoreDataText= '-我是有底线的-'
                 />
             </View>
