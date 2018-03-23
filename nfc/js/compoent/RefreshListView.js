@@ -8,21 +8,25 @@ export const RefreshState = {
     NoMoreData: 3,
     Failure: 4,
 }
+export const canfreshState = {
+    cannot: 0,
+    can: 1,
+}
+
 
 const DEBUG = true
 const log = (text: string) => {DEBUG && console.log(text)}
 
 type Props = {
     refreshState: number,
+    canfreshState:number,
     onHeaderRefresh: Function,
     onFooterRefresh?: Function,
     data: Array<any>,
-
     footerContainerStyle?: ViewPropTypes.style,
     footerTextStyle?: ViewPropTypes.style,
     ListEmptyViewStyle?:ViewPropTypes.style,
     listRef?: any,
-
     footerRefreshingText?: string,
     footerFailureText?: string,
     footerNoMoreDataText?: string,
@@ -43,18 +47,20 @@ class RefreshListView extends PureComponent<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
-        log('[RefreshListView]  RefreshListView componentWillReceiveProps ' + nextProps.refreshState)
+        log('WillReceiveProps接受的props' + nextProps.refreshState+ nextProps)
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        log('[RefreshListView]  RefreshListView componentDidUpdate ' + prevProps.refreshState)
+        log('tDidUpdate' + prevProps.refreshState+prevProps,prevState)
     }
 
     onHeaderRefresh = () => {
-        log('[RefreshListView]  onHeaderRefresh')
+
 
         if (this.shouldStartHeaderRefreshing()) {
-            log('[RefreshListView]  onHeaderRefresh')
+            log('即将开始下拉刷新')
+
+
             this.props.onHeaderRefresh(RefreshState.HeaderRefreshing)
         }
     }
@@ -81,13 +87,17 @@ class RefreshListView extends PureComponent<Props, State> {
 
     shouldStartFooterRefreshing = () => {
         log('[RefreshListView]  shouldStartFooterRefreshing')
+        console.log('变量值'+this.props.canfreshState)
+        if(this.props.canfreshState == 1){
 
-        let {refreshState, data} = this.props
-        if (data.length == 0) {
-            return false
+            let {refreshState, data} = this.props
+            if (data.length == 0) {
+                return false
+            }
+
+            return (refreshState == RefreshState.Idle)
         }
-
-        return (refreshState == RefreshState.Idle)
+       return false
     }
 
     render() {
@@ -102,7 +112,7 @@ class RefreshListView extends PureComponent<Props, State> {
                 onRefresh={this.onHeaderRefresh}
                 refreshing={this.props.refreshState == RefreshState.HeaderRefreshing}
                 ListFooterComponent={this.renderFooter}
-                onEndReachedThreshold={0}
+                onEndReachedThreshold={0.1}
                 ListEmptyComponent={this.renderEmpty}
                 renderItem={renderItem}
 

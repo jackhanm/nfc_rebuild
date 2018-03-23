@@ -16,7 +16,7 @@ import { List, Modal } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
+import RefreshListView, {RefreshState,canfreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
 let pageNo = 1;//当前第几页
 let totalPage=5;//总的页数
@@ -27,6 +27,7 @@ export default class MineRecored extends BaseComponent {
     state: {
         dataList: Array<any>,
         refreshState: number,
+        canfreshState:number
     }
     constructor(props) {
         super(props)
@@ -34,13 +35,14 @@ export default class MineRecored extends BaseComponent {
         this.state = {
             dataList: [],
             refreshState: RefreshState.Idle,
-            page:1
+            canfreshState:canfreshState.cannot,
+
         }
     }
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
-        let url =  NetAPI.MINE_REPORT_PERSION + '&pageIndex='+this.state.page+'&pageSize=10'
+        let url =  NetAPI.MINE_REPORT_PERSION + '&pageIndex='+pageNo+'&pageSize=10'
         NetUtils.get(NetAPI.serverUrl, url, "1.0", "", false, (result) => {
 
            console.log(result)
@@ -52,7 +54,8 @@ export default class MineRecored extends BaseComponent {
 
                         dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
                         refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 1000 ? RefreshState.NoMoreData : RefreshState.Idle,
-                        page:this.state.page++,
+                        page: pageNo++,
+                        canfreshState:canfreshState.can,
                     });
 
 
@@ -74,6 +77,7 @@ export default class MineRecored extends BaseComponent {
         this.onHeaderRefresh()
     }
     onHeaderRefresh = () => {
+        console.log("开始下拉刷新")
         this.setState({refreshState: RefreshState.HeaderRefreshing})
         this.fetchData(true);
         // // 模拟网络请求
@@ -153,7 +157,7 @@ export default class MineRecored extends BaseComponent {
                     refreshState={this.state.refreshState}
                     onHeaderRefresh={this.onHeaderRefresh}
                     onFooterRefresh={this.onFooterRefresh}
-
+                    canfreshState={this.state.canfreshState}
                     // 可选
                     footerRefreshingText= '玩命加载中 >.<'
                     footerFailureText = '我擦嘞，居然失败了 =.=!'
