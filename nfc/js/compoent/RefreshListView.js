@@ -47,11 +47,11 @@ class RefreshListView extends PureComponent<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
-        log('WillReceiveProps接受的props' + nextProps.refreshState+ nextProps)
+
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        log('tDidUpdate' + prevProps.refreshState+prevProps,prevState)
+
     }
 
     onHeaderRefresh = () => {
@@ -66,16 +66,16 @@ class RefreshListView extends PureComponent<Props, State> {
     }
 
     onEndReached = (info: {distanceFromEnd: number}) => {
-        log('[RefreshListView]  onEndReached   ' + info.distanceFromEnd)
+
 
         if (this.shouldStartFooterRefreshing()) {
-            log('[RefreshListView]  onFooterRefresh')
+
             this.props.onFooterRefresh && this.props.onFooterRefresh(RefreshState.FooterRefreshing)
         }
     }
 
     shouldStartHeaderRefreshing = () => {
-        log('[RefreshListView]  shouldStartHeaderRefreshing')
+
 
         if (this.props.refreshState == RefreshState.HeaderRefreshing ||
             this.props.refreshState == RefreshState.FooterRefreshing) {

@@ -9,7 +9,7 @@ const color = {
     background: '#f3f3f3'
 }
 let substrArray;
-class downLoadcell extends PureComponent {
+class Cell extends PureComponent {
 
     // constructor(prop){
     //     super(prop);
@@ -86,49 +86,41 @@ class downLoadcell extends PureComponent {
 
 
         return (
+            <List>
+                <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>
 
-
-
-              <List>
-            <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>*/}
-
-            <TouchableOpacity  style={styles.container} onPress={() => this.props.onPress()}>
-                <View style={{flex:1, flexDirection:'column'}}>
-                    <View style={styles.item}>
-                        <View style={{flex:4, flexDirection:'row',
-                            alignItems:'center',height:50}}>
-                            <Text style={{color:'#4352B2', marginRight:5, }}>
-                                {info.queryType ==='PERSON'? '个人': '公司'}
-                            </Text>
-                            <Text style={{color:'black', marginRight:5}}>
-                                {info.queryKey}
-                            </Text>
-                            {this.rendertag(info)}
+                    <TouchableOpacity onPress={() => this.props.onPress()}>
+                        <View style={{flex:1, flexDirection:'column'}}>
+                            <View style={styles.item}>
+                                <View style={{flex:4, flexDirection:'row',
+                                    alignItems:'center',}}>
+                                    <Text style={{color:'#4352B2', marginRight:5}}>
+                                        {info.queryType ==='PERSON'? '个人': '公司'}
+                                    </Text>
+                                    <Text style={{color:'black', marginRight:5}}>
+                                        {info.queryKey}
+                                    </Text>
+                                    {this.rendertag(info)}
+                                </View>
+                                <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end'}}>
+                                    <Text>
+                                        {info.createTime.substring(0,10)}
+                                    </Text>
+                                    <Image style={{width:10, height:10}} source={require('../../imgResouce/backicon.png')}/>
+                                </View>
+                            </View>
+                            <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
                         </View>
-                        <View style={{flex:2, flexDirection:'row', alignItems:'center', justifyContent:'flex-end',height:50}}>
-                            <Text>
-                                {info.createTime.substring(0,10)}
-                            </Text>
-                            <Image style={{width:10, height:10}} source={require('../../imgResouce/backicon.png')}/>
-                        </View>
-                    </View>
-                    <View style={{backgroundColor:'#F0F0F2', height:0.5, width:windowWidth}}/>
-                </View>
-            </TouchableOpacity>
-             </SwipeAction>
-             </List>
-
+                    </TouchableOpacity>
+                </SwipeAction>
+            </List>
 
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        backgroundColor: 'white',
 
-    },
     item:{
         flex:1,
         width:windowWidth,
@@ -170,5 +162,5 @@ const styles = StyleSheet.create({
     // },
 })
 
-export default downLoadcell
+export default Cell
 

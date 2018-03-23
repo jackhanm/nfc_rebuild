@@ -77,10 +77,11 @@ RCT_EXPORT_MODULE();    //此处不添加参数即默认为这个OC类的名字
 /**************************************** RN Call iOS ***************************************************/
 
 //一个参数
-RCT_EXPORT_METHOD(calliOSActionWithOneParams:(id)name)
+RCT_EXPORT_METHOD(calliOSActionWithOneParams:(id)name params2:(NSString *)params2 params3:(NSString *)params3)
 {
   dispatch_sync(dispatch_get_main_queue(), ^{
     JKLog(@"%@",name);
+    JKLog(@"%@===%@", params2,params3);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
 //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"参数：%@",name]];
@@ -204,7 +205,7 @@ RCT_EXPORT_METHOD(calliOSActionWithCallBack:(RCTResponseSenderBlock)callBack) {
     [dic setValue:arr[1] forKey:@"queryType"];
      [dic setValue:arr[2] forKey:@"queryKey"];
      [dic setValue:arr[3] forKey:@"reportType"];
-     [dic setValue:arr[4] forKey:@"createTime"];
+     [dic setValue:[arr[4] stringByReplacingOccurrencesOfString:@"/" withString:@"-"]forKey:@"createTime"];
     
    
     [Arr addObject:dic];

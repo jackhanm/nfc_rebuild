@@ -17,8 +17,8 @@ import TabNavigator from 'react-native-tab-navigator';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
-import downLoadcell from  './downLoadcell'
+import RefreshListView, {RefreshState,canfreshState} from '../../compoent/RefreshListView'
+import Cell from  './downLoadcell'
 import testData from './data'
 import {commonStyle} from '../../../res/styles/commonStyle'
 
@@ -50,6 +50,7 @@ export default class MineDownload extends BaseComponent<{}> {
     state: {
         dataList: Array<any>,
         refreshState: number,
+        canfreshState:number
     }
     constructor(props) {
         super(props)
@@ -57,14 +58,16 @@ export default class MineDownload extends BaseComponent<{}> {
         this.state = {
             dataList: [],
             refreshState: RefreshState.Idle,
+            canfreshState:canfreshState.cannot,
         }
     }
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
         RNCalliOSAction.calliOSActionWithCallBack((array)=>{
-            console.log('本地pdflist'+array);
+
             this.setState({
+                canfreshState:canfreshState.can,
                 dataList:  isReload ?array: [...this.state.dataList, ...result.data.list ],
                 refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
             })
@@ -128,7 +131,7 @@ export default class MineDownload extends BaseComponent<{}> {
     }
 
     renderCell = (info: Object) => {
-        return <downLoadcell info={info.item}
+        return <Cell info={info.item}
                      onPress={()=>{
                          RNCalliOSAction.calliOStopdfView(info.item.path);
                          console.log(info.item.path)}}
@@ -148,6 +151,7 @@ export default class MineDownload extends BaseComponent<{}> {
                     renderItem={this.renderCell}
                     refreshState={this.state.refreshState}
                     onHeaderRefresh={this.onHeaderRefresh}
+                    canfreshState={this.state.canfreshState}
                     // 可选
                     footerRefreshingText= '玩命加载中 >.<'
                     footerFailureText = '我擦嘞，服务器小哥开小差 =.=!'

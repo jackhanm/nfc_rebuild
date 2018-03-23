@@ -21,6 +21,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden=NO;
+   [self setNav];
 //   [[RNCalliOSAction shareManager] senddata];
 }
 -(void)senddata
@@ -44,7 +45,7 @@
     [super viewDidLoad];
   self.view.backgroundColor = [UIColor whiteColor];
   [self createview];
-  [self setNav];
+ 
     // Do any additional setup after loading the view.
 }
 -(void)setNav
@@ -54,7 +55,13 @@
   self.navigationItem.leftBarButtonItem = leftbtn;
   UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"下载"] style:UIBarButtonItemStylePlain target:self action:@selector(rightAct)];
   self.navigationItem.rightBarButtonItem = rightBtn;
-  self.navigationController.navigationBar.barTintColor=UIColorFromRGB(0x1B53A5);
+  
+  self.navigationController.navigationBar.barTintColor=[UIColor \
+                                                        colorWithRed:((float)((0x1B53A5 & 0xFF0000) >> 16))/255.0 \
+                                                        green:((float)((0x1B53A5 & 0x00FF00) >> 8))/255.0 \
+                                                        blue:((float)(0x1B53A5 & 0x0000FF))/255.0 \
+                                                        alpha:1.0];
+  
   NSDictionary * dict=[NSDictionary dictionaryWithObject:UIColorFromRGB(0xffffff) forKey:NSForegroundColorAttributeName];
   self.navigationController.navigationBar.titleTextAttributes = dict;
   self.navigationItem.title=@"查询结果";

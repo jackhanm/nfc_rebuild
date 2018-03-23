@@ -43,7 +43,7 @@
    jsCodeLocation=[self getBundlePath];
    __block RCTRootView *rootView ;
    self.jslistArr =[NSMutableArray arrayWithArray:[self getJslist]] ;
-
+  [[NSUserDefaults standardUserDefaults] setObject:@"0x1B53A5" forKey:@"NavColor"];
 #if DEBUG
   
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
