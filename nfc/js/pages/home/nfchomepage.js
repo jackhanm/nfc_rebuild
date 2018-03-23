@@ -87,7 +87,9 @@ export default class nfchomepage extends Component{
         let height;
         if(Platform.OS === 'ios'){
             //ios相关操作
-            height=10
+            const  isiphoneX = Platform.OS == 'ios'? height==812 &&width ==375 : false;
+            global.G_IsiPhoneX = isiphoneX;
+            height= G_IsiPhoneX?10:16
         }else{
             console.log('Andorid')
             //android相关操作

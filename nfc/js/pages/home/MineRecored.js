@@ -18,6 +18,9 @@ import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
+let pageNo = 1;//当前第几页
+let totalPage=5;//总的页数
+let itemNo=0;//item的个数
 
 import {commonStyle} from '../../../res/styles/commonStyle'
 export default class MineRecored extends BaseComponent {

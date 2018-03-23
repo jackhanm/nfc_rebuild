@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor: 'white',
-        padding: 10,
+
     },
     item:{
         flex:1,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingRight:10,
         paddingLeft:10,
-        height:30
+        height:70
     },
     // container: {
     //     flexDirection: 'row',

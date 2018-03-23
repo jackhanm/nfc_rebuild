@@ -1,6 +1,12 @@
 /** 公共样式表 **/
-import {Platform} from 'react-native'
+import {Platform,Dimensions} from 'react-native'
+
+let width = Dimensions.get('window').width
+let height = Dimensions.get('window').height
+const  isiphoneX = Platform.OS == 'ios'? height==812 &&width ==375 : false;
+global.G_IsiPhoneX = isiphoneX;
 export const commonStyle = {
+
 
     /** color **/
     // 常用颜色
@@ -72,7 +78,7 @@ export const commonStyle = {
 
     /** height **/
     // 导航栏的高度
-    navHeight: Platform.OS === 'ios' ? 64 : 56,
+    navHeight: Platform.OS === 'ios' ?  64 : 56,
     // 导航栏顶部的状态栏高度
     navStatusBarHeight: Platform.OS === 'ios' ? 20 : 0,
     // 导航栏除掉状态栏的高度

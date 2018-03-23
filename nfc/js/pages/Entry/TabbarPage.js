@@ -248,11 +248,5 @@ const styles = StyleSheet.create({
         height:24,
         tintColor:GlobalStyle.TabselectColor
     },
-    iconSPE:{
-        position:'absolute',
-        width: Platform.OS == 'android'?45:60,
-        height:Platform.OS == 'android'?45:60,
-        bottom:Platform.OS == 'android'?-15:-15,
-        left:Platform.OS == 'android'?-22.5:-30
-    }
+
 });

@@ -169,13 +169,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     titleStyle: {
+        marginTop:G_IsiPhoneX?10:20,
         fontSize: commonStyle.navTitleFont,
         color: commonStyle.navTitleColor,
         textAlign: 'center',
         fontWeight: 'bold'
     },
     subTitleStyle: {
-        fontSize: 11,
+        fontSize: 5,
         marginTop: 5
     },
     rightImageStyle: {
