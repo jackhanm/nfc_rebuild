@@ -14,14 +14,11 @@ import {
     Platform,
 } from 'react-native';
 import ScreenUtil from '../../util/ScreenUtil'
-
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { List, Toast } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import GlobalStyles from '../../../res/styles/GlobalStyles'
-
+import GlobalStyles from '../../styles/GlobalStyles'
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
 const Item = List.Item;
@@ -44,10 +41,31 @@ export default class nfchomepage extends Component{
                     });
 
                 }
-                if (result === "10000") {
+                if (result === '10000'){
+                    this.fetchDataAfterToken();
+                }
+                if(result === '10001'){
+                    //展示toast，登录过期，并跳转到登录界面
 
-                    this.fetchData();
+                }
 
+            }
+        );
+    }
+    //刷新token后的再次请求 防止请求多次，写新方法
+    fetchDataAfterToken(){
+        NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_ALL, "1.0", "", false, (result) => {
+
+                console.log(result)
+                if (result.code === 0) {
+                    this.setState({
+                        //
+                        searchRecord:result.data.list.splice(0,4),
+
+                    });
+
+                }else {
+                    //是否要toast展示
                 }
 
             }
@@ -89,7 +107,7 @@ export default class nfchomepage extends Component{
             //ios相关操作
             const  isiphoneX = Platform.OS == 'ios'? height==812 &&width ==375 : false;
             global.G_IsiPhoneX = isiphoneX;
-            height= G_IsiPhoneX?10:16
+            height= G_IsiPhoneX?16:10
         }else{
             console.log('Andorid')
             //android相关操作

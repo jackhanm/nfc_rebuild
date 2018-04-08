@@ -6,7 +6,7 @@ import {
     Image,SafeAreaView,Platform,Dimensions, Keyboard
 } from 'react-native';
 
-import GlobalStyle from '../../../res/styles/GlobalStyles'
+import GlobalStyle from '../../styles/GlobalStyles'
 
 import TabMainScreen from '../home/TabMainScreen'
 import ThemeDao from '../publicState/ThemeDao'
@@ -16,20 +16,20 @@ import Elemalogin from  '../ThirdTab/Elemalogin'
 import Antmobile from  '../ThirdTab/Antmobile'
 import LearningRedux from '../ThirdTab/LearningRedux'
 import Nfchomepage from '../home/nfchomepage'
-import Searchpersonal from '../home/SearchPersonal'
+import Searchpersonal from '../secondTab/SearchPersonal'
 import PersonalData from '../home/PersonalData'
-import Mineself from '../home/MineSelf'
-import Accountinfo from '../home/AccountInfo'
-import Changepassword from '../home/ChangePassWord'
-import SearchPersonal from '../home/SearchPersonal'
-import SearchCompany from '../home/SearchCompany'
+import Mineself from '../Mine/MineSelf'
+import Accountinfo from '../Mine/AccountInfo'
+import Changepassword from '../Mine/ChangePassWord'
+import SearchPersonal from '../secondTab/SearchPersonal'
+import SearchCompany from '../ThirdTab/SearchCompany'
 import ReportData from  '../home/ReportData'
 import BaseComponent from  '../../base/BaseComponent'
 
 
 
 
-import NfcLogin from '../home/NfcLogin'
+import NfcLogin from '../Login/NfcLogin'
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
@@ -195,16 +195,16 @@ export default class TabbarPage extends Component{
                     <Antmobile {...this.props}/>
                 </TabNavigator.Item>*/}
 
-                {/*<TabNavigator.Item*/}
-                    {/*selected={this.state.selectedTab === 'LearningRedux'}*/}
-                    {/*title={'LearningRedux'}*/}
-                    {/*titleStyle={styles.tabText}*/}
-                    {/*selectedTitleStyle={styles.selectedTabText}*/}
-                    {/*renderIcon={()=> <Image style={styles.icon} source={require('../../images/home_boy_press.png')} />}*/}
-                    {/*renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../images/home_boy_press.png')} />}*/}
-                    {/*onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>*/}
-                    {/*<LearningRedux {...this.props}/>*/}
-                {/*</TabNavigator.Item>*/}
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'LearningRedux'}
+                    title={'LearningRedux'}
+                    titleStyle={styles.tabText}
+                    selectedTitleStyle={styles.selectedTabText}
+                    renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/4.png')} />}
+                    renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/4.png')} />}
+                    onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
+                    <LearningRedux {...this.props}/>
+                </TabNavigator.Item>
 
                 {/*<TabNavigator.Item*/}
                     {/*selected={this.state.selectedTab === 'LearningRedux'}*/}

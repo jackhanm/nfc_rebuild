@@ -4,10 +4,10 @@
 import {
     Dimensions,
 }from 'react-native'
-import  ThemeDao from '../../js/pages/publicState/ThemeDao'
+import  ThemeDao from '../pages/publicState/ThemeDao'
 const {height,width} = Dimensions.get('window');
 //
-import BaseComponent from '../../js/base/BaseComponent'
+import BaseComponent from '../base/BaseComponent'
 //  class global extends BaseComponent {
 //  componentDidMount(){
 //      new ThemeDao().getTheme().then((data)=>{

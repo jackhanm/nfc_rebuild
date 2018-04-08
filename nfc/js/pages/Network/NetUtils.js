@@ -102,8 +102,8 @@ export default class NetUtils extends Component{
                             console.log('token,刷新成功 请重新请求');
                             callback("10000");
                         }else {
-                            console.log('token,刷新成功，登陆过期');
-                            callback("10000");
+                            console.log('token,刷新失败，登陆过期');
+                            callback("10001");
                         }
                     })
 

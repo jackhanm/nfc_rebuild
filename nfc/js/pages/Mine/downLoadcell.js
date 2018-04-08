@@ -20,7 +20,6 @@ class Cell extends PureComponent {
         let imagestr = ""+infp.reportType;
         substrArray = imagestr.split(",");
 
-
         return(
 
             <View style={{ flexDirection:'row',
@@ -79,12 +78,8 @@ class Cell extends PureComponent {
                 style: { backgroundColor: 'red', color: 'white' },
             },
         ];
-
         console.log('render cell')
         let {info} = this.props
-
-
-
         return (
             <List>
                 <SwipeAction autoClose style={{ backgroundColor: 'transparent' }} right={right}  onOpen={() => console.log('open')} onClose={() => console.log('close')}>

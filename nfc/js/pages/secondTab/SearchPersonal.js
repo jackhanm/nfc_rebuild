@@ -14,8 +14,8 @@ import ScreenUtil from '../../util/ScreenUtil'
 import { Tag, WhiteSpace } from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-import {BaseComponent} from  '../../base/BaseComponent'
-import GlobalStyles from '../../../res/styles/GlobalStyles'
+import {BaseComponent} from '../../base/BaseComponent'
+import GlobalStyles from '../../styles/GlobalStyles'
 const TAG_TYPE = {
     ALL:'all',
     CREDITREPORT:'creditReport',

@@ -12,11 +12,11 @@ import {
     Keyboard
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {BaseComponent} from  '../../base/BaseComponent'
+import {BaseComponent} from '../../base/BaseComponent'
 import { List, Modal } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
-import {commonStyle} from '../../../res/styles/commonStyle'
+import NetAPI from '../Network/NetAPI'
+import {commonStyle} from '../../styles/commonStyle'
 const Item = List.Item;
 import ImagePicker from 'react-native-image-crop-picker';
 import ScreenUtil from '../../util/ScreenUtil'

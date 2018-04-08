@@ -8,7 +8,7 @@ import {
     Alert,
     WebView,
 } from 'react-native';
-import {commonStyle} from '../../../res/styles/commonStyle'
+import {commonStyle} from '../../styles/commonStyle'
 import {BaseComponent} from  '../../base/BaseComponent'
 export default class WebViewCommunication extends BaseComponent {
 

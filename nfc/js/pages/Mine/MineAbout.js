@@ -20,10 +20,10 @@ const instructions = Platform.select({
     android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
-import {commonStyle} from '../../../res/styles/commonStyle'
-import {BaseComponent} from  '../../base/BaseComponent'
+import {commonStyle} from '../../styles/commonStyle'
+import {BaseComponent} from '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+import NetAPI from '../Network/NetAPI'
 export default class MineAbout extends BaseComponent<{}> {
     //网络请求
     fetchData(data) {

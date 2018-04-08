@@ -16,7 +16,7 @@ import {
 import { List } from 'antd-mobile';
 import GetSetStorge from '../publicState/GetSetStorg';
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+import NetAPI from '../Network/NetAPI'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ScreenUtil from '../../util/ScreenUtil'
 
@@ -25,8 +25,8 @@ const Brief = Item.Brief;
 
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-import {BaseComponent} from  '../../base/BaseComponent'
-import GlobalStyles from '../../../res/styles/GlobalStyles'
+import {BaseComponent} from '../../base/BaseComponent'
+import GlobalStyles from '../../styles/GlobalStyles'
 export default class MineSelf extends BaseComponent{
 
 
@@ -111,13 +111,11 @@ export default class MineSelf extends BaseComponent{
         }
     }
     _onPress(){
-
         GetSetStorge.removeStorgeAsync('isLogin')
         GetSetStorge.removeStorgeAsync('username')
         GetSetStorge.removeStorgeAsync('accessToken')
         GetSetStorge.removeStorgeAsync('refreshToken')
-        this.props.navigation.navigate('login');
-
+        this.props.navigation.navigate('login',{ transition: 'forVertical' })
 
     }
     _render(){

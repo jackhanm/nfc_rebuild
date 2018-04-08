@@ -10,7 +10,7 @@ import ProTypes from  'prop-types'
 import {
     View, Text, StyleSheet, TouchableOpacity
 } from 'react-native';
-import GlobalStyles from '../../../../res/styles/GlobalStyles'
+import GlobalStyles from '../../../styles/GlobalStyles'
 const barBtnWidth =40
 const defaultNavigationBarProps={
     hiddenNav:false,

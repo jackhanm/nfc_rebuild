@@ -5,7 +5,7 @@ import {
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
-import GlobalStyles from '../../res/styles/GlobalStyles'
+import GlobalStyles from '../styles/GlobalStyles'
 import NavigationBar from '../compoent/NavigationBar'
  class BaseComponent extends Component {
 

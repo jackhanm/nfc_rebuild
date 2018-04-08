@@ -81,6 +81,9 @@ RCT_EXPORT_METHOD(calliOSActionWithOneParams:(id)name params2:(NSString *)params
 {
   dispatch_sync(dispatch_get_main_queue(), ^{
     JKLog(@"%@",name);
+    //16 进制
+    [[NSUserDefaults standardUserDefaults] setObject:params2 forKey:@"themeColor"];
+    
     JKLog(@"%@===%@", params2,params3);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"OpenWebview" object:name];
 //    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];

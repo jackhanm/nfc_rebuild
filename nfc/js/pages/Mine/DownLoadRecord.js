@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {commonStyle} from '../../../res/styles/commonStyle'
+import {commonStyle} from '../../styles/commonStyle'
 import {
     StyleSheet,
     Text,

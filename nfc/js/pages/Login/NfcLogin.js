@@ -18,7 +18,7 @@ import ScreenUtil from '../../util/ScreenUtil'
 import { NavigationActions} from "react-navigation";
 import GetSetStorge from '../publicState/GetSetStorg';
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+import NetAPI from '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
@@ -133,7 +133,7 @@ export default class NfcLogin extends Component{
                     GetSetStorge.setStorgeAsync('accessToken',result.data.accessToken);
                     GetSetStorge.setStorgeAsync('refreshToken',result.data.refreshToken);
 
-                    this.props.navigation.navigate('TabBar');
+                    this.props.navigation.navigate('TabBar',{ transition: 'forVertical' });
                 }
 
             }

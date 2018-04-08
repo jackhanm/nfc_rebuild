@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Platform,Animated,View
 } from 'react-native';
-import GlobalStyle from '../../../res/styles/GlobalStyles'
+import GlobalStyle from '../../styles/GlobalStyles'
 import GetSetStorge from '../publicState/GetSetStorg';
 // import NetUtils from '../Network/NetUtils'
 import guideView from './guideView'

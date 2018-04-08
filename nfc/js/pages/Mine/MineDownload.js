@@ -9,21 +9,44 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    FlatList,
+    NativeAppEventEmitter,NativeEventEmitter,NativeModules
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-import { List, Modal } from 'antd-mobile';
-import {BaseComponent} from  '../../base/BaseComponent'
+import {BaseComponent} from '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+import NetAPI from '../Network/NetAPI'
 import RefreshListView, {RefreshState,canfreshState} from '../../compoent/RefreshListView'
-import Cell from  '../../compoent/Cell'
-let pageNo = 1;//当前第几页
-let totalPage=5;//总的页数
-let itemNo=0;//item的个数
+import Cell from './downLoadcell'
+import testData from '../home/data'
+import {commonStyle} from '../../styles/commonStyle'
 
-import {commonStyle} from '../../../res/styles/commonStyle'
-export default class MineRecored extends BaseComponent {
+//在JavaScript中调用Object-C定义的方法，需要先导入NativeModules,再使用RNCalliOSFuncation
+var RNCalliOSAction = NativeModules.RNCalliOSAction;
+
+export default class MineDownload extends BaseComponent<{}> {
+
+    getlocallist(){
+
+    }
+    navigationBarProps() {
+
+        return {
+            title: '下载管理',
+            titleStyle: {
+                color: commonStyle.navTitleColor,
+            },
+            leftIcon: {
+                name: 'nav_back_o',
+                size: 20,
+                color: commonStyle.navTitleColor,
+            },
+            navBarStyle: {
+                backgroundColor: commonStyle.navThemeColor,
+            }
+        }
+    }
     state: {
         dataList: Array<any>,
         refreshState: number,
@@ -36,71 +59,38 @@ export default class MineRecored extends BaseComponent {
             dataList: [],
             refreshState: RefreshState.Idle,
             canfreshState:canfreshState.cannot,
-
         }
     }
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
-        let url =  NetAPI.MINE_REPORT_PERSION + '&pageIndex='+pageNo+'&pageSize=10'
-        NetUtils.get(NetAPI.serverUrl, url, "1.0", "", false, (result) => {
+        RNCalliOSAction.calliOSActionWithCallBack((array)=>{
 
-           console.log(result)
-                if (result.code === 0) {
+            this.setState({
+                canfreshState:canfreshState.can,
+                dataList:  isReload ?array: [...this.state.dataList, ...result.data.list ],
+                refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
+            })
 
+        });
 
-                    this.setState({
-                        //复制数据源
-
-                        dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
-                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 1000 ? RefreshState.NoMoreData : RefreshState.Idle,
-                        page: pageNo++,
-                        canfreshState:canfreshState.can,
-                    });
-
-
-
-                }else {
-                    this.setState({refreshState: RefreshState.Failure})
-                }
-
-
-            }
-        );
 
     }
 
-
     componentDidMount() {
-        // super.componentDidMount();
+        super.componentDidMount();
         //请求数据
         this.onHeaderRefresh()
     }
     onHeaderRefresh = () => {
-        console.log("开始下拉刷新")
         this.setState({refreshState: RefreshState.HeaderRefreshing})
         this.fetchData(true);
-        // // 模拟网络请求
-        // setTimeout(() => {
-        //     // 模拟网络加载失败的情况
-        //     if (Math.random() < 0.2) {
-        //         this.setState({refreshState: RefreshState.Failure})
-        //         return
-        //     }
-        //
-        //     //获取测试数据
-        //     let dataList = this.getTestList(true)
-        //
-        //     this.setState({
-        //         dataList: dataList,
-        //         refreshState: RefreshState.Idle,
-        //     })
-        // }, 2000)
+
     }
     navigationBarProps() {
 
         return {
-            title: '我的记录',
+            title: '下载管理',
             titleStyle: {
                 color: commonStyle.navTitleColor,
             },
@@ -115,14 +105,13 @@ export default class MineRecored extends BaseComponent {
         }
     }
     onFooterRefresh = () => {
-
-        // this.setState({refreshState: RefreshState.FooterRefreshing})
+        this.setState({refreshState: RefreshState.FooterRefreshing})
         this.fetchData(false);
         // 模拟网络请求
 
 
 
-        }
+    }
 
     // 获取测试数据
     getTestList(isReload: boolean): Array<Object> {
@@ -143,7 +132,13 @@ export default class MineRecored extends BaseComponent {
 
     renderCell = (info: Object) => {
         return <Cell info={info.item}
-                     onPress={()=>{this.props.navigation.navigate('WebViewCommunication')}}/>
+                     onPress={()=>{
+                         RNCalliOSAction.calliOStopdfView(info.item.path);
+                         console.log(info.item.path)}}
+                     delete={()=>{
+                         RNCalliOSAction.deletepdf(info.item.path);
+                     }}/>
+
     }
 
     _render() {
@@ -156,26 +151,34 @@ export default class MineRecored extends BaseComponent {
                     renderItem={this.renderCell}
                     refreshState={this.state.refreshState}
                     onHeaderRefresh={this.onHeaderRefresh}
-                    onFooterRefresh={this.onFooterRefresh}
                     canfreshState={this.state.canfreshState}
                     // 可选
                     footerRefreshingText= '玩命加载中 >.<'
-                    footerFailureText = '我擦嘞，居然失败了 =.=!'
+                    footerFailureText = '我擦嘞，服务器小哥开小差 =.=!'
                     footerNoMoreDataText= '-我是有底线的-'
                 />
             </View>
         )
     }
+
+
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Platform.OS == 'ios' ? 0 : 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
     },
-    title: {
-        fontSize: 18,
-        height: 84,
-        textAlign: 'center'
-    }
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
 });

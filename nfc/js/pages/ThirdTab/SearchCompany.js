@@ -10,11 +10,11 @@ import {
     TextInput,
     FlatList,
 } from 'react-native';
-import GlobalStyles from '../../../res/styles/GlobalStyles'
+import GlobalStyles from '../../styles/GlobalStyles'
 import ScreenUtil from '../../util/ScreenUtil'
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
-import {BaseComponent} from  '../../base/BaseComponent'
+import {BaseComponent} from '../../base/BaseComponent'
 const TAG_TYPE = {
     ALL:'all',
     RISKMANAGE:'riskManage',

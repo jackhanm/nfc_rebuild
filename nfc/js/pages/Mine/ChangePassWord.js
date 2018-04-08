@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BaseComponent} from  '../../base/BaseComponent'
+import {BaseComponent} from '../../base/BaseComponent'
 import {
     StyleSheet,
     Text,
@@ -15,9 +15,9 @@ import ScreenUtil from '../../util/ScreenUtil'
 
 let winWidth = Dimensions.get('window').width;
 import NetUtils from '../Network/NetUtils'
-import NetAPI from  '../Network/NetAPI'
+import NetAPI from '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
-import {commonStyle} from '../../../res/styles/commonStyle'
+import {commonStyle} from '../../styles/commonStyle'
 import { InputItem, List, Button } from 'antd-mobile';
 export default class ChangePassWord extends BaseComponent{
 

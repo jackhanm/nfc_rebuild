@@ -55,13 +55,13 @@ import nfcApp from '../nfcApp'
 import TodoApp from '../TodoApp'
 import Elemalogin from  '../ThirdTab/Elemalogin'
 import PersonalData from '../home/PersonalData'
-import ChangePassWord from '../home/ChangePassWord'
-import AccountInfo from '../home/AccountInfo'
+import ChangePassWord from '../Mine/ChangePassWord'
+import AccountInfo from '../Mine/AccountInfo'
 import WebViewCommunication from  '../ThirdTab/WebViewCommunication'
-import NfcLogin from '../home/NfcLogin'
-import MineAbout from '../home/MineAbout'
-import MineDownload from '../home/MineDownload'
-import MineRecored from '../home/MineRecored'
+import NfcLogin from '../Login/NfcLogin'
+import MineAbout from '../Mine/MineAbout'
+import MineDownload from '../Mine/MineDownload'
+import MineRecored from '../Mine/MineRecored'
 import SearchList from  '../home/SearchList'
 import homeMorelist from  '../home/homeMorelist'
 import ReportData from  '../home/ReportData'
@@ -181,7 +181,10 @@ export default function configAppNavigator(isLoggedIn) {
             ReportData:{screen:ReportData,navigationOptions:{header:null}},
 
         },
+        {
+            transitionConfig: TransitionConfiguration,
 
+        },
         {
             initialRouteName: isLoggedIn ? 'TabBar' : 'login'
         },
@@ -189,10 +192,7 @@ export default function configAppNavigator(isLoggedIn) {
             mode: 'card',
             headerMode:'none',
         },
-        {
-            transitionConfig: TransitionConfiguration,
-            StackOptions,
-        },
+
         );
 };
 const SimpleApp = StackNavigator(

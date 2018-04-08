@@ -21,13 +21,13 @@ var RNCalliOSAction = NativeModules.RNCalliOSAction;
 import ModalDropdown from 'react-native-modal-dropdown';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import {commonStyle} from '../../../res/styles/commonStyle'
+import {commonStyle} from '../../styles/commonStyle'
 
 import Toast from 'react-native-root-toast';
 import {BaseComponent} from  '../../base/BaseComponent'
 import { district } from 'antd-mobile-demo-data';
 
-import GlobalStyles from '../../../res/styles/GlobalStyles'
+import GlobalStyles from '../../styles/GlobalStyles'
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').width;
 import ScreenUtil, {scaleSize} from '../../util/ScreenUtil'

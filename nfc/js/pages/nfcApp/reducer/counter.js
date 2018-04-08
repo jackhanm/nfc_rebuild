@@ -1,7 +1,7 @@
 
 import {Constants} from '../constants'
 
-const defaultState = 10
+const defaultState = 1099
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {

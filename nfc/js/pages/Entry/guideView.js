@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, ScrollView, StyleSheet, Text, Dimensions, TouchableOpacity,TouchableHighlight,View,SafeAreaView } from 'react-native';
 import Swiper from 'react-native-swiper'
-import GlobalStyle from '../../../res/styles/GlobalStyles'
+import GlobalStyle from '../../styles/GlobalStyles'
 import { TabNavigator, NavigationActions} from "react-navigation";
 let image1 = require('../../imgResouce/1.jpg');
 let image2 = require('../../imgResouce/2.jpg');
