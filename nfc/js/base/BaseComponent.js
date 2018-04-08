@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Platform,Dimensions,StyleSheet,View,Keyboard
+    Platform,Dimensions,StyleSheet,View,Keyboard,NetInfo
 } from 'react-native';
 
 let width = Dimensions.get('window').width
 let height = Dimensions.get('window').height
+import { List, Toast } from 'antd-mobile';
 import GlobalStyles from '../styles/GlobalStyles'
 import NavigationBar from '../compoent/NavigationBar'
  class BaseComponent extends Component {
@@ -15,7 +16,10 @@ import NavigationBar from '../compoent/NavigationBar'
         this._render = this._render.bind(this)
         this.onLeftPress = this.onLeftPress.bind(this)
         this.onRightPress = this.onRightPress.bind(this)
-
+        this.state = {
+            isConnected: null,
+            connectionInfo:null,
+        };
         // this.state={
         //     theme:this.props.theme,
         // }
@@ -71,6 +75,28 @@ import NavigationBar from '../compoent/NavigationBar'
 
      componentDidMount() {
          Keyboard.dismiss();
+         NetInfo.isConnected.addEventListener(
+             'change',
+             this._handleConnectivityChange
+         );
+         //检测网络是否连接
+         NetInfo.isConnected.fetch().done(
+             (isConnected) => { this.setState({isConnected}); }
+         );
+         //检测网络连接信息
+         NetInfo.fetch().done(
+             (connectionInfo) => { this.setState({connectionInfo}); }
+         );
+     }
+     componentWillUnmount() {
+         NetInfo.isConnected.removeEventListener(
+             'change',
+             this._handleConnectivityChange
+         );
+     }
+     _handleConnectivityChange(isConnected) {
+
+         isConnected ? 'online' : Toast.offline('Network connection failed !!!', 1) ;
      }
 
 
