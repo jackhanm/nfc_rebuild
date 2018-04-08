@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingRight:10,
         paddingLeft:10,
-        height:50
+        height:70
     },
     // container: {
     //     flexDirection: 'row',

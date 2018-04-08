@@ -10,7 +10,10 @@ import {
     TextInput,
     FlatList,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    LayoutAnimation,
+    UIManager,
+    KeyboardAvoidingView,
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
@@ -22,6 +25,11 @@ import NetAPI from '../Network/NetAPI'
 import { Toast} from 'antd-mobile';
 let winWidth = Dimensions.get('window').width;
 let winHeight = Dimensions.get('window').height;
+var TimerMixin = require('react-timer-mixin');
+
+UIManager.setLayoutAnimationEnabledExperimental
+&& UIManager.setLayoutAnimationEnabledExperimental(true);
+
 // let reastAction = NavigationActions.reset({
 //     index: 0,
 //     actions: [
@@ -30,7 +38,7 @@ let winHeight = Dimensions.get('window').height;
 // });
 
 export default class NfcLogin extends Component{
-
+    mixins: [TimerMixin]
     constructor(){
         super();
         this.state={
@@ -119,25 +127,32 @@ export default class NfcLogin extends Component{
     }
 
     _onPress() {
+        if (this.state.user_name!='' && this.state.pass_word !=''){
+            NetUtils.postJson(NetAPI.serverUrl, NetAPI.USER_LOGIN, {
+                    'username': this.state.userName,
+                    'password': this.state.passWrod
+                }, '1.0', '', false, (result) => {
 
-        NetUtils.postJson(NetAPI.serverUrl, NetAPI.USER_LOGIN, {
-                'username': this.state.userName,
-                'password': this.state.passWrod
-            }, '1.0', '', false, (result) => {
+                    console.log(result)
 
-                console.log(result)
+                    if (result.code === 0) {
+                        GetSetStorge.setStorgeAsync('isLogin', 'true');
+                        GetSetStorge.setStorgeAsync('username','yuhao');
+                        GetSetStorge.setStorgeAsync('accessToken',result.data.accessToken);
+                        GetSetStorge.setStorgeAsync('refreshToken',result.data.refreshToken);
+                        Toast.success('登录成功', 1, ()=>this.props.navigation.navigate('TabBar',{ transition: 'forVertical' }));
 
-            if (result.code === 0) {
-                    GetSetStorge.setStorgeAsync('isLogin', 'true');
-                    GetSetStorge.setStorgeAsync('username','yuhao');
-                    GetSetStorge.setStorgeAsync('accessToken',result.data.accessToken);
-                    GetSetStorge.setStorgeAsync('refreshToken',result.data.refreshToken);
+                    }else {
+                        Toast.fail(result.message, 1);
+                    }
 
-                    this.props.navigation.navigate('TabBar',{ transition: 'forVertical' });
                 }
+            );
+        }else {
+            Toast.info('请输入完整信息', 1);
+        }
 
-            }
-        );
+
 
 
 

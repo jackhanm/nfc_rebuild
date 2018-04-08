@@ -182,12 +182,11 @@ export default function configAppNavigator(isLoggedIn) {
 
         },
         {
+            initialRouteName: isLoggedIn ? 'TabBar' : 'login',
             transitionConfig: TransitionConfiguration,
 
         },
-        {
-            initialRouteName: isLoggedIn ? 'TabBar' : 'login'
-        },
+
         {
             mode: 'card',
             headerMode:'none',

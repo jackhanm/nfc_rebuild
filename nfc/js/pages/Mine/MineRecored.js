@@ -21,9 +21,9 @@ import Cell from '../../compoent/Cell'
 let pageNo = 1;//当前第几页
 let totalPage=5;//总的页数
 let itemNo=0;//item的个数
-
 import {commonStyle} from '../../styles/commonStyle'
 export default class MineRecored extends BaseComponent {
+
     state: {
         dataList: Array<any>,
         refreshState: number,
@@ -53,7 +53,7 @@ export default class MineRecored extends BaseComponent {
                         //复制数据源
 
                         dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
-                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
+                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 150 ? RefreshState.NoMoreData : RefreshState.Idle,
                         page: pageNo++,
                         canfreshState:canfreshState.can,
                     });
@@ -80,22 +80,7 @@ export default class MineRecored extends BaseComponent {
         console.log("开始下拉刷新")
         this.setState({refreshState: RefreshState.HeaderRefreshing})
         this.fetchData(true);
-        // // 模拟网络请求
-        // setTimeout(() => {
-        //     // 模拟网络加载失败的情况
-        //     if (Math.random() < 0.2) {
-        //         this.setState({refreshState: RefreshState.Failure})
-        //         return
-        //     }
-        //
-        //     //获取测试数据
-        //     let dataList = this.getTestList(true)
-        //
-        //     this.setState({
-        //         dataList: dataList,
-        //         refreshState: RefreshState.Idle,
-        //     })
-        // }, 2000)
+
     }
     navigationBarProps() {
 

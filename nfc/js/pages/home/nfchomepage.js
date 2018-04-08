@@ -19,20 +19,34 @@ import { List, Toast } from 'antd-mobile';
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
 import GlobalStyles from '../../styles/GlobalStyles'
+import {Loading} from '../../compoent/Loading'
 let windowHeight = Dimensions.get('window').height;
 let windowWidth = Dimensions.get('window').width;
 const Item = List.Item;
 
 export default class nfchomepage extends Component{
 
+
+    hud(type) {
+        if (type === 'show') {
+            Loading.show()
+            setTimeout(function () {
+                Loading.hidden()
+            }, 5000)
+        } else {
+            Loading.hidden()
+        }
+    }
+
     //网络请求
     fetchData(data) {
         //这个是js的访问网络的方法
 
-
+        this.hud('show');
         NetUtils.get(NetAPI.serverUrl, NetAPI.MINE_REPORT_ALL, "1.0", "", false, (result) => {
 
                 console.log(result)
+            this.hud('Noshow');
                 if (result.code === 0) {
                     this.setState({
                         //
@@ -46,6 +60,7 @@ export default class nfchomepage extends Component{
                 }
                 if(result === '10001'){
                     //展示toast，登录过期，并跳转到登录界面
+                    Toast.offline('登录过期，请重新登录 !!!', 2,()=>this.props.navigation.navigate('login',{ transition: 'forVertical' }));
 
                 }
 
@@ -155,7 +170,7 @@ export default class nfchomepage extends Component{
 
                 </TextInput>
 
-                <TouchableOpacity onPress={()=>{this.state.searchText == ''?Toast.info('请输入查询条件', 0.5):this.props.navigation.navigate('SearchList', this.state.searchText)}} >
+                <TouchableOpacity onPress={()=>{this.state.searchText == ''?Toast.info('请输入查询条件', 0.5):this.props.navigation.navigate('SearchList', {'searchkey':this.state.searchText})}} >
                     <Image style={{width:ScreenUtil.scaleSize(109), height:ScreenUtil.scaleSize(88), padding:0}} source={require('../../imgResouce/search.png')}/>
                 </TouchableOpacity>
 

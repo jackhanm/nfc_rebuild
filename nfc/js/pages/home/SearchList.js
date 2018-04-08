@@ -10,14 +10,18 @@ import { List, Modal } from 'antd-mobile';
 import {BaseComponent} from  '../../base/BaseComponent'
 import NetUtils from '../Network/NetUtils'
 import NetAPI from  '../Network/NetAPI'
-import RefreshListView, {RefreshState} from '../../compoent/RefreshListView'
+import RefreshListView, {RefreshState,canfreshState} from '../../compoent/RefreshListView'
 import Cell from  '../../compoent/Cell'
 import testData from './data'
 import {commonStyle} from '../../styles/commonStyle'
+let pageNo = 1;//当前第几页
+let totalPage=5;//总的页数
+let itemNo=0;//item的个数
 export default class SearchList extends BaseComponent<{}> {
     state: {
         dataList: Array<any>,
         refreshState: number,
+        canfreshState:number
     }
     constructor(props) {
         super(props)
@@ -25,14 +29,16 @@ export default class SearchList extends BaseComponent<{}> {
         this.state = {
             dataList: [],
             refreshState: RefreshState.Idle,
-            searchkey:''
+            canfreshState:canfreshState.cannot,
+            searchkey:this.props.navigation.state.params.searchkey
         }
     }
     //网络请求data.js
     fetchData(isReload: boolean) {
         //这个是js的访问网络的方法
 
-       let searchstr =NetAPI.QUICK_CHECK +'?queryKey='+this.state.searchkey
+
+       let searchstr =NetAPI.QUICK_CHECK +'?queryKey='+this.state.searchkey+ '&pageIndex='+pageNo+'&pageSize=10'
         NetUtils.get(NetAPI.serverUrl, searchstr, "1.0", "", false, (result) => {
 
                 console.log(result)
@@ -41,8 +47,9 @@ export default class SearchList extends BaseComponent<{}> {
                     this.setState({
                         //复制数据源
                         dataList:  isReload ?result.data.list: [...this.state.dataList, ...result.data.list ],
-                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
-
+                        refreshState: isReload ?RefreshState.Idle:this.state.dataList.length > 150 ? RefreshState.NoMoreData : RefreshState.Idle,
+                        page: pageNo++,
+                        canfreshState:canfreshState.can,
                     });
                 }else {
                     this.setState({refreshState: RefreshState.Failure})
@@ -57,7 +64,7 @@ export default class SearchList extends BaseComponent<{}> {
     componentDidMount() {
         super.componentDidMount();
         //请求数据
-        this.setState({searchkey:this.props.navigation.state.params})
+      //  this.setState({searchkey:this.props.navigation.state.params.searchkey})
         this.onHeaderRefresh()
     }
     onHeaderRefresh = () => {
@@ -139,7 +146,7 @@ export default class SearchList extends BaseComponent<{}> {
                     refreshState={this.state.refreshState}
                     onHeaderRefresh={this.onHeaderRefresh}
                     onFooterRefresh={this.onFooterRefresh}
-
+                    canfreshState={this.state.canfreshState}
                     // 可选
                     footerRefreshingText= '玩命加载中 >.<'
                     footerFailureText = '我擦嘞，居然失败了 =.=!'

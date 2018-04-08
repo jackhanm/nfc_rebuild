@@ -203,7 +203,7 @@ export default class TabbarPage extends Component{
                     renderIcon={()=> <Image style={styles.icon} source={require('../../imgResouce/4.png')} />}
                     renderSelectedIcon={() => <Image style={styles.iconselect} source={require('../../imgResouce/4.png')} />}
                     onPress={() => this.setState({ selectedTab: 'LearningRedux' })}>
-                    <LearningRedux {...this.props}/>
+                    <Elemalogin {...this.props}/>
                 </TabNavigator.Item>
 
                 {/*<TabNavigator.Item*/}
