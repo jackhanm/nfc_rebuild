@@ -14,6 +14,8 @@ import {
     LayoutAnimation,
     UIManager,
     KeyboardAvoidingView,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
 
 import ScreenUtil from '../../util/ScreenUtil'
@@ -51,7 +53,9 @@ export default class NfcLogin extends Component{
         Toast.info('好车贷NFC风控系统暂未开放注\n册功能，如需注册，请联系客服\n          QQ：1156068241');
     }
     render(){
-        return(<View style={styles.container}>
+        return(
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+            <View style={styles.container}>
 
             <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
                 <Image
@@ -123,7 +127,9 @@ export default class NfcLogin extends Component{
             {/*/>*/}
 
 
-        </View>);
+             </View>
+            </TouchableWithoutFeedback>
+        );
     }
 
     _onPress() {

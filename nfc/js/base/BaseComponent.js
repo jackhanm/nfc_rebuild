@@ -96,7 +96,7 @@ import NavigationBar from '../compoent/NavigationBar'
      }
      _handleConnectivityChange(isConnected) {
 
-         isConnected ? 'online' : Toast.offline('Network connection failed !!!', 1) ;
+         isConnected ? 'online' : Toast.offline('Network connection failed  Please Check!!!', 1) ;
      }
 
 
